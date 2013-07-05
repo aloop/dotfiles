@@ -1,5 +1,5 @@
 # Simple Dotfile Management
----------------------------
+
 Just a simple way to manage dotfiles, very derivative, i'm sure.
 
 I Wrote **make-links.sh** in a few minutes, so there are likely some oversights, although my minimal testing seems fine.
