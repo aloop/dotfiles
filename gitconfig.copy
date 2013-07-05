@@ -2,7 +2,7 @@
 	email = theseattlite@gmail.com
 	name = Anthony Loop
 [core]
-	editor = st
+	editor = vim
 	excludesfile = ~/.gitignore_global
 [color]
 	ui = true
