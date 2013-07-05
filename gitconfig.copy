@@ -1,0 +1,18 @@
+[user]
+	email = theseattlite@gmail.com
+	name = Anthony Loop
+[core]
+	editor = st
+	excludesfile = ~/.gitignore_global
+[color]
+	ui = true
+[push]
+	default = matching
+[pull]
+	rebase = true
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
