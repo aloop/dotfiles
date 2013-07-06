@@ -46,9 +46,7 @@ link_file() {
 }
 
 copy_file() {
-    if [ -e "$1" ]; then
-        cp -R "$1" "$HOME/$(prep_filename "$1")"
-    fi
+    cp -R "$1" "$HOME/$(prep_filename "$1")"
 }
 
 run() {
