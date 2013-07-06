@@ -46,10 +46,8 @@ link_file() {
 }
 
 copy_file() {
-    if [ -d "$1" ]; then
-        cp -r "$1" "$HOME/$(prep_filename "$1")"
-    elif [ -f "$1" ]; then
-        cp "$1" "$HOME/$(prep_filename "$1")"
+    if [ -e "$1" ]; then
+        cp -R "$1" "$HOME/$(prep_filename "$1")"
     fi
 }
 
