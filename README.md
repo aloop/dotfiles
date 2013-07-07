@@ -9,8 +9,8 @@ I Wrote **dotfiles.sh** in a few minutes, so there are likely some oversights, a
 Simply clone the repository and run the script:
 
 ```sh
-git clone https://github.com/aloop/dotfiles.git ~/.dotfiles
-bash ~/.dotfiles/dotfiles.sh
+$ git clone https://github.com/aloop/dotfiles.git ~/.dotfiles
+$ bash ~/.dotfiles/dotfiles.sh
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ bash ~/.dotfiles/dotfiles.sh
 To re-link or add new links, simply run dotfiles.sh again:
 
 ```sh
-bash ~/.dotfiles/dotfiles.sh
+$ bash ~/.dotfiles/dotfiles.sh
 ```
 
 ## Author
