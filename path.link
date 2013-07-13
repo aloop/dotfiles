@@ -1,0 +1,18 @@
+shell_paths=("$HOME/.rvm/bin" "/usr/local/share/npm/bin")
+
+for shell_path in shell_paths
+do
+    if [ -e "$shell_path" ]; then
+        PATH="$shell_path:$PATH"
+    fi
+done
+
+# If homebrew is installed, prepend it bin dirs onto $PATH
+if command -v brew 2>/dev/null; then
+    PATH="/usr/local/sbin:/usr/local/bin:$(echo "$PATH" | sed 's/:\/usr\/local\/bin//')"
+
+    if [ -e "$(brew --prefix josegonzalez/php/php55)/bin" ]; then
+        PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
+    fi
+fi
+
