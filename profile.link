@@ -1,0 +1,9 @@
+shell_includes=("$HOME/.aliases" "$HOME/.functions" "$HOME/.exports" "$HOME/.path" "$HOME/.rvm/scripts/rvm")
+
+for shell_include in shell_includes
+do
+    if [ -e "$shell_include" ]; then
+        . $shell_include
+    fi
+done
+

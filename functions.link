@@ -1,0 +1,41 @@
+# Launch an http server in the current directory, can't recall where I found this.
+function server() {
+    local port="${1:-8000}"
+    (sleep 1 && open "http://localhost:${port}/")&
+    python -m SimpleHTTPServer "$port"
+}
+
+# Was tired of typing this.
+function mnt-efi() {
+    mkdir /Volumes/Efi
+    sudo mount -t msdos /dev/disk0s1 /Volumes/Efi
+}
+
+# Adapted from https://gist.github.com/SlexAxton/4989674
+gifify() {
+    if [[ -n "$1" ]]; then
+        if [[ $2 == '--good' ]]; then
+            ffmpeg -i $1 -vcodec png out-static-%05d.png
+
+            # Remove even-numbered frames as a nice size optimization without badly affecting the result
+            rm out-static-*[0,2,4,6,8].png
+
+            # Convert the pngs to gifs with ImageMagick
+            ls out-static*.png | xargs -I{} -P4 convert {} -verbose -layers Optimize -resize 600 {}.gif
+
+            # Remove leftover pngs
+            rm out-static*.png
+
+            # Produce the animated gif!
+            ls out-static*.gif | xargs gifsicle --colors 64 --dither --delay=3 --loop --optimize=3 --multifile > $1.gif
+
+            # Remove leftover gifs
+            rm out-static*.gif
+        else
+            ffmpeg -i $1 -s 600x400 -pix_fmt rgb24 -f gif - | gifsicle --dither --optimize=3 --delay=4 > $1.gif
+        fi
+    else
+        echo "proper usage: gifify <input_movie.mov>. You DO need to include extension."
+    fi
+}
+
