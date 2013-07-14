@@ -40,11 +40,13 @@ ZSH_THEME="agnoster"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew npm osx rvm zsh-syntax-highlighting sublime)
+plugins=(git npm rvm zsh-syntax-highlighting)
 
-source $ZSH/oh-my-zsh.sh
+# Gets my custom shell setup stuff.
+# We get this before oh-my-zsh so that ~/.custom
+# can override the plugins array, or other env variables
+. $HOME/.profile
 
-# Customize to your needs...
-
-source $HOME/.profile
+# Start oh-my-zsh
+. $ZSH/oh-my-zsh.sh
 
