@@ -8,7 +8,7 @@ from datetime import datetime
 
 dotfiles_dir = os.path.dirname(os.path.realpath(__file__))
 ignore_list = [
-    # A list of files to ignore in the dotfiles directory
+    # A list of files/folders to ignore in the source directory
     '.git',
     '.DS_Store'
 ]
@@ -47,7 +47,7 @@ class BaseDotfileHandler(object):
         backup_path = os.path.join(self.base_path, "backups", date_string)
 
         if not self.exists(backup_path):
-            os.mkdir(backup_path)
+            os.makedirs(backup_path)
 
         if self.exists(path):
             shutil.move(path, backup_path)
