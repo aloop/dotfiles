@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/anthony'
+let g:netrw_dirhist_2='/home/anthony/.local'
+let g:netrw_dirhist_3='/home/anthony/.local/bin'
+let g:netrw_dirhist_4='/home/anthony/.local'
+let g:netrw_dirhist_5='/home/anthony'
+let g:netrw_dirhist_6='/home/anthony/.vim'
+let g:netrw_dirhist_7='/etc/netctl/interfaces'
+let g:netrw_dirhist_8='/private/etc/apache2/users'
+let g:netrw_dirhist_9='/Users/anthony/.oh-my-zsh/custom'
