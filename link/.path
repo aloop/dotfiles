@@ -1,9 +1,8 @@
-shell_paths=("$HOME/.rvm/bin" "/usr/local/share/npm/bin")
+new_paths=("$HOME/.rvm/bin" "/usr/local/share/npm/bin")
 
-for shell_path in $shell_paths
-do
-    if [ -e "$shell_path" ]; then
-        PATH="$shell_path:$PATH"
+for new_path in "${new_paths[@]}"; do
+    if [ -e "$new_path" ]; then
+        PATH="$new_path:$PATH"
     fi
 done
 
