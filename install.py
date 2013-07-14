@@ -18,13 +18,13 @@ class BaseDotfileHandler(object):
     def __init__(self, base_path, sub_path, ignore_list=None):
         self.home = os.path.expanduser("~")
         self.base_path = base_path
-        self.dest_path = os.path.join(self.base_path, sub_path)
+        self.source_path = os.path.join(self.base_path, sub_path)
         self.ignore = ignore_list if ignore_list is not None else []
         self.time = datetime.now().strftime("%Y-%m-%d-%H%M%S")
 
     def list(self):
         files = []
-        for filename in os.listdir(self.dest_path):
+        for filename in os.listdir(self.source_path):
             if filename not in self.ignore:
                 files.append(filename)
 
@@ -36,7 +36,7 @@ class BaseDotfileHandler(object):
     def run(self):
         for filename in self.list():
             filename = filename
-            source = os.path.join(self.dest_path, filename)
+            source = os.path.join(self.source_path, filename)
             dest = os.path.join(self.home, filename)
 
             self.backup(dest)
