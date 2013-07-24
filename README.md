@@ -8,9 +8,8 @@ Just a way to manage my dotfiles
 
         git clone --recursive https://github.com/aloop/dotfiles.git ~/.dotfiles
 
-2. And then make the install script executable and run it
+2. And then run the install script
 
-        chmod +x ~/.dotfiles/manage.py
         ~/.dotfiles/manage.py install
 
 ## Backups
