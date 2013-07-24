@@ -6,6 +6,7 @@
 *.exe
 *.o
 *.so
+*.pyc
 
 # Packages #
 ############
@@ -52,8 +53,6 @@ Icon?
 #  Project Files   #
 ######################
 .project
-.settings/
-web.config
 *.sublime-project
 *.sublime-workspace
 
