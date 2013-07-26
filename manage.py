@@ -123,8 +123,8 @@ def main():
 
     try:
         options.func()
-    except Exception as e:
-        log.error(e)
+    except:
+        log.exception('Error processing dotfiles:')
         parser.exit(1)
     else:
         print('Everything looks good! Enjoy.')
