@@ -22,7 +22,7 @@ def file_list(path, ignore=None):
     ignore = ignore if ignore else []
     files = os.listdir(path)
 
-    return [filename for filename in files if filename not in ignore]
+    return (filename for filename in files if filename not in ignore)
 
 
 def mkdir(path, recursive=True):
