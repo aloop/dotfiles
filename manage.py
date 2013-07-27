@@ -25,7 +25,7 @@ class Dotfiles(object):
     def process_dir(self, path, func):
         path = os.path.join(self.dir, path)
         for filename in fs.file_list(path, self.ignore):
-            source = os.path.join(self.dir, path, filename)
+            source = os.path.join(path, filename)
             dest = os.path.join(self.home, filename)
 
             if self.make_backups:
