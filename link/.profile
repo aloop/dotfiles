@@ -6,4 +6,3 @@ for shell_include in "${shell_includes[@]}"; do
         . "$shell_include"
     fi
 done
-
