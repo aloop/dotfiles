@@ -49,4 +49,3 @@ plugins=(git npm rvm zsh-syntax-highlighting)
 
 # Start oh-my-zsh
 . $ZSH/oh-my-zsh.sh
-
