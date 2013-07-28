@@ -5,12 +5,6 @@ function server() {
     python -m SimpleHTTPServer "$port"
 }
 
-# Was tired of typing this.
-function mnt-efi() {
-    mkdir /Volumes/Efi
-    sudo mount -t msdos /dev/disk0s1 /Volumes/Efi
-}
-
 # Adapted from https://gist.github.com/SlexAxton/4989674
 gifify() {
     if [[ -n "$1" ]]; then
