@@ -9,7 +9,7 @@ import filesystem as fs
 from datetime import datetime
 
 
-class Dotfiles(object):
+class DotfileManager(object):
     """
     Manages dotfiles by linking or copying them
     to a users home directory and can optionally
@@ -19,7 +19,7 @@ class Dotfiles(object):
         self.datetime = datetime.now().strftime("%Y-%m-%d-%H%M%S")
         self.dir = dir_
         self.home = os.path.expanduser('~')
-        self.ignore = ignore if ignore else []
+        self.ignore = [] if ignore is None else ignore
         self.make_backups = True
 
     def process_dir(self, path, func):
@@ -28,9 +28,10 @@ class Dotfiles(object):
             source = os.path.join(path, filename)
             dest = os.path.join(self.home, filename)
 
-            if self.make_backups:
-                self.backup(dest)
-            fs.remove(dest)
+            if fs.exists(dest):
+                if self.make_backups:
+                    self.backup(dest)
+                fs.remove(dest)
 
             func(source, dest)
 
@@ -63,7 +64,7 @@ def main():
 
     dotfiles_dir = os.path.dirname(os.path.realpath(__file__))
 
-    dotfiles_obj = Dotfiles(dotfiles_dir, default_ignore_list)
+    dotfiles = DotfileManager(dotfiles_dir, default_ignore_list)
 
     file_description = "A Simple way to manage your dotfiles."
 
@@ -89,17 +90,17 @@ def main():
         [
             'install',
             'Perform an install of dotfiles',
-            dotfiles_obj.install
+            dotfiles.install
         ],
         [
             'link',
             'Update dotfile links',
-            dotfiles_obj.link
+            dotfiles.link
         ],
         [
             'copy',
             'Update dotfile copies',
-            dotfiles_obj.copy
+            dotfiles.copy
         ]
     ]
 
@@ -116,14 +117,14 @@ def main():
         log.basicConfig(format=log_format, level=log.WARNING)
 
     if options.no_backup:
-        dotfiles_obj.make_backups = False
+        dotfiles.make_backups = False
     if options.ignore:
         for sublist in options.ignore:
-            dotfiles_obj.ignore.extend(sublist)
+            dotfiles.ignore.extend(sublist)
 
     try:
         options.func()
-    except:
+    except IOError:
         log.exception('Error processing dotfiles:')
         parser.exit(1)
     else:
