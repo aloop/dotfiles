@@ -9,7 +9,6 @@ def exists(path, dead_links=True):
     """Determine if a file or directory exists."""
     if dead_links:
         return os.path.lexists(path)
-
     return os.path.exists(path)
 
 
@@ -19,10 +18,10 @@ def file_list(path, ignore=None):
         raise IOError('Directory listing failed: path {0} is not a directory '
                       'or does not exist'.format(path))
 
-    ignore = ignore if ignore else []
+    ignore_set = set([] if ignore is None else ignore)
     files = os.listdir(path)
 
-    return (filename for filename in files if filename not in ignore)
+    return (filename for filename in files if filename not in ignore_set)
 
 
 def mkdir(path, recursive=True):
