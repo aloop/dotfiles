@@ -45,7 +45,7 @@ def remove(path):
         os.remove(path)
         log.info('Removed file at %s', path)
     else:
-        log.info("Removal unnecessary, %s doesn't exist", path)
+        log.warn("Removal failed: %s doesn't exist", path)
 
 
 def copy(src, dst, preserve_links=True):
@@ -69,7 +69,7 @@ def copy(src, dst, preserve_links=True):
         log.info('Copying file from %s to %s', src, dst)
         shutil.copy(src, dst)
     else:
-        log.warn('Source file or directory %s does not exist', src)
+        log.warn('Copy failed: source at %s does not exist', src)
 
 
 def link(src, dst):
