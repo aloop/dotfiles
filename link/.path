@@ -1,16 +1,27 @@
-new_paths=("$HOME/.rvm/bin" "/usr/local/share/npm/bin")
+# Standard path additions are defined here, these should be safe to include
+# cross-platform.
+#
+# You can add more on a per-machine basis by defining one of
+# these arrays in a ~/.before file. Paths added in ~/.before are extended with
+# the defaults defined in this file.
+prepend_paths=("/usr/local/sbin" "/usr/local/bin" "/usr/local/share/npm/bin"
+               "${prepend_paths[@]}")
 
-for new_path in "${new_paths[@]}"; do
-    if [ -e "$new_path" ]; then
-        PATH="$new_path:$PATH"
+append_paths=("${append_paths[@]}")
+
+# If we have Golang set up, lets add its binaries to the path
+if [ -n $GOPATH ]; then
+    append_paths=("${append_paths[@]}" "$GOPATH/bin")
+fi
+
+for new_path in "${prepend_paths[@]}"; do
+    if [ -d "$new_path" ]; then
+        PATH="$new_path:$(echo "$PATH" | sed -e "s|:${new_path}||" -e "s|${new_path}:||")"
     fi
 done
 
-# If homebrew is installed, prepend it bin dirs onto $PATH
-if command -v brew >/dev/null 2>&1; then
-    PATH="/usr/local/sbin:/usr/local/bin:$(echo "$PATH" | sed 's/:\/usr\/local\/bin//')"
-
-    if [ -e "$(brew --prefix josegonzalez/php/php55)/bin" ]; then
-        PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
+for new_path in "${append_paths[@]}"; do
+    if [ -d "$new_path" ]; then
+        PATH="$(echo "$PATH" | sed -e "s|:${new_path}||" -e "s|${new_path}:||"):$new_path"
     fi
-fi
+done
