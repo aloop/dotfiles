@@ -14,7 +14,7 @@ function server() {
     local port="8000"
 
     if [ "$1" != "--no-browser" ] && [ "$1" != "-n" ]; then
-        (sleep 1 && open_link "http://localhost:${port}/") &>/dev/null
+        ((sleep 1 && open_link "http://localhost:${port}/") &)
     fi
 
     if command -v python3 >/dev/null; then
