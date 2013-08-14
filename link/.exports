@@ -1,5 +1,3 @@
 export ARCHFLAGS="-arch x86_64"
-export DEFAULT_USER="anthony"
-if [ -z $GOPATH ]; then
-    export GOPATH="$HOME/Development/go"
-fi
+[[ -n $SSH_CLIENT ]] || export DEFAULT_USER="anthony"
+[[ -n $GOPATH ]] || export GOPATH="$HOME/Development/go"
