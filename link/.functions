@@ -51,3 +51,11 @@ function gifify() {
         echo "proper usage: gifify <input_movie.mov>. You DO need to include extension."
     fi
 }
+
+function install_rvm() {
+    \curl -L https://get.rvm.io | bash -s stable --ruby --ignore-dotfiles
+}
+
+function install_homebrew() {
+    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+}
