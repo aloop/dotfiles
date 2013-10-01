@@ -7,7 +7,7 @@
 prepend_paths=("/usr/local/sbin" "/usr/local/bin" "/usr/local/share/npm/bin"
                "${prepend_paths[@]}")
 
-append_paths=("${append_paths[@]}")
+append_paths=("$HOME/.cabal/bin" "${append_paths[@]}")
 
 # If we have Golang set up, lets add its binaries to the path
 if [ -n $GOPATH ]; then
