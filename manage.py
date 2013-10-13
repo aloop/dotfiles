@@ -23,7 +23,6 @@ class DotfileManager(object):
         self.make_backups = True
 
     def process_dir(self, path, func):
-        path = os.path.join(self.dir, path)
         for filename in fs.file_list(path, self.ignore):
             source = os.path.join(path, filename)
             dest = os.path.join(self.home, filename)
@@ -40,7 +39,7 @@ class DotfileManager(object):
         backup_path = os.path.join(self.dir, "backups", backup_name)
         filename = os.path.basename(path)
 
-        # Create the backup directory in case it doesn't exist already
+        # Creates the backup directory if it doesn't exist
         fs.mkdir(backup_path)
 
         fs.copy(path, os.path.join(backup_path, filename))
@@ -50,10 +49,14 @@ class DotfileManager(object):
         self.copy()
 
     def link(self):
-        self.process_dir("link", fs.link)
+        path = os.path.join(self.dir, "link")
+        fs.mkdir(path)
+        self.process_dir(path, fs.link)
 
     def copy(self):
-        self.process_dir("copy", fs.copy)
+        path = os.path.join(self.dir, "copy")
+        fs.mkdir(path)
+        self.process_dir(path, fs.copy)
 
 
 def main():
@@ -104,8 +107,8 @@ def main():
         ]
     ]
 
-    for name, help, func in subparser_definitions:
-        new_subp = subp.add_parser(name, help=help, parents=[parentp])
+    for name, help_, func in subparser_definitions:
+        new_subp = subp.add_parser(name, help=help_, parents=[parentp])
         new_subp.set_defaults(func=func)
 
     options = parser.parse_args()
