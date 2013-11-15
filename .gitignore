@@ -1,3 +1,5 @@
 backups/
 *.pyc
 __pycache__/
+link/.vim/bundle/*
+!link/.vim/bundle/vundle

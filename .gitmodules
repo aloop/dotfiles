@@ -1,15 +1,3 @@
-[submodule "link/.vim/bundle/ctrlp.vim"]
-	path = link/.vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim.git
-[submodule "link/.vim/bundle/nerdtree"]
-	path = link/.vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "link/.vim/bundle/vim-colors-solarized"]
-	path = link/.vim/bundle/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "link/.vim/bundle/vim-surround"]
-	path = link/.vim/bundle/vim-surround
-	url = https://github.com/tpope/vim-surround.git
-[submodule "link/.vim/bundle/vim-pathogen"]
-	path = link/.vim/bundle/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
+[submodule "link/.vim/bundle/vundle"]
+	path = link/.vim/bundle/vundle
+	url = https://github.com/gmarik/vundle.git
