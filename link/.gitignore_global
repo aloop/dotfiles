@@ -1,63 +1,15 @@
-# Compiled source #
-###################
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
 *.pyc
-
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-# Logs and databases #
-######################
 *.log
-*.sql
-*.sqlite
-*.db
-
-# OS generated files #
-######################
+Thumbs.db
+Desktop.ini
 .DS_Store
-.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-Icon?
 .fuse_*
-*.bak
 .nfs*
-*~
-.directory
-
-# Images #
-##########
-*.jpg
-*.jpeg
-*.gif
-*.png
-*.ico
-
-#  Project Files   #
-######################
-.project
-*.sublime-project
+*.bak
+.netrwhist
+.sass-cache
 *.sublime-workspace
-
-# Other Files #
-###############
-*.cache
-*.ppsx
-*.pdf
+*~
