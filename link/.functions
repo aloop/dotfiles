@@ -14,7 +14,7 @@ function server() {
     local port="8000"
 
     if [ "$1" != "--no-browser" ] && [ "$1" != "-n" ]; then
-        ((sleep 1 && open_link "http://localhost:${port}/") &)
+        (sleep 1 && open_link "http://localhost:${port}/") &
     fi
 
     if command -v python3 >/dev/null; then
@@ -26,29 +26,32 @@ function server() {
 
 # Adapted from https://gist.github.com/SlexAxton/4989674
 function gifify() {
+    local OPTIND
+    local gif_width="480"
+    while getopts ":w:s:d:" opt; do
+        case "${opt}" in
+            w)
+                gif_width="${OPTARG}"
+                ;;
+            s)
+                ffmpeg_start="${OPTARG}"
+                ;;
+            d)
+                ffmpeg_duration="${OPTARG}"
+                ;;
+            *)
+                echo "Not a flag"
+                exit 1
+                ;;
+        esac
+    done
+
+    shift $(( OPTIND - 1))
+
     if [[ -n "$1" ]]; then
-        if [[ $2 == '--good' ]]; then
-            ffmpeg -i $1 -vcodec png out-static-%05d.png
-
-            # Remove even-numbered frames as a nice size optimization without badly affecting the result
-            rm out-static-*[0,2,4,6,8].png
-
-            # Convert the pngs to gifs with ImageMagick
-            ls out-static*.png | xargs -I{} -P4 convert {} -verbose -layers Optimize -resize 600 {}.gif
-
-            # Remove leftover pngs
-            rm out-static*.png
-
-            # Produce the animated gif!
-            ls out-static*.gif | xargs gifsicle --colors 64 --dither --delay=3 --loop --optimize=3 --multifile > $1.gif
-
-            # Remove leftover gifs
-            rm out-static*.gif
-        else
-            ffmpeg -i $1 -s 600x400 -pix_fmt rgb24 -f gif - | gifsicle --dither --optimize=3 --delay=4 > $1.gif
-        fi
+        ffmpeg -i "${1}" -ss "${ffmpeg_start}" -t "${ffmpeg_duration}" -r 10 -f image2pipe -vcodec ppm - | convert +dither -coalesce -layers Optimize -resize "${gif_width}" - "${1}".gif
     else
-        echo "proper usage: gifify <input_movie.mov>. You DO need to include extension."
+        echo "proper usage: gifify <input.ext>. You DO need to include extension."
     fi
 }
 
