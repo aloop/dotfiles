@@ -1,6 +1,3 @@
-[user]
-	email = theseattlite@gmail.com
-	name = Anthony Loop
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
@@ -16,4 +13,6 @@
 [difftool]
 	prompt = false
 [alias]
-	d = difftool
+    d = difftool
+[include]
+    path = ~/.gitconfig-custom
