@@ -6,7 +6,6 @@
 # the defaults defined in this file.
 prepend_paths=("/usr/local/sbin"
                "/usr/local/bin"
-               "/usr/local/share/npm/bin"
                "${prepend_paths[@]}")
 
 append_paths=("$HOME/.cabal/bin"
