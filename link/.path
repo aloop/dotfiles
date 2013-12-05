@@ -4,14 +4,18 @@
 # You can add more on a per-machine basis by defining one of
 # these arrays in a ~/.before file. Paths added in ~/.before are extended with
 # the defaults defined in this file.
-prepend_paths=("/usr/local/sbin" "/usr/local/bin" "/usr/local/share/npm/bin"
+prepend_paths=("/usr/local/sbin"
+               "/usr/local/bin"
+               "/usr/local/share/npm/bin"
                "${prepend_paths[@]}")
 
-append_paths=("$HOME/.cabal/bin" "${append_paths[@]}")
+append_paths=("$HOME/.cabal/bin"
+              "${append_paths[@]}")
 
 # If we have Golang set up, lets add its binaries to the path
 if [ -n $GOPATH ]; then
-    append_paths=("${append_paths[@]}" "$GOPATH/bin")
+    append_paths=("${append_paths[@]}"
+                  "$GOPATH/bin")
 fi
 
 for new_path in "${prepend_paths[@]}"; do

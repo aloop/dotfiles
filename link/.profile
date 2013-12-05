@@ -1,5 +1,10 @@
-shell_includes=("$HOME/.before" "$HOME/.aliases" "$HOME/.functions"
-                "$HOME/.exports" "$HOME/.path" "$HOME/.rvm/scripts/rvm"
+shell_includes=("$HOME/.before"
+                "$HOME/.aliases"
+                "$HOME/.functions"
+                "$HOME/.exports"
+                "$HOME/.path"
+                "$HOME/.rvm/scripts/rvm"
+                "$HOME/.nvm/nvm.sh"
                 "$HOME/.after")
 
 for shell_include in "${shell_includes[@]}"; do
