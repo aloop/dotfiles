@@ -8,8 +8,8 @@ prepend_paths=("/usr/local/sbin"
                "/usr/local/bin"
                "${prepend_paths[@]}")
 
-append_paths=("$HOME/.cabal/bin"
-              "${append_paths[@]}")
+append_paths=("${append_paths[@]}"
+              "$HOME/.cabal/bin")
 
 # If we have Golang set up, lets add its binaries to the path
 if [ -n $GOPATH ]; then
