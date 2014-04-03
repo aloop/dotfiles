@@ -68,9 +68,12 @@ function df_install_homebrew() {
 }
 
 function df_install_zsh() {
+    local _CURRENT_DIR="${PWD}"
+
     # Manually install oh-my-zsh
     cd ~
     git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
     # Install oh-my-zsh custom plugins
     cd ~/.oh-my-zsh/custom
     git init
@@ -78,6 +81,8 @@ function df_install_zsh() {
     git fetch
     git checkout --track origin/master
     git submodule update --init --recursive
+
+    cd "${_CURRENT_DIR}"
 }
 
 function df_install() {
