@@ -55,10 +55,35 @@ function gifify() {
     fi
 }
 
-function install_rvm() {
-    \curl -L https://get.rvm.io | bash -s stable --ruby --ignore-dotfiles
+
+# Install helpers to finish setting up the shell.
+# TODO: move this functionality to a bootstrap script
+
+function df_install_rvm() {
+    \curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles
 }
 
-function install_homebrew() {
-    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+function df_install_homebrew() {
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+}
+
+function df_install_zsh() {
+    # Manually install oh-my-zsh
+    cd ~
+    git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    # Install oh-my-zsh custom plugins
+    cd ~/.oh-my-zsh/custom
+    git init
+    git remote add origin https://github.com/aloop/oh-my-zsh-custom.git
+    git fetch
+    git checkout --track origin/master
+    git submodule update --init --recursive
+}
+
+function df_install() {
+    df_install_rvm
+    df_install_zsh
+    if [ "$(uname)" = "Darwin" ]; then
+        df_install_homebrew
+    fi
 }
