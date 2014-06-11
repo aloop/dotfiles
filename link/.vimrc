@@ -1,17 +1,53 @@
-" General Settings ------------------------------------------------------------
 
-set nocompatible " Disable Vi compatible mode
-set visualbell   " Use the visual bell, instead of the audible bell
-set history=1000 " Remember a lot more command history
-set autoread     " Reloads a file if it has been changed outside of vim
-set showmode     " Show the current mode
-set showcmd
+" TODO: Trim the fat and modularize
+
+" Disable Vi compatible mode
+set nocompatible
+
+" Start Vundle setup
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Vundle can manage itself
+Plugin 'gmarik/Vundle.vim'
+
+" Plugins
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-pathogen'
+Plugin 'tpope/vim-surround'
+Plugin 'airblade/vim-gitgutter'
+"Plugin 'crooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+
+" Color Schemes
+Plugin 'sickill/vim-monokai'
+
+call vundle#end()
+
+filetype plugin indent on
+" End Vundle setup
+
+
+" Airline Config
+let g:airline_powerline_fonts = 1
+let g:airline_enable_branch   = 1
+let g:airline#extensions#tabline#enabled = 1
+
+
+set history=1000    " Remember a lot more command history
+set undolevels=1000 " And a lot more undo levels
+set hidden          " Allow unsaved buffers in the background
 set ttyfast
-set ruler
-set title        " Change terminal window title
-set autochdir    " Set the directory to the directory of the active window
-set confirm      " Present an option to continue, rather than aborting
-set modelines=0
+set ruler           " Show the current row and column number
+set title           " Change terminal window title
+set autochdir       " Set the directory to the directory of the active window
+
+" Don't beep!
+set visualbell
+set noerrorbells
 
 " Make backspace more useful in insert mode
 set backspace=indent,eol,start
@@ -19,7 +55,7 @@ set backspace=indent,eol,start
 " Enable syntax highlighting
 syntax on
 
-" Use a unix file-type with utf-8 encoding by default
+" Prefer a unix file-type with utf-8 encoding by default
 set ffs=unix,dos,mac
 set encoding=utf8
 
@@ -28,42 +64,80 @@ set nowritebackup
 set noswapfile
 set nobackup
 
+" Automatically resize split views when vim is resized
 au VimResized * exe "normal! \<c-w>="
 
 
-" Setup Plugins ---------------------------------------------------------------
+" Key mappings ----------------------------------------------------------------
 
-filetype off
+let mapleader = ","
+let g:mapleader = ","
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
 
-Bundle 'gmarik/vundle'
+" Fast saving
+nnoremap <leader>w  :w<cr>
+nnoremap <leader>q  :q<cr>
+nnoremap <leader>wq :wq<cr>
 
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-pathogen'
-Bundle 'tpope/vim-surround'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'kien/ctrlp.vim'
+" Jump by three lines instead of one
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
-runtime macros/matchit.vim
+" Open a vertical split and focus it
+nnoremap <leader>v <C-w>v<C-w>l
 
-filetype plugin indent on
+" Easier window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Quick navigation through buffers
+nnoremap <left>     :bp<cr>
+nnoremap <right>    :bn<cr>
+nnoremap <leader>ls :ls<cr>
+
+
+nnoremap j gj
+nnoremap k gk
+
+" Easier command access
+nnoremap ; :
+
+" Easy toggle when pasting formatted code
+set pastetoggle=<F2>
+
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Sudo write
+cmap w!! w !sudo tee % >/dev/null
+
 
 " Wildmenu Completion ---------------------------------------------------------
 
 set wildmenu
 set wildmode=list:longest
 
+" Version control ignores
 set wildignore+=.git,.svn,.hg
+" Image file ignores
 set wildignore+=*.jpg,*.png,*.gif,*.bmp,*.jpeg
-set wildignore+=*.DS_Store
+" System/Temp file ignores
+set wildignore+=*.DS_Store,*.swp,*.bak
+" Compiled file ignores
 set wildignore+=*.pyc
+
+
+" File & Folder navigation
+
+" Automatically change the directory to the current buffers directory
+autocmd BufEnter * :cd %:p:h
 
 
 " Interface Settings ----------------------------------------------------------
 
-" Always show status bar
+" Always show the statusline
 set laststatus=2
 
 " Enables a distinct line at the position of the cursor
@@ -76,14 +150,10 @@ set so=10
 " Show line numbers
 set number
 
-set textwidth=80
+" Show a column at the specified width for the preferred line width
 set colorcolumn=80
 
-" Automatically reload a file when modified by another process
-set autoread
-
-set list
-set listchars=tab:▸\ ,trail:·
+set list listchars=tab:»-,trail:·,extends:»,precedes:«
 
 " Return to last edit position when opening files
 " from http://amix.dk/vim/vimrc.html
@@ -109,53 +179,10 @@ set magic
 set showmatch
 
 
-" Key mappings ----------------------------------------------------------------
+" Formatting ------------------------------------------------------------------
 
-let mapleader = ","
-let g:mapleader = ","
-
-" Fast saving
-nnoremap <leader>w  :w!<cr>
-nnoremap <leader>q  :q<cr>
-nnoremap <leader>wq :wq<cr>
-
-" Jump by three lines instead of one
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-
-" Open a vertical split and focus it
-nnoremap <leader>v <C-w>v<C-w>l
-
-" Easier window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Quick navigation through buffers
-nnoremap <left>    :bp<cr>
-nnoremap <right>   :bn<cr>
-
-nnoremap j gj
-nnoremap k gk
-
-" Easier command access
-nnoremap ; :
-
-" Easy toggle when pasting formatted code
-set pastetoggle=<F2>
-
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-" Sudo write
-cmap w!! w !sudo tee % >/dev/null
-
-
-" Formatting Settings ---------------------------------------------------------
-
-" Use spaces instead of tabs
 set autoindent
+set copyindent
 set smartindent
 set smarttab
 set softtabstop=4
@@ -171,7 +198,4 @@ if has("gui_running")
     set t_Co=256
 endif
 
-let g:solarized_termtrans = 1
-colorscheme solarized
-set background=dark
-
+colorscheme monokai
