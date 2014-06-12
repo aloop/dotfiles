@@ -8,8 +8,8 @@ shell_includes=("$HOME/.aliases"
                 "$HOME/.path"
                 "$HOME/.rvm/scripts/rvm"
                 "$HOME/.nvm/nvm.sh"
-                "$HOME/.after"
-                "${shell_includes[@]}")
+                "${shell_includes[@]}"
+                "$HOME/.after")
 
 for shell_include in "${shell_includes[@]}"; do
     if [ -f "$shell_include" ]; then
