@@ -11,7 +11,7 @@ plugins=(git rvm zsh-syntax-highlighting)
 
 # We source this before oh-my-zsh so that various oh-my-zsh settings can be
 # overridden per-system
-. $HOME/.profile
+. $HOME/.shell_setup
 
 # Start oh-my-zsh
 . $ZSH/oh-my-zsh.sh
