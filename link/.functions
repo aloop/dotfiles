@@ -1,7 +1,15 @@
+is_osx() {
+    if [ "$(uname)" = "Darwin" ]; then
+        return 0
+    fi
+
+    return 1
+}
+
 # Open a link (probably works for file paths as well)
 # in the systems default browser
-function open_link() {
-    if [ "$(uname)" = "Darwin" ]; then
+open_link() {
+    if is_osx; then
         open "$1"
     else
         xdg-open "$1"
@@ -10,7 +18,7 @@ function open_link() {
 
 # Launch an http server in the current directory
 # and optionally open it in the default browser
-function server() {
+server() {
     local port="8000"
 
     if [ "$1" != "--no-browser" ] && [ "$1" != "-n" ]; then
@@ -25,7 +33,7 @@ function server() {
 }
 
 # Adapted from https://gist.github.com/SlexAxton/4989674
-function gifify() {
+gifify() {
     local OPTIND
     local gif_width="480"
     while getopts ":w:s:d:" opt; do
@@ -48,7 +56,7 @@ function gifify() {
 
     shift $(( OPTIND - 1))
 
-    if [[ -n "$1" ]]; then
+    if [ -n "$1" ] && [ -f "$1" ]; then
         ffmpeg -i "${1}" -ss "${ffmpeg_start}" -t "${ffmpeg_duration}" -r 10 -f image2pipe -vcodec ppm - | convert +dither -coalesce -layers Optimize -resize "${gif_width}" - "${1}".gif
     else
         echo "proper usage: gifify <input.ext>. You DO need to include extension."
@@ -59,16 +67,16 @@ function gifify() {
 # Install helpers to finish setting up the shell.
 # TODO: move this functionality to a bootstrap script
 
-function df_install_rvm() {
+df_install_rvm() {
     \curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles
 }
 
-function df_install_homebrew() {
+df_install_homebrew() {
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 }
 
-function df_install_zsh() {
-    local _CURRENT_DIR="${PWD}"
+df_install_zsh() {
+    local _CURRENT_DIR="$PWD"
 
     # Manually install oh-my-zsh
     cd ~
@@ -82,13 +90,13 @@ function df_install_zsh() {
     git checkout --track origin/master
     git submodule update --init --recursive
 
-    cd "${_CURRENT_DIR}"
+    cd "$_CURRENT_DIR"
 }
 
-function df_install() {
+df_install() {
     df_install_rvm
     df_install_zsh
-    if [ "$(uname)" = "Darwin" ]; then
+    if is_osx; then
         df_install_homebrew
     fi
 }

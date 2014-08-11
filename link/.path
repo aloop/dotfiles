@@ -1,30 +1,41 @@
 # Standard path additions are defined here, these should be safe to include
 # cross-platform.
 #
-# You can add more on a per-machine basis by defining one of
+# The paths are only added to PATH if they actually exist in the file system
+#
+# You can add more on a per-machine basis by defining either of
 # these arrays in a ~/.before file. Paths added in ~/.before are extended with
 # the defaults defined in this file.
-prepend_paths=("/usr/local/sbin"
-               "/usr/local/bin"
-               "${prepend_paths[@]}")
+prepend_paths=(
+    "/usr/local/sbin"
+    "/usr/local/bin"
+    "${prepend_paths[@]}"
+)
 
-append_paths=("${append_paths[@]}"
-              "$HOME/.cabal/bin")
+append_paths=(
+    "${append_paths[@]}"
+    "$HOME/.cabal/bin"
+    "${GOPATH:+$GOPATH/bin}"
+)
 
-# If we have Golang set up, lets add its binaries to the path
-if [ -n $GOPATH ]; then
-    append_paths=("${append_paths[@]}"
-                  "$GOPATH/bin")
-fi
+filter_path() {
+    printf "%s" "$(printf "%s" "$PATH" | tr ":" "\n" | sed "\|^${1}$|d" | tr "\n" ":")"
+}
 
 for new_path in "${prepend_paths[@]}"; do
-    if [ -d "$new_path" ]; then
-        PATH="$new_path:$(echo "$PATH" | sed -e "s|:${new_path}||" -e "s|${new_path}:||")"
+    if [ "${new_path:-}" ] && [ -d "$new_path" ]; then
+        PATH="$(filter_path "$new_path")"
+        PATH="$new_path:${PATH%:}"
     fi
 done
 
 for new_path in "${append_paths[@]}"; do
-    if [ -d "$new_path" ]; then
-        PATH="$(echo "$PATH" | sed -e "s|:${new_path}||" -e "s|${new_path}:||"):$new_path"
+    if [ "${new_path:-}" ] && [ -d "$new_path" ]; then
+        PATH="$(filter_path "$new_path")"
+        PATH="${PATH%:}:$new_path"
     fi
 done
+
+# Cleanup
+unset -f filter_path
+unset new_path prepend_paths append_paths
