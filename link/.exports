@@ -1,3 +1,8 @@
 export ARCHFLAGS="-arch x86_64"
-[[ -n $SSH_CLIENT ]] || export DEFAULT_USER="anthony"
-[[ -n $GOPATH ]] || export GOPATH="$HOME/Development/go"
+
+# This allows some prompt themes to hide the username and hostname
+# when you aren't logged into a remote machine
+[ -z "${SSH_CLIENT:-}" ] && export DEFAULT_USER="anthony"
+
+# Setup the golang path if it isn't already set
+: "${GOPATH:="$HOME/Development/go"}"
