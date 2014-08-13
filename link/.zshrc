@@ -7,7 +7,9 @@ ZSH_THEME="agnoster"
 
 # Oh My ZSH Plugins to load. If this is already defined, it will use
 # that list instead.
-: ${plugins:=(git rvm zsh-syntax-highlighting)}
+if [ ! "${plugins:-}" ]; then
+    plugins=(git rvm zsh-syntax-highlighting)
+fi
 
 # Start oh-my-zsh
 . $ZSH/oh-my-zsh.sh
