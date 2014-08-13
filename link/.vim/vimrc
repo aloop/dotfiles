@@ -35,6 +35,10 @@ filetype plugin indent on
 " End Vundle setup
 
 
+" gitgutter config
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
+
 " ctrlp.vim config
 
 " Do not show files and folders in .gitignore
@@ -218,3 +222,9 @@ endif
 set background=dark
 
 colorscheme solarized
+
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green guifg=darkgreen
+highlight GitGutterChange ctermfg=yellow guifg=darkyellow
+highlight GitGutterDelete ctermfg=red guifg=darkred
+highlight GitGutterChangeDelete ctermfg=yellow guifg=darkyellow
