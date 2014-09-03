@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-SOURCE=$(dirname "$BASH_SOURCE")
-if [ -d "$SOURCE/bundle" ] && [ ! -d "$SOURCE/bundle/Vundle.vim" ]; then
-	echo "Cloning Vundle"
-	git clone https://github.com/gmarik/Vundle.vim.git "$SOURCE/bundle/Vundle.vim"
-	echo "Finished cloning Vundle"
-fi
