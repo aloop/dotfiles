@@ -1,1 +1,1 @@
-. $HOME/.shell_setup
+. $HOME/.shellconfig/path

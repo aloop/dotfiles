@@ -1,0 +1,23 @@
+# Standard path additions are defined here, these should be safe to include
+# cross-platform.
+
+df_prepend="${df_prepend:+$df_prepend:}/usr/local/sbin:/usr/local/bin"
+df_append="$HOME/.cabal/bin:$HOME/bin${GOPATH:+:$GOPATH/bin}${df_append:+:$df_append}"
+
+# A this function filters $1 from $2 and "returns" the result
+df_filter_path() {
+    printf "%s" "$(printf '%s' "$2" | tr : '\n' | sed "\:^${1}$:d" | tr '\n' :)"
+}
+
+df_filtered_path="$PATH"
+
+# It's not really necessary to prevent duplicates in the $PATH,
+# but I like to keep it somewhat clean.
+printf "%s" "$df_prepend:$df_append" | tr : '\n' | sed '\:^$:d' | while read line; do
+    df_filtered_path="$(df_filter_path "$line" "$df_filtered_path")"
+done
+
+PATH="$(printf "%s" "$df_prepend:$df_filtered_path:$df_append" | sed "s|:\{2,\}|:|g")"
+
+unset -f df_filter_path
+unset df_prepend df_append df_filtered_path
