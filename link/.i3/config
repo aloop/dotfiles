@@ -4,8 +4,7 @@ set $mod Mod4
 # is used in the bar {} block below.
 #
 # Can use symbols from other fonts by setting fallback fonts, like so:
-#font pango:DejaVu Sans 10, Powerline Symbols 10
-font pango:DejaVu Sans 10
+font pango:DejaVu Sans 10, PowerlineSymbols 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -78,16 +77,11 @@ bindsym $mod+Shift+a focus child
 # ---- WORKSPACES
 # ------------------------
 
-set $WS1 1: Term
-set $WS2 2: Web
-set $WS3 3: Chat
-set $WS4 4: Music
-
 # switch to workspace
-bindsym $mod+1 workspace $WS1
-bindsym $mod+2 workspace $WS2
-bindsym $mod+3 workspace $WS3
-bindsym $mod+4 workspace $WS4
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -96,10 +90,10 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $WS1
-bindsym $mod+Shift+2 move container to workspace $WS2
-bindsym $mod+Shift+3 move container to workspace $WS3
-bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
@@ -122,10 +116,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -144,22 +138,22 @@ bindsym $mod+r mode "resize"
 # ------------------------
 # ---- Solarized Colors
 # ------------------------
-#set $base03:    \#002b36;
-#set $base02:    \#073642;
-#set $base01:    \#586e75;
-#set $base00:    \#657b83;
-#set $base0:     \#839496;
-#set $base1:     \#93a1a1;
-#set $base2:     \#eee8d5;
-#set $base3:     \#fdf6e3;
-#set $yellow:    \#b58900;
-#set $orange:    \#cb4b16;
-#set $red:       \#dc322f;
-#set $magenta:   \#d33682;
-#set $violet:    \#6c71c4;
-#set $blue:      \#268bd2;
-#set $cyan:      \#2aa198;
-#set $green:     \#859900;
+#set $base03:  #002b36;
+#set $base02:  #073642;
+#set $base01:  #586e75;
+#set $base00:  #657b83;
+#set $base0:   #839496;
+#set $base1:   #93a1a1;
+#set $base2:   #eee8d5;
+#set $base3:   #fdf6e3;
+#set $yellow:  #b58900;
+#set $orange:  #cb4b16;
+#set $red:     #dc322f;
+#set $magenta: #d33682;
+#set $violet:  #6c71c4;
+#set $blue:    #268bd2;
+#set $cyan:    #2aa198;
+#set $green:   #859900;
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -189,30 +183,31 @@ client.urgent #268bd2 #268bd2 #fdf6e3 #dc322f
 # ---- Exec On Startup
 # ------------------------
 
-exec --no-startup-id compton -Cb
-exec --no-startup-id dunst -config $HOME/.i3/dunstrc
-exec --no-startup-id udiskie --tray
-exec --no-startup-id chromium
-exec --no-startup-id urxvt
+exec compton --config $HOME/.i3/compton.conf -Cb
+exec dunst -config $HOME/.i3/dunstrc
+exec chromium-browser || chromium || notify-send "Chrome not installed"
+exec --no-startup-id i3-sensible-terminal
 
 
 # ------------------------
-# ---- Key Bindings
+# ---- Custom Key Bindings
 # ------------------------
 
-bindsym $mod+c exec --no-startup-id chromium
-bindsym $mod+m exec --no-startup-id clementine
-bindsym $mod+b exec --no-startup-id thunar
+bindsym $mod+c exec chromium-browser || chromium || notify-send "Chrome not installed"
+bindsym $mod+m exec clementine || notify-send "Music Player not found"
+bindsym $mod+b exec thunar || dolphin || nautilus --no-desktop || notify-send "No file browser found"
 
 bindsym XF86AudioRaiseVolume exec amixer set Master 2.5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer set Master 2.5%- unmute
 
+
 # ------------------------
-# ---- Key Bindings
+# ---- Per-application Settings
 # ------------------------
 
+for_window [window_role="pop-up"] floating enable
+for_window [class="KeePass2"] floating enable
 for_window [class="Vlc"] floating enable
 
-assign [class="^URxvt$"] $WS1
-assign [class="Chromium"] $WS2
-assign [class="Clementine"] $WS4
+assign [class="^Xfce4-terminal"] 2
+assign [class="Chromium"] 1
