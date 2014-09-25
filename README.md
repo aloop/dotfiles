@@ -6,11 +6,11 @@ Just a way to manage my dotfiles
 
 1. Clone the repository and pull in any the submodules:
 
-        git clone --recursive https://github.com/aloop/dotfiles.git ~/.dotfiles
+        git clone https://github.com/aloop/dotfiles.git ~/.dotfiles
 
 2. And then run the install script
 
-        ~/.dotfiles/manage.py install
+        ~/.dotfiles/manage install
 
 ## Backups
 
@@ -20,32 +20,31 @@ Files and Folders to be linked or copied that already exist in the home director
     ~/.dotfiles/backups/HOSTNAME@YYYY-MM-DD-HHMMSS
 
 
-This behavior can be disabled at runtime with the `--no-backup` flag.
-
 ## Basic Usage
 
 To update all links and copies, simply run the install script again:
 
-    ~/.dotfiles/manage.py install
+    ~/.dotfiles/manage install
 
 On the other hand, you may wish to only update links *or* copies:
 
-    ~/.dotfiles/manage.py link
-    
+    ~/.dotfiles/manage link
+
 or:
-   
-    ~/.dotfiles/manage.py copy 
 
-Certain files or folders can be excluded from being linked or copied individually like so:
+    ~/.dotfiles/manage copy
 
-    ~/.dotfiles/manage.py install --ignore FILENAME FOLDERNAME …
-
-Currently globs in these names are **not** supported.
 
 ## Notes
-* I have only used this script with python versions 2.7 and 3.3 (OSX 10.8 native and via homebrew, and Ubuntu 13.04 server)
 * It should be possible to use this script in just about any directory, i've only tested it at ~/.dotfiles, however.
-* This is the first python script i've ever written, beware of gremlins!
+
+
+## Todo
+* Add some backup management commands
+* Add `--no-backup` flag to disable backups
+* Add `--exlude` flag, to exlude files (and folders?) from being linked/copied
+* Maybe action-specific flags, such as `--exclude-link` or `--exclude-copy`
+* Add helper to fill out things such as a local `~/.gitconfig-custom` Containing proper credentials
 
 ## Author
 

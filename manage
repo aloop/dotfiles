@@ -1,0 +1,118 @@
+#!/usr/bin/env sh
+
+# This is set as this scripts directory
+dotfile_dir="$(cd "$(dirname "$0")" && pwd -L)"
+dotfile_link_dir="link"
+dotfile_copy_dir="copy"
+backup_base="${dotfile_dir}/backups/$(hostname)@$(date "+%Y-%m-%d-%H%M%S")"
+
+## Functions
+print() {
+    printf "%s" $1
+}
+
+clean_path() {
+    print $1 | sed -E "s/[\/]{2,}/\//g"
+}
+
+strip_path() {
+    clean_path "$(print $2 | sed "s|$1||")"
+}
+
+join_path() {
+    clean_path "$(printf "/%s" "$@")"
+}
+
+backup_original() {
+    if [ -e "$1" ]; then
+        local backup_dest="$(join_path "$backup_base" "$(strip_path "$HOME" "$1")")"
+
+        if [ ! -d "$(dirname "$backup_dest")" ]; then
+            mkdir -p "$(dirname "$backup_dest")"
+        fi
+
+        mv "$1" "$backup_dest"
+    fi
+}
+
+process_dir() {
+    local action="$1"
+    local basepath
+    local path
+    local dir
+
+    case "$action" in
+        copy)
+            basepath="$(join_path "$dotfile_dir" "$dotfile_copy_dir")"
+        ;;
+        *)
+            basepath="$(join_path "$dotfile_dir" "$dotfile_link_dir")"
+        ;;
+    esac
+
+    dir="${2:-$basepath}"
+
+    # From http://www.dwheeler.com/essays/filenames-in-shell.html#summary
+    for path in "$dir"/* "$dir"/.[!.]* "$dir"/..?*; do
+        if [ -e "$path" ]; then
+            local dest="$(join_path "$HOME" "$(strip_path "$basepath" "$path")")"
+
+            if [ -d "$path" ] && [ ! -L "$path" ]; then
+                mkdir -p "$dest"
+
+                process_dir "$action" "$path"
+            else
+                backup_original "$dest"
+
+                case "$action" in
+                    copy)
+                        cp -f "$path" "$dest"
+                        printf 'Copied \033[1;32m~%s\033[0m to \033[1;32m~%s\033[0m\n' "${path#${HOME}}" "${dest#${HOME}}"
+                    ;;
+                    *)
+                        ln -sf "$path" "$dest"
+                        printf 'Linked \033[1;32m~%s\033[0m to \033[1;32m~%s\033[0m\n' "${path#${HOME}}" "${dest#${HOME}}"
+                    ;;
+                esac
+            fi
+        fi
+    done
+}
+
+print_help() {
+    print "help"
+}
+
+## Main
+
+while :; do
+    case "$1" in
+        -h|--help|help)
+            print_help
+            exit
+            ;;
+        install)
+            process_dir "link"
+            process_dir "copy"
+            ;;
+        link)
+            process_dir "link"
+            ;;
+        copy)
+            process_dir "copy"
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -?*)
+            printf 'WARN: Unknown option: "%s", ignoring...\n' "$1" >&2
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
+
+    shift
+done
