@@ -25,7 +25,7 @@ join_path() {
 
 backup_original() {
     if [ -e "$1" ]; then
-        local backup_dest="$(join_path "$backup_base" "$(strip_path "$HOME" "$1")")"
+        backup_dest="$(join_path "$backup_base" "$(strip_path "$HOME" "$1")")"
 
         if [ ! -d "$(dirname "$backup_dest")" ]; then
             mkdir -p "$(dirname "$backup_dest")"
@@ -36,10 +36,7 @@ backup_original() {
 }
 
 process_dir() {
-    local action="$1"
-    local basepath
-    local path
-    local dir
+    action="$1"
 
     case "$action" in
         copy)
@@ -55,7 +52,7 @@ process_dir() {
     # From http://www.dwheeler.com/essays/filenames-in-shell.html#summary
     for path in "$dir"/* "$dir"/.[!.]* "$dir"/..?*; do
         if [ -e "$path" ]; then
-            local dest="$(join_path "$HOME" "$(strip_path "$basepath" "$path")")"
+            dest="$(join_path "$HOME" "$(strip_path "$basepath" "$path")")"
 
             if [ -d "$path" ] && [ ! -L "$path" ]; then
                 mkdir -p "$dest"
@@ -80,39 +77,70 @@ process_dir() {
 }
 
 print_help() {
-    print "help"
+    link_path="~$(join_path "${dotfile_dir#${HOME}}" "$dotfile_link_dir")"
+    copy_path="~$(join_path "${dotfile_dir#${HOME}}" "$dotfile_copy_dir")"
+
+    cat <<EOF
+Usage: manage [-h|--help] <command>
+
+Commands:
+    install  Link and copy all files under $link_path and $copy_path
+    link     Link all files under $link_path
+    copy     Copy all files under $copy_path
+EOF
 }
 
 ## Main
 
+do_copy=0
+do_link=0
+
 while :; do
     case "$1" in
-        -h|--help|help)
+        -h|--help)
             print_help
             exit
             ;;
         install)
-            process_dir "link"
-            process_dir "copy"
+            do_copy=1
+            do_link=1
+            break
             ;;
         link)
-            process_dir "link"
+            do_link=1
+            break
             ;;
         copy)
-            process_dir "copy"
+            do_copy=1
+            break
             ;;
         --)
             shift
             break
             ;;
         -?*)
-            printf 'WARN: Unknown option: "%s", ignoring...\n' "$1" >&2
+            printf 'Unknown option: %s\n' "$1" >&2
+            print_help >&2
+            exit 1
+            ;;
+        ?*)
+            printf 'Unknown command: %s\n' "$1" >&2
+            print_help >&2
             exit 1
             ;;
         *)
-            break
+            print_help >&2
+            exit 1
             ;;
     esac
 
     shift
 done
+
+if [ $do_link -eq 1 ]; then
+    process_dir "link"
+fi
+
+if [ $do_copy -eq 1 ]; then
+    process_dir "copy"
+fi
