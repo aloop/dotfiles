@@ -45,6 +45,8 @@ or:
 * Add `--exlude` flag, to exlude files (and folders?) from being linked/copied
 * Maybe action-specific flags, such as `--exclude-link` or `--exclude-copy`
 * Add helper to fill out things such as a local `~/.gitconfig-custom` Containing proper credentials
+* Support Merged short options, such as `-nf` parse to no-backup and force, for example
+
 
 ## Author
 
