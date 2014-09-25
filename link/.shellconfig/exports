@@ -1,5 +1,8 @@
 export ARCHFLAGS="-arch x86_64"
 
+export EDITOR="vim"
+export VISUAL="vim"
+
 # This allows some prompt themes to hide the username and hostname
 # when you aren't logged into a remote machine
 [ -z "${SSH_CLIENT:-}" ] && export DEFAULT_USER="anthony"
