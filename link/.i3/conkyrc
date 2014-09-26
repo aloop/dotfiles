@@ -36,42 +36,38 @@ TEXT
 
 # JSON for i3bar
 
-[
-    { "full_text": "CPU:" },
-    ${if_match ${acpitemp}<75}
-        { "full_text": "${freq_g}GHz -${acpitemp}°C ", "color": "\#fdf6e3"},
-    ${else}
-        { "full_text": "${freq_g}GHz -${acpitemp}°C ", "color": "\#dc322f" },
-    ${endif}
-
-    { "full_text": "RAM:" },
-
-    ${if_match ${memperc}<90}
-        { "full_text": "${memperc}%", "color": "\#fdf6e3" },
-    ${else}
-        { "full_text": "${memperc}%", "color": "\#dc322f" },
-    ${endif}
-
-    ${if_empty ${battery}}
-    ${else}
-        ${if_match "${battery_short}"!="U"}
-            ${if_match "${battery_short}"!="N"}
-                ${if_empty "${battery_short}"}
-                ${else}
-                    { "full_text": "|" },
-                    { "full_text": "Battery:" },
-                    ${if_empty ${battery_time}}
-                        { "full_text": "${battery_percent}%", "color": "\#fdf6e3" },
-                    ${else}
-                        { "full_text": "${battery_percent}% (${battery_time} Remaining)", "color": "\#fdf6e3" },
-                    ${endif}
-                ${endif}
-            ${endif}
-        ${endif}
-    ${endif}
-
-    { "full_text": "|" },
-    { "full_text": "${time %a, %d %B %Y}" },
-    { "full_text": "${time %l:%M%P}", "color": "\#fdf6e3" }
+[\
+    { "full_text": "CPU:" },\
+    ${if_match ${acpitemp}<75}\
+        { "full_text": "${freq_g}GHz -${acpitemp}°C ", "color": "\#fdf6e3"},\
+    ${else}\
+        { "full_text": "${freq_g}GHz -${acpitemp}°C ", "color": "\#dc322f" },\
+    ${endif}\
+    { "full_text": "RAM:" },\
+    ${if_match ${memperc}<90}\
+        { "full_text": "${memperc}%", "color": "\#fdf6e3" },\
+    ${else}\
+        { "full_text": "${memperc}%", "color": "\#dc322f" },\
+    ${endif}\
+    ${if_empty ${battery}}\
+    ${else}\
+        ${if_match "${battery_short}"!="U"}\
+            ${if_match "${battery_short}"!="N"}\
+                ${if_empty "${battery_short}"}\
+                ${else}\
+                    { "full_text": "|" },\
+                    { "full_text": "Battery:" },\
+                    ${if_empty ${battery_time}}\
+                        { "full_text": "${battery_percent}%", "color": "\#fdf6e3" },\
+                    ${else}\
+                        { "full_text": "${battery_percent}% (${battery_time} Remaining)", "color": "\#fdf6e3" },\
+                    ${endif}\
+                ${endif}\
+            ${endif}\
+        ${endif}\
+    ${endif}\
+    { "full_text": "|" },\
+    { "full_text": "${time %a, %d %B %Y}" },\
+    { "full_text": "${time %l:%M%P}", "color": "\#fdf6e3" }\
 ],
 
