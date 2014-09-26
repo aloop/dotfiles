@@ -4,7 +4,7 @@ Just a way to manage my dotfiles
 
 ## Install
 
-1. Clone the repository and pull in any the submodules:
+1. Clone the repository:
 
         git clone https://github.com/aloop/dotfiles.git ~/.dotfiles
 
