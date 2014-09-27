@@ -8,15 +8,15 @@ backup_base="${dotfile_dir}/backups/$(hostname)@$(date "+%Y-%m-%d-%H%M%S")"
 
 ## Functions
 print() {
-    printf "%s" $1
+    printf "%s" "$1"
 }
 
 clean_path() {
-    print $1 | sed -E "s/[\/]{2,}/\//g"
+    print "$1" | sed -E "s/[\/]{2,}/\//g"
 }
 
 strip_path() {
-    clean_path "$(print $2 | sed "s|$1||")"
+    clean_path "$(print "$2" | sed "s|$1||")"
 }
 
 join_path() {
