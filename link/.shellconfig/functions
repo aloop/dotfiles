@@ -71,12 +71,23 @@ df_install_rvm() {
     \curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles
 }
 
+df_install_nvm() {
+    _CURRENT_DIR="$PWD"
+
+    git clone https://github.com/creationix/nvm.git ~/.nvm
+    cd ~/.nvm
+    git checkout `git describe --abbrev=0 --tags`
+
+    cd "$_CURRENT_DIR"
+    unset $_CURRENT_DIR
+}
+
 df_install_homebrew() {
-    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 }
 
 df_install_zsh() {
-    local _CURRENT_DIR="$PWD"
+    _CURRENT_DIR="$PWD"
 
     # Manually install oh-my-zsh
     cd ~
@@ -91,10 +102,12 @@ df_install_zsh() {
     git submodule update --init --recursive
 
     cd "$_CURRENT_DIR"
+    unset $_CURRENT_DIR
 }
 
 df_install() {
     df_install_rvm
+    df_install_nvm
     df_install_zsh
     if is_osx; then
         df_install_homebrew
