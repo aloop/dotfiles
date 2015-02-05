@@ -5,7 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="agnoster"
+ZSH_THEME="afowler"
 
 # Oh My ZSH Plugins to load. If this is already defined, it will use
 # that list instead.
