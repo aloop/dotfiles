@@ -183,10 +183,11 @@ client.urgent #268bd2 #268bd2 #fdf6e3 #dc322f
 # ---- Exec On Startup
 # ------------------------
 
+exec --no-startup-id setxkbmap -option ctrl:nocaps
 exec compton --config $HOME/.i3/compton.conf -Cb
 exec dunst -config $HOME/.i3/dunstrc
 exec chromium-browser || chromium || notify-send "Chrome not installed"
-exec --no-startup-id i3-sensible-terminal
+exec --no-startup-id i3-msg 'workspace 2; exec i3-sensible-terminal; workspace 1'
 
 
 # ------------------------
@@ -208,6 +209,3 @@ bindsym XF86AudioLowerVolume exec amixer set Master 2.5%- unmute
 for_window [window_role="pop-up"] floating enable
 for_window [class="KeePass2"] floating enable
 for_window [class="Vlc"] floating enable
-
-assign [class="^Xfce4-terminal"] 2
-assign [class="Chromium"] 1
