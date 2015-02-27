@@ -3,5 +3,12 @@ alias sudo="sudo "
 
 alias mvim="mvim --remote-silent"
 
-alias vi="vim"
-alias e="vim"
+if command_exists vim; then
+    alias vi="vim"
+    alias e="vim"
+fi
+
+alias grep="grep --color=auto"
+alias df="df -h"
+# I usually only use du to get the total space used by a directory
+alias du="du -hcs"

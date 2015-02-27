@@ -1,3 +1,11 @@
+command_exists() {
+    if command -v $1 >/dev/null 2>&1; then
+        return 0
+    fi
+
+    return 1
+}
+
 is_osx() {
     if [ "$(uname)" = "Darwin" ]; then
         return 0
@@ -25,44 +33,12 @@ server() {
         (sleep 1 && open_link "http://localhost:${port}/") &
     fi
 
-    if command -v python3 >/dev/null; then
+    if command_exists python3; then
         python3 -m http.server "$port"
     else
         python -m SimpleHTTPServer "$port"
     fi
 }
-
-# Adapted from https://gist.github.com/SlexAxton/4989674
-gifify() {
-    local OPTIND
-    local gif_width="480"
-    while getopts ":w:s:d:" opt; do
-        case "${opt}" in
-            w)
-                gif_width="${OPTARG}"
-                ;;
-            s)
-                ffmpeg_start="${OPTARG}"
-                ;;
-            d)
-                ffmpeg_duration="${OPTARG}"
-                ;;
-            *)
-                echo "Not a flag"
-                exit 1
-                ;;
-        esac
-    done
-
-    shift $(( OPTIND - 1))
-
-    if [ -n "$1" ] && [ -f "$1" ]; then
-        ffmpeg -i "${1}" -ss "${ffmpeg_start}" -t "${ffmpeg_duration}" -r 10 -f image2pipe -vcodec ppm - | convert +dither -coalesce -layers Optimize -resize "${gif_width}" - "${1}".gif
-    else
-        echo "proper usage: gifify <input.ext>. You DO need to include extension."
-    fi
-}
-
 
 # Install helpers to finish setting up the shell.
 # TODO: move this functionality to a bootstrap script
@@ -74,9 +50,9 @@ df_install_rvm() {
 df_install_nvm() {
     _CURRENT_DIR="$PWD"
 
-    git clone https://github.com/creationix/nvm.git ~/.nvm
-    cd ~/.nvm
-    git checkout `git describe --abbrev=0 --tags`
+    git clone https://github.com/creationix/nvm.git "${HOME}/.nvm"
+    cd "${HOME}/.nvm"
+    git checkout $(git describe --abbrev=0 --tags)
 
     cd "$_CURRENT_DIR"
     unset $_CURRENT_DIR
@@ -90,8 +66,8 @@ df_install_zsh() {
     _CURRENT_DIR="$PWD"
 
     # Manually install oh-my-zsh
-    cd ~
-    git clone https://github.com/tarjoilija/zgen.git ~/.zgen
+    cd "$HOME"
+    git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
 
     cd "$_CURRENT_DIR"
     unset $_CURRENT_DIR

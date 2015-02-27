@@ -17,7 +17,7 @@ printf "%s" "$df_prepend:$df_append" | tr : '\n' | sed '\:^$:d' | while read lin
     df_filtered_path="$(df_filter_path "$line" "$df_filtered_path")"
 done
 
-PATH="$(printf "%s" "$df_prepend:$df_filtered_path:$df_append" | sed "s|:\{2,\}|:|g")"
+export PATH="$(printf "%s" "$df_prepend:$df_filtered_path:$df_append" | sed "s|:\{2,\}|:|g")"
 
 unset -f df_filter_path
 unset df_prepend df_append df_filtered_path
