@@ -1,7 +1,10 @@
+# TODO: implement actual check to set this properly
 export ARCHFLAGS="-arch x86_64"
 
-export EDITOR="vim"
-export VISUAL="vim"
+if command_exists vim; then
+    export EDITOR="vim"
+    export VISUAL="vim"
+fi
 
 # This allows some prompt themes to hide the username and hostname
 # when you aren't logged into a remote machine

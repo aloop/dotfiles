@@ -16,18 +16,27 @@ if [ -f "${HOME}/.zgen/zgen.zsh" ]; then
         zgen oh-my-zsh
 
         # plugins
-        zgen oh-my-zsh plugins/git
+        zgen oh-my-zsh plugins/gitfast
         zgen oh-my-zsh plugins/sudo
-        zgen load zsh-users/zsh-syntax-highlighting
+        zgen oh-my-zsh plugins/rsync
+        zgen oh-my-zsh plugins/brew
+        zgen oh-my-zsh plugins/command-not-found
 
-        # completions
-        zgen load zsh-users/zsh-completions src
+        # Disable automatic creation of a tmux session while running this setup
+        export ZSH_TMUX_AUTOSTART=false
+        zgen oh-my-zsh plugins/tmux
 
         # theme
         zgen oh-my-zsh themes/afowler
 
         # Allow a user to declare plugins for an individual install
         [ -f "${HOME}/.zgen.local" ] && . "${HOME}/.zgen.local"
+
+        # completions
+        zgen load zsh-users/zsh-completions src
+
+        # Should be last
+        zgen load zsh-users/zsh-syntax-highlighting
 
         zgen save
 
