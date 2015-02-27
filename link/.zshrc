@@ -1,17 +1,36 @@
 . $HOME/.shellconfig/profile
 
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="afowler"
-
-# Oh My ZSH Plugins to load. If this is already defined, it will use
-# that list instead.
-if [ ! "${plugins:-}" ]; then
-    plugins=(git rvm zsh-syntax-highlighting)
+# Automatically install zgen if it doesn't exist
+if [ ! -d "${HOME}/.zgen" ]; then
+    df_install_zsh
 fi
 
-# Start oh-my-zsh
-. $ZSH/oh-my-zsh.sh
+# Load zgen
+if [ -f "${HOME}/.zgen/zgen.zsh" ]; then
+    . "${HOME}/.zgen/zgen.zsh"
+
+    # Make sure we haven't already installed
+    if ! zgen saved; then
+        echo "Installing zgen plugins"
+
+        zgen oh-my-zsh
+
+        # plugins
+        zgen oh-my-zsh plugins/git
+        zgen oh-my-zsh plugins/sudo
+        zgen load zsh-users/zsh-syntax-highlighting
+
+        # completions
+        zgen load zsh-users/zsh-completions src
+
+        # theme
+        zgen oh-my-zsh themes/afowler
+
+        # Allow a user to declare plugins for an individual install
+        [ -f "${HOME}/.zgen.local" ] && . "${HOME}/.zgen.local"
+
+        zgen save
+
+        echo "Finished installing zgen plugins"
+    fi
+fi
