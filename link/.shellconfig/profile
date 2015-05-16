@@ -8,10 +8,10 @@ df_source() {
 df_source "$HOME/.before"
 
 # Main enviroment setup
-df_source "$HOME/.shellconfig/functions"
-df_source "$HOME/.shellconfig/exports"
-df_source "$HOME/.shellconfig/path"
-df_source "$HOME/.shellconfig/aliases"
+. "$HOME/.shellconfig/functions"
+. "$HOME/.shellconfig/exports"
+. "$HOME/.shellconfig/path"
+. "$HOME/.shellconfig/aliases"
 
 # Third-party Scripts
 df_source "$HOME/.nvm/nvm.sh"
