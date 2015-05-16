@@ -1,3 +1,6 @@
+[user]
+    email = theseattlite@gmail.com
+    name = Anthony Loop
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
