@@ -11,4 +11,4 @@ fi
 [ -z "${SSH_CLIENT:-}" ] && export DEFAULT_USER="anthony"
 
 # Setup the golang path if it isn't already set
-: "${GOPATH:="$HOME/Development/go"}"
+: "${GOPATH:="$HOME/Projects/go"}"
