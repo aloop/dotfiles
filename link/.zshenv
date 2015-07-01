@@ -1,1 +1,1 @@
-. $HOME/.shellconfig/path
+. $HOME/.shellconfig/env
