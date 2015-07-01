@@ -1,0 +1,24 @@
+command_exists() {
+    if command -v $1 >/dev/null 2>&1; then
+        return 0
+    fi
+
+    return 1
+}
+
+df_source() {
+    if [ -f "$1" ]; then
+        . "$1"
+    fi
+}
+
+# before is intended as a local override for certain env vars
+# and additional paths
+df_source "$HOME/.before"
+
+. "$HOME/.shellconfig/exports"
+. "$HOME/.shellconfig/path"
+
+# Third-party Scripts
+df_source "$HOME/.nvm/nvm.sh"
+df_source "$HOME/.rvm/scripts/rvm"
