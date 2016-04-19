@@ -1,4 +1,4 @@
-. $HOME/.shellconfig/profile
+. $HOME/.shellconfig/env
 
 # Automatically install zgen if it doesn't exist
 if [ ! -d "${HOME}/.zgen" ]; then
