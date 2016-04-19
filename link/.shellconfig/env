@@ -1,5 +1,5 @@
 command_exists() {
-    if command -v $1 >/dev/null 2>&1; then
+    if command -v "$1" >/dev/null 2>&1; then
         return 0
     fi
 
@@ -18,7 +18,14 @@ df_source "$HOME/.before"
 
 . "$HOME/.shellconfig/exports"
 . "$HOME/.shellconfig/path"
+. "$HOME/.shellconfig/functions"
+. "$HOME/.shellconfig/aliases"
 
 # Third-party Scripts
 df_source "$HOME/.nvm/nvm.sh"
 df_source "$HOME/.rvm/scripts/rvm"
+
+# Use .after for things that you want to set after everything else
+df_source "$HOME/.after"
+
+unset -f df_source

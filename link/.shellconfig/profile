@@ -1,5 +1,0 @@
-. "$HOME/.shellconfig/functions"
-. "$HOME/.shellconfig/aliases"
-
-# Use .after for things that you want to set after everything else
-df_source "$HOME/.after"
