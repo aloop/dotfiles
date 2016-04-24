@@ -1,0 +1,196 @@
+#!/usr/bin/env sh
+
+## Helper functions
+
+clean_path() {
+    printf '%s' "$1" | sed "s/\/\{2,\}/\//g"
+}
+
+join_path() {
+    clean_path "$(printf '/%s' "$@")"
+}
+
+get_extension() {
+    printf '%s' "${1##*.}"
+}
+
+highlight_str() {
+    printf '\033[4;32m%s\033[0m' "$1"
+}
+
+success_message() (
+    _action=${1:?}
+    _src=${2:?}
+    _dest=${3:?}
+
+    printf '%s from %s to %s\n' "$_action" "$(highlight_str "~${_src#${HOME}}")" "$(highlight_str "~${_dest#${HOME}}")"
+)
+
+# Adds a trailing slash to a path if it's a directory
+ensure_trailing_slash() {
+    if [ -d "$1" ]; then
+        printf '%s' "${1%/}/"
+    else
+        printf '%s' "$1"
+    fi
+}
+
+## Variables
+
+script_name=$(basename "$0")
+
+# Set base dir as the directory of this script
+dotfiles_base_dir=$(cd "$(dirname "$0")" && pwd -L)
+dotfiles_dir=$(join_path "${dotfiles_base_dir}" "files")
+backups_base=${dotfiles_base_dir}/backups/backup-$(date "+%Y-%m-%d-%H%M%S")
+
+# Set option defaults
+no_copies=0
+no_links=0
+no_backups=0
+
+## Main Functions
+
+backup_original() (
+    _src=${1:?"No source path given"}
+
+    if [ "$no_backups" = 0 ] && [ -e "$_src" ]; then
+        backup_dest=$(join_path "$backups_base" "${_src#${HOME}}")
+
+        if [ ! -d "$(dirname "$backup_dest")" ]; then
+            mkdir -p "$(dirname "$backup_dest")"
+        fi
+
+        mv "$_src" "$backup_dest"
+    fi
+)
+
+mk_dest_dir() (
+    _path=${1:?"No path given"}
+
+    if [ "$_path" = "$HOME" ] || [ -d "$_path" ]; then
+        return
+    fi
+
+    # Attempt to create the directory in case it doesn't exist
+    mkdir -p "$_path"
+
+    printf "Created directory %s\n" "$(highlight_str "~${_path#${HOME}}")"
+)
+
+copy_path() (
+    _src=${1:?"No source path given"}
+    _dest=${2:?"No destination path given"}
+
+    if [ "$no_copies" = 1 ]; then
+        return
+    fi
+
+    _src="$(ensure_trailing_slash "$_src")"
+
+    backup_original "$_dest"
+    mk_dest_dir "$(dirname "$_dest")"
+
+    cp -fR "$_src" "$_dest" && success_message 'Copied' "$_src" "$_dest"
+)
+
+link_path() (
+    _src=${1:?"No source path given"}
+    _dest=${2:?"No destination path given"}
+
+    if [ "$no_links" = 1 ]; then
+        return
+    fi
+
+    _src="$(ensure_trailing_slash "$_src")"
+
+    backup_original "$_dest"
+    mk_dest_dir "$(dirname "$_dest")"
+
+    ln -sf "$_src" "$_dest" && success_message 'Linked' "$_src" "$_dest"
+)
+
+install_dotfiles() (
+    _dir=${1:-$dotfiles_dir}
+
+    # From http://www.dwheeler.com/essays/filenames-in-shell.html#summary
+    for _src in "$_dir"/* "$_dir"/.[!.]* "$_dir"/..?*; do
+        if [ -e "$_src" ]; then
+            _type=$(get_extension "$_src")
+
+            _dest=$(join_path "$HOME" "${_src#${dotfiles_dir}}")
+
+            # Remove .link or .copy from the destination name
+            _dest=${_dest%.link}
+            _dest=${_dest%.copy}
+
+            case "$_type" in
+                copy)
+                    copy_path "$_src" "$_dest"
+                    ;;
+                link)
+                    link_path "$_src" "$_dest"
+                    ;;
+                *)
+                    if [ -d "$_src" ] && [ ! -L "$_src" ]; then
+                        install_dotfiles "$_src"
+                    fi
+                    ;;
+            esac
+        fi
+    done
+)
+
+## Main
+
+print_help() {
+    printf 'Usage: ~%s/%s [-h|--help] [--no-copies] [--no-links] [--no-backups]\n' "${dotfiles_base_dir#${HOME}}" "$script_name"
+}
+
+# Handle options
+
+while :; do
+    # Break the loop if we have no arguments, otherwise we'll hit an error case
+    if [ -z "$1" ]; then
+        break
+    fi
+
+    case "$1" in
+        -h|--help)
+            print_help
+            exit
+            ;;
+        --no-copies)
+            no_copies=1
+            shift
+            ;;
+        --no-links)
+            no_links=1
+            shift
+            ;;
+        --no-backups)
+            no_backups=1
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -?*)
+            printf 'Unknown option: %s\n' "$1" >&2
+            print_help >&2
+            exit 1
+            ;;
+        ?*)
+            printf 'Unknown command: %s\n' "$1" >&2
+            print_help >&2
+            exit 1
+            ;;
+        *)
+            print_help >&2
+            exit 1
+            ;;
+    esac
+done
+
+install_dotfiles

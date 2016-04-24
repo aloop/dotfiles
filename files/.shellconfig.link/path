@@ -1,0 +1,61 @@
+#!/usr/bin/env sh
+# Paths to be added onto the beginning of $PATH
+path_prepend="${path_prepend:+$path_prepend:}/usr/local/bin:/usr/local/sbin"
+# Paths to be added onto the end of $PATH
+path_append="$HOME/.cabal/bin:$HOME/bin${GOPATH:+:$GOPATH/bin}${path_append:+:$path_append}"
+
+df_filter_path() (
+    _needle="$1"
+    _path="$2"
+
+    # This will contain everything left of $needle in $_path
+    _left_result=${_path%"$_needle"*}
+    # This will contain everything right of $needle in $_path
+    _right_result=${_path#*"$_needle"}
+
+    # Make sure the needle and path aren't empty
+    if [ ! -z "$_needle" ] && [ ! -z "$_path" ]; then
+        while
+            # Both results should be different from the path
+            [ "$_left_result" != "$_path" ] &&
+            [ "$_right_result" != "$_path" ] &&
+            # Ensure we haven't only made a partial match
+            ( [  -z "$_left_result" ] || [ "$_left_result" != "${_left_result%:}" ] ) &&
+            ( [  -z "$_right_result" ] || [ "$_right_result" != "${_right_result#:}" ] )
+        do
+            # Join the left side and right side back together
+            _path="${_left_result}:${_right_result}"
+
+            # Try and filter it again for the next iteration to
+            # make sure we've filtered all occurrences
+            _left_result=${_path%"$_needle"*}
+            _right_result=${_path#*"$_needle"}
+        done
+    fi
+
+    printf '%s' "$_path"
+)
+
+# Begin deduplicating $PATH
+filtered_path="$PATH"
+
+oldIFS="$IFS"
+IFS=':'
+
+for new_path in $(printf '%s' "$path_prepend:$path_append"); do
+    filtered_path=$(df_filter_path "$new_path" "$filtered_path")
+done
+
+IFS="$oldIFS"
+# End deduplicating $PATH
+
+# Set $PATH, removing multiple consecutive colons
+PATH=$(printf "%s:%s:%s" "$path_prepend" "$filtered_path" "$path_append" | sed "s|:\{2,\}|:|g")
+
+# Remove leading and trailing colons
+PATH="${PATH#:}"
+PATH="${PATH%:}"
+
+# Unset vars and functions that are no longer needed
+unset -f df_filter_path
+unset path_prepend path_append filtered_path oldIFS
