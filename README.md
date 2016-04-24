@@ -1,48 +1,46 @@
-# Dotfile Management
+# Dotfiles
 
-Just a way to manage my dotfiles
+## Usage
 
-## Install
+Clone the repository:
 
-1. Clone the repository:
+```sh
+git clone https://github.com/aloop/dotfiles.git ~/.dotfiles
+```
 
-        git clone https://github.com/aloop/dotfiles.git ~/.dotfiles
+To install or update all links and copies, simply run the following command:
 
-2. And then run the install script
+```sh
+~/.dotfiles/install
+```
 
-        ~/.dotfiles/manage install
+On the other hand, you may wish to only update links *or* copies:
+
+```sh
+~/.dotfiles/install --no-copies # Only install links
+```
+
+or:
+
+```sh
+~/.dotfiles/install --no-links # Only install copies
+```
 
 ## Backups
 
 Files and Folders to be linked or copied that already exist in the home directory will be backed up to:
 
+```sh
+~/.dotfiles/backups/backup-YYYY-MM-DD-HHMMSS
+```
 
-    ~/.dotfiles/backups/HOSTNAME@YYYY-MM-DD-HHMMSS
+Or, disable backups:
 
-
-## Basic Usage
-
-To update all links and copies, simply run the install script again:
-
-    ~/.dotfiles/manage install
-
-On the other hand, you may wish to only update links *or* copies:
-
-    ~/.dotfiles/manage link
-
-or:
-
-    ~/.dotfiles/manage copy
-
-
-## Notes
-* It should be possible to use this script in just about any directory, i've only tested it at ~/.dotfiles, however.
-
+```sh
+~/.dotfiles/install --no-backups
+```
 
 ## Todo
 * Add some backup management commands
-* Add `--no-backup` flag to disable backups
-* Add `--exlude` flag, to exlude files (and folders?) from being linked/copied
-* Maybe action-specific flags, such as `--exclude-link` or `--exclude-copy`
-* Add helper to fill out things such as a local `~/.gitconfig-custom` Containing proper credentials
-* Support Merged short options, such as `-nf` parse to no-backup and force, for example
+* Create a manifest on install which can be used for uninstalling dotfiles
+* Add helper to fill out things such as adding name and email for git in `~/.gitconfig-custom`
