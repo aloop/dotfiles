@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+
 # Paths to be added onto the beginning of $PATH
 path_prepend="${path_prepend:+$path_prepend:}/usr/local/bin:/usr/local/sbin"
 # Paths to be added onto the end of $PATH

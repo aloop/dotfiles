@@ -1,5 +1,6 @@
-# TODO: implement actual check to set this properly
-export ARCHFLAGS="-arch x86_64"
+#!/usr/bin/env sh
+
+command_exists "brew" && export ARCHFLAGS="-arch x86_64"
 
 if command_exists vim; then
     export EDITOR="vim"
@@ -12,3 +13,11 @@ fi
 
 # Setup the golang path if it isn't already set
 : "${GOPATH:="$HOME/Projects/go"}"
+
+# Setup defaults for XDG
+: "${XDG_CONFIG_HOME:="$HOME/.config"}"
+: "${XDG_CACHE_HOME:="$HOME/.cache"}"
+: "${XDG_RUNTIME_DIR:="$HOME/.run"}"
+: "${XDG_DATA_HOME:="$HOME/.local/share"}"
+
+export HOMEBREW_NO_ANALYTICS=1
