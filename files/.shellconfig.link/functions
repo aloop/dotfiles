@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 is_osx() {
     if [ "$(uname)" = "Darwin" ]; then
         return 0
