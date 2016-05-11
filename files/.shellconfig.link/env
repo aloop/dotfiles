@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
 
-command_exists() {
-    if command -v "$1" >/dev/null 2>&1; then
-        return 0
+command_exists() (
+    if alias "$1" >/dev/null 2>&1; then
+      unalias "$1" >/dev/null 2>&1
     fi
 
-    return 1
-}
+    command -v "$1" >/dev/null 2>&1
+)
 
-df_source() {
+safe_source() {
     if [ -f "$1" ]; then
         . "$1"
     fi
@@ -16,7 +16,7 @@ df_source() {
 
 # before is intended as a local override for certain env vars
 # and additional paths
-df_source "$HOME/.before"
+safe_source "$HOME/.before"
 
 . "$HOME/.shellconfig/exports"
 . "$HOME/.shellconfig/path"
@@ -24,10 +24,9 @@ df_source "$HOME/.before"
 . "$HOME/.shellconfig/aliases"
 
 # Third-party Scripts
-df_source "$HOME/.nvm/nvm.sh"
-df_source "$HOME/.rvm/scripts/rvm"
+safe_source "$HOME/.nvm/nvm.sh"
 
 # Use .after for things that you want to set after everything else
-df_source "$HOME/.after"
+safe_source "$HOME/.after"
 
-unset -f df_source
+unset -f safe_source

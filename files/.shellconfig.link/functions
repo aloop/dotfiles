@@ -20,8 +20,8 @@ open_link() {
 
 # Launch an http server in the current directory
 # and optionally open it in the default browser
-server() {
-    local port="8000"
+server() (
+    port="8000"
 
     if [ "$1" != "--no-browser" ] && [ "$1" != "-n" ]; then
         (sleep 1 && open_link "http://localhost:${port}/") &
@@ -32,46 +32,56 @@ server() {
     else
         python -m SimpleHTTPServer "$port"
     fi
-}
+)
 
-# Install helpers to finish setting up the shell.
-# TODO: move this functionality to a bootstrap script
+# Helpers to finish setting up the shell.
 
-df_install_rvm() {
-    command curl -sSL https://get.rvm.io | bash -s stable --ignore-dotfiles
-}
+df_install_rbenv() (
+    if [ -d "${HOME}/.rbenv" ]; then
+      printf '~/.rbenv already exists, exiting...\n' >&2
+      exit 1
+    fi
 
-df_install_nvm() {
-    _CURRENT_DIR="$PWD"
+    git clone https://github.com/rbenv/rbenv.git ~/.rbenv || exit 1
+    "${HOME}"/.rbenv/bin/rbenv rehash
+    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build || exit 1
+)
+
+df_install_nvm() (
+    if [ -d "${HOME}/.nvm" ]; then
+      printf '~/.nvm already exists, exiting...\n' >&2
+      exit 1
+    fi
 
     git clone https://github.com/creationix/nvm.git "${HOME}/.nvm"
     cd "${HOME}/.nvm" || exit
     git checkout "$(git describe --abbrev=0 --tags)"
+)
 
-    cd "$_CURRENT_DIR" || exit
-    unset _CURRENT_DIR
-}
-
-df_install_homebrew() {
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-}
-
-df_install_zsh() {
-    _CURRENT_DIR="$PWD"
-
-    # Manually install oh-my-zsh
-    cd "$HOME" || exit
-    git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
-
-    cd "$_CURRENT_DIR" || exit
-    unset _CURRENT_DIR
-}
-
-df_install() {
-    df_install_rvm
-    df_install_nvm
-    df_install_zsh
-    if is_osx; then
-        df_install_homebrew
+df_install_brew() (
+    if command_exists brew; then
+      printf 'command "brew" already exists, exiting...\n' >&2
+      exit 1
     fi
-}
+
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    xcode-select --install
+)
+
+df_install_zgen() (
+    if [ -d "${HOME}/.zgen" ]; then
+      printf '~/.zgen already exists, exiting...\n' >&2
+      exit 1
+    fi
+
+    git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+)
+
+df_install() (
+    if is_osx; then
+        df_install_brew
+    fi
+    df_install_rbenv
+    df_install_nvm
+    df_install_zgen
+)
