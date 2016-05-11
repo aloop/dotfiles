@@ -1,9 +1,7 @@
 #!/usr/bin/env sh
 
-# Paths to be added onto the beginning of $PATH
-path_prepend="${path_prepend:+$path_prepend:}/usr/local/bin:/usr/local/sbin"
-# Paths to be added onto the end of $PATH
-path_append="$HOME/.cabal/bin:$HOME/bin${GOPATH:+:$GOPATH/bin}${path_append:+:$path_append}"
+path_prepend+="${path_prepend:+$path_prepend:}${HOME}/.rbenv/shims:${HOME}/.rbenv/bin:/usr/local/bin:/usr/local/sbin"
+path_append="${HOME}/.cabal/bin:${HOME}/bin${GOPATH:+:$GOPATH/bin}${path_append:+:$path_append}"
 
 df_filter_path() (
     _needle="$1"
@@ -43,7 +41,7 @@ filtered_path="$PATH"
 oldIFS="$IFS"
 IFS=':'
 
-for new_path in $(printf '%s' "$path_prepend:$path_append"); do
+for new_path in $(printf '%s:%s' "$path_prepend" "$path_append"); do
     filtered_path=$(df_filter_path "$new_path" "$filtered_path")
 done
 
