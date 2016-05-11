@@ -1,19 +1,15 @@
 #!/usr/bin/env sh
 
 is_osx() {
-    if [ "$(uname)" = "Darwin" ]; then
-        return 0
-    fi
-
-    return 1
+    [ "$(uname)" = "Darwin" ]
 }
 
 # Open a link (probably works for file paths as well)
 # in the systems default browser
 open_link() {
-    if is_osx; then
+    if is_osx && command_exists open; then
         open "$1"
-    else
+    elif command_exists xdg-open; then
         xdg-open "$1"
     fi
 }
@@ -29,8 +25,11 @@ server() (
 
     if command_exists python3; then
         python3 -m http.server "$port"
-    else
+    elif command_exists python; then
         python -m SimpleHTTPServer "$port"
+    else
+        printf "couldn't start server, suitable python version not found" >&2
+        exit 1
     fi
 )
 
