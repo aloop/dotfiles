@@ -1,8 +1,15 @@
-. $HOME/.shellconfig/env
+. "${HOME}/.shellconfig/env"
+
+. "${HOME}/.zsh/exports.zsh"
+. "${HOME}/.zsh/options.zsh"
+. "${HOME}/.zsh/keybindings.zsh"
+. "${HOME}/.zsh/completion.zsh"
+. "${HOME}/.zsh/vcs_info.zsh"
+. "${HOME}/.zsh/prompt.zsh"
 
 # Automatically install zgen if it doesn't exist
 if [ ! -d "${HOME}/.zgen" ]; then
-    df_install_zsh
+    df_install_zgen
 fi
 
 # Load zgen
@@ -13,24 +20,10 @@ if [ -f "${HOME}/.zgen/zgen.zsh" ]; then
     if ! zgen saved; then
         echo "Installing zgen plugins"
 
-        zgen oh-my-zsh
-
-        # plugins
-        zgen oh-my-zsh plugins/gitfast
-        zgen oh-my-zsh plugins/sudo
-        zgen oh-my-zsh plugins/rsync
-        zgen oh-my-zsh plugins/brew
-        zgen oh-my-zsh plugins/command-not-found
-
-        # Disable automatic creation of a tmux session while running this setup
-        export ZSH_TMUX_AUTOSTART=false
-        zgen oh-my-zsh plugins/tmux
-
-        # theme
-        zgen oh-my-zsh themes/afowler
-
         # Allow a user to declare plugins for an individual install
-        [ -f "${HOME}/.zgen.local" ] && . "${HOME}/.zgen.local"
+        if [ -f "${HOME}/.zgen.local" ]; then
+            . "${HOME}/.zgen.local"
+        fi
 
         # completions
         zgen load zsh-users/zsh-completions src
@@ -42,4 +35,8 @@ if [ -f "${HOME}/.zgen/zgen.zsh" ]; then
 
         echo "Finished installing zgen plugins"
     fi
+fi
+
+if [ -f "${HOME}/.zshrc.local" ]; then
+    . "${HOME}/.zshrc.local"
 fi
