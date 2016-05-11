@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# Allow aliases in sudo commands
+# Enable aliases in sudo commands
 alias sudo="sudo "
 
 alias mvim="mvim --remote-silent"
@@ -14,3 +14,26 @@ alias grep="grep --color=auto"
 alias df="df -h"
 # I usually only use du to get the total space used by a directory
 alias du="du -hcs"
+
+if ls --color=auto / >/dev/null 2>&1; then
+    alias ls="ls -F --color=auto"
+else
+    alias ls="ls -F"
+fi
+
+alias l="ls -lah"
+alias ll="ls -lh"
+alias la="ls -lAh"
+
+# Git aliases
+alias g="git"
+alias ga="git add"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias gl="git log"
+alias gb="git branch"
+alias gc="git checkout"
+alias gcb="git checkout -b"
+alias gst="git status"
+alias gr="git reset"
+alias grh="git reset HEAD"
