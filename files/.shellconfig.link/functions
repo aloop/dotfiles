@@ -37,8 +37,8 @@ server() (
 
 df_install_rbenv() (
     if [ -d "${HOME}/.rbenv" ]; then
-      printf '~/.rbenv already exists, exiting...\n' >&2
-      exit 1
+        printf '~/.rbenv already exists, exiting...\n' >&2
+        exit 1
     fi
 
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv || exit 1
@@ -48,8 +48,8 @@ df_install_rbenv() (
 
 df_install_nvm() (
     if [ -d "${HOME}/.nvm" ]; then
-      printf '~/.nvm already exists, exiting...\n' >&2
-      exit 1
+        printf '~/.nvm already exists, exiting...\n' >&2
+        exit 1
     fi
 
     git clone https://github.com/creationix/nvm.git "${HOME}/.nvm"
@@ -59,8 +59,8 @@ df_install_nvm() (
 
 df_install_brew() (
     if command_exists brew; then
-      printf 'command "brew" already exists, exiting...\n' >&2
-      exit 1
+        printf 'command "brew" already exists, exiting...\n' >&2
+        exit 1
     fi
 
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -69,8 +69,8 @@ df_install_brew() (
 
 df_install_zgen() (
     if [ -d "${HOME}/.zgen" ]; then
-      printf '~/.zgen already exists, exiting...\n' >&2
-      exit 1
+        printf '~/.zgen already exists, exiting...\n' >&2
+        exit 1
     fi
 
     git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
