@@ -21,6 +21,11 @@ else
     alias ls="ls -F"
 fi
 
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
 alias l="ls -lah"
 alias ll="ls -lh"
 alias la="ls -lAh"
