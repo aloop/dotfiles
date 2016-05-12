@@ -1,18 +1,18 @@
 [core]
-	excludesfile = ~/.gitignore_global
-	trustctime = false
+    excludesfile = ~/.gitignore_global
+    trustctime = false
 [push]
-	default = simple
+    default = simple
 [pull]
-	rebase = true
+    rebase = true
 [diff]
-	tool = vimdiff
-	renames = copies
+    tool = vimdiff
+    renames = copies
 [difftool]
-	prompt = false
+    prompt = false
 [alias]
-	amend = commit --amend --reuse-message=HEAD
-	d = difftool
-	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    amend = commit --amend --reuse-message=HEAD
+    d = difftool
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [include]
-	path = ~/.gitconfig.local
+    path = ~/.gitconfig.local

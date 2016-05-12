@@ -2,7 +2,7 @@
 
 command_exists() (
     if alias "$1" >/dev/null 2>&1; then
-      unalias "$1" >/dev/null 2>&1
+        unalias "$1" >/dev/null 2>&1
     fi
 
     command -v "$1" >/dev/null 2>&1
