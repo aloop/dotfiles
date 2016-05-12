@@ -1,22 +1,18 @@
-[user]
-    email = theseattlite@gmail.com
-    name = Anthony Loop
 [core]
-	editor = vim
 	excludesfile = ~/.gitignore_global
-	pager = less -r
-[color]
-	ui = true
+	trustctime = false
 [push]
 	default = simple
 [pull]
 	rebase = true
 [diff]
 	tool = vimdiff
+	renames = copies
 [difftool]
 	prompt = false
 [alias]
+	amend = commit --amend --reuse-message=HEAD
 	d = difftool
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [include]
-	path = ~/.gitconfig-custom
+	path = ~/.gitconfig.local

@@ -43,4 +43,4 @@ Or, disable backups:
 ## Todo
 * Add some backup management commands
 * Create a manifest on install which can be used for uninstalling dotfiles
-* Add helper to fill out things such as adding name and email for git in `~/.gitconfig-custom`
+* Add helper to fill out things such as adding name and email for git in `~/.gitconfig.local`
