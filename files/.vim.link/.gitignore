@@ -1,0 +1,8 @@
+./plugged
+./backups
+./autoload/plug.vim
+.netrwhist
+# Ignore local configuration override files
+./before.vim
+./local-plugins.vim
+./after.vim
