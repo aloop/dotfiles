@@ -1,0 +1,42 @@
+" Disable Vi compatibility mode
+set nocompatible
+
+set encoding=utf-8
+
+let vim_dir = expand('~/.vim')
+
+" TODO: Make sure this actually works on windows {{{
+if has('win32')
+    let vim_dir = expand('~/vimfiles')
+endif
+" }}}
+
+" Per-system file for settings that need to occur before all other settings {{{
+runtime before.vim
+" }}}
+
+" Primary Configuration {{{
+runtime config/functions.vim
+runtime config/base.vim
+runtime config/plugins.vim
+runtime config/autocmds.vim
+runtime config/mappings.vim
+runtime config/commands.vim
+runtime config/files.vim
+runtime config/buffers.vim
+runtime config/folding.vim
+runtime config/indentation.vim
+runtime config/searching.vim
+runtime config/statusline.vim
+runtime config/colors.vim
+runtime config/netrw.vim
+" }}}
+
+" Plugin configuration {{{
+runtime config/plugin-airline.vim
+runtime config/plugin-ctrlp.vim
+runtime config/plugin-markdown.vim
+" }}}
+
+" Anything you want to include after this file can be put into ~/.vim/vimrc.local
+runtime after.vim
