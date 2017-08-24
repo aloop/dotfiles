@@ -176,6 +176,28 @@ bar {
     position top
 }
 
+
+### Power and lock settings
+set $Locker i3lock && sleep 1
+set $mode_system System
+# (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Mod1+l exec --no-startup-id $Locker
+
+
 ### Custom Key Bindings
 bindsym $mod+c exec chromium
 bindsym $mod+b exec $term -e sh -c "ranger"
@@ -209,5 +231,6 @@ hide_edge_borders smart
 
 ### Commands to run on startup
 
-exec dunst -config ~/.config/sway/dunstrc
-#exec xrdb -merge ~/.Xresources
+exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/current
+exec --no-startup-id dunst -config ~/.config/sway/dunstrc
+#exec --no-startup-id xrdb -merge ~/.Xresources
