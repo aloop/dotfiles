@@ -1,0 +1,213 @@
+### Variables
+
+set $mod Mod4
+set $term ${TERMINAL:-urxvt}
+set $menu rofi -show drun -modi run
+
+
+### Font
+
+font pango:Noto Sans Bold, DejaVu Sans Bold 10
+
+
+### Key bindings
+
+# Use Left Mouse+$mod to drag, or Right Mouse+$mod to resize floating windows
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec $term
+
+# open launcher
+bindsym $mod+space exec $menu
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart inplace (preserves your layout/session, can be used for upgrades)
+bindsym $mod+Shift+r restart
+
+# exit and log out of session
+bindsym $mod+Shift+e exit
+
+# change focus with vim-like keys
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# or use the arrow keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window with vim-like keys
+bindsym $mod+Shift+h move left, focus
+bindsym $mod+Shift+j move down, focus
+bindsym $mod+Shift+k move up, focus
+bindsym $mod+Shift+l move right, focus
+
+# or use the arrow keys:
+bindsym $mod+Shift+Left move left, focus
+bindsym $mod+Shift+Down move down, focus
+bindsym $mod+Shift+Up move up, focus
+bindsym $mod+Shift+Right move right, focus
+
+# split horizontally
+bindsym $mod+Shift+v splith
+
+# split vertically
+bindsym $mod+v splitv
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# toggle the current window between tiling and floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Mod1+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+Shift+a focus child
+
+# switch to workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+
+### Colors
+
+# set $base00  #2b303b
+# set $base01  #343d46
+# set $base02  #4f5b66
+# set $base03  #65737e
+# set $base04  #a7adba
+# set $base05  #c0c5ce
+# set $base06  #dfe1e8
+# set $base07  #eff1f5
+# set $base08  #bf616a
+# set $base09  #d08770
+# set $base0A  #ebcb8b
+# set $base0B  #a3be8c
+# set $base0C  #96b5b4
+# set $base0D  #8fa1b3
+# set $base0E  #b48ead
+# set $base0F  #ab7967
+
+set $base00 #16181D
+set $base01 #343d46
+set $base02 #4f5b66
+set $base03 #65737e
+set $base04 #a7adba
+set $base05 #c0c5ce
+set $base06 #dfe1e8
+set $base07 #eff1f5
+set $base08 #bf4c57
+set $base09 #d08770
+set $base0A #ebb750
+set $base0B #85be54
+set $base0C #6db5b3
+set $base0D #628bb3
+set $base0E #b45fa4
+set $base0F #ab7967
+
+# Window Colors          border    backgr.   text      indicator child_border
+client.focused           $base04   $base04   $base00   $base08   $base04
+client.focused_inactive  $base02   $base02   $base0D   $base08   $base02
+client.unfocused         $base02   $base02   $base0D   $base08   $base02
+client.urgent            $base00   $base00   $base0D   $base08   $base00
+client.placeholder       $base00   $base00   $base0D   $base08   $base00
+
+client.background $base00
+
+#bar {
+#    position top
+#    status_command ~/.config/sway/conky.sh
+#    separator_symbol " | "
+#
+#    colors {
+#        separator   $base0D
+#        background  $base00
+#        statusline  $base07
+#
+#        # Workspace Names   border   backgr.  text
+#        active_workspace    $base00  $base00  $base05
+#        focused_workspace   $base02  $base00  $base07
+#        inactive_workspace  $base00  $base00  $base03
+#        urgent_workspace    $base00  $base00  $base08
+#    }
+#}
+
+bar {
+    status_command i3status
+    position top
+}
+
+### Custom Key Bindings
+bindsym $mod+c exec chromium
+bindsym $mod+b exec $TERMINAL -e sh -c "ranger"
+
+# Special Key Bindings
+bindsym XF86AudioRaiseVolume exec pactl set-sink-mute 0 0;exec pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-mute 0 0;exec pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86MonBrightnessDown exec dsplight down 5
+bindsym XF86MonBrightnessUp exec dsplight up 5
+
+
+### Per-application Settings
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+#for_window [class="KeePassXC"] floating enable
+
+
+### Misc
+
+#gaps outer 0
+#gaps inner 20
+
+new_window pixel 5
+
+hide_edge_borders smart
+
+### Wallpaper
+#output "*" background ~/Pictures/Wallpapers/current fill
+
+### Commands to run on startup
+
+exec dunst -config ~/.config/sway/dunstrc
+#exec xrdb -merge ~/.Xresources
