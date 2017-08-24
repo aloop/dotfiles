@@ -28,10 +28,14 @@ success_message() (
 
 # Adds a trailing slash to a path if it's a directory
 ensure_trailing_slash() {
-    if [ -d "$1" ]; then
-        printf '%s' "${1%/}/"
+    df_path="$1"
+    if [ -d "$df_path" ]; then
+        while [ "${df_path%/}" != "$df_path" ]; do
+            df_path="${df_path%/}"
+        done
+        printf '%s' "${df_path}/"
     else
-        printf '%s' "$1"
+        printf '%s' "$df_path"
     fi
 }
 
