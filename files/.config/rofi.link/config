@@ -1,0 +1,6 @@
+rofi.padding: 10
+rofi.scroll-method: 1
+rofi.matching: fuzzy
+rofi.display-drun:
+rofi.levenshtein-sort: True
+rofi.disable-history: False

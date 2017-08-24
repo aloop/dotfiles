@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# Send the header so that i3bar knows we want to use JSON:
+# Send the header so that swaybar knows we want to use JSON:
 echo '{"version":1}'
 
 # Begin the endless array.
@@ -10,4 +10,4 @@ echo '['
 echo '[],'
 
 # Now send blocks with information forever:
-exec conky -c $HOME/.i3/conkyrc
+exec conky -c "$HOME/.config/sway/conkyrc"
