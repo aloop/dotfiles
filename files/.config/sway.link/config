@@ -178,7 +178,7 @@ bar {
 
 ### Custom Key Bindings
 bindsym $mod+c exec chromium
-bindsym $mod+b exec $TERMINAL -e sh -c "ranger"
+bindsym $mod+b exec $term -e sh -c "ranger"
 
 # Special Key Bindings
 bindsym XF86AudioRaiseVolume exec pactl set-sink-mute 0 0;exec pactl set-sink-volume 0 +5%
