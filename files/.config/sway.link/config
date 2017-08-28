@@ -226,11 +226,16 @@ new_window pixel 5
 
 hide_edge_borders smart
 
-### Wallpaper
+### Wallpaper (Sway on wayland)
 #output "*" background ~/Pictures/Wallpapers/current fill
 
 ### Commands to run on startup
 
+# Set the keyboard delay/repeat rate for X Server
+exec --no-startup-id xset r rate 250 50
+# Set The Wallpaper
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/current
+# Startup notifications
 exec --no-startup-id dunst -config ~/.config/sway/dunstrc
+# Merge local .Xresources file (Needed on sway/wayland?)
 #exec --no-startup-id xrdb -merge ~/.Xresources
