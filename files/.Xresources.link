@@ -38,6 +38,7 @@ URxvt*color21: #dfe1e8
 URxvt.buffered: true
 URxvt.iso14755: false
 URxvt.iso14755_52: false
+URxvt*termName: rxvt-unicode-256color
 ! Padding
 URxvt.internalBorder: 20
 ! Scrollback
@@ -51,3 +52,5 @@ URxvt.scrollWithBuffer: true
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=14, xft:Droid Sans Mono:pixelsize=14, xft:Ubuntu Mono:pixelsize=14
 URxvt.letterSpace: -1
 URxvt.lineSpace: 1
+! xterm settings
+XTerm*termName: xterm-256color
