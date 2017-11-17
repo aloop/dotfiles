@@ -1,5 +1,5 @@
 [Settings]
 gtk-theme-name = Adwaita
-gtk-icon-theme-name = Flattr
+gtk-icon-theme-name = Adwaita
 gtk-font-name = DejaVu Sans 10
-gtk-application-prefer-dark-theme = false
+gtk-application-prefer-dark-theme = true
