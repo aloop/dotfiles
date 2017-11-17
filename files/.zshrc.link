@@ -40,3 +40,6 @@ fi
 if [ -f "${HOME}/.zshrc.local" ]; then
     . "${HOME}/.zshrc.local"
 fi
+
+# Initialize completions
+compinit

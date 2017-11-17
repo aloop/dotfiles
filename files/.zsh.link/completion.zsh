@@ -12,4 +12,3 @@ zstyle ':completion:*:warnings' format '%F{red}no matches%f'
 # De-prioritize autocomplete functions
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
-compinit -i
