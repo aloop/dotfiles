@@ -29,6 +29,14 @@ if command_exists xrdb; then
     xrdb -merge "${HOME}/.Xresources" >/dev/null 2>&1
 fi
 
+# SSH Agent Setup
+if command_exists gnome-keyring-daemon; then
+    if [ -n "$DESKTOP_SESSION" ];then
+        eval $(gnome-keyring-daemon --start)
+        export SSH_AUTH_SOCK
+    fi
+fi
+
 # Third-party Scripts
 safe_source "$HOME/.nvm/nvm.sh"
 
