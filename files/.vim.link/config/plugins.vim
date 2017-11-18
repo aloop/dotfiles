@@ -1,9 +1,15 @@
 if !executable('git')
     echom 'WARNING: Git not found. Please install git and re-open vim to use your Vundle plugins'
+elseif !executable('wget') && !executable('curl')
+    echom 'WARNING: Neither wget or curl are available for initializing plugins'
 else
     let s:plugins_initial_install = 0
     if !filereadable(vim_dir . '/autoload/plug.vim')
-        silent execute '!curl -fLo ' . shellescape(vim_dir, 1) . '/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        if executable('wget')
+            silent execute '!wget -qO ' . shellescape(vim_dir, 1) . '/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        elseif executable('curl')
+            silent execute '!curl -fLo ' . shellescape(vim_dir, 1) . '/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        endif
         let s:plugins_initial_install = 1
     endif
 
@@ -13,7 +19,6 @@ else
 
     " Language Syntaxes
     Plug 'othree/html5.vim'
-    Plug 'digitaltoad/vim-jade'
     Plug 'pangloss/vim-javascript'
     Plug 'plasticboy/vim-markdown'
     Plug 'evidens/vim-twig'
