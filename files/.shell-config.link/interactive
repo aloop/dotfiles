@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# If `./profile` hasn't been run, run it here
+if [ -z "${df_profile_initialized}" ]; then
+    . "${HOME}/.shell-config/profile"
+fi
+
+for df_interactive_file in "${HOME}"/.shell-config/interactive.d/*; do
+    if
+        [ -e "${df_interactive_file}" ] &&
+        [ "${df_interactive_file%"/.gitignore"}" = "${df_interactive_file}" ]
+    then
+        . "${df_interactive_file}"
+    fi
+done
+unset df_interactive_file
+
+# SSH Agent Setup
+if df_command_exists gnome-keyring-daemon; then
+    if [ -n "$DESKTOP_SESSION" ]; then
+        eval $(gnome-keyring-daemon --start) >/dev/null 2>&1
+        export SSH_AUTH_SOCK
+    fi
+fi
+

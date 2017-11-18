@@ -5,7 +5,7 @@ alias sudo="sudo "
 
 alias mvim="mvim --remote-silent"
 
-if command_exists vim; then
+if df_command_exists vim; then
     alias vi="vim"
     alias e="vim"
 fi
@@ -46,4 +46,7 @@ alias grh="git reset HEAD"
 # youtube-dl
 alias ytdl="youtube-dl -f 'bestvideo[ext!=webm]+bestaudio[ext!=webm]/best[ext!=webm]' --merge-output-format mkv"
 alias ytdl_sub="youtube-dl --write-sub --embed-subs --sub-lang en --convert-subs srt -f 'bestvideo[ext!=webm]+bestaudio[ext!=webm]/best[ext!=webm]' --merge-output-format mkv"
+
+# Add dotfiles alias for easier management
+alias dotfiles="~/.dotfiles/install"
 

@@ -1,0 +1,49 @@
+#!/usr/bin/env sh
+
+# Create needed functions
+
+df_command_exists() (
+    if alias "$1" >/dev/null 2>&1; then
+        unalias "$1" >/dev/null 2>&1
+    fi
+
+    command -v "$1" >/dev/null 2>&1
+)
+
+df_safe_source() {
+    if [ -f "$1" ]; then
+        . "$1"
+    fi
+}
+
+# Start sourcing
+
+# `.before` is intended as a local override for certain env vars
+# and for adding additional paths
+df_safe_source "${HOME}/.before"
+
+for df_profile_file in "${HOME}"/.shell-config/profile.d/*; do
+    if
+        [ -e "${df_profile_file}" ] &&
+        [ "${df_profile_file%"/.gitignore"}" = "${df_profile_file}" ]
+    then
+        . "${df_profile_file}"
+    fi
+done
+unset df_profile_file
+
+# For URxvt
+if df_command_exists xrdb; then
+    xrdb -merge "${HOME}/.Xresources" >/dev/null 2>&1
+fi
+
+# Third-party Scripts
+df_safe_source "${HOME}/.nvm/nvm.sh"
+
+# Use `.after` for things that you want to set after everything else
+df_safe_source "${HOME}/.after"
+
+# Let `./interactive` know that we've already initialized
+df_profile_initialized="true"
+
+unset -f df_safe_source

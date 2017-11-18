@@ -7,9 +7,9 @@ is_osx() {
 # Open a link (probably works for file paths as well)
 # in the systems default browser
 open_link() {
-    if is_osx && command_exists open; then
+    if is_osx && df_command_exists open; then
         open "$1"
-    elif command_exists xdg-open; then
+    elif df_command_exists xdg-open; then
         xdg-open "$1"
     fi
 }
@@ -23,9 +23,9 @@ server() (
         (sleep 1 && open_link "http://localhost:${port}/") &
     fi
 
-    if command_exists python3; then
+    if df_command_exists python3; then
         python3 -m http.server "$port"
-    elif command_exists python; then
+    elif df_command_exists python; then
         python -m SimpleHTTPServer "$port"
     else
         printf "couldn't start server, suitable python version not found" >&2
@@ -58,7 +58,7 @@ df_install_nvm() (
 )
 
 df_install_brew() (
-    if command_exists brew; then
+    if df_command_exists brew; then
         printf 'command "brew" already exists, exiting...\n' >&2
         exit 1
     fi
