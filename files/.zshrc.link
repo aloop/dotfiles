@@ -1,18 +1,18 @@
-. "${HOME}/.shellconfig/env"
+. "${HOME}/.shell-config/interactive"
 
-. "${HOME}/.zsh/exports.zsh"
-. "${HOME}/.zsh/options.zsh"
-. "${HOME}/.zsh/keybindings.zsh"
-. "${HOME}/.zsh/completion.zsh"
-. "${HOME}/.zsh/vcs_info.zsh"
-. "${HOME}/.zsh/prompt.zsh"
+. "${HOME}/.shell-config/zsh/exports.zsh"
+. "${HOME}/.shell-config/zsh/options.zsh"
+. "${HOME}/.shell-config/zsh/keybindings.zsh"
+. "${HOME}/.shell-config/zsh/completion.zsh"
+. "${HOME}/.shell-config/zsh/vcs_info.zsh"
+. "${HOME}/.shell-config/zsh/prompt.zsh"
 
 # Automatically install zgen if it doesn't exist
 if [ ! -d "${HOME}/.zgen" ]; then
     df_install_zgen
 fi
 
-# Load zgen
+# Start loading zgen
 if [ -f "${HOME}/.zgen/zgen.zsh" ]; then
     . "${HOME}/.zgen/zgen.zsh"
 
@@ -41,5 +41,10 @@ if [ -f "${HOME}/.zshrc.local" ]; then
     . "${HOME}/.zshrc.local"
 fi
 
-# Initialize completions
-compinit
+# Initialize completions, with a full run once a day
+if [[ -n "${HOME}"/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+else
+    compinit -C
+fi
+

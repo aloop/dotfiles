@@ -1,0 +1,8 @@
+# Ignore everything in here...
+
+*
+
+# Except for the following:
+
+!*.dist
+!.gitignore
