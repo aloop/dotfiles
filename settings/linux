@@ -4,6 +4,9 @@
 
 if command -v gsettings >/dev/null 2>&1; then
 
+    # Workspace Settings
+    gsettings set org.gnome.shell.overrides workspaces-only-on-primary false
+
     # Night light settings
     gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
@@ -16,15 +19,23 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.peripherals.keyboard delay 250
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 
+    # Use 12-hour clock
+    gsettings set org.gnome.desktop.interface clock-format '12h'
+
+    # Show Battery Percentage
+    gsettings set org.gnome.desktop.interface show-battery-percentage true
+
+    # Disable Autorun
+    gsettings set org.gnome.desktop.media-handling autorun-never true
+
+    # Disable error reporting and usage stats
+    gsettings set org.gnome.desktop.privacy send-software-usage-stats false
+    gsettings set org.gnome.desktop.privacy report-technical-problems false
+
     # Other settings
     gsettings set org.gnome.desktop.privacy remove-old-temp-files true
     gsettings set org.gnome.desktop.privacy remove-old-trash-files true
-    gsettings set org.gnome.desktop.privacy send-software-usage-stats false
-    gsettings set org.gnome.desktop.privacy report-technical-problems false
     gsettings set org.gnome.desktop.session idle-delay 900
-    gsettings set org.gnome.desktop.media-handling autorun-never true
-    gsettings set org.gnome.desktop.interface show-battery-percentage true
-    gsettings set org.gnome.desktop.interface clock-format '12h'
 
 fi
 
