@@ -6,9 +6,10 @@ else
     let s:plugins_initial_install = 0
     if !filereadable(vim_dir . '/autoload/plug.vim')
         if executable('wget')
-            silent execute '!wget -qO ' . shellescape(vim_dir, 1) . '/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+            silent execute printf('!mkdir -p %s', shellescape(vim_dir . '/autoload', 1))
+            silent execute printf('!wget -qO %s https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim', shellescape(vim_dir . '/autoload/plug.vim', 1))
         elseif executable('curl')
-            silent execute '!curl -fLo ' . shellescape(vim_dir, 1) . '/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+            silent execute printf('!curl --create-dirs -fLo %s https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim', shellescape(vim_dir . '/autoload/plug.vim', 1))
         endif
         let s:plugins_initial_install = 1
     endif
