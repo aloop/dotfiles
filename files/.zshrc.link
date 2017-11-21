@@ -1,12 +1,14 @@
 . "${HOME}/.shell-config/interactive"
 
-. "${HOME}/.shell-config/zsh/exports.zsh"
-. "${HOME}/.shell-config/zsh/options.zsh"
-. "${HOME}/.shell-config/zsh/keybindings.zsh"
-. "${HOME}/.shell-config/zsh/completion.zsh"
-. "${HOME}/.shell-config/zsh/vcs-info.zsh"
-. "${HOME}/.shell-config/zsh/prompt.zsh"
-. "${HOME}/.shell-config/zsh/terminal-title.zsh"
+[[ -z $precmd_functions ]] && precmd_functions=()
+[[ -z $preexec_functions ]] && preexec_functions=()
+
+for df_zshrc_file in "${HOME}"/.shell-config/zsh/*.zsh; do
+    if [ -e "${df_zshrc_file}" ]; then
+        . "${df_zshrc_file}"
+    fi
+done
+unset df_zshrc_file
 
 # Automatically install zgen if it doesn't exist
 if [ ! -d "${HOME}/.zgen" ]; then

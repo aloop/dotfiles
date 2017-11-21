@@ -21,4 +21,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
     fi
 }
 
-precmd() { vcs_info; }
+vcs_info_precmd() { vcs_info; }
+
+precmd_functions+=vcs_info_precmd
+
