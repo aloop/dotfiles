@@ -1,0 +1,5 @@
+resample-method = speex-float-8
+default-sample-rate = 96000
+alternate-sample-rate = 88200
+default-sample-format = float32ne
+flat-volumes = no
