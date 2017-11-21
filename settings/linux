@@ -32,6 +32,12 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.privacy send-software-usage-stats false
     gsettings set org.gnome.desktop.privacy report-technical-problems false
 
+    # Add minimize and maximize buttons to windows
+    gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
+
+    # Enable resizing of windows using Super+Right Mouse Click and dragging
+    gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+
     # Other settings
     gsettings set org.gnome.desktop.privacy remove-old-temp-files true
     gsettings set org.gnome.desktop.privacy remove-old-trash-files true
