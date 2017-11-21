@@ -4,8 +4,9 @@
 . "${HOME}/.shell-config/zsh/options.zsh"
 . "${HOME}/.shell-config/zsh/keybindings.zsh"
 . "${HOME}/.shell-config/zsh/completion.zsh"
-. "${HOME}/.shell-config/zsh/vcs_info.zsh"
+. "${HOME}/.shell-config/zsh/vcs-info.zsh"
 . "${HOME}/.shell-config/zsh/prompt.zsh"
+. "${HOME}/.shell-config/zsh/terminal-title.zsh"
 
 # Automatically install zgen if it doesn't exist
 if [ ! -d "${HOME}/.zgen" ]; then
