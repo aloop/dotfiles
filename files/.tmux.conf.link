@@ -37,6 +37,11 @@ set-option -g default-terminal "screen-256color"
 set-option -g base-index 1
 set-window-option -g pane-base-index 1
 
+# Set terminal title
+set-option -g set-titles on
+set-option -g set-titles-string '#(whoami)@#H: #W'
+set-option -g automatic-rename on
+
 ### Key Bindings
 ################################################################################
 
