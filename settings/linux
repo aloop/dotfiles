@@ -43,5 +43,16 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.privacy remove-old-trash-files true
     gsettings set org.gnome.desktop.session idle-delay 900
 
+    # Gedit settings
+    gsettings set org.gnome.gedit.preferences.editor display-right-margin true
+    gsettings set org.gnome.gedit.preferences.editor right-margin-position 80
+    gsettings set org.gnome.gedit.preferences.editor scheme 'solarized-dark'
+    gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
+    gsettings set org.gnome.gedit.preferences.editor bracket-matching true
+    gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
+    gsettings set org.gnome.gedit.preferences.editor insert-spaces true
+    gsettings set org.gnome.gedit.preferences.editor tabs-size 4
+    gsettings set org.gnome.gedit.preferences.editor auto-indent true
+
 fi
 
