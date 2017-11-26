@@ -11,10 +11,9 @@ if-shell "[ $(#{@version-major}) -eq 1 ] || [ $(#{@version-major}) -eq 2 ] && [ 
 
 set-window-option -g xterm-keys on
 
-# Disable mouse
+# Enable mouse
 if-shell "[ $(#{@version-major}) -ge 2 ] && [ $(#{@version-minor}) -ge 1 ]" \
-    'set-option -g mouse off' \
-    'set-option -g mode-mouse off'
+    'set-option -g mouse on'
 
 # Allows for faster key repetition
 set-option -s escape-time 0
