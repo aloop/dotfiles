@@ -12,7 +12,7 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-from 20
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-to 8
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 3500
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2700
 
     # Keyboard Settings
     gsettings set org.gnome.desktop.peripherals.keyboard repeat true
