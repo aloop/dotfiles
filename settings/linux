@@ -32,6 +32,10 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.privacy send-software-usage-stats false
     gsettings set org.gnome.desktop.privacy report-technical-problems false
 
+    # Disable recently used files in nautilus
+    gsettings set org.gnome.desktop.privacy remember-recent-files false
+    gsettings set org.gnome.desktop.privacy recent-files-max-age 3
+
     # Add minimize and maximize buttons to windows
     gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
 
