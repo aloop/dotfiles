@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 path_prepend="${path_prepend:+$path_prepend:}${HOME}/.rbenv/shims:${HOME}/.rbenv/bin:${HOME}/.yarn/bin:/usr/local/bin:/usr/local/sbin"
-path_append="${HOME}/.cabal/bin:${HOME}/bin${GOPATH:+:$GOPATH/bin}:/snap/bin${path_append:+:$path_append}"
+path_append="${HOME}/.cabal/bin:${HOME}/.bin${GOPATH:+:$GOPATH/bin}:/snap/bin${path_append:+:$path_append}"
 
 df_filter_path() (
     _needle="$1"
