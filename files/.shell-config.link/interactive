@@ -8,17 +8,13 @@ fi
 for df_interactive_file in "${HOME}"/.shell-config/interactive.d/*; do
     if
         [ -e "${df_interactive_file}" ] &&
-        [ "${df_interactive_file%"/.gitignore"}" = "${df_interactive_file}" ]
+        [ "${df_interactive_file%"/.gitignore"}" = "${df_interactive_file}" ] &&
+        [ "${df_interactive_file%".disabled"}" = "${df_interactive_file}" ]
     then
         . "${df_interactive_file}"
     fi
 done
 unset df_interactive_file
-
-# Third-party Scripts
-if [ -e "${HOME}/.nvm/nvm.sh" ]; then
-    . "${HOME}/.nvm/nvm.sh"
-fi
 
 unset df_profile_initialized
 

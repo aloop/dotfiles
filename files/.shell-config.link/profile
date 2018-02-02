@@ -25,7 +25,8 @@ df_safe_source "${HOME}/.before"
 for df_profile_file in "${HOME}"/.shell-config/profile.d/*; do
     if
         [ -e "${df_profile_file}" ] &&
-        [ "${df_profile_file%"/.gitignore"}" = "${df_profile_file}" ]
+        [ "${df_profile_file%"/.gitignore"}" = "${df_profile_file}" ] &&
+        [ "${df_profile_file%".disabled"}" = "${df_profile_file}" ]
     then
         . "${df_profile_file}"
     fi
