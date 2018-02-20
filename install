@@ -37,7 +37,16 @@ ensure_trailing_slash() (
     else
         printf '%s' "$df_path"
     fi
-    )
+)
+
+# Removes all trailing slashes
+strip_trailing_slashes() (
+    df_path="$1"
+    # ensure_trailing_slash makes sure there is one and only one trailing slash
+    df_path="$(ensure_trailing_slash "${df_path}")"
+    # Print out the result while removing the trailing slash (if it exists)
+    printf '%s' "${df_path%/}"
+)
 
 ## Variables
 
@@ -108,7 +117,7 @@ link_path() (
         return
     fi
 
-    _src="$(ensure_trailing_slash "$_src")"
+    _src="$(strip_trailing_slashes "$_src")"
 
     backup_original "$_dest"
     mk_dest_dir "$(dirname "$_dest")"
