@@ -4,3 +4,7 @@ rofi.matching: fuzzy
 rofi.display-drun:
 rofi.levenshtein-sort: True
 rofi.disable-history: False
+rofi.opacity: 90
+rofi.bw: 6
+rofi.lines: 8
+rofi.show-icons: true
