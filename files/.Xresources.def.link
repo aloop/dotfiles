@@ -5,36 +5,66 @@ Xft.hintstyle: hintslight
 Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
+
 !!! Terminal colors
-! Based on Base16 Ocean by Chris Kempson (http:
-URxvt*foreground: #c0c5ce
-URxvt*background: #16181D
-URxvt*cursorColor: #c0c5ce
-URxvt*color0: #16181D
-URxvt*color1: #bf4c57
-URxvt*color2: #85be54
-URxvt*color3: #ebb750
-URxvt*color4: #628bb3
-URxvt*color5: #b45fa4
-URxvt*color6: #6db5b3
-URxvt*color7: #c0c5ce
-URxvt*color8: #65737e
-URxvt*color9: #bf4c57
-URxvt*color10: #85be54
-URxvt*color11: #ebb750
-URxvt*color12: #628bb3
-URxvt*color13: #b45fa4
-URxvt*color14: #6db5b3
-URxvt*color15: #eff1f5
+! Base16 Monokai
+! Scheme: Wimer Hazenberg (http://www.monokai.nl)
+
+#define base00 #1d1f21
+#define base01 #383830
+#define base02 #49483e
+#define base03 #75715e
+#define base04 #a59f85
+#define base05 #f8f8f2
+#define base06 #f5f4f1
+#define base07 #f9f8f5
+#define base08 #f92672
+#define base09 #fd971f
+#define base0A #f4bf75
+#define base0B #a6e22e
+#define base0C #a1efe4
+#define base0D #66d9ef
+#define base0E #ae81ff
+#define base0F #cc6633
+
+*foreground:   base05
+#ifdef background_opacity
+*background:   [background_opacity]base00
+#else
+*background:   base00
+#endif
+*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+
 ! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
 ! use 'shell' template to set these if necessary
-URxvt*color16: #d08770
-URxvt*color17: #ab7967
-URxvt*color18: #343d46
-URxvt*color19: #4f5b66
-URxvt*color20: #a7adba
-URxvt*color21: #dfe1e8
-!!! Other URxvt settings
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06
+
+!!! URxvt settings
+URxvt*depth: 32
+URxvt*background: [95]#1d1f21
 URxvt.buffered: true
 URxvt.iso14755: false
 URxvt.iso14755_52: false
