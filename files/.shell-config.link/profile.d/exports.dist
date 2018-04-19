@@ -33,5 +33,7 @@ export LESS="${LESS:-"-CRi -x4"}"
 # Enable color in some commands on OSX and some BSDs
 export CLICOLOR=1
 
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-"$XDG_RUNTIME_DIR/ssh-agent.socket"}"
+
+export XENVIRONMENT="${HOME}/.Xresources"
 
