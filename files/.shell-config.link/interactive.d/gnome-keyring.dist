@@ -1,0 +1,8 @@
+# Gnome SSH Agent Setup
+if df_command_exists gnome-keyring-daemon; then
+    if [ -n "$DESKTOP_SESSION" ]; then
+        eval "$(gnome-keyring-daemon --start)" >/dev/null 2>&1
+        export SSH_AUTH_SOCK
+    fi
+fi
+
