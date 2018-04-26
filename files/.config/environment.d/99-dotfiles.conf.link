@@ -1,4 +1,4 @@
 MOZ_ALLOW_GTK_DARK_THEME=true
-SSH_AUTH_SOCK="${$SSH_AUTH_SOCK:-"$XDG_RUNTIME_DIR/ssh-agent.socket"}"
+SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-"$XDG_RUNTIME_DIR/ssh-agent.socket"}"
 XENVIRONMENT="${HOME}/.Xresources"
 
