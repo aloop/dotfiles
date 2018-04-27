@@ -3,7 +3,7 @@
     "workbench.startupEditor": "newUntitledFile",
     "workbench.statusBar.feedback.visible": false,
     "workbench.iconTheme": "vs-seti",
-    "workbench.colorTheme": "Dracula"
+    "workbench.colorTheme": "Dracula",
     "editor.fontFamily": "Hack, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.minimap.enabled": false,
     "editor.rulers": [80, 120],
@@ -20,5 +20,5 @@
     "files.trimTrailingWhitespace": true,
     "search.smartCase": true,
     "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
+    "telemetry.enableCrashReporter": false
 }
