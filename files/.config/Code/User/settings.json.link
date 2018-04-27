@@ -1,0 +1,24 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.statusBar.feedback.visible": false,
+    "workbench.iconTheme": "vs-seti",
+    "workbench.colorTheme": "Dracula"
+    "editor.fontFamily": "Hack, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.minimap.enabled": false,
+    "editor.rulers": [80, 120],
+    "editor.renderIndentGuides": true,
+    "editor.tabCompletion": true,
+    "editor.mouseWheelZoom": true,
+    "explorer.openEditors.visible": 0,
+    "window.openFilesInNewWindow": "off",
+    "window.zoomLevel": 0,
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.includeLanguages": {
+        "twig": "html"
+    },
+    "files.trimTrailingWhitespace": true,
+    "search.smartCase": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+}
