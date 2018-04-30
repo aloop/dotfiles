@@ -9,10 +9,14 @@
     "editor.rulers": [80, 120],
     "editor.renderIndentGuides": true,
     "editor.tabCompletion": true,
-    "editor.mouseWheelZoom": true,
+    "editor.mouseWheelZoom": false,
+    "editor.dragAndDrop": false,
     "explorer.openEditors.visible": 0,
     "window.openFilesInNewWindow": "off",
     "window.zoomLevel": 0,
+    "window.menuBarVisibility": "toggle",
+    "window.openFoldersInNewWindow": "on",
+    "window.restoreWindows": "all",
     "emmet.triggerExpansionOnTab": true,
     "emmet.includeLanguages": {
         "twig": "html"
