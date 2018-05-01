@@ -26,6 +26,19 @@ or:
 ~/.dotfiles/install --no-links # Only install copies
 ```
 
+## System Settings
+
+Settings for various operating systems are kept in `~/.dotfiles/settings/`,
+they can either be called directly (they are shell scripts), or you can call
+them through the install script:
+```sh
+~/.dotfiles/install settings linux
+```
+If the shell alias for the dotfiles is setup, then you can simply call:
+```sh
+dotfiles settings linux
+```
+
 ## Backups
 
 Files and Folders to be linked or copied that already exist in the home directory will be backed up to:
