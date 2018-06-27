@@ -1,0 +1,4 @@
+--no-call-home
+--merge-output-format mkv
+--sub-format "srt/ass/best"
+--all-subs
