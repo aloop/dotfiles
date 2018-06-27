@@ -33,6 +33,12 @@ server() (
     fi
 )
 
+# Flatpak Helpers
+
+flatpak_update() (
+    flatpak update $(flatpak list --app | cut -f1 | sed 's/\/.*//' | tr "\\n" ' ')
+)
+
 # Helpers to finish setting up the shell.
 
 df_install_rbenv() (
