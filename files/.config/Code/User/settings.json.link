@@ -14,9 +14,9 @@
     "explorer.openEditors.visible": 0,
     "window.openFilesInNewWindow": "off",
     "window.zoomLevel": 0,
-    "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "on",
     "window.restoreWindows": "all",
+    "window.titleBarStyle": "custom",
     "emmet.triggerExpansionOnTab": true,
     "emmet.includeLanguages": {
         "twig": "html"
