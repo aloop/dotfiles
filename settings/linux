@@ -4,50 +4,87 @@
 
 if command -v gsettings >/dev/null 2>&1; then
 
-    # Workspace Settings
+    ## Workspace Settings
     gsettings set org.gnome.shell.overrides workspaces-only-on-primary false
 
-    # Night light settings
+    ## Desktop settings
+    gsettings set org.gnome.desktop.background show-desktop-icons true
+
+    ## Window Manager settings
+    gsettings set org.gnome.desktop.wm.preferences audible-bell false
+
+    ## Custom keybindings
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Start a Terminal"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Super>Return"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+
+    ## Night light settings
     gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-from 20
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-to 8
     gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2700
 
-    # Keyboard Settings
+    ## Keyboard Settings
     gsettings set org.gnome.desktop.peripherals.keyboard repeat true
     gsettings set org.gnome.desktop.peripherals.keyboard delay 250
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 
-    # Use 12-hour clock
+    ## Clock settings
     gsettings set org.gnome.desktop.interface clock-format '12h'
+    gsettings set org.gnome.desktop.interface clock-show-date true
 
-    # Show Battery Percentage
+    ## Show Battery Percentage
     gsettings set org.gnome.desktop.interface show-battery-percentage true
 
-    # Disable Autorun
+    ## Disable Autorun
     gsettings set org.gnome.desktop.media-handling autorun-never true
 
-    # Disable error reporting and usage stats
+    ## Disable error reporting and usage stats
     gsettings set org.gnome.desktop.privacy send-software-usage-stats false
     gsettings set org.gnome.desktop.privacy report-technical-problems false
 
-    # Disable recently used files in nautilus
+    ## Disable recently used files in nautilus
     gsettings set org.gnome.desktop.privacy remember-recent-files false
     gsettings set org.gnome.desktop.privacy recent-files-max-age 3
 
-    # Add minimize and maximize buttons to windows
+    ## Add minimize and maximize buttons to windows
     gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
 
-    # Enable resizing of windows using Super+Right Mouse Click and dragging
+    ## Enable resizing of windows using Super+Right Mouse Click and dragging
     gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 
-    # Other settings
+    ## Power Saving/Screen lock settings
+    gsettings set org.gnome.desktop.session idle-delay 600
+    gsettings set org.gnome.desktop.screensaver idle-activation-enabled true
+    gsettings set org.gnome.desktop.screensaver lock-enabled true
+    gsettings set org.gnome.desktop.screensaver lock-delay 900
+    # Don't sleep automatically
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+    gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 1800
+
+    ## Terminal settings
+    gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
+    # Terminal keybindings require a path for some reason.
+    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Control>asciitilde'
+    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Control>grave'
+    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ move-tab-left '<Control><Shift>Left'
+    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ move-tab-right '<Control><Shift>Right'
+
+    ## Other settings
     gsettings set org.gnome.desktop.privacy remove-old-temp-files true
     gsettings set org.gnome.desktop.privacy remove-old-trash-files true
-    gsettings set org.gnome.desktop.session idle-delay 900
 
-    # Gedit settings
+    ## Nautilus/FilePicker settings
+    #gsettings set org.gnome.nautilus.preferences sort-directories-first true
+    gsettings set org.gtk.Settings.FileChooser sort-directories-first true
+    gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+    gsettings set org.gnome.nautilus.list-view default-visible-columns "['name', 'size', 'type', 'date_modified_with_time']"
+    gsettings set org.gnome.nautilus.window-state start-with-location-bar true
+    gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
+
+    ## Gedit settings
     gsettings set org.gnome.gedit.preferences.editor display-right-margin true
     gsettings set org.gnome.gedit.preferences.editor right-margin-position 80
     gsettings set org.gnome.gedit.preferences.editor scheme 'solarized-dark'
