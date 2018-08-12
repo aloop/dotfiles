@@ -37,3 +37,5 @@ export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-"$XDG_RUNTIME_DIR/ssh-agent.socket"}"
 
 export XENVIRONMENT="${HOME}/.Xresources"
 
+export DOTFILES_ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
+
