@@ -3,6 +3,8 @@ setopt multios
 setopt interactive_comments
 setopt extended_glob
 setopt noglobdots
+setopt append_create
+unsetopt flowcontrol
 
 ## Prompt
 setopt prompt_subst
@@ -24,8 +26,6 @@ setopt pushd_ignore_dups
 
 ## History
 setopt append_history
-setopt extended_history
-setopt inc_append_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_ignore_space
