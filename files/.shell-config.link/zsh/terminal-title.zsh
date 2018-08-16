@@ -1,5 +1,5 @@
 # This is based on a filter in oh-my-zsh's termsupport.zsh
-df_filter_cmd() (
+_dotfiles_filter_cmd() (
     trim_leading_spaces() (
         str="$1"
 
@@ -38,40 +38,40 @@ case "$TERM" in
 
         # Write some info to terminal title.
         # This is seen when the shell prompts for input
-        term_title_precmd() {
+        _dotfiles_term_title_precmd() {
             print -Pn "\e]0;zsh %(1j,%j job%(2j|s|); ,)%~\a"
         }
 
         # Write command and args to terminal title.
         # This is seen while the shell waits for a command to complete.
-        term_title_preexec() (
-            printf "\033]0;%s\a" "$(df_filter_cmd "$1")"
+        _dotfiles_term_title_preexec() (
+            printf "\033]0;%s\a" "$(_dotfiles_filter_cmd "$1")"
         )
 
-        precmd_functions+=term_title_precmd
-        preexec_functions+=term_title_preexec
+        precmd_functions+=_dotfiles_term_title_precmd
+        preexec_functions+=_dotfiles_term_title_preexec
 
     ;;
 
     tmux*|screen*)
 
-        term_title_precmd() {
+        _dotfiles_term_title_precmd() {
             # Restore tmux-title to 'zsh'
             printf "\033kzsh\033\\"
             # Restore urxvt-title to 'zsh'
             print -Pn "\e]2;zsh:%~\a"
         }
 
-        term_title_preexec() (
-            filtered_cmd="$(df_filter_cmd "$1")"
+        _dotfiles_term_title_preexec() (
+            filtered_cmd="$(_dotfiles_filter_cmd "$1")"
             # set tmux-title to running program
             printf "\033k%s\033\\" "$(echo "$filtered_cmd")"
             # set urxvt-title to running program
             print -Pn "\e]2;zsh:$(echo "$filtered_cmd")\a"
         )
 
-        precmd_functions+=term_title_precmd
-        preexec_functions+=term_title_preexec
+        precmd_functions+=_dotfiles_term_title_precmd
+        preexec_functions+=_dotfiles_term_title_preexec
 
     ;;
 esac

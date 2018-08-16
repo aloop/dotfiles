@@ -1,5 +1,5 @@
 zmodload -i zsh/complist
-autoload -U compinit
+autoload -Uz compinit
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ''
