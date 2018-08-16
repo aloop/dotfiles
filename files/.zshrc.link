@@ -31,6 +31,9 @@ if [ -f "${HOME}/.zgen/zgen.zsh" ]; then
         # completions
         zgen load zsh-users/zsh-completions src
 
+        # inline suggestions
+        zgen load zsh-users/zsh-autosuggestions
+
         # Should be last
         zgen load zsh-users/zsh-syntax-highlighting
 
