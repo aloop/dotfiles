@@ -10,46 +10,41 @@ for df_zshrc_file in "${HOME}"/.shell-config/zsh/*.zsh; do
 done
 unset df_zshrc_file
 
-# Automatically install zgen if it doesn't exist
-if [ ! -d "${HOME}/.zgen" ]; then
-    df_install_zgen
+# Automatically install antigen if it doesn't exist
+if [ ! -d "${HOME}/antigen" ]; then
+    git clone https://github.com/zsh-users/antigen.git ~/antigen
 fi
 
-# Start loading zgen
-if [ -f "${HOME}/.zgen/zgen.zsh" ]; then
-    . "${HOME}/.zgen/zgen.zsh"
+# Start loading antigen
+if [ -f "${HOME}/antigen/antigen.zsh" ]; then
+    . "${HOME}/antigen/antigen.zsh"
 
-    # Make sure we haven't already installed
-    if ! zgen saved; then
-        echo "Installing zgen plugins"
+    # completions
+    antigen bundle zsh-users/zsh-completions
 
-        # Allow a user to declare plugins for an individual install
-        if [ -f "${HOME}/.zgen.local" ]; then
-            . "${HOME}/.zgen.local"
-        fi
+    # inline suggestions
+    antigen bundle zsh-users/zsh-autosuggestions
 
-        # completions
-        zgen load zsh-users/zsh-completions src
-
-        # inline suggestions
-        zgen load zsh-users/zsh-autosuggestions
-
-        # Should be last
-        zgen load zsh-users/zsh-syntax-highlighting
-
-        zgen save
-
-        echo "Finished installing zgen plugins"
+    # Allow a user to declare plugins for an individual install
+    if [ -f "${HOME}/.antigen.local" ]; then
+        . "${HOME}/.antigen.local"
     fi
+
+    # Syntax highlighting - apparently needs be last
+    antigen bundle zsh-users/zsh-syntax-highlighting
+
+    antigen apply
 fi
 
 if [ -f "${HOME}/.zshrc.local" ]; then
     . "${HOME}/.zshrc.local"
 fi
 
+autoload -Uz compinit
 # Initialize completions, with a full run once a day
 if [[ -n "${HOME}"/.zcompdump(#qN.mh+24) ]]; then
     compinit
+    compdump
 else
     compinit -C
 fi

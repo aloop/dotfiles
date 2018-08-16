@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-path_prepend="${path_prepend:+$path_prepend:}${HOME}/.rbenv/shims:${HOME}/.rbenv/bin:${HOME}/.yarn/bin:/usr/local/bin:/usr/local/sbin"
-path_append="${HOME}/.cabal/bin:${HOME}/.bin${GOPATH:+:$GOPATH/bin}:/snap/bin${path_append:+:$path_append}"
+path_prepend="${path_prepend:+$path_prepend:}${HOME}/.yarn/bin:/usr/local/bin:/usr/local/sbin"
+path_append="${HOME}/.cabal/bin${GOPATH:+:$GOPATH/bin}:/snap/bin:${HOME}/.bin${path_append:+:$path_append}"
 
 df_filter_path() (
     _needle="$1"
@@ -19,8 +19,8 @@ df_filter_path() (
             [ "$_left_result" != "$_path" ] &&
             [ "$_right_result" != "$_path" ] &&
             # Ensure we haven't only made a partial match
-            ( [  -z "$_left_result" ] || [ "$_left_result" != "${_left_result%:}" ] ) &&
-            ( [  -z "$_right_result" ] || [ "$_right_result" != "${_right_result#:}" ] )
+            { [  -z "$_left_result" ] || [ "$_left_result" != "${_left_result%:}" ]; } &&
+            { [  -z "$_right_result" ] || [ "$_right_result" != "${_right_result#:}" ]; }
         do
             # Join the left side and right side back together
             _path="${_left_result}:${_right_result}"
