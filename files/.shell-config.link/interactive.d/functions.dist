@@ -43,6 +43,28 @@ flatpak_update() (
     flatpak update $(flatpak list --app | cut -f1 | sed 's/\/.*//' | tr "\\n" ' ')
 )
 
+# WP-CLI helpers
+
+wp_migrate_url() (
+    oldhost="$1"
+    newhost="$2"
+
+    if [ -z "$oldhost" ]; then
+        echo "1st parameter for old hostname not given"
+        exit 1
+    fi
+
+    if [ -z "$newhost" ]; then
+        echo "2nd parameter for new hostname not given"
+        exit 1
+    fi
+
+    # Backup database first
+    wp db export
+    # Replace `$oldhost` with `$newhost` without altering GUIDs
+    wp search-replace --skip-columns='guid' --url="$oldhost" "$oldhost" "$newhost"
+)
+
 # Helpers to finish setting up the shell.
 
 dotfiles_install_nvm() (
