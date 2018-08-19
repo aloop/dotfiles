@@ -11,13 +11,13 @@ done
 unset df_zshrc_file
 
 # Automatically install antigen if it doesn't exist
-if [ ! -d "${HOME}/antigen" ]; then
-    git clone https://github.com/zsh-users/antigen.git ~/antigen
+if [ ! -d "${HOME}/.antigen" ]; then
+    git clone https://github.com/zsh-users/antigen.git ~/.antigen
 fi
 
 # Start loading antigen
-if [ -f "${HOME}/antigen/antigen.zsh" ]; then
-    . "${HOME}/antigen/antigen.zsh"
+if [ -f "${HOME}/.antigen/antigen.zsh" ]; then
+    . "${HOME}/.antigen/antigen.zsh"
 
     # completions
     antigen bundle zsh-users/zsh-completions
