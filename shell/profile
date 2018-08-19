@@ -18,11 +18,7 @@ df_safe_source() {
 
 # Start sourcing
 
-# `.before` is intended as a local override for certain env vars
-# and for adding additional paths
-df_safe_source "${HOME}/.before"
-
-for df_profile_file in "${HOME}"/.shell-config/profile.d/*; do
+for df_profile_file in "${DOTFILES_DIR}"/shell/profile.d/*; do
     if
         [ -e "${df_profile_file}" ] &&
         [ "${df_profile_file%"/.gitignore"}" = "${df_profile_file}" ] &&
@@ -32,9 +28,6 @@ for df_profile_file in "${HOME}"/.shell-config/profile.d/*; do
     fi
 done
 unset df_profile_file
-
-# Use `.after` for things that you want to set after everything else
-df_safe_source "${HOME}/.after"
 
 # Let `./interactive` know that we've already initialized
 export df_profile_initialized="true"

@@ -1,6 +1,17 @@
-. "${HOME}/.shell-config/profile"
+if [ -f "${HOME}/.before" ]; then
+    . "${HOME}/.before"
+fi
+
+# If DOTFILES_DIR is set, use it, otherwise default to `$HOME/.dotfiles`
+DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
+
+. "${DOTFILES_DIR}/shell/profile"
 
 if [ -f "${HOME}/.zshenv.local" ]; then
     . "${HOME}/.zshenv.local"
+fi
+
+if [ -f "${HOME}/.after" ]; then
+    . "${HOME}/.after"
 fi
 
