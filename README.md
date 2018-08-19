@@ -65,12 +65,12 @@ Or, disable backups:
 ### Local Override Files
 
 * `~/.gitconfig.local`: Override git settings, useful for setting email and name
-* `~/.before`: is sourced near the beginning of `files/.shell-config/profile`
-* `~/.after`: is sourced near the end of `files/.shell-config/profile`
+* `~/.before`: is sourced near the beginning of `$DOTFILES_DIR/shell/profile`
+* `~/.after`: is sourced near the end of `$DOTFILES_DIR/shell/profile`
 * `~/.zshenv.local`
 * `~/.zshrc.local`
-* `~/.shell-config/profile.d/*`: Any shell scripts you place in this directory will be sourced by `~/.shell-config/profile`
-* `~/.shell-config/interactive.d/*`: Any shell scripts you place in this directory will be sourced by `~/.shell-config/interactive`
+* `$DOTFILES_DIR/shell/profile.d/*`: Any shell scripts you place in this directory will be sourced by `$DOTFILES_DIR/shell/profile`
+* `$DOTFILES_DIR/shell/interactive.d/*`: Any shell scripts you place in this directory will be sourced by `$DOTFILES_DIR/shell/interactive`
 
 ## Todo
 * Create a bashrc, and probably configs for other shells too.

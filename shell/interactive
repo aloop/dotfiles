@@ -2,10 +2,10 @@
 
 # If `./profile` hasn't been run, run it here
 if [ -z "${df_profile_initialized}" ]; then
-    . "${HOME}/.shell-config/profile"
+    . "${DOTFILES_DIR}/shell/profile"
 fi
 
-for df_interactive_file in "${HOME}"/.shell-config/interactive.d/*; do
+for df_interactive_file in "${DOTFILES_DIR}"/shell/interactive.d/*; do
     if
         [ -e "${df_interactive_file}" ] &&
         [ "${df_interactive_file%"/.gitignore"}" = "${df_interactive_file}" ] &&
@@ -14,7 +14,7 @@ for df_interactive_file in "${HOME}"/.shell-config/interactive.d/*; do
         . "${df_interactive_file}"
     fi
 done
-unset df_interactive_file
 
+unset df_interactive_file
 unset df_profile_initialized
 
