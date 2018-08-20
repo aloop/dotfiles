@@ -11,6 +11,7 @@
     "editor.tabCompletion": true,
     "editor.mouseWheelZoom": false,
     "editor.dragAndDrop": false,
+    "breadcrumbs.enabled": true,
     "explorer.openEditors.visible": 0,
     "window.openFilesInNewWindow": "off",
     "window.zoomLevel": 0,
