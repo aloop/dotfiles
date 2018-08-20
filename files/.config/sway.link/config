@@ -215,8 +215,6 @@ hide_edge_borders smart
 exec --no-startup-id xset r rate 250 50
 # Startup notifications
 exec --no-startup-id dunst -config ~/.config/sway/dunstrc
-# Merge local .Xresources file (Needed with sway for urxvt)
-exec --no-startup-id xrdb -merge ~/.Xresources
 
 output DVI-D-1 resolution 1920x1080 position 0,0
 output DP-1 resolution 1920x1080 position 1920,0
