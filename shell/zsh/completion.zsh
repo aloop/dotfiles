@@ -3,7 +3,7 @@ autoload -Uz compinit
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' special-dirs true
 
