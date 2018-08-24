@@ -1,7 +1,17 @@
 #!/usr/bin/env sh
 
-path_prepend="${path_prepend:+$path_prepend:}${HOME}/.yarn/bin:/usr/local/bin:/usr/local/sbin"
-path_append="${HOME}/.cabal/bin${GOPATH:+:$GOPATH/bin}:/snap/bin:${HOME}/.bin${path_append:+:$path_append}"
+path_prepend="${path_prepend:+$path_prepend:}\
+${HOME}/.yarn/bin\
+:/usr/local/bin\
+:/usr/local/sbin"
+
+path_append="${HOME}/.cabal/bin\
+${GOPATH:+:$GOPATH/bin}\
+:${HOME}/.composer/vendor/bin\
+:${HOME}/.config/composer/vendor/bin\
+:/snap/bin\
+:${HOME}/.bin\
+${path_append:+:$path_append}"
 
 df_filter_path() (
     _needle="$1"
