@@ -37,12 +37,6 @@ pretty_print_path() {
     echo $PATH | tr ':' "\n"
 }
 
-# Flatpak Helpers
-
-flatpak_update() (
-    flatpak update $(flatpak list --app | cut -f1 | sed 's/\/.*//' | tr "\\n" ' ')
-)
-
 # WP-CLI helpers
 
 wp_migrate_url() (
