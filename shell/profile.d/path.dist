@@ -10,6 +10,7 @@ ${GOPATH:+:$GOPATH/bin}\
 :${HOME}/.composer/vendor/bin\
 :${HOME}/.config/composer/vendor/bin\
 :/snap/bin\
+:${HOME}/.cargo/bin\
 :${HOME}/.bin\
 ${path_append:+:$path_append}"
 
