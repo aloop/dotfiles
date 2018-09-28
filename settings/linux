@@ -6,6 +6,7 @@ if command -v gsettings >/dev/null 2>&1; then
 
     ## Workspace Settings
     gsettings set org.gnome.shell.overrides workspaces-only-on-primary false
+    gsettings set org.gnome.mutter workspaces-only-on-primary false
 
     ## Desktop settings
     gsettings set org.gnome.desktop.background show-desktop-icons true
