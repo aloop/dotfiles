@@ -33,5 +33,7 @@
     "files.associations": {
         "*.js": "javascriptreact"
     },
-    "editor.suggest.localityBonus": true
+    "editor.suggest.localityBonus": true,
+    "editor.formatOnSave": true,
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }
