@@ -57,10 +57,10 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 
     ## Power Saving/Screen lock settings
-    gsettings set org.gnome.desktop.session idle-delay 600
+    gsettings set org.gnome.desktop.session idle-delay 1200
     gsettings set org.gnome.desktop.screensaver idle-activation-enabled true
     gsettings set org.gnome.desktop.screensaver lock-enabled true
-    gsettings set org.gnome.desktop.screensaver lock-delay 900
+    gsettings set org.gnome.desktop.screensaver lock-delay 1500
     # Don't sleep automatically
     gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
     gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 1800
