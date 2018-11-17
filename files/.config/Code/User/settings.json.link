@@ -35,5 +35,6 @@
     },
     "editor.suggest.localityBonus": true,
     "editor.formatOnSave": true,
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDelete": false
 }
