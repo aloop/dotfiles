@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+# Install Visual Studio Code plugins
+
+if command -v code >/dev/null 2>&1; then
+
+    code \
+        --install-extension "EliverLara.andromeda" \
+        --install-extension "robertohuertasm.vscode-icons" \
+        --install-extension "rust-lang.rust" \
+        --install-extension "mjmcloug.vscode-elixir" \
+        --install-extension "whatwedo.twig" \
+        --install-extension "felixfbecker.php-intellisense" \
+        --install-extension "EditorConfig.EditorConfig" \
+        --install-extension "esbenp.prettier-vscode" \
+        --install-extension "dbaeumer.vscode-eslint" \
+        --install-extension "eg2.tslint" \
+        --install-extension "joelday.docthis" \
+        --install-extension "naumovs.color-highlight" \
+        --install-extension "CoenraadS.bracket-pair-colorizer-2" \
+        --install-extension "christian-kohler.path-intellisense"
+
+else
+
+    echo "Visual Studio Code doesn't seem to be installed. Exiting..."
+
+fi
+
