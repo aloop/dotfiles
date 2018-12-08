@@ -1,3 +1,8 @@
+fpath=(
+    "${DOTFILES_DIR}/shell/zsh/completions"
+    "$fpath[@]"
+)
+
 zmodload -i zsh/complist
 autoload -Uz compinit
 
@@ -42,3 +47,4 @@ unset _dotfiles_ssh_hosts _dotfiles_ssh_known_hosts _dotfiles_ssh_config_hosts
 zstyle ':completion:*:ssh:*' ignored-patterns "localhost|${HOST}|${HOST}.localdomain"
 
 zstyle '*' single-ignored show
+
