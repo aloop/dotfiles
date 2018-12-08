@@ -59,7 +59,11 @@ wp_migrate_url() (
     wp search-replace --skip-columns='guid' --url="$oldhost" "$oldhost" "$newhost"
 )
 
-# Helpers to finish setting up the shell.
+# Helpers for working with the dotfiles
+
+dotfiles() (
+    ~/.dotfiles/install "$@"
+)
 
 dotfiles_install_nvm() (
     if [ -d "${HOME}/.nvm" ]; then
