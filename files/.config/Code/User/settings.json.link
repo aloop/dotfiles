@@ -36,5 +36,9 @@
     "editor.suggest.localityBonus": true,
     "editor.formatOnSave": true,
     "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.suggest.completeFunctionCalls": true,
+    "typescript.suggest.completeFunctionCalls": true,
+    "typescript.surveys.enabled": false,
     "explorer.confirmDelete": false
 }
