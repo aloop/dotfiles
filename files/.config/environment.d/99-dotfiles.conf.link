@@ -2,6 +2,4 @@ MOZ_ALLOW_GTK_DARK_THEME=true
 SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$XDG_RUNTIME_DIR/ssh-agent.socket}"
 XENVIRONMENT="${HOME}/.Xresources"
 ELECTRON_TRASH=gio
-# Let GTK apps use the current DE/WM file pickers and such if they support XDG desktop portals
-GTK_USE_PORTAL=1
 
