@@ -10,6 +10,12 @@ user_pref("general.autoScroll", true);
 // Disable paste using middle mouse button
 user_pref("middlemouse.paste", false);
 
+// Don't sort ctrl-tab by recently used
+user_pref("browser.ctrlTab.recentlyUsedOrder", false);
+
+// Enable blocking of tracker cookies
+user_pref("network.cookie.cookieBehavior", 4);
+
 // Set new page preferences
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
