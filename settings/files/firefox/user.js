@@ -85,6 +85,9 @@ user_pref("app.normandy.enabled", false);
 user_pref("app.normandy.api_url", "");
 user_pref("app.shield.optoutstudies.enabled", false);
 
+// Disable extension recommendations
+user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);
+
 // Disable uploading of screenshots
 user_pref("extensions.screenshots.upload-disabled", true);
 
