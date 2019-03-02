@@ -1,19 +1,9 @@
-. "${DOTFILES_DIR}/shell/interactive"
-
 [[ -z $precmd_functions ]] && precmd_functions=()
 [[ -z $preexec_functions ]] && preexec_functions=()
 
-# Load zsh config files
-for df_zshrc_file in "${DOTFILES_DIR}"/shell/zsh/*.zsh; do
-    if [ -f "${df_zshrc_file}" ]; then
-        . "${df_zshrc_file}"
-    fi
-done
-unset df_zshrc_file
-
 # Automatically install antigen if it doesn't exist
 if [ ! -d "${HOME}/.antigen" ]; then
-    git clone https://github.com/zsh-users/antigen.git ~/.antigen
+    git clone https://github.com/zsh-users/antigen.git ~/.antigen >/dev/null
 fi
 
 # Start loading antigen
@@ -26,6 +16,9 @@ if [ -f "${HOME}/.antigen/antigen.zsh" ]; then
     # inline suggestions
     antigen bundle zsh-users/zsh-autosuggestions
 
+    # Add async worker support
+    antigen bundle mafredri/zsh-async
+
     # Allow a user to declare plugins for an individual install
     if [ -f "${HOME}/.antigen.local" ]; then
         . "${HOME}/.antigen.local"
@@ -36,6 +29,16 @@ if [ -f "${HOME}/.antigen/antigen.zsh" ]; then
 
     antigen apply
 fi
+
+. "${DOTFILES_DIR}/shell/interactive"
+
+# Load zsh config files
+for df_zshrc_file in "${DOTFILES_DIR}"/shell/zsh/*.zsh; do
+    if [ -f "${df_zshrc_file}" ]; then
+        . "${df_zshrc_file}"
+    fi
+done
+unset df_zshrc_file
 
 if [ -f "${HOME}/.zshrc.local" ]; then
     . "${HOME}/.zshrc.local"

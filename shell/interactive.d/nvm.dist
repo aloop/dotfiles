@@ -1,6 +1,16 @@
 #!/usr/bin/env sh
 
-if [ -e "${HOME}/.nvm/nvm.sh" ]; then
-    . "${HOME}/.nvm/nvm.sh"
+export NVM_DIR="${HOME}/.nvm"
+
+if [ -s "${NVM_DIR}/nvm.sh" ]; then
+    function load_nvm() {
+        . "${NVM_DIR}/nvm.sh"
+        [ -s "${NVM_DIR}/bash_completion" ] && . "${NVM_DIR}/bash_completion"
+    }
+
+    # Initialize worker
+    async_start_worker nvm_worker -n
+    async_register_callback nvm_worker load_nvm
+    async_job nvm_worker sleep 0.1
 fi
 
