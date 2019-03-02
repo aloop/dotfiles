@@ -4,8 +4,8 @@ endif
 
 set background=dark
 
-" Attempt to set the colorscheme
-silent! colorscheme molokai
+silent! colorscheme dracula
 
-highlight clear SignColumn
-
+highlight Normal ctermfg=231 ctermbg=233 cterm=none
+highlight CursorLine ctermbg=234 cterm=none
+highlight ColorColumn ctermbg=234 cterm=none
