@@ -29,12 +29,12 @@ else
     Plug 'airblade/vim-gitgutter'
 
     " Linting and Auto-complete
-    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
     Plug 'editorconfig/editorconfig-vim'
 
-    if executable('npm')
-        Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-    endif
+    "if executable('npm')
+    "    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+    "    Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+    "endif
 
     " Color Schemes
     Plug 'dracula/vim'
@@ -55,8 +55,8 @@ else
 
     if s:plugins_initial_install == 1 && !has('gui_running')
         PlugInstall
-        CocInstall 'coc-tsserver'
-        CocInstall 'coc-json'
+        "CocInstall 'coc-tsserver'
+        "CocInstall 'coc-json'
     endif
 
     " End vim-plug Setup }}}
