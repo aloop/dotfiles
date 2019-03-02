@@ -19,24 +19,33 @@ else
     call plug#begin(vim_dir . '/plugged')
 
     " Language Syntaxes
-    Plug 'othree/html5.vim'
     Plug 'pangloss/vim-javascript'
+    Plug 'leafgarland/typescript-vim'
     Plug 'plasticboy/vim-markdown'
     Plug 'evidens/vim-twig'
 
+    " Version Control
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
+
     " Linting and Auto-complete
-    Plug 'scrooloose/syntastic'
+    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+    Plug 'editorconfig/editorconfig-vim'
+
+    if executable('npm')
+        Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+    endif
 
     " Color Schemes
-    Plug 'flazz/vim-colorschemes'
-    Plug 'chriskempson/base16-vim'
+    Plug 'dracula/vim'
 
     " Other Plugins
     Plug 'bling/vim-airline'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
-    Plug 'kien/ctrlp.vim'
     Plug 'mattn/emmet-vim'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+    Plug 'junegunn/fzf.vim'
 
     " Define system-specific bundles in the following file.
     " It should contain only plugin definitions.
@@ -46,6 +55,8 @@ else
 
     if s:plugins_initial_install == 1 && !has('gui_running')
         PlugInstall
+        CocInstall 'coc-tsserver'
+        CocInstall 'coc-json'
     endif
 
     " End vim-plug Setup }}}

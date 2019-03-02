@@ -40,6 +40,8 @@ set scrolloff=10
 set splitbelow
 set splitright
 
-" Enable mouse support (for scrolling)
+" Enable mouse support (for whenever I might feel like it)
 set mouse=a
+
+set updatetime=100
 

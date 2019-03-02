@@ -48,9 +48,6 @@ set pastetoggle=<F2>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-nmap <leader>p :CtrlP<cr>
-nmap <leader>bb :CtrlPBuffer<cr>
-
 " Move lines around like sublime
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
@@ -63,4 +60,21 @@ if has('mac') || has('macunix')
     vmap <D-j> <M-j>
     vmap <D-k> <M-k>
 endif
+
+" Fzf bindings
+" current file directory
+nnoremap <leader>p :FZF <c-r>=fnameescape(expand('%:p:h'))<cr>/<cr>
+nnoremap <C-p> :FZF <c-r>=fnameescape(expand('%:p:h'))<cr>/<cr>
+" current working directory
+nnoremap <leader>P :FZF<cr>
+nnoremap <leader><tab> :Buffers<cr>
+nnoremap <leader>fl :Lines<cr>
+nnoremap <leader>fb :BLines<cr>
+nnoremap <leader>fr :History<cr>
+nnoremap <leader>f: :History:<cr>
+nnoremap <leader>f/ :History/<cr>
+nnoremap <leader>fg :GFiles<cr>
+nnoremap <leader>fs :GFiles?<cr>
+nnoremap <leader>fc :Commits<cr>
+nnoremap <leader><space> :Commands<cr>
 
