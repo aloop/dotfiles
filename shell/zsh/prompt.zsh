@@ -6,10 +6,12 @@ dotfiles_prompt_setup() {
     PROMPT=""
 
     if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_TTY" ] || [ $UID -eq 0 ]; then
-        PROMPT="%n%F{blue}@%f%M %B%F{blue}::%f%b "
+        PROMPT="%n%{%F{blue}%}@%{%f%}%M %{%F{blue}%}::%{%f%} "
     fi
 
-    PROMPT+='${prompt_user_str}%F{green}%3~%F{yellow}${vcs_info_msg_0_:- }%f%B%(?.%F{blue}.%F{red})'"${prompt_symbol}"'%f%b '
+    local vcs_info_msg_fixed="$(printf "%s" "${vcs_info_msg_0_}" | sed 's/ \{2,\}/ /')"
+
+    PROMPT+='${prompt_user_str}%{%F{blue}%}%3~${vcs_info_msg_0_:- }%{%B%}%(?.%{%F{white}%}.%{%F{red}%})'"${prompt_symbol}"'%{%f%}%{%b%} '
 }
 
 dotfiles_prompt_setup
