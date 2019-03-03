@@ -8,7 +8,7 @@ autoload -Uz compinit
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*' completer _complete _match _approximate _ignored
 zstyle ':completion:*:approximate:*' max-errors 3 numeric
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' verbose true
