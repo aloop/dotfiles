@@ -47,3 +47,6 @@ alias grh="git reset HEAD"
 alias ytdl="youtube-dl -f 'bestvideo[ext!=webm]+bestaudio[ext!=webm]/best[ext!=webm]' --merge-output-format mkv"
 alias ytdl_sub="youtube-dl --write-sub --embed-subs --sub-lang en --convert-subs srt -f 'bestvideo[ext!=webm]+bestaudio[ext!=webm]/best[ext!=webm]' --merge-output-format mkv"
 
+# For long-running applications that you don't want to exit when you log out
+# on some systems running systemd
+alias daemonize="systemd-run --scope --user"
