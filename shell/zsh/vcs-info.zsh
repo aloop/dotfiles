@@ -19,7 +19,7 @@ dotfiles_setup_vcs_info() {
     +vi-git-output-symbols() {
         if
             [[ $(command git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] &&
-            command git diff --no-ext-diff --quiet --exit-code
+            command git diff --no-ext-diff --quiet --exit-code &>/dev/null
         then
             # Hijack the unstaged hook output
             hook_com[unstaged]="%{%B%}%{%F{green}%}${PROMPT_VCS_CLEAN_SYMBOL}%{%f%}%{%b%}"
@@ -30,7 +30,7 @@ dotfiles_setup_vcs_info() {
 
     vcs_info_precmd() {
         vcs_info
-        # Perform some extra formatting and cleanup
+        # Condense consecutive spaces into a single space
         vcs_info_msg_0_="$(printf "%s" "${vcs_info_msg_0_:- }" | tr -s ' ')"
     }
 

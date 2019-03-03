@@ -10,14 +10,14 @@ fi
 if [ -f "${HOME}/.antigen/antigen.zsh" ]; then
     . "${HOME}/.antigen/antigen.zsh"
 
-    # completions
-    antigen bundle zsh-users/zsh-completions
+    # Add async worker support
+    antigen bundle mafredri/zsh-async
 
     # inline suggestions
     antigen bundle zsh-users/zsh-autosuggestions
 
-    # Add async worker support
-    antigen bundle mafredri/zsh-async
+    # completions
+    antigen bundle zsh-users/zsh-completions
 
     # Allow a user to declare plugins for an individual install
     if [ -f "${HOME}/.antigen.local" ]; then
