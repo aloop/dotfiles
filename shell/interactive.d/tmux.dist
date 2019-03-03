@@ -12,11 +12,6 @@ if df_command_exists tmux; then
     : "${DF_TMUX_AUTOSTART_SESSION_NAME:=df_autostart_session}"
 
     if [ -z "$TMUX" ] && [ "$DF_TMUX_AUTOSTART" = "true" ]; then
-        # Using new-session with the -A flag requires tmux >=1.8
-        if df_command_exists systemd-run; then
-            command systemd-run --scope --user \tmux new-session -A -s "$DF_TMUX_AUTOSTART_SESSION_NAME"
-        else
-            command tmux new-session -A -s "$DF_TMUX_AUTOSTART_SESSION_NAME"
-        fi
+        command tmux new-session -A -s "$DF_TMUX_AUTOSTART_SESSION_NAME"
     fi
 fi
