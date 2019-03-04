@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Make sure we're in an interactive shell
-case $-; in
+case $- in
     *i*) ;;
       *) return;;
 esac
