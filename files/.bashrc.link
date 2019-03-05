@@ -1,0 +1,20 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# If DOTFILES_DIR is set, use it, otherwise default to `$HOME/.dotfiles`
+export DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
+
+. "${DOTFILES_DIR}/shell/interactive"
+
+# Load bash config files
+for df_bashrc_file in "${DOTFILES_DIR}"/shell/bash/*.bash; do
+    if [ -f "${df_bashrc_file}" ]; then
+        . "${df_bashrc_file}"
+    fi
+done
+unset df_bashrc_file
+
+if [ -f "${HOME}/.bashrc.local" ]; then
+    . "${HOME}/.bashrc.local"
+fi
+
