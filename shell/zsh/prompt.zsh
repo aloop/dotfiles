@@ -7,7 +7,7 @@ dotfiles_prompt_setup() {
         PROMPT="%n%{%F{blue}%}@%{%f%}%M %{%F{white}%}::%{%f%} "
     fi
 
-    PROMPT+='${prompt_user_str}%{%F{blue}%}%3~%{%f%}${vcs_info_msg_0_:- }%{%B%}%{%(?.%{%F{white}%}.%{%F{red})%}%}'"${prompt_symbol}"'%{%f%}%{%b%} '
+    PROMPT+='%{%F{blue}%}%3~%{%f%}${vcs_info_msg_0_:- }%{%B%}%{%(?.%{%F{white}%}.%{%F{red})%}%}'"${prompt_symbol}"'%{%f%}%{%b%} '
 }
 
 dotfiles_prompt_setup
