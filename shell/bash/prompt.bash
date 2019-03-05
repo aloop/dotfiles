@@ -5,11 +5,13 @@ dotfiles_git_prompt() {
     local output_str=' '
 
     if df_command_exists git && [[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == 'true' ]]; then
+        local current_git_hash
+
         # Display the current branch name
         output_str+="on (\[\e[0;34m\]$(command git symbolic-ref --short HEAD 2>/dev/null)\[\e[0m\]"
 
         # Try and get the current commit hash
-        local current_git_hash="$(command git rev-parse --verify HEAD 2>/dev/null)"
+        current_git_hash="$(command git rev-parse --verify HEAD 2>/dev/null)"
 
         # Show the hash of the current commit if available
         if [ -n "${current_git_hash}" ]; then

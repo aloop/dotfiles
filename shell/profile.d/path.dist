@@ -24,7 +24,7 @@ df_filter_path() (
     _right_result=${_path#*"$_needle"}
 
     # Make sure the needle and path aren't empty
-    if [ ! -z "$_needle" ] && [ ! -z "$_path" ]; then
+    if [ -n "$_needle" ] && [ -n "$_path" ]; then
         while
             # Both results should be different from the path
             [ "$_left_result" != "$_path" ] &&
