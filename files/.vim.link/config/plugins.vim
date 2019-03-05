@@ -28,20 +28,20 @@ else
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
 
-    " Linting and Auto-complete
+    " Linting, Autocomplete, and Formatting
     Plug 'editorconfig/editorconfig-vim'
+    Plug 'vim-syntastic/syntastic'
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
-    "if executable('npm')
-    "    Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-    "    Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-    "endif
+    if executable('npm')
+        Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+    endif
 
     " Color Schemes
     Plug 'dracula/vim'
 
     " Other Plugins
     Plug 'bling/vim-airline'
-    Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
     Plug 'mattn/emmet-vim'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -55,8 +55,6 @@ else
 
     if s:plugins_initial_install == 1 && !has('gui_running')
         PlugInstall
-        "CocInstall 'coc-tsserver'
-        "CocInstall 'coc-json'
     endif
 
     " End vim-plug Setup }}}
