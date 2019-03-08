@@ -1,4 +1,5 @@
 # Setup history
+export HISTFILE="${HOME}/.bash_history"
 export HISTCONTROL="erasedups:ignoreboth"
 export HISTSIZE=1000
 export HISTFILESEIZE=10000
