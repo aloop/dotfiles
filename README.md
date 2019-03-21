@@ -77,7 +77,6 @@ Or, disable backups:
 * `$DOTFILES_DIR/shell/interactive.d/*`: Any shell scripts you place in this directory will be sourced by `$DOTFILES_DIR/shell/interactive`
 
 ## Todo
-* Create a bashrc, and probably configs for other shells too.
 * Add some backup management commands
 * Create a manifest on install which can be used for uninstalling dotfiles
 * Add helper to fill out things such as adding name and email for git in `~/.gitconfig.local`
