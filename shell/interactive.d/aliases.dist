@@ -26,9 +26,14 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+# List all files and directories including . and ..
 alias l="ls -lah"
+# List all non-hidden files and directories
 alias ll="ls -lh"
+# List all files and directories
 alias la="ls -lAh"
+# List all symlinks in the current directory
+alias lsl='ls -lh $(find -maxdepth 1 -type l -print)'
 
 # Git aliases
 alias g="git"
