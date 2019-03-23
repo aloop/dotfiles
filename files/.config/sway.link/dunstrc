@@ -1,5 +1,5 @@
 [global]
-    font = DejaVu Sans Mono 8
+    font = Noto Sans 10
 
     # Allow a small subset of html markup:
     #   <b>bold</b>
@@ -21,7 +21,7 @@
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
-    format = "<b>%s</b>\n%b"
+    format = "<b>%a</b>\n<i>%s</i>\n%b"
 
     # Sort messages by urgency.
     sort = yes
@@ -64,7 +64,7 @@
     # the top and down respectevly.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5+30+30"
+    geometry = "0x5-10-10"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -146,11 +146,12 @@
 
     # Align icons left/right/off
     icon_position = left
+    max_icon_size = 150
 
     # Paths to default icons.
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
-    frame_width = 3
+    frame_width = 6
     frame_color = "#eee8d5"
 
 [shortcuts]
@@ -175,22 +176,24 @@
     context = ctrl+shift+period
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#93a1a1"
-    foreground = "#eee8d5"
-    timeout = 10
+    frame_color = "#8be9fd"
+    foreground = "#8be9fd"
+    background = "#282A36"
+    timeout = 6
 
 [urgency_normal]
-    background = "#859900"
-    foreground = "#fdf6e3"
+    frame_color = "#50fa7b"
+    foreground = "#50fa7b"
+    background = "#282A36"
+    #background = "#2B313C"
     timeout = 10
 
 [urgency_critical]
-    background = "#dc322f"
-    foreground = "#fdf6e3"
+    frame_color = "#ff5555"
+    foreground = "#ff5555"
+    background = "#282A36"
+    #background = "#2B313C"
     timeout = 0
-
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
