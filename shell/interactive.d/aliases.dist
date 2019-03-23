@@ -55,3 +55,5 @@ alias ytdl_boost="ytdl --external-downloader aria2c --external-downloader-args '
 # For long-running applications that you don't want to exit when you log out
 # on some systems running systemd
 alias daemonize="systemd-run --scope --user"
+
+alias music="ncmpcpp -q"

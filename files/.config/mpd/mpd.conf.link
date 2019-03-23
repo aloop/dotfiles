@@ -1,0 +1,26 @@
+db_file "~/.config/mpd/database"
+log_file "syslog"
+
+playlist_directory "~/.config/mpd/playlists"
+
+metadata_to_use "albumartist,artist,album,title,track,name,genre,date,composer,performer,disc"
+
+bind_to_address "127.0.0.1"
+
+replaygain "auto"
+replaygain_preamp "0"
+replaygain_missing_preamp "0"
+
+audio_output {
+    type "pulse"
+    name "mpd output"
+}
+
+# Output an FFT file for visualization
+audio_output {
+    type "fifo"
+    name "my_fifo"
+    path "/tmp/mpd.fifo"
+    format "44100:16:2"
+}
+
