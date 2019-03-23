@@ -10,7 +10,13 @@ set $menu rofi -show drun -modi run -theme $HOME/.config/rofi/aml.rasi
 
 font pango:Noto Sans Bold, Droid Sans Bold, DejaVu Sans Bold 10
 
-### Key bindings
+### Input and Key bindings
+
+input * {
+    repeat_delay 250
+    repeat_rate 50
+    xkb_numlock enabled
+}
 
 # Use Left Mouse+$mod to drag, or Right Mouse+$mod to resize floating windows
 floating_modifier $mod
@@ -113,60 +119,63 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 ### Colors
 
-# Base16 Tomorrow Night colors
-set $base00 #1d1f21
-set $base01 #282a2e
-set $base02 #373b41
-set $base03 #969896
-set $base04 #b4b7b4
-set $base05 #c5c8c6
-set $base06 #e0e0e0
-set $base07 #ffffff
-set $base08 #cc6666
-set $base09 #de935f
-set $base0A #f0c674
-set $base0B #b5bd68
-set $base0C #8abeb7
-set $base0D #81a2be
-set $base0E #b294bb
-set $base0F #a3685a
+# Base16 Dracula colors
+set $base00 #282936
+set $base01 #3a3c4e
+set $base02 #4d4f68
+set $base03 #626483
+set $base04 #62d6e8
+set $base05 #e9e9f4
+set $base06 #f1f2f8
+set $base07 #f7f7fb
+set $base08 #ea51b2
+set $base09 #b45bcf
+set $base0A #00f769
+set $base0B #ebff87
+set $base0C #a1efe4
+set $base0D #62d6e8
+set $base0E #b45bcf
+set $base0F #00f769
+set $dark09 #6e387f
 
-client.focused          $base05 $base0D $base00 $base0D $base0D
-client.focused_inactive $base01 $base01 $base05 $base03 $base01
-client.unfocused        $base01 $base00 $base05 $base01 $base01
+# client.<class>        border background text indicator child_border
+client.focused          $base09 $base09 $base00 $base09 $base09
+client.focused_inactive $dark09 $dark09 $base05 $dark09 $dark09
+client.unfocused        $base01 $base01 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08
 client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background       $base07
 
 bar {
     status_command i3status
+    tray_output primary
     position top
+    wrap_scroll yes
 
     colors {
         background $base00
-        separator  $base01
-        statusline $base04
+        separator  $base02
+        statusline $base09
 
         # State             Border  BG      Text
-        focused_workspace   $base05 $base0D $base00
-        active_workspace    $base05 $base03 $base00
-        inactive_workspace  $base03 $base01 $base05
+        focused_workspace   $base00 $base09 $base05
+        active_workspace    $base00 $dark09 $base05
+        inactive_workspace  $base00 $base01 $base05
         urgent_workspace    $base08 $base08 $base00
         binding_mode        $base00 $base0A $base00
     }
 }
 
 ### Power and lock settings
-set $Locker i3lock -e -c 000000 && sleep 1
+set $Locker swaylock
 set $mode_system System
-# (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+# (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym e exec --no-startup-id sway-msg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -181,41 +190,39 @@ bindsym $mod+Mod1+l exec --no-startup-id $Locker
 bindsym $mod+b exec $webbrowser
 
 # Special Key Bindings
-bindsym XF86AudioRaiseVolume exec pactl set-sink-mute 0 0;exec pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-mute 0 0;exec pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
 bindsym XF86MonBrightnessDown exec dsplight down 5
 bindsym XF86MonBrightnessUp exec dsplight up 5
 
 
 ### Per-application Settings
 
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
 for_window [class="Steam|mpv"] floating enable
 for_window [title="Preferences$"] floating enable
+
+
+### Display configuration
+output DVI-D-1 resolution 1920x1080 position 0,0
+output DP-1 resolution 1920x1080 position 1920,0
+output DVI-D-2 resolution 1920x1080 position 3840,0
+
 
 ### Misc
 
 gaps outer 0
 gaps inner 20
 
-new_window pixel 6
+default_border pixel 6
+default_floating_border pixel 6
 
-hide_edge_borders smart
-
-#for_window [class="^.*"] border pixel 0
-
-### Wallpaper (Sway on wayland)
-#output "*" background ~/Pictures/Wallpapers/current fill
+### Wallpaper
+#output "*" background ~/Pictures/Wallpapers/current.jpg fill
 
 ### Commands to run on startup
 
-# Set the keyboard delay/repeat rate for X Server
-exec --no-startup-id xset r rate 250 50
 # Startup notifications
 exec --no-startup-id dunst -config ~/.config/sway/dunstrc
 
-output DVI-D-1 resolution 1920x1080 position 0,0
-output DP-1 resolution 1920x1080 position 1920,0
-output DVI-D-2 resolution 1920x1080 position 3840,0
