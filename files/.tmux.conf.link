@@ -90,10 +90,10 @@ set-window-option -g window-status-current-format '#I #W'
 
 # Left side of status bar
 set-option -g status-left-length 30
-set-option -g status-left '#[fg=colour141,reverse] #H ❯ #[fg=colour234,reverse] '
+set-option -g status-left '#[fg=colour141,reverse] #(whoami)@#H ❯ #[fg=colour234,reverse] '
 
 # Right side of status bar
-set-option -g status-left-length 0
+set-option -g status-right-length 0
 set-option -g status-right ''
 
 set-option -g status-interval 5
