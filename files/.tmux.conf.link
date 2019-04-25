@@ -83,14 +83,16 @@ bind-key r source-file ~/.tmux.conf
 set-option -g status-justify left
 
 # Inactive windows in status bar
-set-window-option -g window-status-format '#I #W'
+set-window-option -g window-status-format ' #I #W'
 
 # Current or active window in status bar
-set-window-option -g window-status-current-format '#I #W'
+set-window-option -g window-status-current-format ' #I #W'
+
+set-window-option -g window-status-separator ''
 
 # Left side of status bar
 set-option -g status-left-length 30
-set-option -g status-left '#[fg=colour141,reverse] #(whoami)@#H ❯ #[fg=colour234,reverse] '
+set-option -g status-left ' #(whoami)@#H ❯ '
 
 # Right side of status bar
 set-option -g status-right-length 0
@@ -103,6 +105,7 @@ set-option -g status-interval 5
 
 # default statusbar colors
 set-option -g status-style default,bg=colour234,fg=colour141
+set-option -g status-left-style default,bg=colour141,fg=colour234
 
 # default window title colors
 set-window-option -g window-status-style fg=colour141,dim
