@@ -88,7 +88,7 @@ set-window-option -g window-status-format ' #I #W'
 # Current or active window in status bar
 set-window-option -g window-status-current-format ' #I #W'
 
-set-window-option -g window-status-separator ''
+set-window-option -g window-status-separator ' |'
 
 # Left side of status bar
 set-option -g status-left-length 30
