@@ -32,6 +32,9 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Super>Return"
     gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 
+    # Enable compose key
+    gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt']"
+
     # Font settings
     gsettings set org.gnome.desktop.interface font-name 'DejaVu Sans 10'
     gsettings set org.gnome.desktop.interface document-font-name 'DejaVu Sans 12'
