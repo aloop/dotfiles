@@ -1,6 +1,6 @@
 fpath=(
     "${DOTFILES_DIR}/shell/zsh/completions"
-    "$fpath[@]"
+    "${fpath[@]}"
 )
 
 zmodload -i zsh/complist
@@ -34,15 +34,15 @@ zstyle ':completion::complete:*' cache-path "$DOTFILES_ZSH_CACHE_DIR"
 zstyle ':completion:*:ssh:*' users
 
 # Use ~/.ssh/known_hosts and ~/.ssh/config as a source for completions
-[ -r ~/.ssh/known_hosts ] && _dotfiles_ssh_known_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _dotfiles_ssh_known_hosts=()
-[ -r ~/.ssh/config ] && _dotfiles_ssh_config_hosts=($(cat ~/.ssh/config | sed -ne 's/Host[=\t ]//p')) || _dotfiles_ssh_config_hosts=()
+[ -r "${HOME}/.ssh/known_hosts" ] && _dotfiles_ssh_known_hosts=(${${${${(f)"$(<"${HOME}/.ssh/known_hosts")"}:#[\|]*}%%\ *}%%,*}) || _dotfiles_ssh_known_hosts=()
+[ -r "${HOME}/.ssh/config" ] && _dotfiles_ssh_config_hosts=($(sed -ne 's/Host[=\t ]//p' < "${HOME}/.ssh/config")) || _dotfiles_ssh_config_hosts=()
 
 _dotfiles_ssh_hosts=(
-    "$_dotfiles_ssh_config_hosts[@]"
-    "$_dotfiles_ssh_known_hosts[@]"
+    "${_dotfiles_ssh_config_hosts[@]}"
+    "${_dotfiles_ssh_known_hosts[@]}"
 )
 
-zstyle ':completion:*:ssh:*' hosts $_dotfiles_ssh_hosts
+zstyle ':completion:*:ssh:*' hosts "${_dotfiles_ssh_hosts[@]}"
 unset _dotfiles_ssh_hosts _dotfiles_ssh_known_hosts _dotfiles_ssh_config_hosts
 
 # We don't need to ssh into this machine

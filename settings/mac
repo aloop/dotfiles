@@ -4,13 +4,14 @@
 
 # Make sure we're actually in macOS, otherwise exit immediately
 if
-     "$(uname)" != "Darwin" ] &&
-     command_exists defaults &&
-     command_exists systemsetup &&
-     command_exists pmset &&
-     command_exists chflags
+    [ "$(uname)" != "Darwin" ] ||
+    ! df_command_exists defaults ||
+    ! df_command_exists systemsetup ||
+    ! df_command_exists pmset ||
+    ! df_command_exists chflags
 then
-    exit
+    echo "System does not seem to be macOS, exiting..."
+    exit 1
 fi
 
 ### System Settings
@@ -72,7 +73,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Show the ~/Library folder
-chflags nohidden ~/Library
+chflags nohidden "${HOME}/Library"
 
 # Show the /Volumes folder
 sudo chflags nohidden /Volumes

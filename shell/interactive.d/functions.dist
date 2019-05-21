@@ -34,7 +34,7 @@ server() (
 )
 
 pretty_print_path() {
-    echo $PATH | tr ':' "\n"
+    echo "$PATH" | tr ':' "\n"
 }
 
 # WP-CLI helpers
@@ -62,7 +62,7 @@ wp_migrate_url() (
 # Helpers for working with the dotfiles
 
 dotfiles() (
-    ~/.dotfiles/install "$@"
+    "${HOME}/.dotfiles/install" "$@"
 )
 
 dotfiles_install_nvm() (
