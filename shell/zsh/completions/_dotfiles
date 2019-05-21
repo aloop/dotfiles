@@ -22,16 +22,16 @@ case "$state" in
         _describe -t commands 'command' commands && return 0
         ;;
     (args)
-        case $line[1] in
+        case "${line[1]}" in
             (install)
                 local arguments=(
                     "(-h --help --no-links)--no-copies[Only use dotfiles that are created as symlinks]"
                     "(-h --help --no-copies)--no-links[Only use dotfiles that are copied]"
                     "(-h --help)--no-backups[Don't backup any already existing files when copying or linking files]"
-                    "$shared_args[@]"
+                    "${shared_args[@]}"
                 )
 
-                _arguments "$arguments[@]" && return 0
+                _arguments "${arguments[@]}" && return 0
             ;;
             (settings)
                 local settings_file settings_files=()
@@ -40,14 +40,14 @@ case "$state" in
                     for settings_file in "$DOTFILES_DIR"/settings/*; do
                         if [ -e "$settings_file" ] && [ ! -d "$settings_file" ]; then
                             settings_files=(
-                                "$settings_files[@]"
+                                "${settings_files[@]}"
                                 "${settings_file#"${DOTFILES_DIR}/settings/"}"
                             )
                         fi
                     done
                 fi
 
-                _arguments "$shared_args[@]"
+                _arguments "${shared_args[@]}"
                 _describe -t settings_files 'available settings' settings_files && return 0
                 ;;
         esac
