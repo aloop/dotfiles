@@ -39,6 +39,8 @@ user_pref("plugins.enumerable_names", "");
 
 // Enable tracking protection
 user_pref("privacy.trackingprotection.enabled", true);
+user_pref("privacy.trackingprotection.cryptomining.enabled", true);
+user_pref("privacy.trackingprotection.fingerprinting.enabled", true);
 
 // Disable location tracking
 user_pref("permissions.default.geo", 2);
