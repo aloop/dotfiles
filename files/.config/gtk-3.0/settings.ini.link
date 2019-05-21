@@ -1,7 +1,5 @@
 [Settings]
 gtk-application-prefer-dark-theme=true
 gtk-font-name=DejaVu Sans 10
-gtk-document-font-name=DejaVu Sans 12
-gtk-monospace-font-name=Hack 11
 gtk-icon-theme-name=Adwaita
 gtk-theme-name=Adwaita:dark
