@@ -3,7 +3,7 @@
 # Create a symlink to our user.js in any available firefox profiles
 
 if [ -d "${HOME}/.mozilla/firefox" ]; then
-    for firefox_profile in "${HOME}"/.mozilla/firefox/*.default; do
+    for firefox_profile in "${HOME}"/.mozilla/firefox/*.*; do
         if [ -d "$firefox_profile" ]; then
             ln -sf "${HOME}/.dotfiles/settings/files/firefox/user.js" "${firefox_profile}/user.js"
         fi
