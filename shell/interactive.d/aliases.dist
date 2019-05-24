@@ -57,3 +57,5 @@ alias ytdl_boost="ytdl --external-downloader aria2c --external-downloader-args '
 alias daemonize="systemd-run --scope --user"
 
 alias music="ncmpcpp -q"
+
+alias iso8601='date -u +"%Y-%m-%dT%H:%M:%SZ"'
