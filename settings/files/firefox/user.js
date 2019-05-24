@@ -31,6 +31,7 @@ user_pref(
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
 
 user_pref("browser.contentblocking.enabled", true);
+user_pref("browser.contentblocking.category", "custom");
 
 // Helps prevent spoofed domain names
 user_pref("network.IDN_show_punycode", true);
@@ -114,3 +115,6 @@ user_pref("security.ssl.errorReporting.url", "");
 user_pref("security.ssl.enable_ocsp_stapling", true);
 user_pref("security.OCSP.enabled", 1);
 user_pref("security.OCSP.require", true);
+
+// Ask where to save downloads
+user_pref("browser.download.useDownloadDir", false);
