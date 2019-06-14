@@ -74,6 +74,10 @@ window#waybar.solo {
 }
 */
 
+#workspaces {
+    margin-right: 5px;
+}
+
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button {
     padding: 0 5px;
@@ -103,7 +107,8 @@ window#waybar.solo {
 #pulseaudio,
 #tray,
 #mode,
-#idle_inhibitor {
+#idle_inhibitor,
+#custom-media {
     padding: 0 10px;
     margin: 0 5px;
     color: #f8f8f2;
@@ -150,6 +155,11 @@ window#waybar.solo {
 
 label:focus {
     background-color: #14151b;
+}
+
+#custom-media {
+    background: #82fba0;
+    color: #44475a;
 }
 
 #cpu {
