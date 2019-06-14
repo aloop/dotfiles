@@ -35,6 +35,11 @@ if command -v gsettings >/dev/null 2>&1; then
     # Enable compose key
     gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt']"
 
+    # Theme
+    gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+    gsettings set org.gnome.desktop.interface icon-theme "Adwaita"
+    gsettings set org.gnome.desktop.interface cursor-theme "Adwaita"
+
     # Font settings
     gsettings set org.gnome.desktop.interface font-name 'DejaVu Sans 10'
     gsettings set org.gnome.desktop.interface document-font-name 'DejaVu Sans 12'
