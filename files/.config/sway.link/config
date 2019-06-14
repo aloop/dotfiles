@@ -8,7 +8,7 @@ set $menu rofi -show drun -modi run -theme $HOME/.config/rofi/aml.rasi
 
 ### Font
 
-font pango:Noto Sans Bold, Droid Sans Bold, DejaVu Sans Bold 10
+font Droid Sans Bold 10, DejaVu Sans Bold 10, Noto Sans Bold 10
 
 ### Input and Key bindings
 
@@ -119,52 +119,57 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 ### Colors
 
-# Base16 Dracula colors
-set $base00 #282936
-set $base01 #3a3c4e
-set $base02 #4d4f68
-set $base03 #626483
-set $base04 #62d6e8
-set $base05 #e9e9f4
-set $base06 #f1f2f8
-set $base07 #f7f7fb
-set $base08 #ea51b2
-set $base09 #b45bcf
-set $base0A #00f769
-set $base0B #ebff87
-set $base0C #a1efe4
-set $base0D #62d6e8
-set $base0E #b45bcf
-set $base0F #00f769
-set $dark09 #6e387f
+# Dracula colors
 
-# client.<class>        border background text indicator child_border
-client.focused          $base09 $base09 $base00 $base09 $base09
-client.focused_inactive $dark09 $dark09 $base05 $dark09 $dark09
-client.unfocused        $base01 $base01 $base05 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
-client.placeholder      $base00 $base00 $base05 $base00 $base00
-client.background       $base07
+set $normal_black #282a36
+set $normal_white #f8f8f2
+set $normal_red #ff5555
+set $normal_green #50fa7b
+set $normal_orange #ffb86c
+set $normal_yellow #f1fa8c
+set $normal_blue #6272a4
+set $normal_pink #ff79c6
+set $normal_purple #bd93f9
+set $normal_cyan #8be9fd
+
+set $bright_black #44475a
+set $bright_red #ff8888
+set $bright_green #82fba0
+set $bright_orange #ffd09e
+set $bright_yellow #f7fcbd
+set $bright_blue #828fb7
+set $bright_magenta #ffacdc
+set $bright_purple #dcc5fc
+set $bright_cyan #bdf3fe
+set $bright_white #ffffff
+
+set $dim_black #14151b
+set $dim_red #ff2222
+set $dim_green #1ef956
+set $dim_orange #ff9f38
+set $dim_yellow #ebf85b
+set $dim_blue #4d5b86
+set $dim_magenta #ff46b0
+set $dim_purple #a165f6
+set $dim_cyan #59dffc
+set $dim_white #e6e6d1
+
+# client.<class>        border        background    text          indicator     child_border
+# -------------------------------------------------------------------------------------------
+client.focused          $normal_purple $normal_purple $normal_black $normal_purple $normal_purple
+client.focused_inactive $bright_purple $bright_purple $normal_black $bright_purple $bright_purple
+client.unfocused        $normal_purple $normal_black  $normal_white $normal_black  $normal_black
+client.urgent           $normal_red    $normal_red    $normal_white $normal_red    $normal_red
 
 bar {
-    status_command i3status
+    swaybar_command waybar
     tray_output primary
     position top
     wrap_scroll yes
-
-    colors {
-        background $base00
-        separator  $base02
-        statusline $base09
-
-        # State             Border  BG      Text
-        focused_workspace   $base00 $base09 $base05
-        active_workspace    $base00 $dark09 $base05
-        inactive_workspace  $base00 $base01 $base05
-        urgent_workspace    $base08 $base08 $base00
-        binding_mode        $base00 $base0A $base00
-    }
 }
+
+titlebar_border_thickness 4
+titlebar_padding 12 6
 
 ### Power and lock settings
 set $Locker swaylock
@@ -221,8 +226,8 @@ output DVI-D-2 resolution 1920x1080 position 3840,0
 gaps outer 0
 gaps inner 20
 
-default_border pixel 6
-default_floating_border pixel 6
+default_border pixel 4
+default_floating_border pixel 4
 
 ### Wallpaper
 #output "*" background ~/Pictures/Wallpapers/current.jpg fill
