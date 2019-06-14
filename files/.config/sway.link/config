@@ -16,6 +16,7 @@ input * {
     repeat_delay 250
     repeat_rate 50
     xkb_numlock enabled
+    xkb_options ctrl:nocaps
 }
 
 # Use Left Mouse+$mod to drag, or Right Mouse+$mod to resize floating windows
