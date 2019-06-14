@@ -209,6 +209,9 @@ bindsym --locked XF86AudioStop exec mpc pause
 bindsym --locked XF86AudioNext exec mpc next
 bindsym --locked XF86AudioPrev exec mpc previous
 
+bindsym --release Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i "(focused)" | cut -d " " -f 2)" - | wl-copy
+bindsym --release Shift+Print exec grim -g "$(slurp)" - | wl-copy
+
 
 ### Per-application Settings
 
