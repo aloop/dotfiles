@@ -158,8 +158,8 @@ set $dim_white #e6e6d1
 # client.<class>        border        background    text          indicator     child_border
 # -------------------------------------------------------------------------------------------
 client.focused          $normal_purple $normal_purple $normal_black $normal_purple $normal_purple
-client.focused_inactive $bright_purple $bright_purple $normal_black $bright_purple $bright_purple
-client.unfocused        $normal_purple $normal_black  $normal_white $normal_black  $normal_black
+client.focused_inactive $bright_black  $bright_black  $normal_white $bright_black  $bright_black
+client.unfocused        $normal_black  $normal_black  $normal_white $normal_black  $normal_black
 client.urgent           $normal_red    $normal_red    $normal_white $normal_red    $normal_red
 
 bar {
