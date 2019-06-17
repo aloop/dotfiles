@@ -239,5 +239,4 @@ default_floating_border pixel 4
 ### Commands to run on startup
 
 # Startup notifications
-exec --no-startup-id dunst -config ~/.config/sway/dunstrc
-
+exec --no-startup-id mako
