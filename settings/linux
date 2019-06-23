@@ -111,6 +111,7 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.nautilus.list-view default-visible-columns "['name', 'size', 'type', 'date_modified_with_time']"
     gsettings set org.gnome.nautilus.window-state start-with-location-bar true
     gsettings set org.gnome.nautilus.list-view default-zoom-level 'small'
+    gsettings set org.gnome.nautilus.preferences always-use-location-entry true
 
     ## Gedit settings
     gsettings set org.gnome.gedit.preferences.editor display-right-margin true
