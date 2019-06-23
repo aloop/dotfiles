@@ -233,10 +233,13 @@ gaps inner 20
 default_border pixel 4
 default_floating_border pixel 4
 
-### Wallpaper
-#output "*" background ~/Pictures/Wallpapers/current.jpg fill
+### Set Background image and fallback color
+output '*' bg ~/.local/share/wallpapers/dotfiles.jpg fill '#000000'
 
 ### Commands to run on startup
 
-# Startup notifications
+### Startup notifications
 exec --no-startup-id mako
+
+### Try to exec a local shell script so systems can have their own settings
+exec_always --no-startup-id ~/.sway.local.sh
