@@ -209,7 +209,7 @@ bindsym --locked XF86AudioStop exec mpc pause
 bindsym --locked XF86AudioNext exec mpc next
 bindsym --locked XF86AudioPrev exec mpc previous
 
-bindsym --release Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i "(focused)" | cut -d " " -f 2)" - | wl-copy
+bindsym --release Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i '(focused)' | cut -d ' ' -f 2)" - | wl-copy
 bindsym --release Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
 
@@ -234,7 +234,7 @@ default_border pixel 4
 default_floating_border pixel 4
 
 ### Set Background image and fallback color
-output '*' bg ~/.local/share/wallpapers/dotfiles.jpg fill '#000000'
+output "*" bg ~/.local/share/wallpapers/dotfiles.jpg fill "#000000"
 
 ### Commands to run on startup
 
