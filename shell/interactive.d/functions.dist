@@ -59,6 +59,12 @@ wp_migrate_url() (
     wp search-replace --skip-columns='guid' --url="$oldhost" "$oldhost" "$newhost"
 )
 
+# Generate a sha256 hash for usage with Content-Security-Protection
+
+gen_csp_hash() {
+    printf 'sha256-%s\n' "$(printf '%s' "$1" | openssl dgst -binary -sha256 | openssl base64)"
+}
+
 # Helpers for working with the dotfiles
 
 dotfiles() (
