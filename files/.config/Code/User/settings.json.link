@@ -40,5 +40,6 @@
     "javascript.suggest.completeFunctionCalls": true,
     "typescript.suggest.completeFunctionCalls": true,
     "typescript.surveys.enabled": false,
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "git.autofetch": true
 }
