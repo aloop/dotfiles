@@ -6,6 +6,7 @@ if command -v code >/dev/null 2>&1; then
 
     code \
         --install-extension "EliverLara.andromeda" \
+        --install-extension "dracula-theme.theme-dracula" \
         --install-extension "vscode-icons-team.vscode-icons" \
         --install-extension "rust-lang.rust" \
         --install-extension "mjmcloug.vscode-elixir" \
