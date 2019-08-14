@@ -5,10 +5,6 @@
 Clone the repository:
 
 ```sh
-git clone https://git.anthonyloop.com/aloop/dotfiles.git ~/.dotfiles
-```
-or
-```sh
 git clone https://github.com/aloop/dotfiles.git ~/.dotfiles
 ```
 
