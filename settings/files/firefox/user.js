@@ -118,3 +118,6 @@ user_pref("security.OCSP.require", true);
 
 // Ask where to save downloads
 user_pref("browser.download.useDownloadDir", false);
+
+// Disable automatic addition of www. and .com to bare domain names
+user_pref("browser.fixup.alternate.enabled", false);
