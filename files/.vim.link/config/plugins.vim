@@ -24,18 +24,9 @@ else
     Plug 'plasticboy/vim-markdown'
     Plug 'evidens/vim-twig'
 
-    " Version Control
-    Plug 'tpope/vim-fugitive'
-    Plug 'airblade/vim-gitgutter'
-
     " Linting, Autocomplete, and Formatting
     Plug 'editorconfig/editorconfig-vim'
-    Plug 'vim-syntastic/syntastic'
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-
-    if executable('npm')
-        Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-    endif
+    Plug 'dense-analysis/ale'
 
     " Color Schemes
     Plug 'dracula/vim'
