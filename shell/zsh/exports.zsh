@@ -1,6 +1,6 @@
 export HISTFILE="${HOME}/.zsh_history"
-export HISTSIZE="1000"
-export SAVEHIST="10000"
+export HISTSIZE="10000"
+export SAVEHIST="100000"
 
 # Don't show a '%' when the output ends without a newline
 export PROMPT_EOL_MARK=""
