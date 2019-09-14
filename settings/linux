@@ -33,7 +33,7 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 
     # Theme
-    gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+    gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
     gsettings set org.gnome.desktop.interface icon-theme "Adwaita"
     gsettings set org.gnome.desktop.interface cursor-theme "Adwaita"
 

@@ -3,4 +3,4 @@ gtk-application-prefer-dark-theme=true
 gtk-font-name=DejaVu Sans 10
 gtk-cursor-theme-name=Adwaita
 gtk-icon-theme-name=Adwaita
-gtk-theme-name=Adwaita-dark
+gtk-theme-name=Adwaita
