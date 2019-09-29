@@ -49,7 +49,7 @@ if command -v gsettings >/dev/null 2>&1; then
     # Enable Sunset to Sunrise feature
     gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-automatic true
     # Set color temp in kelvin
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 3500
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 2700
 
     ## Keyboard Settings
     gsettings set org.gnome.desktop.peripherals.keyboard repeat true
