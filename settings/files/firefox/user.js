@@ -1,5 +1,5 @@
-// I usually want firefox as the default browser
-user_pref("browser.shell.checkDefaultBrowser", true);
+// Annoying when using both Default Release and Dev Edition or Nightly
+user_pref("browser.shell.checkDefaultBrowser", false);
 
 // Restore the previous session on startup
 user_pref("browser.startup.page", 3);
