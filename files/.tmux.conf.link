@@ -6,23 +6,22 @@ set-option -g @version-major "tmux -V | cut -d' ' -f2 | cut -d'.' -f1 | sed 's/[
 set-option -g @version-minor "tmux -V | cut -d' ' -f2 | cut -d'.' -f2 | sed 's/[^0-9]*//g'"
 
 # Use UTF-8 in older versions of tmux
-if-shell "[ $(#{@version-major}) -eq 1 ] || [ $(#{@version-major}) -eq 2 ] && [ $(#{@version-minor}) -le 1 ]" \
-    'set-window-option -g utf8 on; set-option -g status-utf8 on'
+if-shell "[ $(#{@version-major}) -eq 1 ] || { [ $(#{@version-major}) -eq 2 ] && [ $(#{@version-minor}) -le 1 ] }" \
+    'set-option -wg utf8 on; set-option -g status-utf8 on'
 
-set-window-option -g xterm-keys on
+set-option -wg xterm-keys on
 
 # Enable mouse
-if-shell "[ $(#{@version-major}) -ge 2 ] && [ $(#{@version-minor}) -ge 1 ]" \
-    'set-option -g mouse on'
+set-option -g mouse on
 
 # Allows for faster key repetition
 set-option -s escape-time 0
 
 # Constrain the window size to the smallest client on the current window,
 # rather than all windows in the current session.
-set-window-option -g aggressive-resize on
+set-option -wg aggressive-resize on
 
-set-window-option -g automatic-rename
+set-option -wg automatic-rename
 
 # scroll-back buffer lines
 set-option -g history-limit 10000
@@ -34,7 +33,7 @@ set-option -g default-terminal "screen-256color"
 
 # Number the windows starting at 1
 set-option -g base-index 1
-set-window-option -g pane-base-index 1
+set-option -wg pane-base-index 1
 
 # Set terminal title
 set-option -g set-titles on
@@ -52,7 +51,7 @@ set-option -g prefix C-a
 bind-key C-a send-prefix
 
 # Enable vi-mode
-set-window-option -g mode-keys vi
+set-option -wg mode-keys vi
 set-option -g status-keys vi
 
 # Rebind window/split creation and set them up to use the working directory of
@@ -83,12 +82,12 @@ bind-key r source-file ~/.tmux.conf
 set-option -g status-justify left
 
 # Inactive windows in status bar
-set-window-option -g window-status-format ' #I #W'
+set-option -wg window-status-format ' #I #W'
 
 # Current or active window in status bar
-set-window-option -g window-status-current-format ' #I #W'
+set-option -wg window-status-current-format ' #I #W'
 
-set-window-option -g window-status-separator ' |'
+set-option -wg window-status-separator ' |'
 
 # Left side of status bar
 set-option -g status-left-length 30
@@ -108,10 +107,10 @@ set-option -g status-style default,bg=colour234,fg=colour141
 set-option -g status-left-style default,bg=colour141,fg=colour234
 
 # default window title colors
-set-window-option -g window-status-style fg=colour141,dim
+set-option -wg window-status-style fg=colour141,dim
 
 # active window title colors
-set-window-option -g window-status-current-style fg=colour141,bright
+set-option -wg window-status-current-style fg=colour141,bright
 
 # pane border
 set-option -g pane-border-style fg=colour236
