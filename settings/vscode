@@ -5,21 +5,24 @@
 if command -v code >/dev/null 2>&1; then
 
     code \
-        --install-extension "EliverLara.andromeda" \
-        --install-extension "dracula-theme.theme-dracula" \
-        --install-extension "vscode-icons-team.vscode-icons" \
-        --install-extension "rust-lang.rust" \
-        --install-extension "mjmcloug.vscode-elixir" \
-        --install-extension "whatwedo.twig" \
-        --install-extension "felixfbecker.php-intellisense" \
-        --install-extension "EditorConfig.EditorConfig" \
-        --install-extension "esbenp.prettier-vscode" \
+        --install-extension "bmewburn.vscode-intelephense-client" \
+        --install-extension "christian-kohler.path-intellisense" \
+        --install-extension "coenraads.bracket-pair-colorizer" \
         --install-extension "dbaeumer.vscode-eslint" \
+        --install-extension "dracula-theme.theme-dracula" \
+        --install-extension "editorconfig.editorconfig" \
         --install-extension "eg2.tslint" \
-        --install-extension "joelday.docthis" \
+        --install-extension "eliverlara.andromeda" \
+        --install-extension "esbenp.prettier-vscode" \
+        --install-extension "junstyle.php-cs-fixer" \
+        --install-extension "mjmcloug.vscode-elixir" \
+        --install-extension "ms-vscode.go" \
         --install-extension "naumovs.color-highlight" \
-        --install-extension "CoenraadS.bracket-pair-colorizer-2" \
-        --install-extension "christian-kohler.path-intellisense"
+        --install-extension "neilbrayfield.php-docblocker" \
+        --install-extension "rust-lang.rust" \
+        --install-extension "timonwong.shellcheck" \
+        --install-extension "vscode-icons-team.vscode-icons" \
+        --install-extension "whatwedo.twig"
 
 else
 
