@@ -158,7 +158,7 @@ install_dotfiles() (
                     link_path "$_src" "$_dest"
                     ;;
                 *)
-                    if [ -d "$_src" ] && [ ! -L "$_src" ]; then
+                    if [ -d "$_src" ]; then
                         install_dotfiles "$_src"
                     fi
                     ;;
