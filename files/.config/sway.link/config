@@ -234,7 +234,7 @@ default_border pixel 4
 default_floating_border pixel 4
 
 ### Set Background image and fallback color
-output "*" bg ~/.local/share/wallpapers/dotfiles.jpg fill "#000000"
+output "*" bg "#000000" solid_color
 
 ### Commands to run on startup
 
