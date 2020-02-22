@@ -220,9 +220,9 @@ for_window [title="Preferences$"] floating enable
 
 
 ### Display configuration
-output DVI-D-1 resolution 1920x1080 position 0,0
-output DP-1 resolution 1920x1080 position 1920,0
-output DVI-D-2 resolution 1920x1080 position 3840,0
+output DVI-D-1 pos 0,0 mode 1920x1080@60hz
+output DP-1 pos 1920,0 mode 1920x1080@144.001999hz
+output DVI-D-2 pos 3840,0 mode 1920x1080@60hz
 
 
 ### Misc
