@@ -1,0 +1,34 @@
+plugins: the lastgenre fetchart
+directory: ~/Music/Main Library
+library: ~/Music/Main Library/beets-library.db
+original_date: yes
+per_disc_numbering: yes
+
+paths:
+    default: %the{$albumartist}/$original_year-$original_month-$original_day - $album%aunique{}/$disc.$track. $artist - $title
+    singleton: %the{$albumartist}/$original_year-$original_month-$original_day - $album%aunique{}/$disc.$track. $artist - $title
+    comp: %the{$albumartist}/$original_year-$original_month-$original_day - $album%aunique{}/$disc.$track. $artist - $title
+
+import:
+    write: yes
+    copy: no
+    move: yes
+    from_scratch: yes
+
+match:
+    preferred:
+        countries: ['US', 'XW']
+        media: ['Digital Media|File', 'CD']
+        original_year: yes
+
+ui:
+    color: yes
+
+lastgenre:
+    count: 3
+    separator: '; '
+
+fetchart:
+    minwidth: 400
+    enforce_ratio: 0.5%
+    sources: filesystem itunes amazon albumart coverart
