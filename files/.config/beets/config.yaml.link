@@ -1,6 +1,6 @@
-plugins: the lastgenre fetchart embedart missing inline info zero
-directory: ~/Music/library
-library: ~/Music/library/beets.db
+plugins: the lastgenre fetchart embedart missing inline info zero mbsync
+directory: ~/Music/Library
+library: ~/Music/Library/beets.db
 original_date: yes
 per_disc_numbering: yes
 
@@ -13,7 +13,7 @@ import:
     write: yes
     copy: no
     move: yes
-    timid: yes
+#    timid: yes
 #    from_scratch: yes
 
 match:
@@ -31,14 +31,18 @@ match:
         - SVCD
         - UMD
         - VHS
-        - Vinyl'
+        - '12" Vinyl'
+        - Vinyl
+        - Reel-to-reel
+        - Cassette
 
 ui:
     color: yes
 
 lastgenre:
-    count: 3
-    separator: '; '
+    count: 5
+    separator: ';'
+#    separator: "\x00"
 
 fetchart:
     minwidth: 400
