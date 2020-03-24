@@ -1,4 +1,4 @@
-plugins: the lastgenre fetchart embedart missing inline info zero mbsync
+plugins: the lastgenre fetchart embedart missing inline info zero mbsync mpdupdate
 directory: ~/Music/Library
 library: ~/Music/Library/beets.db
 original_date: yes
@@ -69,3 +69,7 @@ item_fields:
 zero:
     fields: comments
     update_database: yes
+
+mpd:
+    host: localhost
+    port: 6600
