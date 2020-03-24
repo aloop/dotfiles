@@ -49,14 +49,6 @@ mouse_support = yes
 mouse_list_scroll_whole_page = no
 lines_scrolled = 6
 
-# Setup Visualization
-visualizer_fifo_path = "/tmp/mpd.fifo"
-visualizer_output_name = "my_fifo"
-visualizer_sync_interval = "30"
-visualizer_in_stereo = yes
-visualizer_type = "spectrum"
-visualizer_look = "●▮"
-
 screen_switcher_mode = playlist, media_library
 startup_screen = media_library
 

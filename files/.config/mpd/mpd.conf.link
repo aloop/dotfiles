@@ -12,16 +12,15 @@ replaygain "auto"
 replaygain_preamp "0"
 replaygain_missing_preamp "0"
 
+resampler {
+    plugin "libsamplerate"
+    type "0"
+}
+
+audio_output_format "48000:f:*"
+
 audio_output {
     type "pulse"
     name "mpd output"
-}
-
-# Output an FFT file for visualization
-audio_output {
-    type "fifo"
-    name "my_fifo"
-    path "/tmp/mpd.fifo"
-    format "44100:16:2"
 }
 
