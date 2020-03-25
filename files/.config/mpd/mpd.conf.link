@@ -1,7 +1,7 @@
 db_file "~/.config/mpd/database"
 log_file "syslog"
 
-music_directory "~/Music"
+music_directory "~/Music/Library/"
 playlist_directory "~/.config/mpd/playlists"
 
 metadata_to_use "albumartist,artist,album,title,track,name,genre,date,composer,performer,disc"
