@@ -1,13 +1,13 @@
-plugins: the lastgenre fetchart embedart missing inline info zero mbsync mpdupdate
+plugins: lastgenre fetchart embedart missing inline info zero mbsync mpdupdate
 directory: ~/Music/Library
 library: ~/Music/Library/beets.db
 original_date: yes
 per_disc_numbering: yes
 
 paths:
-    default: %the{$albumartist}/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
-    singleton: %the{$albumartist}/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
-    comp: %the{$albumartist}/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
+    default: $albumartist/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
+    singleton: $albumartist/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
+    comp: $albumartist/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
 
 import:
     write: yes
