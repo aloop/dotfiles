@@ -13,7 +13,7 @@ import:
     write: yes
     copy: no
     move: yes
-#    timid: yes
+    timid: yes
 #    from_scratch: yes
 
 match:
