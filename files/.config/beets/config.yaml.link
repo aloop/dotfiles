@@ -1,4 +1,4 @@
-plugins: lastgenre fetchart embedart missing inline info zero mbsync mpdupdate
+plugins: lastgenre fetchart embedart missing inline info zero mbsync replaygain mpdupdate
 directory: ~/Music/Library
 library: ~/Music/Library/beets.db
 original_date: yes
@@ -58,10 +58,7 @@ embedart:
     compare_threshold: 10
 
 replaygain:
-    backend: ffmpeg
-#    overwrite: yes
-    targetlevel: 84
-    peak: true
+    backend: gstreamer
 
 item_fields:
     disc_and_track: u'%02i.%02i' % (disc, track) if disctotal > 1 else u'%02i' % (track)
