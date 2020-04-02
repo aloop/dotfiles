@@ -1,4 +1,16 @@
-plugins: lastgenre fetchart embedart missing inline info zero mbsync replaygain mpdupdate
+plugins:
+    - lastgenre
+    - fetchart
+    - embedart
+    - missing
+    - inline
+    - info
+    - zero
+    - mbsync
+    - replaygain
+    - badfiles
+    - lyrics
+
 directory: ~/Music/Library
 library: ~/Music/Library/beets.db
 original_date: yes
@@ -55,7 +67,6 @@ fetchart:
 
 embedart:
     maxwidth: 800
-    compare_threshold: 10
 
 replaygain:
     backend: gstreamer
@@ -67,6 +78,7 @@ zero:
     fields: comments
     update_database: yes
 
-mpd:
-    host: localhost
-    port: 6600
+lyrics:
+    auto: no
+    sources: genius lyricwiki musixmatch
+
