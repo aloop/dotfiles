@@ -19,9 +19,13 @@
         "format": "<span style=\"italic\">{}</span>"
     },
     "custom/media": {
-        "format": " {}",
+        "format": "{icon} {}",
         "return-type": "json",
         "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null",
         "on-click": "playerctl -p spotify play-pause",
@@ -29,9 +33,9 @@
         "on-scroll-down": "playerctl -p spotify previous"
     },
     "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{albumArtist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "format": "{stateIcon}{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {albumArtist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+        "format-disconnected": "Disconnected",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} Stopped",
         "unknown-tag": "N/A",
         "interval": 2,
         "consume-icons": {
@@ -48,8 +52,8 @@
             "on": "1 "
         },
         "state-icons": {
-            "paused": "",
-            "playing": ""
+            "paused": "  ",
+            "playing": "  "
         },
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)"
@@ -62,16 +66,17 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 21,
         "spacing": 10
     },
     "clock": {
-        "tooltip-format": "{:%Y-%m-%d | %l:%M %P}",
-        "format": "{:%l:%M %P}",
+
+        "tooltip-format": "{:%Y-%m-%d | %I:%M %p}",
+        "format": "{:%H:%M %p}",
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage:3}% ",
         "tooltip": false
     },
     "memory": {
@@ -110,12 +115,12 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        // "scroll-step": 1,
+        "format": "{volume:3}% {icon} {format_source}",
+        "format-bluetooth": "{volume:3}% {icon} {format_source}",
+        "format-muted": "{volume:3}%  {format_source}",
+        "format-source": "{volume:3}% ",
+        "format-source-muted": "{volume:3}% ",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
