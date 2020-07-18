@@ -13,11 +13,12 @@ replaygain_preamp "0"
 replaygain_missing_preamp "0"
 
 resampler {
-    plugin "libsamplerate"
-    type "0"
+    plugin "soxr"
+    quality "very high"
+    threads "0"
 }
 
-audio_output_format "48000:f:*"
+audio_output_format "96000:f:*"
 
 audio_output {
     type "pulse"
