@@ -35,8 +35,6 @@ tscale=oversample
 
 # Display Settings
 
-icc-profile-auto=yes
-icc-3dlut-size=256x256x256
 target-prim=auto
 target-trc=auto
 gamma-auto
@@ -76,7 +74,7 @@ sub-auto=fuzzy
 # Screenshot Configuration
 # screenshot-template="%x\Screens\Screenshot-%F-T%wH.%wM.%wS.%wT-F%{estimated-frame-number}"
 screenshot-format=png
-screenshot-png-compression=10
+screenshot-png-compression=9
 screenshot-tag-colorspace=yes
 screenshot-high-bit-depth=yes
 
