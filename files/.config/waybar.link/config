@@ -72,7 +72,7 @@
     "clock": {
 
         "tooltip-format": "{:%Y-%m-%d | %I:%M %p}",
-        "format": "{:%H:%M %p}",
+        "format": "{:%I:%M %p}",
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
