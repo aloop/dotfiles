@@ -1,5 +1,6 @@
 plugins:
     - the
+    - convert
     - lastgenre
     - fetchart
     - embedart
@@ -74,4 +75,13 @@ zero:
 lyrics:
     auto: no
     sources: genius lyricwiki musixmatch
+
+convert:
+    auto: yes
+    copy_album_art: yes
+    dest: ~/Music/Converted
+    never_convert_lossy_files: yes
+    format: opus
+    formats:
+        opus: ffmpeg -i $source -y -vn -acodec libopus -ab 128k $dest
 
