@@ -33,19 +33,13 @@ match:
     preferred:
         countries: ['US', 'XW']
         media: ['Digital Media|File', 'CD']
-        original_year: yes
     ignored_media:
         - Data CD
-        - DVD
-        - DVD-Video
-        - Blu-ray
         - HD-DVD
         - VCD
         - SVCD
         - UMD
         - VHS
-        - '12" Vinyl'
-        - Vinyl
         - Reel-to-reel
         - Cassette
 
@@ -55,11 +49,9 @@ ui:
 lastgenre:
     count: 5
     separator: ';'
-#    separator: "\x00"
 
 fetchart:
     minwidth: 400
-    enforce_ratio: 0.5%
     sources:
         - filesystem
         - itunes
