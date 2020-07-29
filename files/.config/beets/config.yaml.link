@@ -1,4 +1,5 @@
 plugins:
+    - the
     - lastgenre
     - fetchart
     - embedart
@@ -17,9 +18,9 @@ original_date: yes
 per_disc_numbering: yes
 
 paths:
-    default: $albumartist/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
-    singleton: $albumartist/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
-    comp: $albumartist/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
+    default: %the{$albumartist}/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
+    singleton: %the{$albumartist}/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
+    comp: %the{$albumartist}/%if{$original_year,$original_year%if{$original_month,-$original_month%if{$original_day,-$original_day}} - }$album%aunique{}/$disc_and_track. $artist - $title
 
 import:
     write: yes
