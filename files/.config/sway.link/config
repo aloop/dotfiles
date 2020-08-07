@@ -3,8 +3,8 @@
 set $mod Mod4
 set $term ${TERMINAL:-alacritty}
 
-set $webbrowser firefox
-set $menu rofi -show drun -modi run -theme $HOME/.config/rofi/aml.rasi
+set $webbrowser ${BROWSER:-firefox}
+set $menu rofi -show drun -modi run -theme $HOME/.config/rofi/aml.rasi | xargs swaymsg exec --
 
 ### Font
 
@@ -41,7 +41,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit and log out of session
-bindsym $mod+Shift+e exit
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 # change focus with vim-like keys
 bindsym $mod+h focus left
@@ -162,13 +162,6 @@ client.focused_inactive $bright_black  $bright_black  $normal_white $bright_blac
 client.unfocused        $normal_black  $normal_black  $normal_white $normal_black  $normal_black
 client.urgent           $normal_red    $normal_red    $normal_white $normal_red    $normal_red
 
-bar {
-    swaybar_command waybar
-    tray_output primary
-    position top
-    wrap_scroll yes
-}
-
 titlebar_border_thickness 4
 titlebar_padding 12 6
 
@@ -221,7 +214,8 @@ for_window [title="Preferences$"] floating enable
 
 ### Display configuration
 output DVI-D-1 pos 0,0 mode 1920x1080@60hz
-output DP-1 pos 1920,0 mode 1920x1080@144.001999hz
+# Disable adaptive sync because of flickering
+output DP-1 pos 1920,0 mode 1920x1080@144.001999hz adaptive_sync off
 output DVI-D-2 pos 3840,0 mode 1920x1080@60hz
 
 
@@ -241,5 +235,7 @@ output "*" bg "#000000" solid_color
 ### Startup notifications
 exec --no-startup-id mako
 
-### Try to exec a local shell script so systems can have their own settings
-exec_always --no-startup-id ~/.sway.local.sh
+include "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf"
+
+# Start systemd target
+exec "systemctl --user import-environment; systemctl --user start sway-session.target"
