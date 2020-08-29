@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if df_command_exists brew; then
+    printf '"brew" seem to be installed already, exiting...\n' >&2
+    exit 1
+fi
+
+xcode-select --install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+

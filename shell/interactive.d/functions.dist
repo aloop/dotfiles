@@ -71,30 +71,3 @@ dotfiles() (
     "${HOME}/.dotfiles/install" "$@"
 )
 
-dotfiles_install_nvm() (
-    if [ -d "${HOME}/.nvm" ]; then
-        printf '~/.nvm already exists, exiting...\n' >&2
-        exit 1
-    fi
-
-    git clone https://github.com/creationix/nvm.git "${HOME}/.nvm"
-    cd "${HOME}/.nvm" || exit
-    git checkout "$(git describe --abbrev=0 --tags)"
-)
-
-dotfiles_install_brew() (
-    if df_command_exists brew; then
-        printf 'command "brew" already exists, exiting...\n' >&2
-        exit 1
-    fi
-
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    xcode-select --install
-)
-
-dotfiles_install() (
-    if is_osx; then
-        dotfiles_install_brew
-    fi
-    dotfiles_install_nvm
-)
