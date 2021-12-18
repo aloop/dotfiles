@@ -13,7 +13,7 @@ if df_command_exists vim; then
 fi
 
 # Setup the golang path if it isn't already set
-export GOPATH=${GOPATH:-"${HOME}/Projects/go"}
+export GOPATH=${GOPATH:-"${HOME}/.go"}
 
 # Setup defaults for XDG
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-"${HOME}/.config"}"
