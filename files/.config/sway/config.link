@@ -4,7 +4,8 @@ set $mod Mod4
 set $term ${TERMINAL:-alacritty}
 
 set $webbrowser ${BROWSER:-firefox}
-set $menu rofi -show drun -modi run -theme $HOME/.config/rofi/aml.rasi | xargs swaymsg exec --
+#set $menu wofi --dmenu | xargs swaymsg exec --
+set $menu wofi -iI --show drun
 
 ### Font
 
@@ -29,7 +30,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+space exec --no-startup-id $menu
 
 # Alt+Tab style window switching
-bindsym $mod+Tab exec --no-startup-id rofi -show window -theme $HOME/.config/rofi/aml.rasi
+#bindsym $mod+Tab exec wofi --show window
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -208,15 +209,8 @@ bindsym --release Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
 ### Per-application Settings
 
-for_window [class="Steam|mpv"] floating enable
+for_window [class="Steam"] floating enable
 for_window [title="Preferences$"] floating enable
-
-
-### Display configuration
-output DVI-D-1 pos 0,0 mode 1920x1080@60hz
-# Disable adaptive sync because of flickering
-output DP-1 pos 1920,0 mode 1920x1080@144.001999hz adaptive_sync off
-output DVI-D-2 pos 3840,0 mode 1920x1080@60hz
 
 
 ### Misc
