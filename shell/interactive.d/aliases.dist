@@ -48,8 +48,8 @@ alias gr="git reset"
 alias grh="git reset HEAD"
 
 ## youtube-dl aliases
-alias ytdl="youtube-dl -f 'bestvideo[ext!=webm]+bestaudio[ext!=webm]/best[ext!=webm]'"
-alias ytdl_boost="ytdl --external-downloader aria2c --external-downloader-args '-c -j 8 -x 8 -s 8 -k 5M'"
+alias ytdl="yt-dlp -f 'bestvideo[ext!=webm]+bestaudio[ext!=webm]/best[ext!=webm]'"
+alias ytdl_boost="ytdl --downloader-args aria2c:'-c -j 8 -x 8 -s 8 -k 5M'"
 
 # For long-running applications that you don't want to exit when you log out
 # on some systems running systemd
