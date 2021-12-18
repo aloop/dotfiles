@@ -65,6 +65,34 @@ gen_csp_hash() {
     printf 'sha256-%s\n' "$(printf '%s' "$1" | openssl dgst -binary -sha256 | openssl base64)"
 }
 
+gen_salt() {
+    [ -c /dev/urandom ] || { echo 'ERROR: Random source /dev/urandom not available.' >&2; return 1; }
+    LC_ALL=C tr -cd 'a-zA-Z0-9,;.:_#*+~!@$%&()=?{[]}|><-' < /dev/urandom | head -c "${1:-64}"
+}
+
+gen_argon2i_hash() {
+    if [ -z "$1" ]; then
+        echo "No password given. Exiting..."
+        return 1
+    fi
+
+    if command -v argon2 &>/dev/null; then
+        printf "$1" | argon2 "$(gen_salt)" -e
+    else
+        echo "argon2 not installed. Exiting..."
+    fi
+}
+
+gen_caddy_basicauth_hash() {
+    if command -v caddy &>/dev/null; then
+        local _tmp_salt="$(gen_salt)"
+        caddy hash-password --algorithm "scrypt" --salt "$_tmp_salt"
+        echo "$(printf "%s" "$_tmp_salt" | base64)"
+    else
+        echo "Caddy is not installed. Exiting..."
+    fi
+}
+
 # Helpers for working with the dotfiles
 
 dotfiles() (
