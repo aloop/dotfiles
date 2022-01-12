@@ -14,58 +14,64 @@ ${GOPATH:+:$GOPATH/bin}\
 :${HOME}/.bin\
 ${path_append:+:$path_append}"
 
-df_filter_path() (
-    _needle="$1"
-    _path="$2"
+_df_is_in_path() {
+    case "$1" in
+        $2:*)   return 0 ;;
+        *:$2)   return 0 ;;
+        *:$2:*) return 0 ;;
+        *)      return 1 ;;
+    esac
+}
 
-    # This will contain everything left of $needle in $_path
-    _left_result=${_path%"$_needle"*}
-    # This will contain everything right of $needle in $_path
-    _right_result=${_path#*"$_needle"}
+_df_filter_segment() (
+    _temp_path="$1"
+    _segment="$2"
 
-    # Make sure the needle and path aren't empty
-    if [ -n "$_needle" ] && [ -n "$_path" ]; then
-        while
-            # Both results should be different from the path
-            [ "$_left_result" != "$_path" ] &&
-            [ "$_right_result" != "$_path" ] &&
-            # Ensure we haven't only made a partial match
-            { [  -z "$_left_result" ] || [ "$_left_result" != "${_left_result%:}" ]; } &&
-            { [  -z "$_right_result" ] || [ "$_right_result" != "${_right_result#:}" ]; }
-        do
-            # Join the left side and right side back together
-            _path="${_left_result}:${_right_result}"
-
-            # Try and filter it again for the next iteration to
-            # make sure we've filtered all occurrences
-            _left_result=${_path%"$_needle"*}
-            _right_result=${_path#*"$_needle"}
+    if [ "$_temp_path" = "$_segment" ]; then
+        _temp_path=""
+    else
+        while _df_is_in_path "$_temp_path" "${_segment}"; do
+            _temp_path=${_temp_path//":${_segment}:"/":"}
+            _temp_path=${_temp_path/#"${_segment}:"/}
+            _temp_path=${_temp_path/%":${_segment}"/}
         done
     fi
 
-    printf '%s' "$_path"
+    printf "%s" "$_temp_path"
 )
 
-# Begin deduplicating $PATH
-filtered_path="$PATH"
+_df_process_path() (
+    filtered_path="$1"
+    _path_prepend="$2"
+    _path_append="$3"
 
-oldIFS="$IFS"
-IFS=':'
+    oldIFS="$IFS"
+    IFS=':'
 
-for new_path in $(printf '%s:%s' "$path_prepend" "$path_append"); do
-    filtered_path=$(df_filter_path "$new_path" "$filtered_path")
-done
+    if [ -n "$_path_prepend" ]; then
+        for _segment in $_path_prepend; do
+            if [ -n "$_segment" ]; then
+                filtered_path="${_segment}:$(_df_filter_segment "$filtered_path" "$_segment")"
+            fi
+        done
+    fi
 
-IFS="$oldIFS"
-# End deduplicating $PATH
+    if [ -n "$_path_append" ]; then
+        for _segment in $_path_append; do
+            if [ -n "$_segment" ]; then
+                filtered_path="$(_df_filter_segment "$filtered_path" "$_segment"):${_segment}"
+            fi
+        done
+    fi
+
+    IFS="$oldIFS"
+
+    printf "%s" "$filtered_path"
+)
 
 # Set $PATH, removing multiple consecutive colons
-PATH=$(printf "%s:%s:%s" "$path_prepend" "$filtered_path" "$path_append" | sed "s|:\{2,\}|:|g")
+PATH="$(_df_process_path "$PATH" "$path_prepend" "$path_append" | sed "s|:\{2,\}|:|g")"
 
 # Remove leading and trailing colons
 PATH="${PATH#:}"
 PATH="${PATH%:}"
-
-# Unset vars and functions that are no longer needed
-unset -f df_filter_path
-unset path_prepend path_append filtered_path oldIFS
