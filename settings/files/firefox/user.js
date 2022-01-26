@@ -4,6 +4,9 @@ user_pref("browser.shell.checkDefaultBrowser", false);
 // Restore the previous session on startup
 user_pref("browser.startup.page", 3);
 
+// Disable contentLoadURL
+user_pref("middlemouse.contentLoadURL", false);
+
 // Enable middle mouse button scrolling
 user_pref("general.autoScroll", true);
 
