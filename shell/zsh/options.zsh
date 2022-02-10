@@ -1,25 +1,27 @@
-setopt no_beep
 setopt multios
 setopt interactive_comments
 setopt extended_glob
-setopt noglobdots
 setopt append_create
-unsetopt flowcontrol
+setopt pipefail
+setopt no_beep
+setopt no_glob_dots
+setopt no_flow_control
 
 ## Prompt
 setopt prompt_subst
 setopt transient_rprompt
 
 ## Completion
-unsetopt menu_complete
+setopt no_menu_complete
 setopt auto_menu
 setopt auto_name_dirs
 setopt complete_in_word
 setopt always_to_end
+#setopt rec_exact
 
 ## Navigation
 setopt auto_cd
-setopt cdablevars
+setopt cdable_vars
 setopt auto_pushd
 setopt pushd_silent
 setopt pushd_ignore_dups
@@ -33,6 +35,8 @@ setopt hist_ignore_space
 setopt hist_find_no_dups
 setopt hist_reduce_blanks
 setopt hist_verify
+setopt hist_no_store
+#setopt hist_fcntl_lock
 setopt share_history
 
 ## Jobs
