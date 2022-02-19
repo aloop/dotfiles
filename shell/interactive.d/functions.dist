@@ -102,6 +102,6 @@ colorpicker() (
 # Helpers for working with the dotfiles
 
 dotfiles() (
-    "${HOME}/.dotfiles/install" "$@"
+    "${DOTFILES_DIR}/install" "$@"
 )
 
