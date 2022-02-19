@@ -8,22 +8,22 @@ Clone the repository:
 git clone https://github.com/aloop/dotfiles.git ~/.dotfiles
 ```
 
-To install or update all links and copies, simply run the following command:
+To setup or update all links and copies, simply run the following command:
 
 ```sh
-~/.dotfiles/install
+~/.dotfiles/dotfiles
 ```
 
 On the other hand, you may wish to only update links *or* copies:
 
 ```sh
-~/.dotfiles/install --no-copies # Only install links
+~/.dotfiles/dotfiles --no-copies # Only setup links
 ```
 
 or:
 
 ```sh
-~/.dotfiles/install --no-links # Only install copies
+~/.dotfiles/dotfiles --no-links # Only setup copies
 ```
 
 ## System Settings
@@ -32,7 +32,7 @@ Settings for various operating systems are kept in `~/.dotfiles/settings/`,
 they can either be called directly (they are shell scripts), or you can call
 them through the install script:
 ```sh
-~/.dotfiles/install settings linux
+~/.dotfiles/dotfiles settings linux
 ```
 If the shell alias for the dotfiles is setup, then you can simply call:
 ```sh
@@ -50,7 +50,7 @@ Files and Folders to be linked or copied that already exist in the home director
 Or, disable backups:
 
 ```sh
-~/.dotfiles/install --no-backups
+~/.dotfiles/dotfiles --no-backups
 ```
 
 ## Useful things
