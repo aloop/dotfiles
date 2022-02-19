@@ -54,7 +54,7 @@ script_name="$(basename "$0")"
 
 # Set base dir as the directory of this script
 dotfiles_base_dir="$(cd "$(dirname "$0")" && pwd -L)"
-settings_dir="$(join_path "${dotfiles_base_dir}" "settings")"
+scripts_dir="$(join_path "${dotfiles_base_dir}" "scripts")"
 dotfiles_dir="$(join_path "${dotfiles_base_dir}" "files")"
 backups_base="${dotfiles_base_dir}/backups/backup-$(date "+%Y-%m-%d-%H%M%S")"
 
@@ -62,8 +62,7 @@ backups_base="${dotfiles_base_dir}/backups/backup-$(date "+%Y-%m-%d-%H%M%S")"
 no_copies=0
 no_links=0
 no_backups=0
-do_install=0
-do_settings=0
+do_script=
 
 ## Handle Dotfiles
 
@@ -169,19 +168,30 @@ install_dotfiles() (
 
 ## Handle Settings
 
-run_settings_file() (
-    settings_file_path="$(join_path "$settings_dir" "$1")"
-    if [ -z "$1" ]; then
-        echo "Error: no settings file name specified"
+run_script() (
+    script_type="$1"
+    script_name="$2"
+
+    if [ -z "$script_name" ]; then
+        # Support just calling `dotfiles install`
+        if [ "$script_type" = "install" ]; then
+            install_dotfiles
+            exit $?
+        fi
+
+        echo "Error: no ${script_type} script name specified"
+        print_help >&2
         exit 1
     fi
 
-    if [ ! -f "$settings_file_path" ]; then
-        echo "Error: Setting \"$1\" does not exist"
+    script_file_path="$(join_path "$scripts_dir" "$script_type" "$script_name")"
+
+    if [ ! -f "$script_file_path" ]; then
+        echo "Error: ${script_type} script \"${script_name}\" does not exist"
         exit 1
     fi
 
-    . "$settings_file_path"
+    . "$script_file_path"
 )
 
 ## Main
@@ -215,18 +225,8 @@ while :; do
             no_backups=1
             shift
             ;;
-        install)
-            do_install=1
-            shift
-            ;;
-        settings)
-            if [ "$do_install" = "1" ]; then
-                printf 'Cannot install and run settings simultaneously\n'
-                print_help >&2
-                exit 1
-            fi
-
-            do_settings=1
+        install|upgrade|settings)
+            do_script="$1"
             shift
             break
             ;;
@@ -251,8 +251,8 @@ while :; do
     esac
 done
 
-if [ "$do_install" = "0" ] && [ "$do_settings" = "1" ]; then
-    run_settings_file "$1"
+if [ -n "$do_script" ]; then
+    run_script "$do_script" "$1"
     exit $?
 fi
 

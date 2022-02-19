@@ -5,7 +5,7 @@
 if [ -d "${HOME}/.mozilla/firefox" ]; then
     for firefox_profile in "${HOME}"/.mozilla/firefox/*.*; do
         if [ -d "$firefox_profile" ]; then
-            ln -sf "${HOME}/.dotfiles/settings/files/firefox/user.js" "${firefox_profile}/user.js"
+            ln -sf "${DOTFILES_DIR}/scripts/settings/files/firefox/user.js" "${firefox_profile}/user.js"
         fi
     done
 else

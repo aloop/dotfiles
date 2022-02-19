@@ -124,3 +124,6 @@ user_pref("browser.download.useDownloadDir", false);
 
 // Disable automatic addition of www. and .com to bare domain names
 user_pref("browser.fixup.alternate.enabled", false);
+
+user_pref("gfx.webrender.program-binary", true);
+user_pref("gfx.webrender.program-binary-disk", true);

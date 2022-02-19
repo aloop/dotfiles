@@ -10,11 +10,33 @@ shared_args=(
     "(- *)"{-h,--help}"[display usage information]"
 )
 
+__dotfiles_scripts_autocomplete() {
+    local script_file=
+    local script_files=()
+    local script_type="$1"
+
+    local SCRIPTS_DIR="${DOTFILES_DIR}/scripts/${script_type}"
+
+    if [ -n "$script_type" ] && [ -n "$SCRIPTS_DIR" ] && [ -d "$SCRIPTS_DIR" ]; then
+        for script_file in "$SCRIPTS_DIR"/*; do
+            if [ -e "$script_file" ] && [ ! -d "$script_file" ]; then
+                script_files=(
+                    "${script_files[@]}"
+                    "${script_file#"${SCRIPTS_DIR}/"}"
+                )
+            fi
+        done
+    fi
+
+    _describe -t script_files "available ${script_type} scripts" script_files
+}
+
 case "$state" in
     (cmds)
         local commands=(
-            "install:Install or update dotfiles"
-            "settings:Use a settings file"
+            "install:Install or update dotfiles, or run an install script when given a second argument"
+            "settings:Run a script intended to configure settings"
+            "upgrade:Run a script intended to upgrade an application"
         )
 
         _arguments "(- *)"{-h,--help}"[display usage information]"
@@ -31,25 +53,14 @@ case "$state" in
                     "${shared_args[@]}"
                 )
 
-                _arguments "${arguments[@]}" && return 0
+                _arguments "${arguments[@]}" && __dotfiles_scripts_autocomplete "install" && return 0
             ;;
             (settings)
-                local settings_file settings_files=()
-
-                if [ -n "$DOTFILES_DIR" ] && [ -d "$DOTFILES_DIR" ]; then
-                    for settings_file in "$DOTFILES_DIR"/settings/*; do
-                        if [ -e "$settings_file" ] && [ ! -d "$settings_file" ]; then
-                            settings_files=(
-                                "${settings_files[@]}"
-                                "${settings_file#"${DOTFILES_DIR}/settings/"}"
-                            )
-                        fi
-                    done
-                fi
-
-                _arguments "${shared_args[@]}"
-                _describe -t settings_files 'available settings' settings_files && return 0
-                ;;
+                __dotfiles_scripts_autocomplete "settings" && return 0
+            ;;
+            (upgrade)
+                __dotfiles_scripts_autocomplete "upgrades" && return 0
+            ;;
         esac
         ;;
 esac
