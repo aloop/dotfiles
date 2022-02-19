@@ -11,6 +11,7 @@ ${GOPATH:+:$GOPATH/bin}\
 :${HOME}/.config/composer/vendor/bin\
 :/snap/bin\
 :${HOME}/.cargo/bin\
+:${HOME}/.fnm\
 :${HOME}/.bin\
 ${path_append:+:$path_append}"
 

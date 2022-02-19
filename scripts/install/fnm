@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ ! -d "${HOME}/.fnm" ]; then
+    curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "${HOME}/.fnm" --skip-shell
+else
+    echo "Directory \"${HOME}/.fnm\" already exists, aborting"
+    exit 1
+fi
+
