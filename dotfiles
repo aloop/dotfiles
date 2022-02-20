@@ -173,12 +173,6 @@ run_script() (
     script_name="$2"
 
     if [ -z "$script_name" ]; then
-        # Support just calling `dotfiles install`
-        if [ "$script_type" = "install" ]; then
-            install_dotfiles
-            exit $?
-        fi
-
         echo "Error: no ${script_type} script name specified"
         print_help >&2
         exit 1

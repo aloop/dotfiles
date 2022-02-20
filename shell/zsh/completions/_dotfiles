@@ -1,18 +1,10 @@
 #compdef dotfiles
 
-_arguments -C \
-  '1:cmd:->cmds' \
-  '*:: :->args' \
-&& return 0
+# Reference: https://zsh.sourceforge.io/Doc/Release/Completion-System.html
 
-local shared_args
-shared_args=(
-    "(- *)"{-h,--help}"[display usage information]"
-)
-
-__dotfiles_scripts_autocomplete() {
+_dotfiles_scripts_autocomplete() {
     local script_file=
-    local script_files=()
+    local -a script_files=()
     local script_type="$1"
 
     local SCRIPTS_DIR="${DOTFILES_DIR}/scripts/${script_type}"
@@ -26,43 +18,45 @@ __dotfiles_scripts_autocomplete() {
                 )
             fi
         done
-    fi
 
-    _describe -t script_files "available ${script_type} scripts" script_files
+        _describe -t script_files "available ${script_type} scripts" script_files
+    else
+        return 0
+    fi
 }
 
-case "$state" in
-    (cmds)
-        local commands=(
-            "install:Install or update dotfiles, or run an install script when given a second argument"
-            "settings:Run a script intended to configure settings"
-            "upgrade:Run a script intended to upgrade an application"
-        )
+_dotfiles() {
+    local curcontext="${curcontext}" context state state_descr line
+    typeset -A opt_args
 
-        _arguments "(- *)"{-h,--help}"[display usage information]"
+    _arguments -s \
+        - set1 \
+            "--no-copies[Only use dotfiles that are created as symlinks]" \
+            "--no-backups[Don't backup any already existing files when copying or linking files]" \
+        - set2 \
+            "--no-links[Only use dotfiles that are copied]" \
+            "--no-backups[Don't backup any already existing files when copying or linking files]" \
+        - set3 \
+            {-h,--help}"[display usage information]" \
+        - set4 \
+            ':command:((\
+                install\:"Install or update dotfiles, or run an install script when given a second argument" \
+                settings\:"Run a script intended to configure settings" \
+                upgrade\:"Run a script intended to upgrade an application"\
+            ))'
 
-        _describe -t commands 'command' commands && return 0
-        ;;
-    (args)
-        case "${line[1]}" in
-            (install)
-                local arguments=(
-                    "(-h --help --no-links)--no-copies[Only use dotfiles that are created as symlinks]"
-                    "(-h --help --no-copies)--no-links[Only use dotfiles that are copied]"
-                    "(-h --help)--no-backups[Don't backup any already existing files when copying or linking files]"
-                    "${shared_args[@]}"
-                )
+    # Adapted from https://zsh.sourceforge.io/Guide/zshguide06.html#l144
+    if (( CURRENT == 3 )); then
+        # Remember the subcommand name
+        local cmd=${words[2]}
+        # Set the context for the subcommand.
+        curcontext="${curcontext%:*:*}:dotfiles-$cmd"
+        # Narrow the range of words we are looking at to exclude `dotfiles'
+        (( CURRENT-- ))
+        shift words
+        # Run the completion for the subcommand
+        _dotfiles_scripts_autocomplete "$cmd" && return 0
+    fi
+}
 
-                _arguments "${arguments[@]}" && __dotfiles_scripts_autocomplete "install" && return 0
-            ;;
-            (settings)
-                __dotfiles_scripts_autocomplete "settings" && return 0
-            ;;
-            (upgrade)
-                __dotfiles_scripts_autocomplete "upgrades" && return 0
-            ;;
-        esac
-        ;;
-esac
-
-return 1
+_dotfiles "$@"
