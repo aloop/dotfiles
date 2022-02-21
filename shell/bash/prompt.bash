@@ -1,6 +1,8 @@
 dotfiles_git_prompt() {
     local PROMPT_VCS_CLEAN_SYMBOL='✓'
     local PROMPT_VCS_DIRTY_SYMBOL='✗'
+    local PROMPT_VCS_STAGED_SYMBOL='✚'
+    local PROMPT_VCS_UNTRACKED_SYMBOL='✭'
 
     local output_str=' '
 
@@ -25,6 +27,14 @@ dotfiles_git_prompt() {
             output_str+="\[\e[1;32m\]${PROMPT_VCS_CLEAN_SYMBOL}\[\e[0m\]"
         else
             output_str+="\[\e[1;31m\]${PROMPT_VCS_DIRTY_SYMBOL}\[\e[0m\]"
+        fi
+
+        if ! command git diff --cached --no-ext-diff --quiet --exit-code &>/dev/null; then
+            output_str+=" \[\e[1;33m\]${PROMPT_VCS_STAGED_SYMBOL}\[\e[0m\]"
+        fi
+
+        if command git status --porcelain | command grep -m 1 '^??' &>/dev/null; then
+            output_str+=" \[\e[1;36m\]${PROMPT_VCS_UNTRACKED_SYMBOL}\[\e[0m\]"
         fi
 
         # Display if a rebase is in progress
