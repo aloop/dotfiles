@@ -53,7 +53,11 @@ df_safe_bindkey "${df_key[End]}" end-of-line
 # Enable Delete
 df_safe_bindkey "${df_key[Delete]}" delete-char
 
-bindkey "^K" kill-whole-line # ctrl-k
+bindkey "^K" kill-whole-line
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 
 # Remove local variables and functions
 unset df_key
