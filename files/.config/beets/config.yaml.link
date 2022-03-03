@@ -28,7 +28,9 @@ import:
     copy: no
     move: yes
     timid: yes
-#    from_scratch: yes
+    #from_scratch: yes
+    # Prefer english names when possible
+    languages: en
 
 match:
     preferred:
@@ -63,7 +65,10 @@ embedart:
     maxwidth: 800
 
 replaygain:
-    backend: gstreamer
+    auto: yes
+    overwrite: yes
+    backend: ffmpeg
+    peak: "true"
 
 item_fields:
     disc_and_track: u'%02i.%02i' % (disc, track) if disctotal > 1 else u'%02i' % (track)
@@ -77,10 +82,9 @@ lyrics:
     sources: genius lyricwiki musixmatch
 
 convert:
-    auto: yes
+    auto: no
     copy_album_art: yes
     dest: ~/Music/Converted
-    never_convert_lossy_files: yes
     format: opus
     formats:
         opus: ffmpeg -i $source -y -vn -acodec libopus -ab 128k $dest
