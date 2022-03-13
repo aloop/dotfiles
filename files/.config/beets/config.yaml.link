@@ -33,6 +33,9 @@ import:
     # Prefer english names when possible
     languages: en
 
+musicbrainz:
+    extra_tags: [catalognum]
+
 match:
     preferred:
         countries: ['US', 'XW']
