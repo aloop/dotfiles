@@ -12,6 +12,7 @@ plugins:
     - replaygain
     - badfiles
     - lyrics
+    - smartplaylist
 
 directory: ~/Music/Library
 library: ~/Music/Library/beets.db
@@ -80,6 +81,129 @@ zero:
 lyrics:
     auto: no
     sources: genius lyricwiki musixmatch
+
+smartplaylist:
+    # Slow to generate, so let's disable automatic updates
+    auto: no
+    relative_to: ~/Music/Library/Playlists
+    playlist_dir: ~/Music/Library/Playlists
+    forward_slash: no
+    urlencoded: no
+    playlists:
+        - name: all.m3u8
+          query: 'albumartist+ album+ year+'
+        # Playlists by decades
+        - name: '2010s to Now.m3u8'
+          album_query: "year:2010.. albumartist+ album+ year+"
+        - name: 00s.m3u8
+          album_query: "year:2000..2009 albumartist+ album+ year+"
+        - name: 90s.m3u8
+          album_query: "year:1990..1999 albumartist+ album+ year+"
+        - name: 80s.m3u8
+          album_query: "year:1980..1989 albumartist+ album+ year+"
+        - name: 70s.m3u8
+          album_query: "year:1970..1979 albumartist+ album+ year+"
+        - name: 60s.m3u8
+          album_query: "year:1960..1969 albumartist+ album+ year+"
+        - name: '50s and older.m3u8'
+          album_query: "year:1900..1959 albumartist+ album+ year+"
+        # Playlists by genre
+        - name: Rock.m3u8
+          album_query: "genre:'rock' albumartist+ album+ year+"
+        - name: Folk.m3u8
+          album_query: "genre:'folk' albumartist+ album+ year+"
+        - name: 'Country & Bluegrass.m3u8'
+          album_query: ["genre:country albumartist+ album+ year+", "genre:bluegrass albumartist+ album+ year+"]
+        - name: 'Blues.m3u8'
+          album_query: "genre:blues albumartist+ album+ year+"
+        - name: 'Jazz.m3u8'
+          album_query: "genre:jazz albumartist+ album+ year+"
+        - name: 'Soul.m3u8'
+          album_query: "genre:soul albumartist+ album+ year+"
+        - name: 'Funk.m3u8'
+          album_query: "genre:funk albumartist+ album+ year+"
+        - name: 'Pop.m3u8'
+          album_query: "genre:'pop' albumartist+ album+ year+"
+        - name: New Wave.m3u8
+          album_query: "genre:'new wave' albumartist+ album+ year+"
+        - name: Disco.m3u8
+          album_query: "genre:'disco' albumartist+ album+ year+"
+        - name: J-Pop.m3u8
+          album_query: "genre:'j-pop' albumartist+ album+ year+"
+        - name: K-Pop.m3u8
+          album_query: "genre:'k-pop' albumartist+ album+ year+"
+        - name: Synthpop.m3u8
+          album_query: "genre:synthpop albumartist+ album+ year+"
+        - name: Electropop.m3u8
+          album_query: "genre:electropop albumartist+ album+ year+"
+        - name: Hyperpop.m3u8
+          album_query: "genre:electropop albumartist+ album+ year+"
+        - name: 'Dream pop.m3u8'
+          album_query: "genre:'dream pop' albumartist+ album+ year+"
+        - name: 'Dance & Electronic.m3u8'
+          album_query: ["genre:dance albumartist+ album+ year+", "genre:electronic albumartist+ album+ year+", "genre:synthpop albumartist+ album+ year+"]
+        - name: Synthwave.m3u8
+          album_query: "genre:synthwave albumartist+ album+ year+"
+        - name: Vaporwave.m3u8
+          album_query: "genre:vaporwave albumartist+ album+ year+"
+        - name: 'Trip-Hop.m3u8'
+          album_query: "genre:'trip-hop' albumartist+ album+ year+"
+        - name: 'Rap & Hip-Hop.m3u8'
+          album_query: ["genre:'hip-hop' albumartist+ album+ year+", "genre:rap albumartist+ album+ year+"]
+        - name: 'Classical.m3u8'
+          album_query: "genre:classical albumartist+ album+ year+"
+        - name: 'Opera.m3u8'
+          album_query: "genre:opera albumartist+ album+ year+"
+        - name: 'Indie.m3u8'
+          album_query: "genre:'indie' albumartist+ album+ year+"
+        - name: 'Indie Rock.m3u8'
+          album_query: "genre:'indie rock' albumartist+ album+ year+"
+        - name: 'Lo-Fi.m3u8'
+          album_query: "genre:'lo-fi' albumartist+ album+ year+"
+        - name: 'Shoegaze.m3u8'
+          album_query: "genre:'shoegaze' albumartist+ album+ year+"
+        - name: 'Alternative Rock.m3u8'
+          album_query: "genre:'alternative rock' albumartist+ album+ year+"
+        - name: 'Grunge.m3u8'
+          album_query: "genre:'grunge' albumartist+ album+ year+"
+        - name: 'Punk & Hardcore.m3u8'
+          album_query: ["genre:'punk' albumartist+ album+ year+", "genre:'punk rock' albumartist+ album+ year+", "genre:'hardcore' albumartist+ album+ year+"]
+        - name: 'Post-Punk.m3u8'
+          album_query: "genre:'post-punk' albumartist+ album+ year+"
+        - name: 'Post-Hardcore.m3u8'
+          album_query: "genre:'post-hardcore' albumartist+ album+ year+"
+        - name: 'Gothic Rock.m3u8'
+          album_query: "genre:'gothic rock' albumartist+ album+ year+"
+        - name: 'Post-Rock.m3u8'
+          album_query: "genre:'post-rock' albumartist+ album+ year+"
+        - name: 'Psychedelic.m3u8'
+          album_query: "genre:'psychedelic' albumartist+ album+ year+"
+        - name: 'Art Rock.m3u8'
+          album_query: "genre:'art rock' albumartist+ album+ year+"
+        - name: 'Progressive Rock.m3u8'
+          album_query: "genre:'progressive rock' albumartist+ album+ year+"
+        - name: Krautrock.m3u8
+          album_query: "genre:krautrock albumartist+ album+ year+"
+        - name: 'Classic Rock.m3u8'
+          album_query: "genre:'classic rock' albumartist+ album+ year+"
+        - name: Metal.m3u8
+          album_query: "genre:'metal' albumartist+ album+ year+"
+        - name: 'Progressive Metal.m3u8'
+          album_query: "genre:'progressive metal' albumartist+ album+ year+"
+        - name: 'Death Metal.m3u8'
+          album_query: "genre:'death metal' albumartist+ album+ year+"
+        - name: 'Black Metal.m3u8'
+          album_query: "genre:'black metal' albumartist+ album+ year+"
+        - name: 'Thrash Metal.m3u8'
+          album_query: "genre:thrash albumartist+ album+ year+"
+        - name: 'Power Metal.m3u8'
+          album_query: "genre:'power metal' albumartist+ album+ year+"
+        - name: Heavy Metal.m3u8
+          album_query: "genre:'heavy metal' albumartist+ album+ year+"
+        - name: 'Metalcore.m3u8'
+          album_query: "genre:Metalcore albumartist+ album+ year+"
+        - name: 'Soundtracks & Scores.m3u8'
+          album_query: ["genre:soundtrack albumartist+ album+ year+", "genre:score albumartist+ album+ year+"]
 
 convert:
     auto: no
