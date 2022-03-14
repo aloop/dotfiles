@@ -13,6 +13,7 @@ plugins:
     - badfiles
     - lyrics
     - smartplaylist
+    - acousticbrainz
 
 directory: ~/Music/Library
 library: ~/Music/Library/beets.db
