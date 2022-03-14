@@ -95,119 +95,119 @@ smartplaylist:
     urlencoded: no
     playlists:
         - name: all.m3u8
-          query: 'albumartist+ album+ year+'
+          query: 'albumartist+ year+ album+'
         # Playlists by decades
         - name: '2010s to Now.m3u8'
-          album_query: "year:2010.. albumartist+ album+ year+"
+          album_query: "year:2010.. albumartist+ year+ album+"
         - name: 00s.m3u8
-          album_query: "year:2000..2009 albumartist+ album+ year+"
+          album_query: "year:2000..2009 albumartist+ year+ album+"
         - name: 90s.m3u8
-          album_query: "year:1990..1999 albumartist+ album+ year+"
+          album_query: "year:1990..1999 albumartist+ year+ album+"
         - name: 80s.m3u8
-          album_query: "year:1980..1989 albumartist+ album+ year+"
+          album_query: "year:1980..1989 albumartist+ year+ album+"
         - name: 70s.m3u8
-          album_query: "year:1970..1979 albumartist+ album+ year+"
+          album_query: "year:1970..1979 albumartist+ year+ album+"
         - name: 60s.m3u8
-          album_query: "year:1960..1969 albumartist+ album+ year+"
+          album_query: "year:1960..1969 albumartist+ year+ album+"
         - name: '50s and older.m3u8'
-          album_query: "year:1900..1959 albumartist+ album+ year+"
+          album_query: "year:..1959 albumartist+ year+ album+"
         # Playlists by genre
         - name: Rock.m3u8
-          album_query: "genre:'rock' albumartist+ album+ year+"
+          album_query: "genre:'rock' albumartist+ year+ album+"
         - name: Folk.m3u8
-          album_query: "genre:'folk' albumartist+ album+ year+"
+          album_query: "genre:'folk' albumartist+ year+ album+"
         - name: 'Country & Bluegrass.m3u8'
-          album_query: ["genre:country albumartist+ album+ year+", "genre:bluegrass albumartist+ album+ year+"]
+          album_query: ["genre:country albumartist+ year+ album+", "genre:bluegrass albumartist+ year+ album+"]
         - name: 'Blues.m3u8'
-          album_query: "genre:blues albumartist+ album+ year+"
+          album_query: "genre:blues albumartist+ year+ album+"
         - name: 'Jazz.m3u8'
-          album_query: "genre:jazz albumartist+ album+ year+"
+          album_query: "genre:jazz albumartist+ year+ album+"
         - name: 'Soul.m3u8'
-          album_query: "genre:soul albumartist+ album+ year+"
+          album_query: "genre:soul albumartist+ year+ album+"
         - name: 'Funk.m3u8'
-          album_query: "genre:funk albumartist+ album+ year+"
+          album_query: "genre:funk albumartist+ year+ album+"
         - name: 'Pop.m3u8'
-          album_query: "genre:'pop' albumartist+ album+ year+"
+          album_query: "genre:'pop' albumartist+ year+ album+"
         - name: New Wave.m3u8
-          album_query: "genre:'new wave' albumartist+ album+ year+"
+          album_query: "genre:'new wave' albumartist+ year+ album+"
         - name: Disco.m3u8
-          album_query: "genre:'disco' albumartist+ album+ year+"
+          album_query: "genre:'disco' albumartist+ year+ album+"
         - name: J-Pop.m3u8
-          album_query: "genre:'j-pop' albumartist+ album+ year+"
+          album_query: "genre:'j-pop' albumartist+ year+ album+"
         - name: K-Pop.m3u8
-          album_query: "genre:'k-pop' albumartist+ album+ year+"
+          album_query: "genre:'k-pop' albumartist+ year+ album+"
         - name: Synthpop.m3u8
-          album_query: "genre:synthpop albumartist+ album+ year+"
+          album_query: "genre:synthpop albumartist+ year+ album+"
         - name: Electropop.m3u8
-          album_query: "genre:electropop albumartist+ album+ year+"
+          album_query: "genre:electropop albumartist+ year+ album+"
         - name: Hyperpop.m3u8
-          album_query: "genre:electropop albumartist+ album+ year+"
+          album_query: "genre:electropop albumartist+ year+ album+"
         - name: 'Dream pop.m3u8'
-          album_query: "genre:'dream pop' albumartist+ album+ year+"
+          album_query: "genre:'dream pop' albumartist+ year+ album+"
         - name: 'Dance & Electronic.m3u8'
-          album_query: ["genre:dance albumartist+ album+ year+", "genre:electronic albumartist+ album+ year+", "genre:synthpop albumartist+ album+ year+"]
+          album_query: ["genre:dance albumartist+ year+ album+", "genre:electronic albumartist+ year+ album+", "genre:synthpop albumartist+ year+ album+"]
         - name: Synthwave.m3u8
-          album_query: "genre:synthwave albumartist+ album+ year+"
+          album_query: "genre:synthwave albumartist+ year+ album+"
         - name: Vaporwave.m3u8
-          album_query: "genre:vaporwave albumartist+ album+ year+"
+          album_query: "genre:vaporwave albumartist+ year+ album+"
         - name: 'Trip-Hop.m3u8'
-          album_query: "genre:'trip-hop' albumartist+ album+ year+"
+          album_query: "genre:'trip-hop' albumartist+ year+ album+"
         - name: 'Rap & Hip-Hop.m3u8'
-          album_query: ["genre:'hip-hop' albumartist+ album+ year+", "genre:rap albumartist+ album+ year+"]
+          album_query: ["genre:'hip-hop' albumartist+ year+ album+", "genre:rap albumartist+ year+ album+"]
         - name: 'Classical.m3u8'
-          album_query: "genre:classical albumartist+ album+ year+"
+          album_query: "genre:classical albumartist+ year+ album+"
         - name: 'Opera.m3u8'
-          album_query: "genre:opera albumartist+ album+ year+"
+          album_query: "genre:opera albumartist+ year+ album+"
         - name: 'Indie.m3u8'
-          album_query: "genre:'indie' albumartist+ album+ year+"
+          album_query: "genre:'indie' albumartist+ year+ album+"
         - name: 'Indie Rock.m3u8'
-          album_query: "genre:'indie rock' albumartist+ album+ year+"
+          album_query: "genre:'indie rock' albumartist+ year+ album+"
         - name: 'Lo-Fi.m3u8'
-          album_query: "genre:'lo-fi' albumartist+ album+ year+"
+          album_query: "genre:'lo-fi' albumartist+ year+ album+"
         - name: 'Shoegaze.m3u8'
-          album_query: "genre:'shoegaze' albumartist+ album+ year+"
+          album_query: "genre:'shoegaze' albumartist+ year+ album+"
         - name: 'Alternative Rock.m3u8'
-          album_query: "genre:'alternative rock' albumartist+ album+ year+"
+          album_query: "genre:'alternative rock' albumartist+ year+ album+"
         - name: 'Grunge.m3u8'
-          album_query: "genre:'grunge' albumartist+ album+ year+"
+          album_query: "genre:'grunge' albumartist+ year+ album+"
         - name: 'Punk & Hardcore.m3u8'
-          album_query: ["genre:'punk' albumartist+ album+ year+", "genre:'punk rock' albumartist+ album+ year+", "genre:'hardcore' albumartist+ album+ year+"]
+          album_query: ["genre:'punk' albumartist+ year+ album+", "genre:'punk rock' albumartist+ year+ album+", "genre:'hardcore' albumartist+ year+ album+"]
         - name: 'Post-Punk.m3u8'
-          album_query: "genre:'post-punk' albumartist+ album+ year+"
+          album_query: "genre:'post-punk' albumartist+ year+ album+"
         - name: 'Post-Hardcore.m3u8'
-          album_query: "genre:'post-hardcore' albumartist+ album+ year+"
+          album_query: "genre:'post-hardcore' albumartist+ year+ album+"
         - name: 'Gothic Rock.m3u8'
-          album_query: "genre:'gothic rock' albumartist+ album+ year+"
+          album_query: "genre:'gothic rock' albumartist+ year+ album+"
         - name: 'Post-Rock.m3u8'
-          album_query: "genre:'post-rock' albumartist+ album+ year+"
+          album_query: "genre:'post-rock' albumartist+ year+ album+"
         - name: 'Psychedelic.m3u8'
-          album_query: "genre:'psychedelic' albumartist+ album+ year+"
+          album_query: "genre:'psychedelic' albumartist+ year+ album+"
         - name: 'Art Rock.m3u8'
-          album_query: "genre:'art rock' albumartist+ album+ year+"
+          album_query: "genre:'art rock' albumartist+ year+ album+"
         - name: 'Progressive Rock.m3u8'
-          album_query: "genre:'progressive rock' albumartist+ album+ year+"
+          album_query: "genre:'progressive rock' albumartist+ year+ album+"
         - name: Krautrock.m3u8
-          album_query: "genre:krautrock albumartist+ album+ year+"
+          album_query: "genre:krautrock albumartist+ year+ album+"
         - name: 'Classic Rock.m3u8'
-          album_query: "genre:'classic rock' albumartist+ album+ year+"
+          album_query: "genre:'classic rock' albumartist+ year+ album+"
         - name: Metal.m3u8
-          album_query: "genre:'metal' albumartist+ album+ year+"
+          album_query: "genre:'metal' albumartist+ year+ album+"
         - name: 'Progressive Metal.m3u8'
-          album_query: "genre:'progressive metal' albumartist+ album+ year+"
+          album_query: "genre:'progressive metal' albumartist+ year+ album+"
         - name: 'Death Metal.m3u8'
-          album_query: "genre:'death metal' albumartist+ album+ year+"
+          album_query: "genre:'death metal' albumartist+ year+ album+"
         - name: 'Black Metal.m3u8'
-          album_query: "genre:'black metal' albumartist+ album+ year+"
+          album_query: "genre:'black metal' albumartist+ year+ album+"
         - name: 'Thrash Metal.m3u8'
-          album_query: "genre:thrash albumartist+ album+ year+"
+          album_query: "genre:thrash albumartist+ year+ album+"
         - name: 'Power Metal.m3u8'
-          album_query: "genre:'power metal' albumartist+ album+ year+"
+          album_query: "genre:'power metal' albumartist+ year+ album+"
         - name: Heavy Metal.m3u8
-          album_query: "genre:'heavy metal' albumartist+ album+ year+"
+          album_query: "genre:'heavy metal' albumartist+ year+ album+"
         - name: 'Metalcore.m3u8'
-          album_query: "genre:Metalcore albumartist+ album+ year+"
+          album_query: "genre:Metalcore albumartist+ year+ album+"
         - name: 'Soundtracks & Scores.m3u8'
-          album_query: ["genre:soundtrack albumartist+ album+ year+", "genre:score albumartist+ album+ year+"]
+          album_query: ["genre:soundtrack albumartist+ year+ album+", "genre:score albumartist+ year+ album+"]
 
 convert:
     auto: no
