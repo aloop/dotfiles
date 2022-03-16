@@ -13,7 +13,6 @@ plugins:
     - badfiles
     - lyrics
     - smartplaylist
-    - acousticbrainz
 
 directory: ~/Music/Library
 library: ~/Music/Library/beets.db
@@ -208,9 +207,6 @@ smartplaylist:
           album_query: "genre:Metalcore albumartist+ year+ album+"
         - name: 'Soundtracks & Scores.m3u8'
           album_query: ["genre:soundtrack albumartist+ year+ album+", "genre:score albumartist+ year+ album+"]
-
-acousticbrainz:
-    auto: yes
 
 convert:
     auto: no
