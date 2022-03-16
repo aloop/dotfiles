@@ -209,6 +209,9 @@ smartplaylist:
         - name: 'Soundtracks & Scores.m3u8'
           album_query: ["genre:soundtrack albumartist+ year+ album+", "genre:score albumartist+ year+ album+"]
 
+acousticbrainz:
+    auto: yes
+
 convert:
     auto: no
     copy_album_art: yes
