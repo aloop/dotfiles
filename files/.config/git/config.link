@@ -1,5 +1,4 @@
 [core]
-    excludesfile = ~/.gitignore_global
     trustctime = false
 [push]
     default = simple
@@ -14,5 +13,9 @@
     amend = commit --amend --reuse-message=HEAD
     d = difftool
     l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[color]
+    diff = auto
+    ui = auto
 [include]
-    path = ~/.gitconfig.local
+    path = ~/.config/git/config_local
+    path = ~/.config/git/config_windows
