@@ -23,7 +23,7 @@ success_message() (
     _src=${2:?}
     _dest=${3:?}
 
-    printf '%s from %s to %s\n' "$_action" "$(highlight_str "~${_src#${HOME}}")" "$(highlight_str "~${_dest#${HOME}}")"
+    printf '%s from %s to %s\n' "$_action" "$(highlight_str "~${_src#"${HOME}"}")" "$(highlight_str "~${_dest#"${HOME}"}")"
 )
 
 # Adds a trailing slash to a path if it's a directory
@@ -41,9 +41,8 @@ ensure_trailing_slash() (
 
 # Removes all trailing slashes
 strip_trailing_slashes() (
-    df_path="$1"
     # ensure_trailing_slash makes sure there is one and only one trailing slash
-    df_path="$(ensure_trailing_slash "${df_path}")"
+    df_path="$(ensure_trailing_slash "$1")"
     # Print out the result while removing the trailing slash (if it exists)
     printf '%s' "${df_path%/}"
 )
@@ -53,7 +52,7 @@ strip_trailing_slashes() (
 script_name="$(basename "$0")"
 
 # Set base dir as the directory of this script
-dotfiles_base_dir="$(cd "$(dirname "$0")" && pwd -L)"
+dotfiles_base_dir="$(cd "$(dirname "$0")" && pwd -P)"
 scripts_dir="$(join_path "${dotfiles_base_dir}" "scripts")"
 dotfiles_dir="$(join_path "${dotfiles_base_dir}" "files")"
 backups_base="${dotfiles_base_dir}/backups/backup-$(date "+%Y-%m-%d-%H%M%S")"
@@ -79,14 +78,29 @@ fi
 backup_original() (
     _src=${1:?"No source path given"}
 
-    if [ "$no_backups" = 0 ] && [ -e "$_src" ]; then
-        backup_dest=$(join_path "$backups_base" "${_src#${HOME}}")
+    backup_dest="$(join_path "$backups_base" "${_src#"${HOME}"}")"
+    backup_parent="$(dirname "$backup_dest")"
 
-        if [ ! -d "$(dirname "$backup_dest")" ]; then
-            mkdir -p "$(dirname "$backup_dest")"
+    if [ "$no_backups" = 0 ] && [ -e "$_src" ]; then
+        if [ ! -d "$backup_parent" ]; then
+            mkdir -p "$backup_parent"
         fi
 
         mv "$_src" "$backup_dest"
+    elif [ "$no_backups" = 0 ]; then
+        # Make sure the file/folder we're trying to replace is not contained in a broken symlink
+        while [ "$_src" != "$HOME" ] && [ "${_src#"${HOME}"}" != "$_src" ]; do
+            if [ -L "$_src" ] && [ ! -e "$_src" ]; then
+                if [ ! -d "$backup_parent" ]; then
+                    mkdir -p "$backup_parent"
+                fi
+                # Might as well backup the broken link too, it will take up almost no space.
+                mv "$_src" "$backup_dest"
+            else
+                # strip the last segment of the file path for the next iteration
+                _src="${_src%/*}"
+            fi
+        done
     fi
 )
 
@@ -100,7 +114,7 @@ mk_dest_dir() (
     # Attempt to create the directory in case it doesn't exist
     mkdir -p "$_path"
 
-    printf "Created directory %s\\n" "$(highlight_str "~${_path#${HOME}}")"
+    printf "Created directory %s\\n" "$(highlight_str "~${_path#"${HOME}"}")"
 )
 
 copy_path() (
@@ -143,7 +157,7 @@ install_dotfiles() (
         if [ -e "$_src" ]; then
             _type=$(get_extension "$_src")
 
-            _dest=$(join_path "$HOME" "${_src#${dotfiles_dir}}")
+            _dest=$(join_path "$HOME" "${_src#"${dotfiles_dir}"}")
 
             # Remove .link or .copy from the destination name
             _dest=${_dest%.link}
@@ -180,8 +194,8 @@ run_script() (
 
     script_file_path="$(join_path "$scripts_dir" "$script_type" "$script_name")"
 
-    if [ ! -f "$script_file_path" ]; then
-        echo "Error: ${script_type} script \"${script_name}\" does not exist"
+    if [ ! -r "$script_file_path" ]; then
+        echo "Error: ${script_type} script \"${script_name}\" does not exist or is not readable"
         exit 1
     fi
 
@@ -191,7 +205,7 @@ run_script() (
 ## Main
 
 print_help() {
-    printf 'Usage: ~%s/%s [-h|--help] [--no-copies] [--no-links] [--no-backups]\n' "${dotfiles_base_dir#${HOME}}" "$script_name"
+    printf 'Usage: ~%s/%s [-h|--help] [--no-copies] [--no-links] [--no-backups]\n' "${dotfiles_base_dir#"${HOME}"}" "$script_name"
 }
 
 # Handle options
