@@ -18,7 +18,8 @@ if command -v code >/dev/null 2>&1; then
         --install-extension "neilbrayfield.php-docblocker" \
         --install-extension "timonwong.shellcheck" \
         --install-extension "vscode-icons-team.vscode-icons" \
-        --install-extension "whatwedo.twig"
+        --install-extension "whatwedo.twig" \
+        --install-extension "ms-vscode-remote.remote-ssh"
 
 else
 
