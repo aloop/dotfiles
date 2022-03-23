@@ -14,7 +14,6 @@
     "breadcrumbs.enabled": true,
     "explorer.openEditors.visible": 0,
     "window.openFilesInNewWindow": "off",
-    "window.zoomLevel": 0,
     "window.openFoldersInNewWindow": "on",
     "window.restoreWindows": "all",
     "window.titleBarStyle": "custom",
@@ -41,5 +40,9 @@
     "typescript.suggest.completeFunctionCalls": true,
     "typescript.surveys.enabled": false,
     "explorer.confirmDelete": false,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.formatOnSaveTimeout": 5000,
+    "editor.bracketPairColorization.enabled": true,
+    "telemetry.telemetryLevel": "off"
 }
