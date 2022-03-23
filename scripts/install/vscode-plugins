@@ -7,19 +7,15 @@ if command -v code >/dev/null 2>&1; then
     code \
         --install-extension "bmewburn.vscode-intelephense-client" \
         --install-extension "christian-kohler.path-intellisense" \
-        --install-extension "coenraads.bracket-pair-colorizer" \
         --install-extension "dbaeumer.vscode-eslint" \
         --install-extension "dracula-theme.theme-dracula" \
         --install-extension "editorconfig.editorconfig" \
-        --install-extension "eg2.tslint" \
-        --install-extension "eliverlara.andromeda" \
+        --install-extension "ms-vscode.vscode-typescript-tslint-plugin" \
         --install-extension "esbenp.prettier-vscode" \
         --install-extension "junstyle.php-cs-fixer" \
-        --install-extension "mjmcloug.vscode-elixir" \
-        --install-extension "ms-vscode.go" \
+        --install-extension "golang.Go" \
         --install-extension "naumovs.color-highlight" \
         --install-extension "neilbrayfield.php-docblocker" \
-        --install-extension "rust-lang.rust" \
         --install-extension "timonwong.shellcheck" \
         --install-extension "vscode-icons-team.vscode-icons" \
         --install-extension "whatwedo.twig"

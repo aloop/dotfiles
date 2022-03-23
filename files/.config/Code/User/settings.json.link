@@ -44,5 +44,6 @@
     "vsicons.dontShowNewVersionMessage": true,
     "editor.formatOnSaveTimeout": 5000,
     "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs":"active",
     "telemetry.telemetryLevel": "off"
 }
