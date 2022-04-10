@@ -21,9 +21,9 @@ user_pref("general.autoScroll", true);
 // Don't sort ctrl-tab by recently used
 user_pref("browser.ctrlTab.recentlyUsedOrder", false);
 
-// Disable new tab page
-user_pref("browser.newtabpage.enabled", false);
-user_pref("browser.newtab.preload", false);
+// Enable the new tab page
+user_pref("browser.newtabpage.enabled", true);
+user_pref("browser.newtab.preload", true);
 
 // Set new page preferences
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
