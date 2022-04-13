@@ -30,8 +30,14 @@ user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
 user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
-user_pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
-user_pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false);
+user_pref(
+    "browser.newtabpage.activity-stream.section.highlights.includePocket",
+    false
+);
+user_pref(
+    "browser.newtabpage.activity-stream.feeds.discoverystreamfeed",
+    false
+);
 user_pref("browser.newtabpage.activity-stream.showSponsored", false);
 user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
 
@@ -253,5 +259,14 @@ user_pref("browser.backspace_action", 2);
 user_pref("browser.bookmarks.max_backups", 2);
 
 // Don't recommend features or extensions while browsings
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+user_pref(
+    "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons",
+    false
+);
+user_pref(
+    "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features",
+    false
+);
+
+// Enable GTK overlay scrollbar
+user_pref("widget.gtk.overlay-scrollbars.enabled", true);
