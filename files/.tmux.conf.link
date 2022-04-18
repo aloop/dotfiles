@@ -15,7 +15,7 @@ set-option -wg xterm-keys on
 set-option -g mouse on
 
 # Allows for faster key repetition
-set-option -s escape-time 0
+set-option -s escape-time 50
 
 # Constrain the window size to the smallest client on the current window,
 # rather than all windows in the current session.
