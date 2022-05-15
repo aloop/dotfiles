@@ -1,9 +1,17 @@
 [core]
     trustctime = false
+[user]
+    name = Anthony Loop
+    email = anthony@anthonyloop.com
+    signingKey = B01478CBEF5DE5E9!
+[commit]
+    gpgSign = true
 [push]
     default = simple
 [pull]
     rebase = true
+[tag]
+    gpgSign = true
 [diff]
     tool = vimdiff
     renames = copies
@@ -19,3 +27,4 @@
 [include]
     path = ~/.config/git/config_local
     path = ~/.config/git/config_windows
+
