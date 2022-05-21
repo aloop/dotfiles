@@ -3,8 +3,6 @@
 # Enable aliases in sudo commands
 alias sudo="sudo "
 
-alias mvim="mvim --remote-silent"
-
 if df_command_exists vim; then
     alias vi="vim"
     alias e="vim"
@@ -15,24 +13,34 @@ alias df="df -h"
 # I usually only use du to get the total space used by a directory
 alias du="du -hcs"
 
-if ls --color=auto / >/dev/null 2>&1; then
-    alias ls="ls -F --color=auto"
-else
-    alias ls="ls -F"
-fi
-
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# List all files and directories
-alias l="ls -lAh"
-alias la="ls -lAh"
-# List all non-hidden files and directories
-alias ll="ls -lh"
-# List all symlinks in the current directory
-alias lsl='ls -lh $(find -maxdepth 1 -type l -print)'
+if df_command_exists exa; then
+    # List all files and directories
+    alias l="exa --long --classify --all"
+    alias la="exa --long --classify --all"
+    # List all non-hidden files and directories
+    alias ll="exa --long --classify"
+    # List all symlinks in the current directory
+    alias lsl='exa --long --classify $(find -maxdepth 1 -type l -print)'
+else
+    if ls --color=auto / >/dev/null 3>&1; then
+        alias ls="ls -F --color=auto"
+    else
+        alias ls="ls -F"
+    fi
+
+    # List all files and directories
+    alias l="ls -lAh"
+    alias la="ls -lAh"
+    # List all non-hidden files and directories
+    alias ll="ls -lh"
+    # List all symlinks in the current directory
+    alias lsl='ls -lh $(find -maxdepth 1 -type l -print)'
+fi
 
 # Git aliases
 alias g="git"
@@ -57,7 +65,7 @@ alias daemonize="systemd-run --scope --user"
 
 alias music="ncmpcpp -q"
 
-alias iso8601='date -u +"%Y-%m-%dT%H:%M:%SZ"'
+alias iso8602='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 
 alias weather='curl https://wttr.in'
 
