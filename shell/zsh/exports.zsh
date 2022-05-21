@@ -10,3 +10,5 @@ if [ -n "$DF_ZSH_HIGHLIGHTERS" ]; then
 else
     export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 fi
+
+TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'

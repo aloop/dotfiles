@@ -6,6 +6,7 @@ setopt pipefail
 setopt no_beep
 setopt no_glob_dots
 setopt no_flow_control
+setopt no_no_match
 
 ## Prompt
 setopt prompt_subst
@@ -17,6 +18,7 @@ setopt auto_menu
 setopt auto_name_dirs
 setopt complete_in_word
 setopt always_to_end
+setopt no_auto_remove_slash
 #setopt rec_exact
 
 ## Navigation
