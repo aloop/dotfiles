@@ -20,12 +20,12 @@ alias .....="cd ../../../.."
 
 if df_command_exists exa; then
     # List all files and directories
-    alias l="exa --long --classify --all"
-    alias la="exa --long --classify --all"
+    alias l="exa --long --group --classify --all"
+    alias la="exa --long --group --classify --all"
     # List all non-hidden files and directories
-    alias ll="exa --long --classify"
+    alias ll="exa --long --group --classify"
     # List all symlinks in the current directory
-    alias lsl='exa --long --classify $(find -maxdepth 1 -type l -print)'
+    alias lsl='exa --long --group --classify $(find -maxdepth 1 -type l -print)'
 else
     if ls --color=auto / >/dev/null 3>&1; then
         alias ls="ls -F --color=auto"
