@@ -12,6 +12,9 @@ else
     echo "Directory \"~/.mozilla/firefox/\" doesn't exist, start firefox to create a profile, then run these settings again."
 fi
 
+# Enable server for `foot` terminal
+systemctl --user enable --now foot-server@wayland-0.socket
+
 # Gnome Settings
 
 if command -v gsettings >/dev/null 2>&1; then
@@ -27,8 +30,10 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.wm.preferences audible-bell false
 
     ## Custom keybindings
+
+    ### Set keybinding to open a terminal with Super+Enter
     gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Start a Terminal"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "alacritty"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "footclient"
     gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Super>Return"
     gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 
