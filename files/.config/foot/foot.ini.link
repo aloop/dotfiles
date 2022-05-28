@@ -8,7 +8,7 @@
 # title=foot
 # locked-title=no
 
-font=Hack:size=11,monospace:size=11
+font=Hack:size=12,monospace:size=12
 # font-bold=<bold variant of regular font>
 # font-italic=<italic variant of regular font>
 # font-bold-italic=<bold+italic variant of regular font>
@@ -64,7 +64,7 @@ bold-text-in-bright=no
 # alternate-scroll-mode=yes
 
 [colors]
-alpha=0.975
+alpha=0.99
 # foreground=dcdccc
 # background=111111
 
