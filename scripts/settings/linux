@@ -13,7 +13,7 @@ else
 fi
 
 # Enable server for `foot` terminal
-systemctl --user enable --now foot-server@wayland-0.socket
+systemctl --user enable --now foot-server@wayland-0.service
 
 # Gnome Settings
 
