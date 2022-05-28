@@ -26,6 +26,7 @@ if df_command_exists exa; then
     alias ll="exa --long --group --classify"
     # List all symlinks in the current directory
     alias lsl='exa --long --group --classify $(find -maxdepth 1 -type l -print)'
+    alias lt="l --tree"
 else
     if ls --color=auto / >/dev/null 3>&1; then
         alias ls="ls -F --color=auto"
