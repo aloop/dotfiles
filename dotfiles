@@ -58,9 +58,9 @@ dotfiles_dir="$(join_path "${dotfiles_base_dir}" "files")"
 backups_base="${dotfiles_base_dir}/backups/backup-$(date "+%Y-%m-%d-%H%M%S")"
 
 # Set option defaults
-no_copies=0
-no_links=0
-no_backups=0
+no_copies=${DOTFILES_NO_COPIES:-0}
+no_links=${DOTFILES_NO_LINKS:-0}
+no_backups=${DOTFILES_NO_BACKUPS:-0}
 do_script=
 
 ## Handle Dotfiles
