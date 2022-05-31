@@ -19,6 +19,11 @@ input * {
     xkb_options ctrl:nocaps
 }
 
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
 # Use Left Mouse+$mod to drag, or Right Mouse+$mod to resize floating windows
 floating_modifier $mod
 
@@ -198,6 +203,8 @@ bindsym --locked XF86AudioPause exec --no-startup-id "playerctl play-pause"
 bindsym --locked XF86AudioStop  exec --no-startup-id "playerctl pause"
 bindsym --locked XF86AudioNext  exec --no-startup-id "playerctl next"
 bindsym --locked XF86AudioPrev  exec --no-startup-id "playerctl previous"
+
+bindsym XF86Search exec --no-startup-id $menu
 
 bindsym --release Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i '(focused)' | cut -d ' ' -f 2)" - | wl-copy
 bindsym --release Shift+Print exec grim -g "$(slurp)" - | wl-copy
