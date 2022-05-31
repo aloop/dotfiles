@@ -118,6 +118,16 @@ backup_original() (
                 _src="${_src%/*}"
             fi
         done
+    # Otherwise we need to remove the file/dir/link
+    else
+        # Strip any trailing slashes so we can properly detect a symlink to a directory
+        _src="$(strip_trailing_slashes "$_src")"
+
+        if [ -L "$_src" ] || [ -f "$_src" ]; then
+            rm "$_src"
+        elif [ -d "$_src" ]; then
+            rm -rf "$_src"
+        fi
     fi
 )
 
