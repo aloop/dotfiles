@@ -4,7 +4,6 @@ set $mod Mod4
 set $term ${TERMINAL:-foot}
 
 set $webbrowser ${BROWSER:-firefox}
-#set $menu wofi --dmenu | xargs swaymsg exec --
 set $menu wofi -iI --show drun
 
 ### Font
@@ -28,9 +27,6 @@ bindsym $mod+Return exec $term
 
 # open launcher
 bindsym $mod+space exec --no-startup-id $menu
-
-# Alt+Tab style window switching
-#bindsym $mod+Tab exec wofi --show window
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -163,8 +159,8 @@ client.focused_inactive $bright_black  $bright_black  $normal_white $bright_blac
 client.unfocused        $normal_black  $normal_black  $normal_white $normal_black  $normal_black
 client.urgent           $normal_red    $normal_red    $normal_white $normal_red    $normal_red
 
-titlebar_border_thickness 4
-titlebar_padding 12 6
+titlebar_border_thickness 2
+titlebar_padding 6 3
 
 ### Power and lock settings
 set $Locker swaylock
@@ -172,7 +168,7 @@ set $mode_system System
 # (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id sway-msg exit, mode "default"
+    bindsym e exec --no-startup-id swaymsg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
@@ -216,10 +212,10 @@ for_window [title="Preferences$"] floating enable
 ### Misc
 
 gaps outer 0
-gaps inner 20
+gaps inner 8
 
-default_border pixel 4
-default_floating_border pixel 4
+default_border pixel 2
+default_floating_border pixel 2
 
 ### Set Background image and fallback color
 output "*" bg "#000000" solid_color
