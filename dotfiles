@@ -130,7 +130,7 @@ copy_path() (
     backup_original "$_dest"
     mk_dest_dir "$(dirname "$_dest")"
 
-    cp -fR "$_src" "$_dest" && success_message 'Copied' "$_src" "$_dest"
+    cp -afR "$_src" "$_dest" && success_message 'Copied' "$_src" "$_dest"
 )
 
 link_path() (
