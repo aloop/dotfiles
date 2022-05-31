@@ -1,7 +1,7 @@
 ### Variables
 
 set $mod Mod4
-set $term ${TERMINAL:-alacritty}
+set $term ${TERMINAL:-foot}
 
 set $webbrowser ${BROWSER:-firefox}
 #set $menu wofi --dmenu | xargs swaymsg exec --
@@ -226,10 +226,12 @@ output "*" bg "#000000" solid_color
 
 ### Commands to run on startup
 
-### Startup notifications
-exec --no-startup-id mako
+include "/etc/sway/config.d/*"
 
 include "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf"
 
 # Start systemd target
 exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+
+# Notifications
+exec --no-startup-id mako
