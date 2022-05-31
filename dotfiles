@@ -15,7 +15,16 @@ get_extension() (
 )
 
 highlight_str() (
-    printf '\033[4;32m%s\033[0m' "$1"
+    case "$1" in
+        purple) highlight_color_code=35 ;;
+        green) highlight_color_code=32 ;;
+        cyan) highlight_color_code=36 ;;
+        blue) highlight_color_code=34 ;;
+        red) highlight_color_code=31 ;;
+        *) highlight_color_code=37 ;;
+    esac
+
+    printf '\033[4;%dm%s\033[0m' "$highlight_color_code" "$2"
 )
 
 success_message() (
@@ -23,7 +32,15 @@ success_message() (
     _src=${2:?}
     _dest=${3:?}
 
-    printf '%s from %s to %s\n' "$_action" "$(highlight_str "~${_src#"${HOME}"}")" "$(highlight_str "~${_dest#"${HOME}"}")"
+    printf '%s from %s to %s\n' "$_action" "$(highlight_str green "~${_src#"${HOME}"}")" "$(highlight_str green "~${_dest#"${HOME}"}")"
+)
+
+failure_message() (
+    _action=${1:?}
+    _src=${2:?}
+    _dest=${3:?}
+
+    printf '%s from %s to %s\n' "$_action" "$(highlight_str red "~${_src#"${HOME}"}")" "$(highlight_str red "~${_dest#"${HOME}"}")"
 )
 
 # Adds a trailing slash to a path if it's a directory
@@ -114,7 +131,7 @@ mk_dest_dir() (
     # Attempt to create the directory in case it doesn't exist
     mkdir -p "$_path"
 
-    printf "Created directory %s\\n" "$(highlight_str "~${_path#"${HOME}"}")"
+    printf "Created directory %s\\n" "$(highlight_str blue "~${_path#"${HOME}"}")"
 )
 
 copy_path() (
@@ -146,7 +163,27 @@ link_path() (
     backup_original "$_dest"
     mk_dest_dir "$(dirname "$_dest")"
 
-    ln -sf "$_src" "$_dest" && success_message 'Linked' "$_src" "$_dest"
+    ln -sf "$_src" "$_dest" && success_message 'Softlinked' "$_src" "$_dest"
+)
+
+hardlink_file() (
+    _src=${1:?"No source path given"}
+    _dest=${2:?"No destination path given"}
+
+    if [ "$no_links" = 1 ]; then
+        return
+    fi
+
+    if [ -d "$_src" ]; then
+        failure_message 'Unable to hardlink directory' "$_src" "$_dest"
+    fi
+
+    _src="$(strip_trailing_slashes "$_src")"
+
+    backup_original "$_dest"
+    mk_dest_dir "$(dirname "$_dest")"
+
+    ln -f "$_src" "$_dest" && success_message 'Hardlinked' "$_src" "$_dest"
 )
 
 install_dotfiles() (
@@ -161,6 +198,7 @@ install_dotfiles() (
 
             # Remove .link or .copy from the destination name
             _dest=${_dest%.link}
+            _dest=${_dest%.hardlink}
             _dest=${_dest%.copy}
 
             case "$_type" in
@@ -169,6 +207,9 @@ install_dotfiles() (
                     ;;
                 link)
                     link_path "$_src" "$_dest"
+                    ;;
+                hardlink)
+                    hardlink_file "$_src" "$_dest"
                     ;;
                 *)
                     if [ -d "$_src" ]; then
