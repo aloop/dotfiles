@@ -50,6 +50,7 @@ window#waybar {
     color: #e9e9f4;
     transition-property: background-color;
     transition-duration: 0.5s;
+    border-radius: 5px;
 }
 
 window#waybar.hidden {
@@ -71,6 +72,7 @@ window#waybar.solo {
 */
 
 #workspaces {
+    margin-left: 7.5px;
     margin-right: 5px;
 }
 
@@ -83,13 +85,14 @@ window#waybar.solo {
 }
 
 #workspaces button.focused {
-    color: @color-black;
-    background-color: @color-dim-purple;
-    border-bottom: 2px solid @color-purple;
+    color: @color-purple;
+    /*    background-color: @color-dim-purple;*/
+    border-bottom-color: @color-purple;
 }
 
 #workspaces button.urgent {
-    background-color: @color-red;
+    color: @color-red;
+    border-bottom-color: @color-red;
 }
 
 #mpd,
