@@ -39,9 +39,9 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Noto Sans", "DejaVu Sans", "Droid Sans", Roboto, Helvetica,
-        Arial, sans-serif;
-    font-size: 13px;
+    font-family: "Inter", "Noto Sans", "DejaVu Sans", "Droid Sans", Roboto,
+        Helvetica, Arial, sans-serif FontAwesome, "Font Awesome";
+    font-size: 10pt;
     min-height: 0;
 }
 
@@ -86,7 +86,6 @@ window#waybar.solo {
 
 #workspaces button.focused {
     color: @color-purple;
-    /*    background-color: @color-dim-purple;*/
     border-bottom-color: @color-purple;
 }
 

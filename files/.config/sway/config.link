@@ -8,7 +8,7 @@ set $menu wofi -iI --show drun
 
 ### Font
 
-font Droid Sans Bold 10, DejaVu Sans Bold 10, Noto Sans Bold 10
+font pango:Inter,Droid Sans,DejaVu Sans,Noto Sans Normal Bold 10
 
 ### Input and Key bindings
 
@@ -157,12 +157,13 @@ set $dim_purple #a165f6
 set $dim_cyan #59dffc
 set $dim_white #e6e6d1
 
-# client.<class>        border        background    text          indicator     child_border
+# client.<class>         border         background     text          indicator      child_border
 # -------------------------------------------------------------------------------------------
-client.focused          $normal_purple $normal_purple $normal_black $normal_purple $normal_purple
-client.focused_inactive $normal_purple $normal_black  $normal_white $bright_black  $normal_purple
-client.unfocused        $normal_black  $normal_black  $normal_white $normal_black  $normal_black
-client.urgent           $normal_red    $normal_red    $normal_white $normal_red    $normal_red
+client.focused           $normal_purple $normal_purple $normal_black $normal_purple $normal_purple
+client.focused_tab_title $normal_purple $normal_purple $normal_black $normal_purple $normal_purple
+client.focused_inactive  $bright_purple $normal_black  $normal_white $bright_purple $bright_purple
+client.unfocused         $normal_black  $normal_black  $normal_white $normal_black  $normal_black
+client.urgent            $normal_red    $normal_red    $normal_white $normal_red    $normal_red
 
 titlebar_border_thickness 2
 titlebar_padding 6 3
