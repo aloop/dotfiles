@@ -28,7 +28,7 @@
             "default": "🎜"
         },
         "escape": true,
-        "exec": "$XDG_CONFIG_HOME/waybar/mediaplayer.py --player spotify 2> /dev/null",
+        "exec": "${XDG_CONFIG_HOME:-${HOME}/.config}/waybar/mediaplayer.py --player spotify 2> /dev/null",
         "on-click": "playerctl -p spotify play-pause",
         "on-scroll-up": "playerctl -p spotify next",
         "on-scroll-down": "playerctl -p spotify previous"
