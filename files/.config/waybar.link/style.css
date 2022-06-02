@@ -122,6 +122,8 @@ window#waybar.solo {
 }
 
 #clock {
+    font-family: Hack, Droid Sans Mono, DejaVu Sans Mono, monospace;
+    font-size: 9pt;
 }
 
 #battery {
@@ -156,8 +158,9 @@ label:focus {
 }
 
 #custom-media {
-    background: @color-bright-green;
-    color: @color-bright-black;
+    background: @color-dim-green;
+    border-color: @color-dim-green;
+    color: @color-black;
 }
 
 #cpu {

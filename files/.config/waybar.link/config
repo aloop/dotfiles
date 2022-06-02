@@ -72,9 +72,9 @@
     },
     "clock": {
         "interval": 1,
-        "tooltip-format": "{:%A, %B %d  %I:%M:%S %p}",
-        "format": "{:%a, %b %d  %I:%M:%S %p}",
-        "format-alt": "{:%I:%M:%S %p}"
+        "format": "{:%a, %b %d <span weight=\"bold\">%I:%M:%S</span> %p}",
+        "tooltip-format": "{:%A, %B %d %I:%M:%S %p}",
+        "format-alt": "{:<span weight=\"bold\">%I:%M:%S</span> %p}"
     },
     "cpu": {
         "format": "{usage:3}% ",
