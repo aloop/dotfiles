@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [],
-    "modules-right": ["custom/media", "mpd", "idle_inhibitor", "pulseaudio", "battery", "battery#bat2", "clock", "tray"],
+    "modules-right": ["custom/media", "mpd", "idle_inhibitor", "pulseaudio", "battery", "battery#bat2", "network", "clock", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "format": "{name}: {icon}",
@@ -109,11 +109,15 @@
         "bat": "BAT2"
     },
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-wifi": "{essid} ({signalStrength}%) {frequency} ",
+        "format-ethernet": "",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{ifname}: {ipaddr}",
+        "tooltip-format": "{ifname}: {ipaddr}",
+        "tooltip-format-wifi": "{ipaddr}",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr} ",
+        "tooltip-format-disconnected": ""
     },
     "pulseaudio": {
         // "scroll-step": 1,
