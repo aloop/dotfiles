@@ -54,6 +54,11 @@ bind C-a send-prefix
 set -wg mode-keys vi
 set -g status-keys vi
 
+unbind p
+bind p paste-buffer
+bind -T copy-mode-vi 'v' send -X begin-selection
+bind -T copy-mode-vi 'y' send -X copy-selection
+
 # Rebind window/split creation and set them up to use the working directory of
 # the current pane
 bind c new-window -c "#{pane_current_path}"
