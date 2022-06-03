@@ -2,126 +2,126 @@
 ################################################################################
 
 # Set vars for tmux version
-set-option -g @version-major "tmux -V | cut -d' ' -f2 | cut -d'.' -f1 | sed 's/[^0-9]*//g'"
-set-option -g @version-minor "tmux -V | cut -d' ' -f2 | cut -d'.' -f2 | sed 's/[^0-9]*//g'"
+set -g @version-major "tmux -V | cut -d' ' -f2 | cut -d'.' -f1 | sed 's/[^0-9]*//g'"
+set -g @version-minor "tmux -V | cut -d' ' -f2 | cut -d'.' -f2 | sed 's/[^0-9]*//g'"
 
 # Use UTF-8 in older versions of tmux
 if-shell "[ $(#{@version-major}) -eq 1 ] || { [ $(#{@version-major}) -eq 2 ] && [ $(#{@version-minor}) -le 1 ] }" \
-    'set-option -wg utf8 on; set-option -g status-utf8 on'
+    'set -wg utf8 on; set-option -g status-utf8 on'
 
-set-option -wg xterm-keys on
+set -wg xterm-keys on
 
 # Enable mouse
-set-option -g mouse on
+set -g mouse on
 
 # Allows for faster key repetition
-set-option -s escape-time 50
+set -s escape-time 50
 
 # Constrain the window size to the smallest client on the current window,
 # rather than all windows in the current session.
-set-option -wg aggressive-resize on
+set -wg aggressive-resize on
 
-set-option -wg automatic-rename
+set -wg automatic-rename
 
 # scroll-back buffer lines
-set-option -g history-limit 10000
+set -g history-limit 10000
 
 # on-screen time (in in milliseconds) for C-a q
-set-option -g display-panes-time 2000
+set -g display-panes-time 2000
 
-set-option -g default-terminal "screen-256color"
+set -g default-terminal "screen-256color"
 
 # Number the windows starting at 1
-set-option -g base-index 1
-set-option -wg pane-base-index 1
+set -g base-index 1
+set -wg pane-base-index 1
 
 # Set terminal title
-set-option -g set-titles on
-set-option -g set-titles-string '#(whoami)@#H: #W'
-set-option -g automatic-rename on
+set -g set-titles on
+set -g set-titles-string '#(whoami)@#H: #W'
+set -g automatic-rename on
 
 ### Key Bindings
 ################################################################################
 
 # set prefix key to ctrl+a
-unbind-key C-b
-set-option -g prefix C-a
+unbind C-b
+set -g prefix C-a
 
 # Send the prefix to the client inside a window
-bind-key C-a send-prefix
+bind C-a send-prefix
 
 # Enable vi-mode
-set-option -wg mode-keys vi
-set-option -g status-keys vi
+set -wg mode-keys vi
+set -g status-keys vi
 
 # Rebind window/split creation and set them up to use the working directory of
 # the current pane
-bind-key c new-window -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
 # Vertical splits
-bind-key '"' split-window -v -c "#{pane_current_path}"
-bind-key s split-window -v -c "#{pane_current_path}"
+bind '"' split-window -v -c "#{pane_current_path}"
+bind s   split-window -v -c "#{pane_current_path}"
 # Horizontal Splits
-bind-key '%' split-window -h -c "#{pane_current_path}"
-bind-key v split-window -h -c "#{pane_current_path}"
+bind '%' split-window -h -c "#{pane_current_path}"
+bind S   split-window -h -c "#{pane_current_path}"
 
-bind-key -r C-h previous-window
-bind-key -r C-l next-window
+bind -r C-h previous-window
+bind -r C-l next-window
 
-bind-key h select-pane -L
-bind-key j select-pane -D
-bind-key k select-pane -U
-bind-key l select-pane -R
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
 
 # reload config without killing session
-unbind-key r
-bind-key r source-file ~/.tmux.conf
+unbind r
+bind r source-file ~/.config/tmux/tmux.conf
 
 ### Status Bar
 ################################################################################
 
-set-option -g status-justify left
+set -g status-justify left
 
 # Inactive windows in status bar
-set-option -wg window-status-format ' #I #W'
+set -wg window-status-format ' #I #W'
 
 # Current or active window in status bar
-set-option -wg window-status-current-format ' #I #W'
+set -wg window-status-current-format ' #I #W'
 
-set-option -wg window-status-separator ' |'
+set -wg window-status-separator ' |'
 
 # Left side of status bar
-set-option -g status-left-length 30
-set-option -g status-left ' #(whoami)@#H ❯ '
+set -g status-left-length 30
+set -g status-left ' #(whoami)@#H ❯ '
 
 # Right side of status bar
-set-option -g status-right-length 0
-set-option -g status-right ''
+set -g status-right-length 0
+set -g status-right ''
 
-set-option -g status-interval 5
+set -g status-interval 5
 
 ### Colors
 ################################################################################
 
 # default statusbar colors
-set-option -g status-style default,bg=colour234,fg=colour141
-set-option -g status-left-style default,bg=colour141,fg=colour234
+set -g status-style default,bg=colour234,fg=colour141
+set -g status-left-style default,bg=colour141,fg=colour234
 
 # default window title colors
-set-option -wg window-status-style fg=colour141,dim
+set -wg window-status-style fg=colour141,dim
 
 # active window title colors
-set-option -wg window-status-current-style fg=colour141,bright
+set -wg window-status-current-style fg=colour141,bright
 
 # pane border
-set-option -g pane-border-style fg=colour236
-set-option -g pane-active-border-style fg=colour61
+set -g pane-border-style fg=colour236
+set -g pane-active-border-style fg=colour61
 
 # message text
-set-option -g message-style bg=colour235,fg=colour141
-set-option -g message-command-style bg=colour235,fg=colour141
+set -g message-style bg=colour235,fg=colour141
+set -g message-command-style bg=colour235,fg=colour141
 
-set-option -g mode-style bg=colour141,fg=colour235
+set -g mode-style bg=colour141,fg=colour235
 
 # pane number display
-set-option -g display-panes-active-colour colour33
-set-option -g display-panes-colour colour141
+set -g display-panes-active-colour colour33
+set -g display-panes-colour colour141
