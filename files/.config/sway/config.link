@@ -4,7 +4,7 @@ set $mod Mod4
 set $term ${TERMINAL:-foot}
 
 set $webbrowser ${BROWSER:-firefox}
-set $menu wofi -iI --show drun
+set $menu wofi --conf "${XDG_CONFIG_HOME:-${HOME}/.config}/wofi/sway.conf" --term $term
 
 ### Font
 
