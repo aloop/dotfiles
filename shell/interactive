@@ -16,5 +16,4 @@ for df_interactive_file in "${DOTFILES_DIR}"/shell/interactive.d/*; do
 done
 
 unset df_interactive_file
-unset df_profile_initialized
 

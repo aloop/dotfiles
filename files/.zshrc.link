@@ -30,6 +30,7 @@ if [ -f "${HOME}/.antigen/antigen.zsh" ]; then
     antigen apply
 fi
 
+# Source scripts intended for an interactive shell
 . "${DOTFILES_DIR}/shell/interactive"
 
 # Load zsh config files
@@ -43,6 +44,9 @@ unset df_zshrc_file
 if [ -f "${HOME}/.zshrc.local" ]; then
     . "${HOME}/.zshrc.local"
 fi
+
+# Source scripts inteneded to autostart programs on login (e.g. tmux in an ssh session)
+. "${DOTFILES_DIR}/shell/autostart"
 
 autoload -Uz compinit
 # Initialize completions, with a full run once a day
