@@ -1,10 +1,10 @@
 # If DOTFILES_DIR is set, use it, otherwise default to `$HOME/.dotfiles`
 export DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 
-. "${DOTFILES_DIR}/shell/profile"
+if [ -f "${HOME}/.zlogin.local" ]; then
+    . "${HOME}/.zlogin.local"
+fi
 
 # Source scripts inteneded to autostart programs on login (e.g. tmux in an ssh session)
 . "${DOTFILES_DIR}/shell/autostart"
-
-[[ -f ~/.bashrc ]] && . ~/.bashrc
 

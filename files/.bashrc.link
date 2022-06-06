@@ -18,5 +18,3 @@ if [ -f "${HOME}/.bashrc.local" ]; then
     . "${HOME}/.bashrc.local"
 fi
 
-. "${DOTFILES_DIR}/shell/autostart"
-

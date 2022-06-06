@@ -45,9 +45,6 @@ if [ -f "${HOME}/.zshrc.local" ]; then
     . "${HOME}/.zshrc.local"
 fi
 
-# Source scripts inteneded to autostart programs on login (e.g. tmux in an ssh session)
-. "${DOTFILES_DIR}/shell/autostart"
-
 autoload -Uz compinit
 # Initialize completions, with a full run once a day
 if [[ -n "${HOME}"/.zcompdump(#qN.mh+24) ]]; then

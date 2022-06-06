@@ -1,4 +1,0 @@
-if [ "${DF_SWAY_AUTOSTART:=true}" = "true" ] && [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ] && df_command_exists sway; then
-    exec sway
-fi
-
