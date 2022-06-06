@@ -37,3 +37,8 @@ export XENVIRONMENT="${HOME}/.Xresources"
 
 export DOTFILES_ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 
+export ELECTRON_TRASH=trash-cli
+export WLC_REPEAT_RATE=50
+export WLC_REPEAT_DELAY=250
+export MOZ_ENABLE_WAYLAND=1
+
