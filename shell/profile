@@ -10,12 +10,6 @@ df_command_exists() (
     command -v "$1" >/dev/null 2>&1
 )
 
-df_safe_source() {
-    if [ -f "$1" ]; then
-        . "$1"
-    fi
-}
-
 # Start sourcing
 
 for df_profile_file in "${DOTFILES_DIR}"/shell/profile.d/*; do
@@ -30,6 +24,5 @@ done
 unset df_profile_file
 
 # Let `./interactive` know that we've already initialized
-export df_profile_initialized="true"
+df_profile_initialized="true"
 
-unset -f df_safe_source
