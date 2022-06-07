@@ -80,6 +80,8 @@ See "Install Script ENV Vars" below to learn how to set this option by default.
 * `~/.zshenv.local`
 * `~/.zshrc.local`
 * `~/.zlogin.local`
+* `~/.bash_profile.local`
+* `~/.bashrc.local`
 * `${DOTFILES_DIR}/shell/profile.d/*`: Any shell scripts you place in this directory will be sourced by `${DOTFILES_DIR}/shell/profile`
 * `${DOTFILES_DIR}/shell/interactive.d/*`: Any shell scripts you place in this directory will be sourced by `${DOTFILES_DIR}/shell/interactive`
 * `~/.config/sway/config.d`: can add extra config files for sway here (may need to create dir)
