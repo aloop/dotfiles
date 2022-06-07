@@ -201,7 +201,7 @@ install_dotfiles() (
 
     # From http://www.dwheeler.com/essays/filenames-in-shell.html#summary
     for _src in "$_dir"/* "$_dir"/.[!.]* "$_dir"/..?*; do
-        if [ -e "$_src" ]; then
+        if [ -e "$_src" ] || [ -L "$_src" ]; then
             _type=$(get_extension "$_src")
 
             _dest=$(join_path "$HOME" "${_src#"${dotfiles_dir}"}")
