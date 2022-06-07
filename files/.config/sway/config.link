@@ -5,6 +5,10 @@ set $term ${TERMINAL:-foot}
 
 set $webbrowser ${BROWSER:-firefox}
 set $menu wofi --conf "${XDG_CONFIG_HOME:-${HOME}/.config}/wofi/sway.conf" --term $term
+set $bar waybar
+set $notfications mako
+set $redshift gammastep -m wayland
+
 
 ### Font
 
@@ -41,9 +45,6 @@ bindsym $mod+Shift+c reload
 
 # restart inplace (preserves your layout/session, can be used for upgrades)
 bindsym $mod+Shift+r restart
-
-# exit and log out of session
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 # change focus with vim-like keys
 bindsym $mod+h focus left
@@ -233,8 +234,18 @@ include "/etc/sway/config.d/*"
 
 include "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf"
 
-# Start systemd target
-exec "systemctl --user import-environment; systemctl --user start sway-session.target"
+# Status bar
+bar swaybar_command $bar
 
 # Notifications
-exec --no-startup-id mako
+exec --no-startup-id $notifications
+
+# Redshift
+exec $redshift
+
+# Idle command
+exec swayidle -w \
+    timeout 1800 'swaylock -f -c 222222' \
+    timeout 1200 'swaymsg "output * dpms off"' \
+        resume 'sleep 2 && swaymsg "output * dpms off"' \
+    before-sleep 'swaylock -f -c 222222'
