@@ -28,6 +28,10 @@ else
     Plug 'editorconfig/editorconfig-vim'
     Plug 'dense-analysis/ale'
 
+    " Git
+    Plug 'tpope/vim-fugitive'
+    Plug 'mhinz/vim-signify'
+
     " Color Schemes
     Plug 'dracula/vim'
 
