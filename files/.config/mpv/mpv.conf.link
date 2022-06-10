@@ -80,5 +80,7 @@ screenshot-high-bit-depth=yes
 
 # Network Configuration
 
-ytdl-format="((bestvideo[vcodec^=av01]/bestvideo[vcodec^=vp9]/bestvideo)+(bestaudio[acodec=opus]/bestaudio[acodec=vorbis]/bestaudio[acodec=aac]/bestaudio))/best"
 hls-bitrate=max
+
+# Make sure to use yt-dlp
+script-opts=ytdl_hook-try_ytdl_first=yes,ytdl_hook-ytdl_path=yt-dlp
