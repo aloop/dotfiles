@@ -40,6 +40,8 @@ set -g set-titles on
 set -g set-titles-string '#(whoami)@#H: #W'
 set -g automatic-rename on
 
+set -g focus-events on
+
 ### Key Bindings
 ################################################################################
 
