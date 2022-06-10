@@ -21,8 +21,7 @@ else
     " Language Syntaxes
     Plug 'pangloss/vim-javascript'
     Plug 'leafgarland/typescript-vim'
-    Plug 'plasticboy/vim-markdown'
-    Plug 'evidens/vim-twig'
+    Plug 'preservim/vim-markdown'
 
     " Linting, Autocomplete, and Formatting
     Plug 'editorconfig/editorconfig-vim'
@@ -36,10 +35,10 @@ else
     Plug 'dracula/vim'
 
     " Other Plugins
-    Plug 'bling/vim-airline'
+    Plug 'vim-airline/vim-airline'
     Plug 'tpope/vim-surround'
     Plug 'mattn/emmet-vim'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#isntall() } }
     Plug 'junegunn/fzf.vim'
 
     " Define system-specific bundles in the following file.

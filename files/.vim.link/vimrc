@@ -32,6 +32,7 @@ runtime config/colors.vim
 " Plugin configuration After {{{
 runtime config/plugin-airline.vim
 runtime config/plugin-markdown.vim
+runtime config/plugin-editorconfig.vim
 " }}}
 
 " Anything you want to include after this file can be put into ~/.vim/vimrc.local
