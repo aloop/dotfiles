@@ -38,7 +38,7 @@ else
     Plug 'vim-airline/vim-airline'
     Plug 'tpope/vim-surround'
     Plug 'mattn/emmet-vim'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#isntall() } }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
     " Define system-specific bundles in the following file.
