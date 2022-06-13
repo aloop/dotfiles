@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [],
-    "modules-right": ["custom/media", "mpd", "idle_inhibitor", "pulseaudio", "battery", "battery#bat2", "network", "clock", "tray"],
+    "modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "battery", "battery#bat2", "network", "clock", "custom/weather", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "format": "{name}: {icon}",
@@ -19,42 +19,31 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "${XDG_CONFIG_HOME:-${HOME}/.config}/waybar/mediaplayer.py --player spotify 2> /dev/null",
-        "on-click": "playerctl -p spotify play-pause",
-        "on-scroll-up": "playerctl -p spotify next",
-        "on-scroll-down": "playerctl -p spotify previous"
+    "custom/weather": {
+        "exec": "curl 'https://wttr.in/?format=1'",
+        "interval": 3600
     },
     "mpd": {
-        "format": "{stateIcon}{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {albumArtist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
-        "format-disconnected": "Disconnected",
+        "format": "{stateIcon}  {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}  {artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+        "format-disconnected": "",
         "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} Stopped",
         "unknown-tag": "N/A",
         "interval": 2,
         "consume-icons": {
-            "on": " "
+            "on": "<span color=\"#bd93f9\"></span> "
         },
         "random-icons": {
-            "off": "<span color=\"#ff5555\"></span> ",
-            "on": " "
+            "on": "<span color=\"#bd93f9\"></span> "
         },
         "repeat-icons": {
-            "on": " "
+            "on": "<span color=\"#bd93f9\"></span> "
         },
         "single-icons": {
-            "on": "1 "
+            "on": "<span color=\"#bd93f9\">1</span> "
         },
         "state-icons": {
-            "paused": "  ",
-            "playing": "  "
+            "paused": "",
+            "playing": ""
         },
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)",
@@ -64,7 +53,7 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
+            "activated": "<span color=\"#bd93f9\"></span>",
             "deactivated": ""
         }
     },

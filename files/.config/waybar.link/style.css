@@ -40,7 +40,7 @@
     border: none;
     border-radius: 0;
     font-family: "Inter", "Noto Sans", "DejaVu Sans", "Droid Sans", Roboto,
-        Helvetica, Arial, sans-serif FontAwesome, "Font Awesome";
+        Helvetica, Arial, sans-serif;
     font-size: 10pt;
     min-height: 0;
 }
@@ -106,7 +106,8 @@ window#waybar.solo {
 #tray,
 #mode,
 #idle_inhibitor,
-#custom-media {
+#custom-media,
+#custom-weather {
     padding: 0 10px;
     margin: 0 5px;
     color: @color-white;
@@ -161,6 +162,9 @@ label:focus {
     background: @color-dim-green;
     border-color: @color-dim-green;
     color: @color-black;
+}
+
+#custom-weather {
 }
 
 #cpu {
