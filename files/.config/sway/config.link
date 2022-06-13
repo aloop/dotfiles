@@ -19,7 +19,8 @@ font pango:Inter,Droid Sans,DejaVu Sans,Noto Sans Normal Bold 10
 input * {
     repeat_delay 250
     repeat_rate 50
-    xkb_numlock enabled
+    # Disabled because of an issue with Firefox crashing on sway config reload
+    #xkb_numlock enabled
     xkb_options ctrl:nocaps
 }
 
