@@ -41,4 +41,5 @@ export ELECTRON_TRASH=trash-cli
 export WLC_REPEAT_RATE=50
 export WLC_REPEAT_DELAY=250
 export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM="wayland;xcb"
 
