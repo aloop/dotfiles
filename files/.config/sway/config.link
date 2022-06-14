@@ -32,20 +32,11 @@ input type:touchpad {
 # Use Left Mouse+$mod to drag, or Right Mouse+$mod to resize floating windows
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec $term
-
-# open launcher
-bindsym $mod+space exec --no-startup-id $menu
-
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym --no-repeat $mod+Shift+q kill
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
-
-# restart inplace (preserves your layout/session, can be used for upgrades)
-bindsym $mod+Shift+r restart
+bindsym --no-repeat $mod+Shift+c reload
 
 # change focus with vim-like keys
 bindsym $mod+h focus left
@@ -77,16 +68,15 @@ bindsym $mod+Shift+v splith
 # split vertically
 bindsym $mod+v splitv
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+# change container layout (stacking, tabbed, toggle split)
+bindsym $mod+Shift+e layout toggle tabbed stacking
 bindsym $mod+e layout toggle split
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym --no-repeat $mod+f fullscreen
 
 # toggle the current window between tiling and floating
-bindsym $mod+Shift+space floating toggle
+bindsym --no-repeat $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+Mod1+space focus mode_toggle
@@ -120,6 +110,60 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+
+# Application launching keybindings
+bindsym --no-repeat $mod+b exec $webbrowser
+bindsym --no-repeat $mod+Return exec $term
+bindsym --no-repeat $mod+space exec --no-startup-id $menu
+
+# Control volume
+bindsym --locked XF86AudioRaiseVolume exec "df-volume increase 2"
+bindsym --locked XF86AudioLowerVolume exec "df-volume decrease 2"
+bindsym --locked --no-repeat XF86AudioMute exec "df-volume toggle-mute"
+
+# Control screen brightness
+bindsym --locked XF86MonBrightnessDown exec dsplight down 5
+bindsym --locked XF86MonBrightnessUp exec dsplight up 5
+
+# Bind media keys for mpris
+bindsym --locked --no-repeat XF86AudioPlay  exec --no-startup-id "playerctl play-pause"
+bindsym --locked --no-repeat XF86AudioPause exec --no-startup-id "playerctl play-pause"
+bindsym --locked --no-repeat XF86AudioStop  exec --no-startup-id "playerctl pause"
+bindsym --locked --no-repeat XF86AudioNext  exec --no-startup-id "playerctl next"
+bindsym --locked --no-repeat XF86AudioPrev  exec --no-startup-id "playerctl previous"
+# Bind media keys for MPD
+bindsym --locked --no-repeat Shift+XF86AudioPlay  exec --no-startup-id "mpc toggle"
+bindsym --locked --no-repeat Shift+XF86AudioPause exec --no-startup-id "mpc toggle"
+bindsym --locked --no-repeat Shift+XF86AudioStop  exec --no-startup-id "mpc pause"
+bindsym --locked --no-repeat Shift+XF86AudioNext  exec --no-startup-id "mpc next"
+bindsym --locked --no-repeat Shift+XF86AudioPrev  exec --no-startup-id "mpc prev"
+
+bindsym XF86Search exec --no-startup-id $menu
+
+# Take a screenshot of the currently focused screen and copy it to the clipboard
+bindsym --no-repeat Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i '(focused)' | cut -d ' ' -f 2)" - | wl-copy
+# Take a screenshot of an area selected with the mouse and copy it to the clipboard
+bindsym --no-repeat Shift+Print exec grim -g "$(slurp)" - | wl-copy
+
+### Power and lock settings
+set $Locker swaylock
+set $mode_system System
+
+# (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym --no-repeat l exec --no-startup-id $Locker, mode "default"
+    bindsym --no-repeat e exec --no-startup-id swaymsg exit, mode "default"
+    bindsym --no-repeat s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym --no-repeat r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym --no-repeat p exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Mod1+l exec --no-startup-id $Locker
 
 
 ### Colors
@@ -163,7 +207,7 @@ set $dim_white #e6e6d1
 # -------------------------------------------------------------------------------------------
 client.focused           $normal_purple $normal_purple $normal_black $normal_purple $normal_purple
 client.focused_tab_title $normal_purple $normal_purple $normal_black $normal_purple $normal_purple
-client.focused_inactive  $bright_purple $normal_black  $normal_white $bright_purple $bright_purple
+client.focused_inactive  $normal_black  $normal_black  $normal_white $normal_black  $normal_black
 client.unfocused         $normal_black  $normal_black  $normal_white $normal_black  $normal_black
 client.urgent            $normal_red    $normal_red    $normal_white $normal_red    $normal_red
 
@@ -173,57 +217,8 @@ titlebar_padding 6 3
 default_border pixel 2
 default_floating_border pixel 2
 
-gaps outer 0
+gaps outer 8
 gaps inner 8
-
-
-### Power and lock settings
-set $Locker swaylock
-set $mode_system System
-# (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id swaymsg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+Mod1+l exec --no-startup-id $Locker
-
-
-### Custom Key Bindings
-bindsym $mod+b exec $webbrowser
-
-# Special Key Bindings
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-mute @DEFAULT_SINK@ 0 && pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-
-bindsym --locked XF86MonBrightnessDown exec dsplight down 5
-bindsym --locked XF86MonBrightnessUp exec dsplight up 5
-
-bindsym --locked XF86AudioPlay  exec --no-startup-id "playerctl play-pause"
-bindsym --locked XF86AudioPause exec --no-startup-id "playerctl play-pause"
-bindsym --locked XF86AudioStop  exec --no-startup-id "playerctl pause"
-bindsym --locked XF86AudioNext  exec --no-startup-id "playerctl next"
-bindsym --locked XF86AudioPrev  exec --no-startup-id "playerctl previous"
-
-bindsym --locked Shift+XF86AudioPlay  exec --no-startup-id "mpc toggle"
-bindsym --locked Shift+XF86AudioPause exec --no-startup-id "mpc toggle"
-bindsym --locked Shift+XF86AudioStop  exec --no-startup-id "mpc pause"
-bindsym --locked Shift+XF86AudioNext  exec --no-startup-id "mpc next"
-bindsym --locked Shift+XF86AudioPrev  exec --no-startup-id "mpc prev"
-
-bindsym XF86Search exec --no-startup-id $menu
-
-bindsym --release Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i '(focused)' | cut -d ' ' -f 2)" - | wl-copy
-bindsym --release Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
 
 ### Per-application Settings

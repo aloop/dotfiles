@@ -13,6 +13,7 @@ ${GOPATH:+:$GOPATH/bin}\
 :${HOME}/.cargo/bin\
 :${HOME}/.fnm\
 :${HOME}/.bin\
+:${DOTFILES_DIR:-"${HOME}/.dotfiles"}/bin\
 ${path_append:+:$path_append}"
 
 _df_is_in_path() {
