@@ -214,6 +214,12 @@ bindsym --locked XF86AudioStop  exec --no-startup-id "playerctl pause"
 bindsym --locked XF86AudioNext  exec --no-startup-id "playerctl next"
 bindsym --locked XF86AudioPrev  exec --no-startup-id "playerctl previous"
 
+bindsym --locked Shift+XF86AudioPlay  exec --no-startup-id "mpc toggle"
+bindsym --locked Shift+XF86AudioPause exec --no-startup-id "mpc toggle"
+bindsym --locked Shift+XF86AudioStop  exec --no-startup-id "mpc pause"
+bindsym --locked Shift+XF86AudioNext  exec --no-startup-id "mpc next"
+bindsym --locked Shift+XF86AudioPrev  exec --no-startup-id "mpc previous"
+
 bindsym XF86Search exec --no-startup-id $menu
 
 bindsym --release Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i '(focused)' | cut -d ' ' -f 2)" - | wl-copy
