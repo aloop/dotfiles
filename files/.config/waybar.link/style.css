@@ -39,9 +39,8 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Inter", "Noto Sans", "DejaVu Sans", "Droid Sans", Roboto,
-        Helvetica, Arial, sans-serif;
-    font-size: 10pt;
+    font-family: "DejaVu Sans Mono", Hack, "Droid Sans Mono", monospace;
+    font-size: 9pt;
     min-height: 0;
 }
 

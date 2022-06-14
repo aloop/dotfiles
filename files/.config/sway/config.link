@@ -12,7 +12,7 @@ set $redshift gammastep -m wayland
 
 ### Font
 
-font pango:Inter,Droid Sans,DejaVu Sans,Noto Sans Normal Bold 10
+font pango:DejaVu Sans Mono,Hack,Droid Sans Normal Bold 9
 
 ### Input and Key bindings
 
