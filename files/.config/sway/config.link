@@ -145,6 +145,8 @@ bindsym --no-repeat Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i '(
 # Take a screenshot of an area selected with the mouse and copy it to the clipboard
 bindsym --no-repeat Shift+Print exec grim -g "$(slurp)" - | wl-copy
 
+bindsym --no-repeat $mod+m exec xdotool key --clearmodifiers ctrl+m
+
 ### Power and lock settings
 set $Locker swaylock
 set $mode_system System
