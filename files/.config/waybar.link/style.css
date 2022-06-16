@@ -56,23 +56,13 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-#window {
-    padding: 0 5px;
-    font-weight: bold;
+.modules-left,
+.modules-center,
+.modules-right {
+    margin: 0 7.5px;
 }
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 #workspaces {
-    margin-left: 7.5px;
-    margin-right: 5px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -93,6 +83,20 @@ window#waybar.solo {
     border-bottom-color: @color-red;
 }
 
+#window {
+    margin-left: 7.5px;
+    font-weight: bold;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
 #mpd,
 #clock,
 #battery,
@@ -106,9 +110,10 @@ window#waybar.solo {
 #mode,
 #idle_inhibitor,
 #custom-media,
+#custom-light-control,
 #custom-weather {
     padding: 0 10px;
-    margin: 0 5px;
+    margin: 0px 2.5px;
     color: @color-white;
     background-color: @color-bright-black;
     border-bottom: 2px solid @color-purple;
@@ -118,7 +123,8 @@ window#waybar.solo {
     font-weight: bold;
     color: @color-bright-black;
     background-color: @color-orange;
-    border-bottom: 2px solid @color-purple;
+    border-top: 2px solid @color-orange;
+    border-bottom: 2px solid @color-orange;
 }
 
 #clock {
@@ -164,6 +170,19 @@ label:focus {
 }
 
 #custom-weather {
+}
+
+#custom-light-control {
+    transition: all 0.5s;
+}
+
+#custom-light-control.light-off {
+}
+
+#custom-light-control.light-on {
+    background-color: @color-dim-yellow;
+    border-bottom-color: @color-dim-yellow;
+    color: @color-black;
 }
 
 #cpu {

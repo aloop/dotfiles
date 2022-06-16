@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+
+set -eEuo pipefail
+
+#
+#  Requires: curl, jq, bc
+#
+# TODO:
+#   - error handling
+#   - color control
+#   - flag to specify an entity_id
+#   - rewrite to use websocket api
+#
+
+# The entity you wish to control
+entity_id=""
+
+# Example: https://homeassistant.example.com/api
+base_url=""
+
+# Your Home Assistant auth token
+auth_token=""
+
+brightness_step=10
+
+# Include a local configuration file if it exists
+if [ -e "${XDG_CONFIG_HOME:-${HOME}/.config}/dotfiles/df-light" ]; then
+    . "${XDG_CONFIG_HOME:-${HOME}/.config}/dotfiles/df-light"
+fi
+
+state_url="${state_path:-${base_url}/states/${entity_id}}"
+service_url="${state_path:-${base_url}/services/light}"
+
+request() {
+    method="$1"
+    shift
+
+    curl -s -X "$method" \
+        -H "Authorization: Bearer ${auth_token}" \
+        -H "Content-Type: application/json" \
+        "$@"
+}
+
+get() {
+    request GET "$@"
+}
+
+put() {
+    request PUT "$@"
+}
+
+post() {
+    request POST "$@"
+}
+
+get_state() {
+    get "${state_url}" | jq '.state'
+}
+
+get_brightness() {
+    get "${state_url}" | jq '.attributes.brightness'
+}
+
+get_brightness_percent() {
+    brightness_raw=$(get_brightness)
+    brightness_percent="$(echo "scale=2; (${brightness_raw} / 255) * 100" | bc)"
+
+    echo "${brightness_percent%.*}"
+}
+
+toggle_light() {
+    post -d "{\"entity_id\":\"${entity_id}\"}" "${service_url}/toggle" >/dev/null
+}
+
+alter_brightness() {
+    amount=$1
+
+    post -d "{\"entity_id\":\"${entity_id}\",\"brightness_step_pct\":\"${amount}\"}" \
+        "${base_url}/services/light/turn_on"
+}
+
+case "${1:-}" in
+    toggle)
+        toggle_light
+        ;;
+    increase-brightness)
+        alter_brightness "${brightness_step}"
+        ;;
+    decrease-brightness)
+        alter_brightness "-${brightness_step}"
+        ;;
+    *)
+        if [ "$(get_state)" = '"on"' ]; then
+            state="on"
+        fi
+
+        cat <<- JSON | jq --unbuffered --compact-output
+            {
+                "alt": "${state:-off}",
+                "tooltip": "",
+                "class": "light-${state:-off}",
+                "percentage": $(get_brightness_percent)
+            }
+JSON
+        ;;
+esac
+
