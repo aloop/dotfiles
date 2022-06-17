@@ -3,7 +3,8 @@
 set $mod Mod4
 set $term ${TERMINAL:-foot}
 
-set $webbrowser ${BROWSER:-firefox}
+set $web-browser firefox
+set $web-browser-private-flag --private-window
 set $menu wofi --conf "${XDG_CONFIG_HOME:-${HOME}/.config}/wofi/sway.conf" --term $term
 set $bar waybar
 set $notfications mako
@@ -112,7 +113,8 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # Application launching keybindings
-bindsym --no-repeat $mod+b exec $webbrowser
+bindsym --no-repeat $mod+b exec $web-browser
+bindsym --no-repeat $mod+Shift+b exec $web-browser $web-browser-private-flag
 bindsym --no-repeat $mod+Return exec $term
 bindsym --no-repeat $mod+space exec --no-startup-id $menu
 
