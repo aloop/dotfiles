@@ -1,6 +1,7 @@
 ### Variables
 
 set $mod Mod4
+set $alt Mod1
 set $term ${TERMINAL:-foot}
 
 set $web-browser firefox
@@ -80,7 +81,7 @@ bindsym --no-repeat $mod+f fullscreen
 bindsym --no-repeat $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Mod1+space focus mode_toggle
+bindsym $mod+$alt+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -146,6 +147,8 @@ bindsym XF86Search exec --no-startup-id $menu
 bindsym --no-repeat Print exec grim -o "$(swaymsg -t get_outputs -p | grep -i '(focused)' | cut -d ' ' -f 2)" - | wl-copy
 # Take a screenshot of an area selected with the mouse and copy it to the clipboard
 bindsym --no-repeat Shift+Print exec grim -g "$(slurp)" - | wl-copy
+# Color Picker
+bindsym --no-repeat $alt+Print exec grim -g "$(slurp -p)" - -t png -o | convert png:- -format '%[pixel:s]\n' info:- | awk -F '[(,)]' '{printf("#%02x%02x%02x",$2,$3,$4)}' | wl-copy -n
 
 bindsym --no-repeat $mod+m exec xdotool key --clearmodifiers ctrl+m
 
@@ -167,7 +170,7 @@ mode "$mode_system" {
 }
 
 bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+Mod1+l exec --no-startup-id $Locker
+bindsym $mod+$alt+l exec --no-startup-id $Locker
 
 
 ### Colors
