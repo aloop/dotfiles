@@ -22,6 +22,7 @@ else
     Plug 'pangloss/vim-javascript'
     Plug 'leafgarland/typescript-vim'
     Plug 'preservim/vim-markdown'
+    Plug 'rust-lang/rust.vim'
 
     " Linting, Autocomplete, and Formatting
     Plug 'editorconfig/editorconfig-vim'

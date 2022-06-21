@@ -10,7 +10,6 @@ if command -v code >/dev/null 2>&1; then
         --install-extension "dbaeumer.vscode-eslint" \
         --install-extension "dracula-theme.theme-dracula" \
         --install-extension "editorconfig.editorconfig" \
-        --install-extension "ms-vscode.vscode-typescript-tslint-plugin" \
         --install-extension "esbenp.prettier-vscode" \
         --install-extension "junstyle.php-cs-fixer" \
         --install-extension "golang.Go" \
@@ -19,6 +18,7 @@ if command -v code >/dev/null 2>&1; then
         --install-extension "timonwong.shellcheck" \
         --install-extension "vscode-icons-team.vscode-icons" \
         --install-extension "whatwedo.twig" \
+        --install-extension "rust-lang.rust-analyzer" \
         --install-extension "ms-vscode-remote.remote-ssh"
 
 else
