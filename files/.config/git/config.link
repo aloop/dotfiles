@@ -6,6 +6,8 @@
     signingKey = B01478CBEF5DE5E9!
 [commit]
     gpgSign = true
+[init]
+    defaultBranch = main
 [push]
     default = simple
 [pull]
