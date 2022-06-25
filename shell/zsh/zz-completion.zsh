@@ -1,5 +1,6 @@
 fpath=(
     "${DOTFILES_DIR}/shell/zsh/completions"
+    "${DOTFILES_DIR}/shell/zsh/vendor/completions"
     "${fpath[@]}"
 )
 
