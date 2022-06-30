@@ -15,7 +15,7 @@
 [tag]
     gpgSign = true
 [diff]
-    tool = vimdiff
+    tool = nvimdiff
     renames = copies
 [difftool]
     prompt = false

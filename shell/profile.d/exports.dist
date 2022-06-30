@@ -7,7 +7,10 @@ fi
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_CASK_OPTS="--appdir=${HOME}/Applications"
 
-if df_command_exists vim; then
+if df_command_exists nvim; then
+    export EDITOR="nvim"
+    export VISUAL="nvim"
+elif df_command_exists vim; then
     export EDITOR="vim"
     export VISUAL="vim"
 fi
