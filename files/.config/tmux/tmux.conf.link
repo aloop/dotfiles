@@ -1,14 +1,6 @@
 ### General Settings
 ################################################################################
 
-# Set vars for tmux version
-set -g @version-major "tmux -V | cut -d' ' -f2 | cut -d'.' -f1 | sed 's/[^0-9]*//g'"
-set -g @version-minor "tmux -V | cut -d' ' -f2 | cut -d'.' -f2 | sed 's/[^0-9]*//g'"
-
-# Use UTF-8 in older versions of tmux
-if-shell "[ $(#{@version-major}) -eq 1 ] || { [ $(#{@version-major}) -eq 2 ] && [ $(#{@version-minor}) -le 1 ] }" \
-    'set -wg utf8 on; set-option -g status-utf8 on'
-
 set -wg xterm-keys on
 
 # Enable mouse
@@ -29,7 +21,7 @@ set -g history-limit 10000
 # on-screen time (in in milliseconds) for C-a q
 set -g display-panes-time 2000
 
-set -g default-terminal "screen-256color"
+set -g default-terminal "tmux-256color"
 
 # Number the windows starting at 1
 set -g base-index 1
@@ -44,6 +36,8 @@ set -g focus-events on
 
 # Enable OSC52 clipboard handling
 set -g set-clipboard on
+
+set -qg allow-passthrough on
 
 ### Key Bindings
 ################################################################################
