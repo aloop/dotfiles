@@ -35,6 +35,9 @@ else
     " Color Schemes
     Plug 'dracula/vim'
 
+    " Clipboard
+    Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+
     " Other Plugins
     Plug 'vim-airline/vim-airline'
     Plug 'tpope/vim-surround'

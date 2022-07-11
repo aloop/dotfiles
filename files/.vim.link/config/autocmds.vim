@@ -13,5 +13,7 @@ augroup myautocmds
 
     " Recognize .md files as Markdown
     autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+    autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
 augroup END
 
