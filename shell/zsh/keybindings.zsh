@@ -50,6 +50,9 @@ df_safe_bindkey "${df_key[Down]}" down-line-or-beginning-search
 df_safe_bindkey "${df_key[Home]}" beginning-of-line
 df_safe_bindkey "${df_key[End]}" end-of-line
 
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+
 # Enable Delete
 df_safe_bindkey "${df_key[Delete]}" delete-char
 
