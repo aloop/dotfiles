@@ -40,7 +40,7 @@ bold-text-in-bright=no
 # command-focused=no
 
 [scrollback]
-# lines=1000
+lines=10000
 # multiplier=3.0
 # indicator-position=relative
 # indicator-format=
