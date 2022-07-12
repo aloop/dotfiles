@@ -3,7 +3,31 @@ set nocompatible
 
 set encoding=utf-8
 
-let vim_dir = expand('~/.vim')
+" Set vim config location
+if has('nvim')
+    if empty($XDG_CONFIG_HOME)
+        let vim_dir = expand('~/.config/nvim')
+    else
+        let vim_dir = $XDG_CONFIG_HOME . '/nvim'
+    endif
+else
+    let vim_dir = expand('~/.vim')
+endif
+
+" Set vim plugins location
+if has('nvim')
+    if empty($XDG_DATA_HOME)
+        let plugins_dir = expand('~/.local/share/nvim/plugged')
+    else
+        let plugins_dir = $XDG_DATA_HOME . '/nvim/plugged'
+    endif
+else
+    if empty($XDG_DATA_HOME)
+        let plugins_dir = expand('~/.local/share/vim/plugged')
+    else
+        let plugins_dir = $XDG_DATA_HOME . '/vim/plugged'
+    endif
+endif
 
 " Per-system file for settings that need to occur before all other settings {{{
 runtime before.vim
@@ -35,5 +59,6 @@ runtime config/plugin-markdown.vim
 runtime config/plugin-editorconfig.vim
 " }}}
 
-" Anything you want to include after this file can be put into ~/.vim/vimrc.local
-runtime vimrc.local
+" Per-system file for settings that need to occur after all other settings {{{
+runtime after.vim
+" }}}

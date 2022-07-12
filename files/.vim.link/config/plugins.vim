@@ -1,22 +1,26 @@
 if !executable('git')
-    echom 'WARNING: Git not found. Please install git and re-open vim to use your Vundle plugins'
+    echom 'WARNING: Git not found. Please install git and re-open vim to use your plugins'
 elseif !executable('wget') && !executable('curl')
     echom 'WARNING: Neither wget or curl are available for initializing plugins'
 else
     let s:plugins_initial_install = 0
     if !filereadable(vim_dir . '/autoload/plug.vim')
-        if executable('wget')
-            silent execute printf('!mkdir -p %s', shellescape(vim_dir . '/autoload', 1))
-            silent execute printf('!wget -qO %s https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim', shellescape(vim_dir . '/autoload/plug.vim', 1))
-        elseif executable('curl')
+        if executable('curl')
             silent execute printf('!curl --create-dirs -fLo %s https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim', shellescape(vim_dir . '/autoload/plug.vim', 1))
+        elseif executable('wget')
+            call mkdir(vim_dir . '/autoload', 'p')
+            silent execute printf('!wget -qO %s https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim', shellescape(vim_dir . '/autoload/plug.vim', 1))
         endif
         let s:plugins_initial_install = 1
     endif
 
+    if !isdirectory(plugins_dir)
+        call mkdir(plugins_dir, 'p')
+    endif
+
     " vim-plug setup {{{
 
-    call plug#begin(vim_dir . '/plugged')
+    call plug#begin(plugins_dir)
 
     " Language Syntaxes
     Plug 'pangloss/vim-javascript'
@@ -33,7 +37,7 @@ else
     Plug 'mhinz/vim-signify'
 
     " Color Schemes
-    Plug 'dracula/vim'
+    Plug 'dracula/vim', {'as': 'dracula'}
 
     " Clipboard
     Plug 'ojroques/vim-oscyank', {'branch': 'main'}
