@@ -16,6 +16,7 @@ get_extension() (
 
 highlight_str() (
     case "$1" in
+        yellow) highlight_color_code=33 ;;
         purple) highlight_color_code=35 ;;
         green) highlight_color_code=32 ;;
         cyan) highlight_color_code=36 ;;
@@ -28,17 +29,17 @@ highlight_str() (
 )
 
 success_message() (
-    _action=${1:?}
-    _src=${2:?}
-    _dest=${3:?}
+    _action="${1:?}"
+    _src="${2:?}"
+    _dest="${3:?}"
 
     printf '%s from %s to %s\n' "$_action" "$(highlight_str green "~${_src#"${HOME}"}")" "$(highlight_str green "~${_dest#"${HOME}"}")"
 )
 
 failure_message() (
-    _action=${1:?}
-    _src=${2:?}
-    _dest=${3:?}
+    _action="${1:?}"
+    _src="${2:?}"
+    _dest="${3:?}"
 
     printf '%s from %s to %s\n' "$_action" "$(highlight_str red "~${_src#"${HOME}"}")" "$(highlight_str red "~${_dest#"${HOME}"}")"
 )
@@ -72,6 +73,7 @@ script_name="$(basename "$0")"
 dotfiles_base_dir="$(cd "$(dirname "$0")" && pwd -P)"
 scripts_dir="$(join_path "${dotfiles_base_dir}" "scripts")"
 dotfiles_dir="$(join_path "${dotfiles_base_dir}" "files")"
+dotfiles_env_dir="$(join_path "${dotfiles_base_dir}" "files-env")"
 backups_base="${dotfiles_base_dir}/backups/backup-$(date "+%Y-%m-%d-%H%M%S")"
 
 # Set option defaults
@@ -93,7 +95,7 @@ if [ -z "${dotfiles_base_dir#/}" ]; then
 fi
 
 backup_original() (
-    _src=${1:?"No source path given"}
+    _src="${1:?"No source path given"}"
 
     backup_dest="$(join_path "$backups_base" "${_src#"${HOME}"}")"
     backup_parent="$(dirname "$backup_dest")"
@@ -132,7 +134,7 @@ backup_original() (
 )
 
 mk_dest_dir() (
-    _path=${1:?"No path given"}
+    _path="${1:?"No path given"}"
 
     if [ "$_path" = "$HOME" ] || [ -d "$_path" ]; then
         return
@@ -145,8 +147,8 @@ mk_dest_dir() (
 )
 
 copy_path() (
-    _src=${1:?"No source path given"}
-    _dest=${2:?"No destination path given"}
+    _src="${1:?"No source path given"}"
+    _dest="${2:?"No destination path given"}"
 
     if [ "$no_copies" = 1 ]; then
         return
@@ -161,8 +163,8 @@ copy_path() (
 )
 
 link_path() (
-    _src=${1:?"No source path given"}
-    _dest=${2:?"No destination path given"}
+    _src="${1:?"No source path given"}"
+    _dest="${2:?"No destination path given"}"
 
     if [ "$no_links" = 1 ]; then
         return
@@ -177,8 +179,8 @@ link_path() (
 )
 
 hardlink_file() (
-    _src=${1:?"No source path given"}
-    _dest=${2:?"No destination path given"}
+    _src="${1:?"No source path given"}"
+    _dest="${2:?"No destination path given"}"
 
     if [ "$no_links" = 1 ]; then
         return
@@ -196,20 +198,33 @@ hardlink_file() (
     ln -f "$_src" "$_dest" && success_message 'Hardlinked' "$_src" "$_dest"
 )
 
-install_dotfiles() (
-    _dir=${1:-$dotfiles_dir}
+process_dotfiles() (
+    _dir="${1:-"$dotfiles_dir"}"
+    _src_base="${2}"
+    _dest_base="${3}"
 
-    # From http://www.dwheeler.com/essays/filenames-in-shell.html#summary
+    if [ -n "$_src_base" ] && [ -z "$_dest_base" ]; then
+        printf "%s\n" "$(highlight_str red "\"\$_src_base\" cannot have a value while \"\$_dest_base\" is empty. Exiting...")"
+        exit 1
+    elif [ -z "$_src_base" ] && [ -n "$_dest_base" ]; then
+        printf "%s\n" "$(highlight_str red "\"\$_dest_base\" cannot have a value while \"\$_src_base\" is empty. Exiting...")"
+        exit 1
+    fi
+
     for _src in "$_dir"/* "$_dir"/.[!.]* "$_dir"/..?*; do
         if [ -e "$_src" ] || [ -L "$_src" ]; then
-            _type=$(get_extension "$_src")
+            _type="$(get_extension "$_src")"
 
-            _dest=$(join_path "$HOME" "${_src#"${dotfiles_dir}"}")
+            if [ -z "$_src_base" ] && [ -z "$_dest_base" ]; then
+                _dest="$(join_path "$HOME" "${_src#"${dotfiles_dir}"}")"
+            else
+                _dest="$(join_path "$_dest_base" "${_src#"${_src_base}"}")"
+            fi
 
-            # Remove .link or .copy from the destination name
-            _dest=${_dest%.link}
-            _dest=${_dest%.hardlink}
-            _dest=${_dest%.copy}
+            # Remove .link, .hardlink, and .copy from the destination name
+            _dest="${_dest%.link}"
+            _dest="${_dest%.hardlink}"
+            _dest="${_dest%.copy}"
 
             case "$_type" in
                 copy)
@@ -223,12 +238,58 @@ install_dotfiles() (
                     ;;
                 *)
                     if [ -d "$_src" ]; then
-                        install_dotfiles "$_src"
+                        process_dotfiles "$_src" "$_src_base" "$_dest_base"
                     fi
                     ;;
             esac
         fi
     done
+)
+
+process_dotfiles_from_env_path() (
+    _dir="${dotfiles_env_dir}"
+
+    for _src in "$_dir"/* "$_dir"/.[!.]* "$_dir"/..?*; do
+        if [ -d "$_src" ]; then
+            env_var_name="${_src##*/}"
+
+            if [ -z "$env_var_name" ]; then
+                printf "%s\n" "$(highlight_str red "Environment variable name not given! exiting")"
+                exit 1
+            fi
+
+            # Don't like using eval here, but I don't think there is another
+            # way in posix sh
+            env_var_value="$(eval echo "\$$env_var_name")"
+
+            if [ -z "$env_var_value" ]; then
+                # Try to set some default fallbacks
+                case "$env_var_name" in
+                    XDG_CONFIG_HOME)
+                        env_var_value="${HOME}/.config"
+                        ;;
+                    XDG_DATA_HOME)
+                        env_var_value="${HOME}/.local/share"
+                        ;;
+                    XDG_STATE_HOME)
+                        env_var_value="${HOME}/.local/state"
+                        ;;
+                    *)
+                        printf "%s\n" "$(highlight_str yellow "Environment variable \"${env_var_name}\" not set, skipping directory...")"
+                        continue
+                        ;;
+                esac
+            fi
+
+            printf "%s\n" "$(highlight_str cyan "Resolved \"\$${env_var_name}\" to \"${env_var_value}\"")"
+
+            process_dotfiles "$_src" "$_src" "$env_var_value"
+        fi
+    done
+)
+
+install() (
+    process_dotfiles && process_dotfiles_from_env_path
 )
 
 ## Handle Settings
@@ -315,4 +376,4 @@ if [ -n "$do_script" ]; then
     exit $?
 fi
 
-install_dotfiles
+install
