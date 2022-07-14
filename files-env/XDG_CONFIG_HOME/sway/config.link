@@ -8,7 +8,7 @@ set $web-browser firefox
 set $web-browser-private-flag --private-window
 set $menu wofi --conf "${XDG_CONFIG_HOME:-${HOME}/.config}/wofi/sway.conf" --term $term
 set $bar waybar
-set $notfications mako
+set $notifications mako
 set $redshift gammastep -m wayland
 
 
