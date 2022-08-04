@@ -5,7 +5,9 @@ set $alt Mod1
 set $term ${TERMINAL:-foot}
 
 set $web-browser firefox
+set $alternate-web-browser chromium
 set $web-browser-private-flag --private-window
+set $alternate-web-browser-private-flag --incognito
 set $menu wofi --conf "${XDG_CONFIG_HOME:-${HOME}/.config}/wofi/sway.conf" --term $term
 set $bar waybar
 set $notifications mako
@@ -116,6 +118,8 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Application launching keybindings
 bindsym --no-repeat $mod+b exec $web-browser
 bindsym --no-repeat $mod+Shift+b exec $web-browser $web-browser-private-flag
+bindsym --no-repeat $mod+$alt+b exec $alternate-web-browser
+bindsym --no-repeat $mod+$alt+Shift+b exec $alternate-web-browser $alternate-web-browser-private-flag
 bindsym --no-repeat $mod+Return exec $term
 bindsym --no-repeat $mod+space exec --no-startup-id $menu
 
@@ -228,6 +232,11 @@ gaps outer 8
 gaps inner 8
 
 
+### Focus settings
+
+focus_follows_mouse no
+
+
 ### Per-application Settings
 
 for_window [class="Steam"] floating enable
@@ -247,7 +256,7 @@ include "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf"
 bar swaybar_command $bar
 
 # Notifications
-exec --no-startup-id $notifications
+exec $notifications
 
 # Redshift
 exec $redshift
