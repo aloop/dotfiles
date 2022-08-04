@@ -2,7 +2,7 @@ mpd_host = "localhost"
 mpd_port = "6600"
 mpd_music_dir = "~/Music/Library/"
 
-playlist_disable_highlight_delay = "3"
+playlist_disable_highlight_delay = 0
 message_delay_time = "1"
 header_visibility = yes
 statusbar_visibility = yes
@@ -22,8 +22,11 @@ header_text_scrolling = yes
 display_remaining_time = yes
 display_bitrate = yes
 ignore_leading_the = yes
+ignore_diacritics = yes
 empty_tag_marker = ""
 show_duplicate_tags = no
+autocenter_mode = yes
+playlist_separate_albums = yes
 
 # Safety
 allow_for_physical_item_deletion = no
@@ -50,5 +53,5 @@ mouse_list_scroll_whole_page = no
 lines_scrolled = 6
 
 screen_switcher_mode = playlist, media_library
-startup_screen = media_library
+startup_screen = playlist
 
