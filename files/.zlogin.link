@@ -5,6 +5,6 @@ if [ -f "${HOME}/.zlogin.local" ]; then
     . "${HOME}/.zlogin.local"
 fi
 
-# Source scripts inteneded to autostart programs on login (e.g. tmux in an ssh session)
+# Source scripts intended to autostart programs on login (e.g. tmux in an ssh session)
 . "${DOTFILES_DIR}/shell/autostart"
 
