@@ -20,11 +20,10 @@ font pango:DejaVu Sans Mono,Hack,Droid Sans Normal Bold 9
 
 ### Input and Key bindings
 
-input * {
+input type:keyboard {
     repeat_delay 250
     repeat_rate 50
-    # Disabled because of an issue with Firefox crashing on sway config reload
-    #xkb_numlock enabled
+    xkb_numlock enabled
     xkb_options ctrl:nocaps
 }
 
@@ -234,7 +233,7 @@ gaps inner 8
 
 ### Focus settings
 
-focus_follows_mouse no
+focus_follows_mouse yes
 
 
 ### Per-application Settings
