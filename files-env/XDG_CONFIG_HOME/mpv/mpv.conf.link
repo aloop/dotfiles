@@ -1,22 +1,22 @@
 # GPU Acceleration
 
-vo=gpu
+vo=gpu-next
 profile=gpu-hq
-# hwdec=auto-copy
-hwdec=no
+hwdec=auto
 fbo-format=rgba32f
+gpu-context=auto # or wayland
 gpu-api=vulkan
 vulkan-async-compute=yes
 vulkan-async-transfer=yes
 vulkan-queue-count=8
 spirv-compiler=auto
 hdr-compute-peak=yes
-tone-mapping=mobius
+tone-mapping=bt.2446a
 
 # Video Quality Settings
 
 dither-depth=auto
-dither=error-diffusion
+dither=fruit
 temporal-dither=yes
 error-diffusion=jarvis-judice-ninke
 #error-diffusion=atkinson
@@ -26,9 +26,12 @@ error-diffusion=jarvis-judice-ninke
 video-sync=display-resample
 interpolation
 
-scale=ewa_lanczossharp
-dscale=ewa_lanczossharp
-cscale=ewa_lanczossharp
+scale=ewa_lanczos
+scale-blur=0.981251
+dscale=ewa_lanczos
+dscale-blur=0.981251
+cscale=ewa_lanczos
+cscale-blur=0.981251
 correct-downscaling=yes
 sigmoid-upscaling=yes
 tscale=oversample
@@ -37,13 +40,10 @@ tscale=oversample
 
 target-prim=auto
 target-trc=auto
-gamma-auto
 
 # Audio Configuration
 
 volume-max=100
-# fix audio popping when seeking
-audio-stream-silence
 
 # Window Configuration
 
@@ -83,4 +83,4 @@ screenshot-high-bit-depth=yes
 hls-bitrate=max
 
 # Make sure to use yt-dlp
-script-opts=ytdl_hook-try_ytdl_first=yes,ytdl_hook-ytdl_path=yt-dlp
+#script-opts=ytdl_hook-try_ytdl_first=yes,ytdl_hook-ytdl_path=yt-dlp

@@ -4,11 +4,10 @@
     "workbench.statusBar.feedback.visible": false,
     "workbench.iconTheme": "vscode-icons",
     "editor.fontFamily": "Hack, 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "Catppuccin Mocha",
     "editor.minimap.enabled": false,
     "editor.rulers": [80, 120],
-    "editor.renderIndentGuides": true,
-    "editor.tabCompletion": true,
+    "editor.tabCompletion": "onlySnippets",
     "editor.mouseWheelZoom": false,
     "editor.dragAndDrop": false,
     "breadcrumbs.enabled": true,
@@ -44,6 +43,13 @@
     "vsicons.dontShowNewVersionMessage": true,
     "editor.formatOnSaveTimeout": 5000,
     "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs":"active",
-    "telemetry.telemetryLevel": "off"
+    "editor.guides.bracketPairs": "active",
+    "telemetry.telemetryLevel": "off",
+    "editor.guides.indentation": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "git.confirmSync": false,
+    "[go]": {
+        "editor.defaultFormatter": "golang.go"
+    }
 }

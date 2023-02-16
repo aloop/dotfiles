@@ -4,7 +4,7 @@ endif
 
 set background=dark
 
-silent! colorscheme dracula
+silent! colorscheme catppuccin-mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
 highlight Normal ctermfg=231 ctermbg=NONE guibg=NONE cterm=NONE
 highlight CursorLine ctermbg=237 cterm=none

@@ -37,7 +37,8 @@ else
     Plug 'mhinz/vim-signify'
 
     " Color Schemes
-    Plug 'dracula/vim', {'as': 'dracula'}
+    "Plug 'dracula/vim', {'as': 'dracula'}
+    Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
     " Clipboard
     Plug 'ojroques/vim-oscyank', {'branch': 'main'}

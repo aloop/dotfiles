@@ -8,7 +8,7 @@ if command -v code >/dev/null 2>&1; then
         --install-extension "bmewburn.vscode-intelephense-client" \
         --install-extension "christian-kohler.path-intellisense" \
         --install-extension "dbaeumer.vscode-eslint" \
-        --install-extension "dracula-theme.theme-dracula" \
+        --install-extension "catppuccin.catppuccin-vsc" \
         --install-extension "editorconfig.editorconfig" \
         --install-extension "esbenp.prettier-vscode" \
         --install-extension "junstyle.php-cs-fixer" \
