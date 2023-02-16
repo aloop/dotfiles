@@ -1,0 +1,13 @@
+# @see https://wiki.archlinux.org/title/PipeWire#No_notification_sounds_from_Discord
+pulse.rules = [
+    {
+        # Discord notification sounds fix
+        matches = [ { application.process.binary = "Discord" } ]
+        actions = {
+            update-props = {
+                pulse.min.quantum = 1024/48000 # 21ms
+            }
+        }
+    }
+]
+
