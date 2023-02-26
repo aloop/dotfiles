@@ -23,14 +23,15 @@ else
     call plug#begin(plugins_dir)
 
     " Language Syntaxes
-    Plug 'pangloss/vim-javascript'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'preservim/vim-markdown'
     Plug 'rust-lang/rust.vim'
 
     " Linting, Autocomplete, and Formatting
     Plug 'editorconfig/editorconfig-vim'
     Plug 'dense-analysis/ale'
+
+    if has('nvim')
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    endif
 
     " Git
     Plug 'tpope/vim-fugitive'

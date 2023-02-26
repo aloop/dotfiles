@@ -59,6 +59,10 @@ runtime config/plugin-markdown.vim
 runtime config/plugin-editorconfig.vim
 " }}}
 
+if has('nvim')
+    lua require('aloop')
+endif
+
 " Per-system file for settings that need to occur after all other settings {{{
 runtime after.vim
 " }}}
