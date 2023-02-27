@@ -10,7 +10,5 @@ set wildignore+=*.DS_Store,*.swp,*.bak
 " Compiled file ignores
 set wildignore+=*.pyc
 
-" Save a system file even if vim was launched without root privileges.
-" I am unsure where this snippet is orignially from.
+" Save a file using sudo
 cmap w!! w !sudo tee % >/dev/null
-

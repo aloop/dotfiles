@@ -4,29 +4,13 @@ set nocompatible
 set encoding=utf-8
 
 " Set vim config location
-if has('nvim')
-    if empty($XDG_CONFIG_HOME)
-        let vim_dir = expand('~/.config/nvim')
-    else
-        let vim_dir = $XDG_CONFIG_HOME . '/nvim'
-    endif
-else
-    let vim_dir = expand('~/.vim')
-endif
+let vim_dir = expand('~/.vim')
 
 " Set vim plugins location
-if has('nvim')
-    if empty($XDG_DATA_HOME)
-        let plugins_dir = expand('~/.local/share/nvim/plugged')
-    else
-        let plugins_dir = $XDG_DATA_HOME . '/nvim/plugged'
-    endif
+if empty($XDG_DATA_HOME)
+    let plugins_dir = expand('~/.local/share/vim/plugged')
 else
-    if empty($XDG_DATA_HOME)
-        let plugins_dir = expand('~/.local/share/vim/plugged')
-    else
-        let plugins_dir = $XDG_DATA_HOME . '/vim/plugged'
-    endif
+    let plugins_dir = $XDG_DATA_HOME . '/vim/plugged'
 endif
 
 " Per-system file for settings that need to occur before all other settings {{{
@@ -58,10 +42,6 @@ runtime config/plugin-airline.vim
 runtime config/plugin-markdown.vim
 runtime config/plugin-editorconfig.vim
 " }}}
-
-if has('nvim')
-    lua require('aloop')
-endif
 
 " Per-system file for settings that need to occur after all other settings {{{
 runtime after.vim

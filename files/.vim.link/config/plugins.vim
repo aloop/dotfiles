@@ -29,10 +29,6 @@ else
     Plug 'editorconfig/editorconfig-vim'
     Plug 'dense-analysis/ale'
 
-    if has('nvim')
-        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    endif
-
     " Git
     Plug 'tpope/vim-fugitive'
     Plug 'mhinz/vim-signify'
