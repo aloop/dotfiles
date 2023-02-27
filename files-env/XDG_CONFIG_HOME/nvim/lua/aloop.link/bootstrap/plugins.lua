@@ -18,7 +18,10 @@ return require('packer').startup(function(use)
     -- Language Syntaxes
     use {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end
     }
 
     -- Linting, Autocomplete, and Formatting
