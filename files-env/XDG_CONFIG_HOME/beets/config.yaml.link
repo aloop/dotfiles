@@ -13,6 +13,7 @@ plugins:
     - badfiles
     - lyrics
     - smartplaylist
+    - scrub
 
 directory: ~/Music/Library
 library: ~/Music/Library/beets.db
@@ -29,9 +30,11 @@ import:
     copy: no
     move: yes
     timid: yes
-    #from_scratch: yes
     # Prefer english names when possible
     languages: en
+
+scrub:
+    auto: yes
 
 musicbrainz:
     extra_tags: [catalognum]
