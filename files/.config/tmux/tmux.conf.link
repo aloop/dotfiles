@@ -38,7 +38,7 @@ set -g automatic-rename on
 set -g focus-events on
 
 # Enable OSC52 clipboard handling
-set -g set-clipboard on
+set -s set-clipboard on
 
 set -qg allow-passthrough on
 

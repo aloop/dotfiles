@@ -14,6 +14,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Use OSCYank to copy yanked text to the system clipboard
 vim.api.nvim_create_autocmd("TextYankPost", {
-    command = 'if v:event.operator is "y" && v:event.regname is "" | OSCYankReg " | endif',
+    command = [[if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif]],
     group = custom_augroup
 })
