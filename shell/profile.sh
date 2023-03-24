@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+# shellcheck shell=bash
 
 # Create needed functions
 
@@ -12,12 +12,8 @@ df_command_exists() (
 
 # Start sourcing
 
-for df_profile_file in "${DOTFILES_DIR}"/shell/profile.d/*; do
-    if
-        [ -e "${df_profile_file}" ] &&
-        [ "${df_profile_file%"/.gitignore"}" = "${df_profile_file}" ] &&
-        [ "${df_profile_file%".disabled"}" = "${df_profile_file}" ]
-    then
+for df_profile_file in "${DOTFILES_DIR}"/shell/profile.d/*.sh; do
+    if [ -e "${df_profile_file}" ]; then
         . "${df_profile_file}"
     fi
 done
@@ -25,4 +21,3 @@ unset df_profile_file
 
 # Let `./interactive` know that we've already initialized
 df_profile_initialized="true"
-

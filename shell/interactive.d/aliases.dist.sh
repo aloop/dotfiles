@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+# shellcheck shell=bash
 
 # Enable aliases in sudo commands
 alias sudo="sudo "

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+# shellcheck shell=bash
 
 is_osx() {
     [ "$(uname)" = "Darwin" ]

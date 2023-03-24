@@ -4,7 +4,7 @@
 # If DOTFILES_DIR is set, use it, otherwise default to `$HOME/.dotfiles`
 export DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 
-. "${DOTFILES_DIR}/shell/interactive"
+. "${DOTFILES_DIR}/shell/interactive.sh"
 
 # Load bash config files
 for df_bashrc_file in "${DOTFILES_DIR}"/shell/bash/*.bash; do

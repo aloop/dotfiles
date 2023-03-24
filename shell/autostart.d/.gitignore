@@ -4,5 +4,5 @@
 
 # Except for the following:
 
-!*.dist
+!*.dist.sh
 !.gitignore

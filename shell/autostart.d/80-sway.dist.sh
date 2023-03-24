@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+# shellcheck shell=bash
 
 # Make sure we're in an interactive shell
 case $- in

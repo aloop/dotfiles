@@ -50,7 +50,7 @@ if [ -f "${ZPLUG_HOME}/init.zsh" ]; then
 fi
 
 # Source scripts intended for an interactive shell
-. "${DOTFILES_DIR}/shell/interactive"
+. "${DOTFILES_DIR}/shell/interactive.sh"
 
 # Load zsh config files
 for df_zshrc_file in "${DOTFILES_DIR}"/shell/zsh/*.zsh; do

@@ -6,4 +6,4 @@ if [ -f "${ZDOTDIR}/local/.zlogin" ]; then
 fi
 
 # Source scripts intended to autostart programs on login (e.g. tmux in an ssh session)
-. "${DOTFILES_DIR}/shell/autostart"
+. "${DOTFILES_DIR}/shell/autostart.sh"

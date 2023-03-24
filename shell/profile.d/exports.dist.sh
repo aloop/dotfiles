@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+# shellcheck shell=bash
 
 if df_command_exists brew; then
     export ARCHFLAGS="${ARCHFLAGS:-"-arch x86_64"}"

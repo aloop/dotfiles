@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+# shellcheck shell=bash
 
 if df_command_exists gpg-connect-agent && df_command_exists gpgconf; then
     GPG_TTY="$(tty)"
