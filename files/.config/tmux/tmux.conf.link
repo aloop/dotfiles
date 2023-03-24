@@ -1,7 +1,7 @@
 ### General Settings
 ################################################################################
 
-set -wg xterm-keys on
+set -g xterm-keys on
 
 # Enable mouse
 set -g mouse on
@@ -21,8 +21,10 @@ set -g history-limit 10000
 # on-screen time (in in milliseconds) for C-a q
 set -g display-panes-time 2000
 
-set -g default-terminal "xterm-256color"
-set -ga terminal-overrides ",xterm-256color:Tc"
+set -g default-terminal "tmux-256color"
+
+# Enable RGB color
+set-option -sa terminal-overrides ",*256colo*:RGB"
 
 # Number the windows starting at 1
 set -g base-index 1
