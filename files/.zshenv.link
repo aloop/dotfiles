@@ -2,8 +2,8 @@ if [ -f "${HOME}/.before" ]; then
     . "${HOME}/.before"
 fi
 
-if [ -f "${ZDOTDIR}/local/.zshenv" ]; then
-    . "${ZDOTDIR}/local/.zshenv"
+if [ -f "${HOME}/.zshenv.local" ]; then
+    . "${HOME}/.zshenv.local"
 fi
 
 # If DOTFILES_DIR is set, use it, otherwise default to `$HOME/.dotfiles`
