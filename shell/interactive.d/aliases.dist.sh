@@ -24,6 +24,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 if df_command_exists exa; then
+    # shellcheck disable=SC2262
+    alias ls="exa"
     # List all files and directories
     alias l="exa --long --group --classify --all"
     alias la="exa --long --group --classify --all"
@@ -63,7 +65,6 @@ alias grh="git reset HEAD"
 
 ## youtube-dl aliases
 alias ytdl="yt-dlp -f 'bestvideo[ext!=webm]+bestaudio[ext!=webm]/best[ext!=webm]'"
-alias ytdl_boost="ytdl --downloader-args aria2c:'-c -j 8 -x 8 -s 8 -k 5M'"
 
 # For long-running applications that you don't want to exit when you log out
 # on some systems running systemd
