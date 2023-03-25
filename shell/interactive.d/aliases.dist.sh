@@ -7,6 +7,7 @@ if df_command_exists nvim; then
     alias vim="nvim"
     alias vi="nvim"
     alias e="nvim"
+    alias vimdiff="nvim -d"
 elif df_command_exists vim; then
     alias vi="vim"
     alias e="vim"
