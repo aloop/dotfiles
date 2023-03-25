@@ -30,6 +30,8 @@ if [ "${XDG_DATA_DIRS#*/snapd/desktop}" = "${XDG_DATA_DIRS}" ]; then
     export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}:/var/lib/snapd/desktop"
 fi
 
+export GNUPGHOME="${GNUPGHOME:-"${XDG_CONFIG_HOME}/gnupg"}"
+
 export PAGER="${PAGER:-"less"}"
 
 export LESS="${LESS:-"-CRi -x4"}"
