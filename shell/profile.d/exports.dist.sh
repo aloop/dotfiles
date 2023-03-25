@@ -1,12 +1,5 @@
 # shellcheck shell=bash
 
-if df_command_exists brew; then
-    export ARCHFLAGS="${ARCHFLAGS:-"-arch x86_64"}"
-fi
-
-export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_CASK_OPTS="--appdir=${HOME}/Applications"
-
 if df_command_exists nvim; then
     export EDITOR="nvim"
     export VISUAL="nvim"
