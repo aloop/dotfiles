@@ -13,8 +13,6 @@ set -s escape-time 50
 # rather than all windows in the current session.
 set -wg aggressive-resize on
 
-set -wg automatic-rename
-
 # scroll-back buffer lines
 set -g history-limit 10000
 
@@ -33,7 +31,7 @@ set -wg pane-base-index 1
 # Set terminal title
 set -g set-titles on
 set -g set-titles-string '#(whoami)@#H: #W'
-set -g automatic-rename on
+set -wg automatic-rename on
 
 set -g focus-events on
 
