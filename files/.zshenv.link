@@ -14,8 +14,8 @@ export DOTFILES_DIR="${DOTFILES_DIR:-"$HOME/.dotfiles"}"
 # Set the directory that the other ZSH startup files should be loaded from
 export ZDOTDIR="${ZDOTDIR:="${XDG_CONFIG_HOME}/zsh"}"
 
-# Set zplug install directory
-export ZPLUG_HOME="${XDG_DATA_HOME}/zplug"
+# Set plugin install directory
+export DOTFILES_ZSH_PLUGINS_DIR="${DOTFILES_ZSH_PLUGINS_DIR:-"${XDG_DATA_HOME}/dotfiles/zsh-plugins"}"
 
 if [ -f "${HOME}/.after" ]; then
     . "${HOME}/.after"
