@@ -1,4 +1,5 @@
 autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
 
 dotfiles_setup_vcs_info() {
     PROMPT_VCS_CLEAN_SYMBOL="✓"
@@ -51,7 +52,7 @@ dotfiles_setup_vcs_info() {
         fi
     }
 
-    vcs_info_precmd() {
+    _dotfiles_vcs_info_precmd() {
         vcs_info
 
         # Condense consecutive spaces into a single space
@@ -60,7 +61,7 @@ dotfiles_setup_vcs_info() {
         done
     }
 
-    precmd_functions+=vcs_info_precmd
+	add-zsh-hook -Uz precmd _dotfiles_vcs_info_precmd
 }
 
 dotfiles_setup_vcs_info

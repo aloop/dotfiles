@@ -30,7 +30,7 @@ set -wg pane-base-index 1
 
 # Set terminal title
 set -g set-titles on
-set -g set-titles-string '#(whoami)@#H: #W'
+set -g set-titles-string '#T – #(whoami)@#H'
 set -wg automatic-rename on
 
 set -g focus-events on
