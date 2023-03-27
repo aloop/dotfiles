@@ -42,3 +42,8 @@ export WLC_REPEAT_DELAY=250
 export MOZ_ENABLE_WAYLAND=1
 export QT_QPA_PLATFORM="wayland;xcb"
 
+# set COLORTERM=truecolor if using Windows Terminal
+if [ -n "$WT_SESSION" ]; then
+    export COLORTERM="truecolor"
+fi
+
