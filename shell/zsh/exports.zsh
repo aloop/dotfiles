@@ -12,3 +12,4 @@ else
 fi
 
 TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S\nmaxmem\t%M MB\nfaults\t%F'
+

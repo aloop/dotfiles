@@ -125,3 +125,4 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.gedit.preferences.editor auto-indent true
 
 fi
+

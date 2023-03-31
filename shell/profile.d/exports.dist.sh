@@ -34,3 +34,4 @@ export QT_QPA_PLATFORM="wayland;xcb"
 if [ -n "$WT_SESSION" ]; then
     export COLORTERM="truecolor"
 fi
+

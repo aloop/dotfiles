@@ -34,3 +34,4 @@ if [[ -n "${XDG_CACHE_HOME}"/zsh/zcompdump(#qN.mh+24) ]]; then
 else
     compinit -C -d "${XDG_CACHE_HOME}/zsh/zcompdump"
 fi
+

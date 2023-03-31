@@ -93,3 +93,4 @@ opt.ruler = true
 -- Install & configure plugins
 
 require('aloop.bootstrap.plugins')
+

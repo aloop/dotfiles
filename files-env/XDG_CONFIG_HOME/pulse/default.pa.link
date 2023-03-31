@@ -1,3 +1,4 @@
 .include /etc/pulse/default.pa
 
 unload-module module-suspend-on-idle
+

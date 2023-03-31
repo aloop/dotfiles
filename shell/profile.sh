@@ -21,3 +21,4 @@ unset df_profile_file
 
 # Let `./interactive` know that we've already initialized
 df_profile_initialized="true"
+

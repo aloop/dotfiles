@@ -2,3 +2,4 @@
 if [[ ! $COLORTERM = *(24bit|truecolor)* ]]; then
     zmodload zsh/nearcolor
 fi
+

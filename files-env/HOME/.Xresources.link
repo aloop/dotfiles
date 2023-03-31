@@ -58,3 +58,4 @@ URxvt.lineSpace: 1
 
 ! xterm settings
 XTerm*termName: xterm-256color
+

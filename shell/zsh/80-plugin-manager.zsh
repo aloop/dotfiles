@@ -36,3 +36,4 @@ dotfiles_plugin "https://github.com/zsh-users/zsh-autosuggestions"
 dotfiles_plugin "https://github.com/zsh-users/zsh-completions"
 dotfiles_plugin "https://github.com/zsh-users/zsh-completions"
 dotfiles_plugin "https://github.com/zsh-users/zsh-syntax-highlighting"
+

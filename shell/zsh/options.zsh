@@ -44,3 +44,4 @@ setopt share_history
 ## Jobs
 setopt longlistjobs # Show PID when suspending process
 setopt notify
+

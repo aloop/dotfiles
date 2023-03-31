@@ -86,3 +86,4 @@ PATH="${PATH#:}"
 PATH="${PATH%:}"
 
 unset _df_path_prepend _df_path_append _df_is_in_path _df_filter_segment _df_process_path
+

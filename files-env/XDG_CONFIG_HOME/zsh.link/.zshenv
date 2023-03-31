@@ -20,3 +20,4 @@ export DOTFILES_ZSH_PLUGINS_DIR="${DOTFILES_ZSH_PLUGINS_DIR:-"${XDG_DATA_HOME}/d
 if [ -f "${HOME}/.after" ]; then
     . "${HOME}/.after"
 fi
+

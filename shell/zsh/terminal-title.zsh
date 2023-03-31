@@ -46,6 +46,7 @@ _dotfiles_set_terminal_title_preexec () {
 }
 
 if [[ "$TERM" == (Eterm*|alacritty*|aterm*|foot*|gnome*|konsole*|kterm*|putty*|rxvt*|screen*|wezterm*|tmux*|xterm*) ]]; then
-	add-zsh-hook -Uz precmd _dotfiles_set_terminal_title_precmd
-	add-zsh-hook -Uz preexec _dotfiles_set_terminal_title_preexec
+    add-zsh-hook -Uz precmd _dotfiles_set_terminal_title_precmd
+    add-zsh-hook -Uz preexec _dotfiles_set_terminal_title_preexec
 fi
+

@@ -77,3 +77,4 @@ alias iso8602='date -u +"%Y-%m-%dT%H:%M:%SZ"'
 alias weather='curl https://wttr.in'
 
 alias ip='ip --color=auto'
+

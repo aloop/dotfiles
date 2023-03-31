@@ -77,7 +77,7 @@ gen_argon2i_hash() {
     fi
 
     if command -v argon2 &>/dev/null; then
-        printf "$1" | argon2 "$(gen_salt)" -e
+        printf "%s" "$1" | argon2 "$(gen_salt 64)" -e
     else
         echo "argon2 not installed. Exiting..."
     fi
@@ -85,9 +85,10 @@ gen_argon2i_hash() {
 
 gen_caddy_basicauth_hash() {
     if command -v caddy &>/dev/null; then
-        local _tmp_salt="$(gen_salt)"
+        local _tmp_salt
+        _tmp_salt="$(gen_salt 64)"
         caddy hash-password --algorithm "scrypt" --salt "$_tmp_salt"
-        echo "$(printf "%s" "$_tmp_salt" | base64)"
+        printf "%s" "$_tmp_salt" | base64
     else
         echo "Caddy is not installed. Exiting..."
     fi
@@ -101,7 +102,7 @@ colorpicker() (
 
 # Create a directory and cd into it
 mkcd() {
-    mkdir -p "$1" && cd "$1"
+    mkdir -p "$1" && cd "$1" || exit
 }
 
 # Helpers for working with the dotfiles
@@ -109,3 +110,4 @@ mkcd() {
 dotfiles() (
     "${DOTFILES_DIR}/dotfiles" "$@"
 )
+

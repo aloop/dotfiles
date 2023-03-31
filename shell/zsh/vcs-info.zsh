@@ -61,9 +61,10 @@ dotfiles_setup_vcs_info() {
         done
     }
 
-	add-zsh-hook -Uz precmd _dotfiles_vcs_info_precmd
+    add-zsh-hook -Uz precmd _dotfiles_vcs_info_precmd
 }
 
 dotfiles_setup_vcs_info
 
 unset dotfiles_setup_vcs_info
+

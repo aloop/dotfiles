@@ -23,3 +23,4 @@ The first time you launch vim after downloading this configuration, it will atte
 ### Plugin installation dir
 
 For vim it's `${XDG_DATA_HOME}/vim/plugged`, for neovim it's `${XDG_DATA_HOME}/nvim/plugged
+

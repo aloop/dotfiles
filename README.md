@@ -96,3 +96,4 @@ See "Install Script ENV Vars" below to learn how to set this option by default.
 
 -   Add some backup management commands
 -   Create a manifest on install which can be used for uninstalling dotfiles
+
