@@ -25,7 +25,9 @@ return require('packer').startup(function(use)
     }
 
     -- Linting, Autocomplete, and Formatting
-    use 'editorconfig/editorconfig-vim'
+    if vim.fn.has('nvim-0.9') == 0 then
+        use 'gpanders/editorconfig.nvim'
+    end
     use 'dense-analysis/ale'
 
     -- Git
@@ -69,4 +71,3 @@ return require('packer').startup(function(use)
         require('packer').sync()
     end
 end)
-

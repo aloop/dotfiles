@@ -50,4 +50,3 @@ case "$1" in
         echo "No arguments given, exiting..."
         ;;
 esac
-

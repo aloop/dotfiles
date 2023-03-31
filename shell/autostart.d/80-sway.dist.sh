@@ -15,4 +15,3 @@ then
     export XDG_CURRENT_DESKTOP=sway
     exec systemd-cat -t sway sway
 fi
-

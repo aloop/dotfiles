@@ -10,4 +10,3 @@ else
     echo "Directory \"${HOME}/.asdf\" already exists, aborting"
     exit 1
 fi
-

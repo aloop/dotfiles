@@ -40,4 +40,3 @@ dotfiles_prompt_setup() {
 dotfiles_prompt_setup
 
 unset dotfiles_prompt_setup
-

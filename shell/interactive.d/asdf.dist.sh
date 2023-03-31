@@ -9,4 +9,3 @@ if [ -f "$HOME/.asdf/asdf.sh" ]; then
         . "${ASDF_DIR}/completions/asdf.bash"
     fi
 fi
-

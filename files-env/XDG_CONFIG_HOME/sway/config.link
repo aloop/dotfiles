@@ -225,4 +225,3 @@ exec swayidle -w \
     timeout 1200 'swaymsg "output * dpms off"' \
         resume 'sleep 2 && swaymsg "output * dpms on"' \
     before-sleep 'swaylock -f -c 222222'
-

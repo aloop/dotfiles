@@ -11,4 +11,3 @@ vim.g.ale_fixers = {
     css = {'prettier', 'stylelint'},
     html = {'prettier'}
 }
-

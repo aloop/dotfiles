@@ -377,4 +377,3 @@ if [ -n "$do_script" ]; then
 fi
 
 install
-

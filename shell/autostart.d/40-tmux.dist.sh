@@ -16,4 +16,3 @@ if df_command_exists tmux; then
         exec tmux new-session -A -s "$DF_TMUX_AUTOSTART_SESSION_NAME"
     fi
 fi
-

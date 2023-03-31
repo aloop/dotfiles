@@ -9,4 +9,3 @@ shopt -s cdspell 2>/dev/null
 # Enable **-style globbing
 shopt -s globstar 2>/dev/null
 shopt -s nocaseglob
-

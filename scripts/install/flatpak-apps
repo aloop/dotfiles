@@ -13,4 +13,3 @@ else
     echo "Flatpak doesn't seem to be installed. Exiting..."
 
 fi
-

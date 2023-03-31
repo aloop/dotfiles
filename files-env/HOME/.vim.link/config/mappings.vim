@@ -77,4 +77,3 @@ nnoremap <leader>fg :GFiles<cr>
 nnoremap <leader>fs :GFiles?<cr>
 nnoremap <leader>fc :Commits<cr>
 nnoremap <leader><space> :Commands<cr>
-

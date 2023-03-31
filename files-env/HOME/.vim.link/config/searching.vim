@@ -9,4 +9,3 @@ set showmatch
 set hlsearch
 
 set magic
-

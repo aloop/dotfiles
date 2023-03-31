@@ -78,4 +78,3 @@ map('c', 'w!!', 'w !sudo tee % >/dev/null')
 map('n', '<C-n>', ':NvimTreeToggle<cr>')
 map('n', '<leader>f', ':NvimTreeRefresh<cr>')
 map('n', '<leader>n', ':NvimTreeFindFile<cr>')
-

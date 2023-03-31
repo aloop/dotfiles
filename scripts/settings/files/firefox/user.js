@@ -270,4 +270,3 @@ user_pref(
 
 // Enable GTK overlay scrollbar
 user_pref("widget.gtk.overlay-scrollbars.enabled", true);
-

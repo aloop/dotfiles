@@ -104,4 +104,3 @@ case "${1:-}" in
 JSON
         ;;
 esac
-

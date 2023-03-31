@@ -73,4 +73,3 @@ dotfiles_prompt_setup() {
 }
 
 PROMPT_COMMAND=dotfiles_prompt_setup
-

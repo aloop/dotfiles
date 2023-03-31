@@ -18,4 +18,3 @@ function cycle_video_rotate(direction)
 end
 
 mp.add_key_binding(nil, "Cycle_Video_Rotate", cycle_video_rotate)
-

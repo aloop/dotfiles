@@ -6,4 +6,3 @@
 --force-dark-mode
 --ozone-platform-hint=wayland
 --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,VaapiVideoDecoder,WebUIDarkMode
-

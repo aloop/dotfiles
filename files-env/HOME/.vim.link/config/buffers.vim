@@ -6,4 +6,3 @@ set hidden
 
 " Set the current directory to the directory of the active buffer
 set autochdir
-

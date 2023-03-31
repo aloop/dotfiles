@@ -44,4 +44,3 @@ set splitright
 set mouse=a
 
 set updatetime=100
-

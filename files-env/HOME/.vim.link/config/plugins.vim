@@ -34,7 +34,6 @@ else
     Plug 'mhinz/vim-signify'
 
     " Color Schemes
-    "Plug 'dracula/vim', {'as': 'dracula'}
     Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
     " Clipboard
@@ -59,4 +58,3 @@ else
 
     " End vim-plug Setup }}}
 endif
-

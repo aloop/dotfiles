@@ -2,4 +2,3 @@ context.properties = {
     default.clock.rate          = 96000
     default.clock.allowed-rates = [ 44100 48000 88200 176400 192000 ]
 }
-

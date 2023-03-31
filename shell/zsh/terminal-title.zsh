@@ -49,4 +49,3 @@ if [[ "$TERM" == (Eterm*|alacritty*|aterm*|foot*|gnome*|konsole*|kterm*|putty*|r
     add-zsh-hook -Uz precmd _dotfiles_set_terminal_title_precmd
     add-zsh-hook -Uz preexec _dotfiles_set_terminal_title_preexec
 fi
-

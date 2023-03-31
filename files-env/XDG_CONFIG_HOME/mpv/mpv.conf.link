@@ -84,4 +84,3 @@ hls-bitrate=max
 
 # Make sure to use yt-dlp
 #script-opts=ytdl_hook-try_ytdl_first=yes,ytdl_hook-ytdl_path=yt-dlp
-

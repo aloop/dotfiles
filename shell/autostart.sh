@@ -13,4 +13,3 @@ done
 
 unset df_autostart_file
 unset df_profile_initialized
-

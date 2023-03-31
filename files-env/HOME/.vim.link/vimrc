@@ -46,4 +46,3 @@ runtime config/plugin-editorconfig.vim
 " Per-system file for settings that need to occur after all other settings {{{
 runtime after.vim
 " }}}
-

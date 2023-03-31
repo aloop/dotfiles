@@ -40,4 +40,3 @@ client.focused_tab_title $normal_purple $normal_purple $normal_black $normal_pur
 client.focused_inactive  $normal_black  $normal_black  $normal_white $normal_black  $normal_black
 client.unfocused         $normal_black  $normal_black  $normal_white $normal_black  $normal_black
 client.urgent            $normal_red    $normal_red    $normal_white $normal_red    $normal_red
-

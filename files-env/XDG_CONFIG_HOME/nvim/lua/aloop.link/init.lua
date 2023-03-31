@@ -10,4 +10,3 @@ require('aloop.config.colors')
 require('aloop.config.autocmds')
 require('aloop.config.keybindings')
 require('aloop.config.plugins')
-

@@ -11,4 +11,3 @@ if df_command_exists gpg-connect-agent && df_command_exists gpgconf; then
         export SSH_AUTH_SOCK
     fi
 fi
-

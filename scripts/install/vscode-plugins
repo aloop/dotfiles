@@ -26,4 +26,3 @@ else
     echo "Visual Studio Code doesn't seem to be installed. Exiting..."
 
 fi
-

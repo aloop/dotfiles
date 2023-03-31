@@ -65,4 +65,3 @@ bindkey "^X^E" edit-command-line
 # Remove local variables and functions
 unset df_key
 unset -f df_safe_bindkey
-

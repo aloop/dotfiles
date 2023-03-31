@@ -31,4 +31,3 @@
     path = ~/.config/git/config_windows
 [init]
     defaultBranch = main
-

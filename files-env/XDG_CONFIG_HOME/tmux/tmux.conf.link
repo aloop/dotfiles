@@ -130,4 +130,3 @@ set -g mode-style bg=colour141,fg=colour235
 # pane number display
 set -g display-panes-active-colour colour33
 set -g display-panes-colour colour141
-

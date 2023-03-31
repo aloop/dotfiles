@@ -8,4 +8,3 @@ augroup filetype_overrides
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
-

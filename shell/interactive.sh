@@ -12,4 +12,3 @@ for df_interactive_file in "${DOTFILES_DIR}"/shell/interactive.d/*.sh; do
 done
 
 unset df_interactive_file
-

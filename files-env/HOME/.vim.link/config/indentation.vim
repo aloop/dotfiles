@@ -11,4 +11,3 @@ set shiftround
 
 " Use spaces instead of tabs
 set expandtab
-

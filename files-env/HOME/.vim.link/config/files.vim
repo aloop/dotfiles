@@ -5,4 +5,3 @@ set ffs=unix,dos,mac
 set nowritebackup
 set noswapfile
 set nobackup
-

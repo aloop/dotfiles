@@ -8,4 +8,3 @@ let g:ale_fixers = {
 \   'css': ['prettier', 'stylelint'],
 \   'html': ['prettier']
 \}
-

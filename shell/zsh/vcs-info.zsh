@@ -67,4 +67,3 @@ dotfiles_setup_vcs_info() {
 dotfiles_setup_vcs_info
 
 unset dotfiles_setup_vcs_info
-
