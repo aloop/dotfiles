@@ -59,6 +59,12 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.peripherals.keyboard delay 250
     gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
 
+    ## Mouse Settings
+    # Disable mouse acceleration
+    gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
+    # Enable resizing of windows using Super+Right Mouse Click and dragging
+    gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+
     ## Clock settings
     gsettings set org.gnome.desktop.interface clock-format '12h'
     gsettings set org.gnome.desktop.interface clock-show-date true
@@ -79,9 +85,6 @@ if command -v gsettings >/dev/null 2>&1; then
 
     ## Add minimize and maximize buttons to windows
     gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
-
-    ## Enable resizing of windows using Super+Right Mouse Click and dragging
-    gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 
     ## Power Saving/Screen lock settings
     gsettings set org.gnome.desktop.session idle-delay 1200
