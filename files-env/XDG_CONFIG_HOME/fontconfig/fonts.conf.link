@@ -9,10 +9,13 @@
             <bool>false</bool>
         </edit>
         <edit mode="assign" name="hinting">
-            <bool>true</bool>
+            <bool>false</bool>
         </edit>
         <edit mode="assign" name="hintstyle">
-            <const>hintslight</const>
+            <const>hintnone</const>
+        </edit>
+        <edit mode="assign" name="autohint">
+            <bool>false</bool>
         </edit>
         <edit mode="assign" name="lcdfilter">
             <const>lcddefault</const>
@@ -21,4 +24,25 @@
             <const>rgb</const>
         </edit>
     </match>
+    <alias>
+        <family>sans-serif</family>
+        <prefer>
+            <family>Noto Sans</family>
+            <family>DejaVu Sans</family>
+            <family>Droid Sans</family>
+            <family>Noto Color Emoji</family>
+        </prefer>
+    </alias>
+    <alias>
+        <family>monospace</family>
+        <prefer>
+            <family>Hack Nerd Font</family>
+            <family>Hack NF</family>
+            <family>Hack</family>
+            <family>Inconsolata</family>
+            <family>DejaVu Sans Mono</family>
+            <family>Droid Sans Mono</family>
+            <family>Noto Color Emoji</family>
+        </prefer>
+    </alias>
 </fontconfig>

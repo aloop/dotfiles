@@ -39,7 +39,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "DejaVu Sans Mono", Hack, "Droid Sans Mono", monospace;
+    font-family: monospace;
     font-size: 9pt;
     min-height: 0;
 }
@@ -128,7 +128,6 @@ window#waybar.solo {
 }
 
 #clock {
-    font-family: Hack, Droid Sans Mono, DejaVu Sans Mono, monospace;
     font-size: 9pt;
 }
 

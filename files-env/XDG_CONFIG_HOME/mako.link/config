@@ -1,7 +1,7 @@
 sort=-time
 layer=overlay
 format=<b>%a</b>\n<i>%s</i>\n%b
-font=Inter,Droid Sans,DejaVu Sans,Noto Sans Normal 10
+font=monospace Normal 10
 background-color=#282a36dd
 text-color=#f8f8f2
 anchor=bottom-right

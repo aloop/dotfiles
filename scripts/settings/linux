@@ -41,10 +41,10 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 
     # Font settings
-    gsettings set org.gnome.desktop.interface font-name 'DejaVu Sans 10'
-    gsettings set org.gnome.desktop.interface document-font-name 'DejaVu Sans 12'
-    gsettings set org.gnome.desktop.interface monospace-font-name 'Hack 11'
-    gsettings set org.gnome.desktop.wm.preferences titlebar-font 'DejaVu Sans 10'
+    gsettings set org.gnome.desktop.interface font-name 'sans-serif 10'
+    gsettings set org.gnome.desktop.interface document-font-name 'sans-serif 12'
+    gsettings set org.gnome.desktop.interface monospace-font-name 'monospace 11'
+    gsettings set org.gnome.desktop.wm.preferences titlebar-font 'sans-serif 10'
     gsettings set org.gnome.desktop.wm.preferences titlebar-uses-system-font true
 
     ## Night light settings
