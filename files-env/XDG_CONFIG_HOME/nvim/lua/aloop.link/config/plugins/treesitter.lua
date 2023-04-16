@@ -5,7 +5,8 @@ require'nvim-treesitter.configs'.setup {
       "c",
       "lua",
       "vim",
-      "help",
+      "vimdoc",
+      "query",
       -- Others
       "bash",
       "go",
@@ -18,7 +19,6 @@ require'nvim-treesitter.configs'.setup {
       "css",
       "scss",
       "html",
-      "twig",
       "yaml",
       "markdown",
       "dockerfile"

@@ -1,12 +1,8 @@
 local map = vim.keymap.set
 
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 
 vim.opt.pastetoggle = '<F2>'
-
--- Jump by three lines instead of one
-map('n', '<C-e>', '3<C-e>')
-map('n', '<C-y>', '3<C-y>')
 
 -- Undo & Redo
 map('n', '<leader>z', ':undo<cr>')
@@ -51,30 +47,18 @@ map('n', '<M-k>', 'mz:m-2<cr>`z')
 map('v', '<M-j>', ':m\'>+<cr>`<mt1>mzgv`yo`z')
 map('v', '<M-k>', ':m\'<-2<cr>`>my`<mzgv`yo`z')
 
--- FZF bindings
-
---- Current file directory
-map('n', '<leader>p', ':FZF <c-r>=fnameescape(expand(\'%:p:h\'))<cr>/<cr>')
-map('n', '<C-p>', ':FZF <c-r>=fnameescape(expand(\'%:p:h\'))<cr>/<cr>')
-
---- Current working directory
-map('n', '<leader>P', ':FZF<cr>')
-map('n', '<leader><tab>', ':Buffers<cr>')
-map('n', '<leader>', ':Buffers<cr>')
-map('n', '<leader>fl', ':Lines<cr>')
-map('n', '<leader>fb', ':BLines<cr>')
-map('n', '<leader>fr', ':History<cr>')
-map('n', '<leader>f:', ':History:<cr>')
-map('n', '<leader>f/', ':History/<cr>')
-map('n', '<leader>fg', ':GFiles<cr>')
-map('n', '<leader>fs', ':GFiles?<cr>')
-map('n', '<leader>fc', ':Commits<cr>')
-map('n', '<leader><space>', ':Commands<cr>')
-
 -- Save a file using sudo
 map('c', 'w!!', 'w !sudo tee % >/dev/null')
 
 -- nvim-tree
 map('n', '<C-n>', ':NvimTreeToggle<cr>')
-map('n', '<leader>f', ':NvimTreeRefresh<cr>')
-map('n', '<leader>n', ':NvimTreeFindFile<cr>')
+
+-- telescope
+local tsbuiltin = require('telescope.builtin')
+map('n', '<C-p>',      tsbuiltin.find_files, {})
+map('n', '<leader>ff', tsbuiltin.find_files, {})
+map('n', '<leader>fi', tsbuiltin.git_files,  {})
+map('n', '<leader>fo', tsbuiltin.oldfiles,   {})
+map('n', '<leader>fg', tsbuiltin.live_grep,  {})
+map('n', '<leader>fb', tsbuiltin.buffers,    {})
+map('n', '<leader>fh', tsbuiltin.help_tags,  {})

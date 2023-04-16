@@ -89,7 +89,6 @@ opt.laststatus = 3
 --- Show the current row and column coordinates of the cursor in the statusline
 opt.ruler = true
 
-
 -- Install & configure plugins
 
 require('aloop.bootstrap.plugins')

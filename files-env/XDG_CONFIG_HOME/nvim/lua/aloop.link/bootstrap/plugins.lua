@@ -1,73 +1,54 @@
-local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
-return require('packer').startup(function(use)
-    -- Let Packer manage itself
-    use 'wbthomason/packer.nvim'
-
-    -- Language Syntaxes
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end
-    }
-
-    -- Linting, Autocomplete, and Formatting
-    if vim.fn.has('nvim-0.9') == 0 then
-        use 'gpanders/editorconfig.nvim'
-    end
-    use 'dense-analysis/ale'
-
-    -- Git
-    use 'tpope/vim-fugitive'
-    use 'mhinz/vim-signify'
-
-    -- Color Schemes
-    use {
-        'catppuccin/nvim',
-        as = 'catppuccin'
-    }
-
-    -- Clipboard
-    use {
-        'ojroques/vim-oscyank',
-        branch = 'main'
-    }
-
-    -- Other Plugins
-    use 'nvim-tree/nvim-web-devicons'
-    use {
+require('lazy').setup({
+    { 'gpanders/editorconfig.nvim', cond = vim.fn.has('nvim-0.9') == 0 },
+    { 'catppuccin/nvim', name = 'catppuccin' },
+    { 'ojroques/vim-oscyank', branch = 'main' },
+    'dense-analysis/ale',
+    'tpope/vim-fugitive',
+    'mhinz/vim-signify',
+    'nvim-tree/nvim-web-devicons',
+    {
         'nvim-lualine/lualine.nvim',
-        requires = {
-            'nvim-tree/nvim-web-devicons',
-            opt = true
-        }
-    }
-    use 'tpope/vim-surround'
-    use 'mattn/emmet-vim'
-    use 'junegunn/fzf.vim'
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons'
-        },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
-    }
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    if packer_bootstrap then
-        require('packer').sync()
-    end
-end)
+        cond = vim.fn.has('nvim-0.5') == 1
+    },
+    'tpope/vim-surround',
+    'mattn/emmet-vim',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = function()
+            require('nvim-treesitter.install').update({ with_sync = true })
+        end,
+    },
+    { 'nvim-tree/nvim-tree.lua', tag = 'nightly' },
+    {
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.1',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        cond = vim.fn.has('nvim-0.7') == 1
+    },
+    {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup({
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            })
+        end,
+        cond = vim.fn.has('nvim-0.5') == 1
+    },
+})
