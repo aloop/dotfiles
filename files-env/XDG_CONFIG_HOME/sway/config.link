@@ -2,7 +2,7 @@
 
 set $mod Mod4
 set $alt Mod1
-set $term ${TERMINAL:-alacritty}
+set $term ${TERMINAL:-foot}
 
 set $web-browser firefox
 set $alternate-web-browser chromium

@@ -2,36 +2,43 @@
 
 # shell=$SHELL (if set, otherwise user's default shell from /etc/passwd)
 # term=foot (or xterm-256color if built with -Dterminfo=disabled)
+term=xterm-256color
 # login-shell=no
 
-# app-id=foot
+app-id=org.codeberg.dnkl.foot
 # title=foot
 # locked-title=no
 
-font=monospace:size=11
+font=monospace:size=12
 # font-bold=<bold variant of regular font>
 # font-italic=<italic variant of regular font>
 # font-bold-italic=<bold+italic variant of regular font>
+# font-size-adjustment=0.5
 # line-height=<font metrics>
 # letter-spacing=0
 # horizontal-letter-offset=0
 # vertical-letter-offset=0
 # underline-offset=<font metrics>
+# underline-thickness=<font underline thickness>
 # box-drawings-uses-font-glyphs=no
-# dpi-aware=yes
+# dpi-aware=auto
 
 # initial-window-size-pixels=700x500  # Or,
 initial-window-size-chars=120x40
 # initial-window-mode=windowed
-pad=16x16 # optionally append 'center'
+pad=16x16 center                             # optionally append 'center'
 # resize-delay-ms=100
 
 # notify=notify-send -a ${app-id} -i ${app-id} ${title} ${body}
 
-bold-text-in-bright=no
+# bold-text-in-bright=no
 # word-delimiters=,│`|:"'()[]{}<>
 # selection-target=primary
 # workers=<number of logical CPUs>
+# utempter=/usr/lib/utempter/utempter
+
+[environment]
+# name=value
 
 [bell]
 # urgent=no
@@ -43,18 +50,18 @@ bold-text-in-bright=no
 lines=10000
 # multiplier=3.0
 # indicator-position=relative
-# indicator-format=
+# indicator-format=""
 
 [url]
 # launch=xdg-open ${url}
 # label-letters=sadfjklewcmpgh
 # osc8-underline=url-mode
 # protocols=http, https, ftp, ftps, file, gemini, gopher
-# uri-characters=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+="'
+# uri-characters=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.,~:;/?#@!$&%*+="'()[]
 
 [cursor]
 # style=block
-# color=111111 dcdccc
+# color=<inverse foreground/background>
 # blink=no
 # beam-thickness=1.5
 # underline-thickness=<font underline thickness>
@@ -67,6 +74,8 @@ lines=10000
 alpha=0.99
 foreground=cdd6f4 # Text
 background=1e1e2e # Base
+
+## Normal/regular colors (color palette 0-7)
 regular0=45475a   # Surface 1
 regular1=f38ba8   # red
 regular2=a6e3a1   # green
@@ -75,6 +84,8 @@ regular4=89b4fa   # blue
 regular5=f5c2e7   # pink
 regular6=94e2d5   # teal
 regular7=bac2de   # Subtext 1
+
+## Bright colors (color palette 8-15)
 bright0=585b70    # Surface 2
 bright1=f38ba8    # red
 bright2=a6e3a1    # green
@@ -95,17 +106,20 @@ bright7=a6adc8    # Subtext 0
 # 255 = <256-color palette #255>
 
 ## Misc colors
-selection-foreground=ffffff
-selection-background=44475a
-# jump-labels=<regular0> <regular3>
-urls=8be9fd
-# scrollback-indicator=<regular0> <bright4>
+# selection-foreground=<inverse foreground/background>
+# selection-background=<inverse foreground/background>
+# jump-labels=<regular0> <regular3>          # black-on-yellow
+# scrollback-indicator=<regular0> <bright4>  # black-on-bright-blue
+# search-box-no-match=<regular0> <regular1>  # black-on-red
+# search-box-match=<regular0> <regular3>     # black-on-yellow
+# urls=<regular3>
 
 [csd]
 # preferred=server
 # size=26
 # font=<primary font>
 # color=<foreground color>
+# hide-when-typing=no
 # border-width=0
 # border-color=<csd.color>
 # button-width=26
@@ -137,6 +151,10 @@ urls=8be9fd
 # pipe-selected=[xargs -r firefox] none
 # show-urls-launch=Control+Shift+u
 # show-urls-copy=none
+# show-urls-persistent=none
+# prompt-prev=Control+Shift+z
+# prompt-next=Control+Shift+x
+# unicode-input=none
 # noop=none
 
 [search-bindings]
@@ -156,12 +174,16 @@ urls=8be9fd
 # delete-next-word=Mod1+d Control+Delete
 # extend-to-word-boundary=Control+w
 # extend-to-next-whitespace=Control+Shift+w
-# clipboard-paste=Control+v Control+y
+# clipboard-paste=Control+v Control+Shift+v Control+y XF86Paste
 # primary-paste=Shift+Insert
+# unicode-input=none
 
 [url-bindings]
 # cancel=Control+g Control+c Control+d Escape
 # toggle-url-visible=t
+
+[text-bindings]
+# \x03=Mod4+c  # Map Super+c -> Ctrl+c
 
 [mouse-bindings]
 # selection-override-modifiers=Shift
@@ -173,3 +195,5 @@ urls=8be9fd
 # select-word=BTN_LEFT-2
 # select-word-whitespace=Control+BTN_LEFT-2
 # select-row=BTN_LEFT-3
+
+# vim: ft=dosini
