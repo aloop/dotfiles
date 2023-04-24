@@ -27,10 +27,9 @@ fi
 printf "\nChecksum verified, installing...\n\n"
 
 # Install to path
-mkdir -p "${HOME}/.bin"
-mv ./nvim.appimage "${HOME}/.bin/nvim"
-chmod +x "${HOME}/.bin/nvim"
+sudo mv ./nvim.appimage /usr/local/bin/nvim
+sudo chmod +x /usr/local/bin/nvim
 
 printf "Neovim installed successfully! Printing neovim version information:\n\n"
 # Print out version information
-"${HOME}/.bin/nvim" --version
+/usr/local/bin/nvim --version
