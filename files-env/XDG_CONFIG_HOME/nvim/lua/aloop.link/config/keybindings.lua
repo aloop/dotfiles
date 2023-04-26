@@ -2,8 +2,6 @@ local map = vim.keymap.set
 
 vim.g.mapleader = ' '
 
-vim.opt.pastetoggle = '<F2>'
-
 -- Undo & Redo
 map('n', '<leader>z', ':undo<cr>')
 map('n', '<leader>Z', ':redo<cr>')
@@ -27,8 +25,9 @@ map('n', '<right>', ':bn<cr>')
 map('n', '<leader>ls', ':ls<cr>')
 map('n', '<leader>bd', ':bd!<cr>')
 
--- Toggle highlighting
-map('n', '<leader><cr>', ':nohl!<cr>')
+-- Clear last search
+map('n', '<leader><cr>', ':let @/=""<cr>', { silent = true })
+map('n', '/', ':let @/=""<cr>/')
 
 -- Skip past wrapped lines
 map('n', 'j', 'gj')
