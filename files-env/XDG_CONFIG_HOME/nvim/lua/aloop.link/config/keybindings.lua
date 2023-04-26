@@ -3,54 +3,55 @@ local map = vim.keymap.set
 vim.g.mapleader = ' '
 
 -- Undo & Redo
-map('n', '<leader>z', ':undo<cr>')
-map('n', '<leader>Z', ':redo<cr>')
+map('n', '<leader>z', ':undo<cr>', { noremap = true })
+map('n', '<leader>Z', ':redo<cr>', { noremap = true })
 
 -- Open a vertical split and focus it
-map('n', '<leader>v', '<C-w>v<C-w>l')
+map('n', '<leader>v', '<C-w>v<C-w>l', { noremap = true })
+-- Open a horizontal split and focus it
+map('n', '<leader>V', '<C-w>s<C-w>l', { noremap = true })
 
 -- Easier split navigation
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
-map('n', '<C-l>', '<C-w>l')
+map('n', '<C-h>', '<C-w>h', { noremap = true })
+map('n', '<C-j>', '<C-w>j', { noremap = true })
+map('n', '<C-k>', '<C-w>k', { noremap = true })
+map('n', '<C-l>', '<C-w>l', { noremap = true })
 
 -- Fast window switching
-map('n', '<tab>', '<C-w>w')
-map('n', '<S-tab>', '<C-w>W')
+map('n', '<tab>', '<C-w>w', { noremap = true })
+map('n', '<S-tab>', '<C-w>W', { noremap = true })
 
 -- Quick navigation through buffers
-map('n', '<left>', ':bp<cr>')
-map('n', '<right>', ':bn<cr>')
-map('n', '<leader>ls', ':ls<cr>')
-map('n', '<leader>bd', ':bd!<cr>')
+map('n', '<left>', ':bp<cr>', { noremap = true, silent = true })
+map('n', '<right>', ':bn<cr>', { noremap = true, silent = true })
+map('n', '<leader>bd', ':bd!<cr>', { noremap = true, silent = true })
 
 -- Clear last search
-map('n', '<leader><cr>', ':let @/=""<cr>', { silent = true })
-map('n', '/', ':let @/=""<cr>/')
+map('n', '<leader><cr>', ':let @/=""<cr>', { noremap = true, silent = true })
+map('n', '/', ':let @/=""<cr>/', { noremap = true })
 
 -- Skip past wrapped lines
-map('n', 'j', 'gj')
-map('n', 'k', 'gk')
+map('n', 'j', 'gj', { noremap = true })
+map('n', 'k', 'gk', { noremap = true })
 
 -- Select entire buffer
-map('n', '<leader>a', 'ggVG')
+map('n', '<leader>a', 'ggVG', { noremap = true })
 
 -- Center search result when moving through results
-map('n', 'n', 'nzzzv')
-map('n', 'N', 'Nzzzv')
+map('n', 'n', 'nzzzv', { noremap = true })
+map('n', 'N', 'Nzzzv', { noremap = true })
 
 -- Swap lines around like Sublime and VS Code
-map('n', '<M-j>', 'mz:m+<cr>`z')
-map('n', '<M-k>', 'mz:m-2<cr>`z')
-map('v', '<M-j>', ':m\'>+<cr>`<mt1>mzgv`yo`z')
-map('v', '<M-k>', ':m\'<-2<cr>`>my`<mzgv`yo`z')
+map('n', '<M-j>', 'mz:m+<cr>`z', { noremap = true })
+map('n', '<M-k>', 'mz:m-2<cr>`z', { noremap = true })
+map('v', '<M-j>', ':m\'>+<cr>`<mt1>mzgv`yo`z', { noremap = true })
+map('v', '<M-k>', ':m\'<-2<cr>`>my`<mzgv`yo`z', { noremap = true })
 
 -- Save a file using sudo
-map('c', 'w!!', 'w !sudo tee % >/dev/null')
+map('c', 'w!!', 'w !sudo tee % >/dev/null', { noremap = true })
 
 -- nvim-tree
-map('n', '<C-n>', ':NvimTreeToggle<cr>')
+map('n', '<C-n>', ':NvimTreeToggle<cr>', { noremap = true, silent = true })
 
 -- telescope
 local tsbuiltin = require('telescope.builtin')
