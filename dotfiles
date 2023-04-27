@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# set a restrictive default umask
+umask 077
+
 ## Helper functions
 
 clean_path() (
