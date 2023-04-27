@@ -6,8 +6,8 @@
 # %{%B%} %{%b%} sets and ends bold
 
 dotfiles_prompt_setup() {
-    local prompt_start_symbol=""
-    local prompt_end_symbol=""
+    local prompt_start_symbol=""
+    local prompt_end_symbol=""
     local prompt_separator_symbol=""
 
     local error_color="#f38ba8"
