@@ -36,7 +36,7 @@ if command -v gsettings >/dev/null 2>&1; then
 
     # Theme
     gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
-    gsettings set org.gnome.desktop.interface icon-theme "Adwaita"
+    gsettings set org.gnome.desktop.interface icon-theme "breeze-dark"
     gsettings set org.gnome.desktop.interface cursor-theme "Adwaita"
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 
@@ -84,7 +84,7 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.privacy recent-files-max-age 3
 
     ## Add minimize and maximize buttons to windows
-    gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
+    gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:close"
 
     ## Power Saving/Screen lock settings
     gsettings set org.gnome.desktop.session idle-delay 1200
@@ -94,14 +94,6 @@ if command -v gsettings >/dev/null 2>&1; then
     # Don't sleep automatically
     gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
     gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 1800
-
-    ## Terminal settings
-    gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar false
-    # Terminal keybindings require a path for some reason.
-    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Control>asciitilde'
-    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Control>grave'
-    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ move-tab-left '<Control><Shift>Left'
-    gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ move-tab-right '<Control><Shift>Right'
 
     ## Other settings
     gsettings set org.gnome.desktop.privacy remove-old-temp-files true
