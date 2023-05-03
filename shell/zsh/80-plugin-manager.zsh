@@ -8,7 +8,7 @@ if [ ! -d "${DOTFILES_ZSH_PLUGINS_DIR}" ]; then
     mkdir -p "${DOTFILES_ZSH_PLUGINS_DIR}"
 fi
 
-dotfiles_plugin() {
+df_plugin() {
     local plugin_url="$1"
     # Operate under the convention of having a script named
     # the same as the repo, with an added .plugin.zsh extension
@@ -30,9 +30,3 @@ dotfiles_plugin() {
         . "${plugin_source_path}"
     fi
 }
-
-dotfiles_plugin "https://github.com/mafredri/zsh-async" "async.zsh"
-dotfiles_plugin "https://github.com/zsh-users/zsh-autosuggestions"
-dotfiles_plugin "https://github.com/zsh-users/zsh-completions"
-dotfiles_plugin "https://github.com/zsh-users/zsh-completions"
-dotfiles_plugin "https://github.com/zsh-users/zsh-syntax-highlighting"
