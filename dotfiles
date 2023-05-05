@@ -217,37 +217,39 @@ process_dotfiles() (
     fi
 
     for _src in "$_dir"/* "$_dir"/.[!.]* "$_dir"/..?*; do
-        if [ -e "$_src" ] || [ -L "$_src" ]; then
-            _type="$(get_extension "$_src")"
-
-            if [ -z "$_src_base" ] && [ -z "$_dest_base" ]; then
-                _dest="$(join_path "$HOME" "${_src#"${dotfiles_dir}"}")"
-            else
-                _dest="$(join_path "$_dest_base" "${_src#"${_src_base}"}")"
-            fi
-
-            # Remove .link, .hardlink, and .copy from the destination name
-            _dest="${_dest%.link}"
-            _dest="${_dest%.hardlink}"
-            _dest="${_dest%.copy}"
-
-            case "$_type" in
-                copy)
-                    copy_path "$_src" "$_dest"
-                    ;;
-                link)
-                    link_path "$_src" "$_dest"
-                    ;;
-                hardlink)
-                    hardlink_file "$_src" "$_dest"
-                    ;;
-                *)
-                    if [ -d "$_src" ]; then
-                        process_dotfiles "$_src" "$_src_base" "$_dest_base"
-                    fi
-                    ;;
-            esac
+        if [ ! -e "$_src" ] && [ ! -L "$_src" ]; then
+            continue
         fi
+
+        _type="$(get_extension "$_src")"
+
+        if [ -z "$_src_base" ] && [ -z "$_dest_base" ]; then
+            _dest="$(join_path "$HOME" "${_src#"${dotfiles_dir}"}")"
+        else
+            _dest="$(join_path "$_dest_base" "${_src#"${_src_base}"}")"
+        fi
+
+        # Remove .link, .hardlink, and .copy from the destination name
+        _dest="${_dest%.link}"
+        _dest="${_dest%.hardlink}"
+        _dest="${_dest%.copy}"
+
+        case "$_type" in
+            copy)
+                copy_path "$_src" "$_dest"
+                ;;
+            link)
+                link_path "$_src" "$_dest"
+                ;;
+            hardlink)
+                hardlink_file "$_src" "$_dest"
+                ;;
+            *)
+                if [ -d "$_src" ]; then
+                    process_dotfiles "$_src" "$_src_base" "$_dest_base"
+                fi
+                ;;
+        esac
     done
 )
 
@@ -255,40 +257,41 @@ process_dotfiles_from_env_path() (
     _dir="${dotfiles_env_dir}"
 
     for _src in "$_dir"/* "$_dir"/.[!.]* "$_dir"/..?*; do
-        if [ -d "$_src" ]; then
-            env_var_name="${_src##*/}"
-
-            if [ -z "$env_var_name" ]; then
-                printf "%s\n" "$(highlight_str red "Environment variable name not given! exiting")"
-                exit 1
-            fi
-
-
-            env_var_value="${!env_var_name}"
-
-            if [ -z "$env_var_value" ]; then
-                # Try to set some default fallbacks
-                case "$env_var_name" in
-                    XDG_CONFIG_HOME)
-                        env_var_value="${HOME}/.config"
-                        ;;
-                    XDG_DATA_HOME)
-                        env_var_value="${HOME}/.local/share"
-                        ;;
-                    XDG_STATE_HOME)
-                        env_var_value="${HOME}/.local/state"
-                        ;;
-                    *)
-                        printf "%s\n" "$(highlight_str yellow "Environment variable \"${env_var_name}\" not set, skipping directory...")"
-                        continue
-                        ;;
-                esac
-            fi
-
-            printf "%s\n" "$(highlight_str cyan "Resolved \"\$${env_var_name}\" to \"${env_var_value}\"")"
-
-            process_dotfiles "$_src" "$_src" "$env_var_value"
+        if [ ! -d "$_src" ]; then
+            continue
         fi
+
+        env_var_name="${_src##*/}"
+
+        if [ -z "$env_var_name" ]; then
+            printf "%s\n" "$(highlight_str red "Environment variable name not given! exiting")"
+            exit 1
+        fi
+
+        env_var_value="${!env_var_name}"
+
+        if [ -z "$env_var_value" ]; then
+            # Try to set some default fallbacks
+            case "$env_var_name" in
+                XDG_CONFIG_HOME)
+                    env_var_value="${HOME}/.config"
+                    ;;
+                XDG_DATA_HOME)
+                    env_var_value="${HOME}/.local/share"
+                    ;;
+                XDG_STATE_HOME)
+                    env_var_value="${HOME}/.local/state"
+                    ;;
+                *)
+                    printf "%s\n" "$(highlight_str yellow "Environment variable \"${env_var_name}\" not set, skipping directory...")"
+                    continue
+                    ;;
+            esac
+        fi
+
+        printf "%s\n" "$(highlight_str cyan "Resolved \"\$${env_var_name}\" to \"${env_var_value}\"")"
+
+        process_dotfiles "$_src" "$_src" "$env_var_value"
     done
 )
 
