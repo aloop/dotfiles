@@ -1,4 +1,6 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+set -eEo pipefail
 
 # set a restrictive default umask
 umask 077
@@ -261,9 +263,8 @@ process_dotfiles_from_env_path() (
                 exit 1
             fi
 
-            # Don't like using eval here, but I don't think there is another
-            # way in posix sh
-            env_var_value="$(eval echo "\$$env_var_name")"
+
+            env_var_value="${!env_var_name}"
 
             if [ -z "$env_var_value" ]; then
                 # Try to set some default fallbacks
@@ -310,11 +311,16 @@ run_script() (
     script_file_path="$(join_path "$scripts_dir" "$script_type" "$script_name")"
 
     if [ ! -r "$script_file_path" ]; then
-        echo "Error: ${script_type} script \"${script_name}\" does not exist or is not readable"
+        echo "Error: ${script_type} script \"${script_name}\" does not exist or is not readable! Exiting..."
         exit 1
     fi
 
-    . "$script_file_path"
+    if [ ! -x "$script_file_path" ]; then
+        echo "Error: ${script_type} script \"${script_name}\" is not executable! Exiting..."
+        exit 1
+    fi
+
+    "$script_file_path"
 )
 
 ## Main
