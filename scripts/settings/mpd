@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
 if command -v mpd >/dev/null 2>&1; then
-    systemctl --user enable --now mpd
     mkdir -p "${XDG_CONFIG_HOME:-"${HOME}/.config"}/mpd/playlists"
+    systemctl --user enable --now mpd
 fi
