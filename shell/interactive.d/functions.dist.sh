@@ -105,6 +105,11 @@ mkcd() {
     mkdir -p "$1" && cd "$1" || exit
 }
 
+# Checkout the latest tag from a git repo in a format like v1*
+git-checkout-latest-version() {
+    git checkout "$(git describe --abbrev=0 --tags --match "v[0-9]*" "$(git rev-list --tags --max-count=1)")"
+}
+
 # Helpers for working with the dotfiles
 
 dotfiles() (
