@@ -189,7 +189,10 @@ def main():
 
     log.basicConfig(format=log_format, level=log_level)
 
-    if args.no_backups or config.get("options", "backups", fallback=None) == False:
+    if (
+        args.no_backups
+        or config.getboolean("options", "backups", fallback=True) == False
+    ):
         dotfiles.make_backups = False
 
     if args.ignore:
