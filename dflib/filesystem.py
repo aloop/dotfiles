@@ -1,108 +1,94 @@
 """Abstractions for file system operations"""
 
-import os
-import errno
-import shutil
 import logging as log
+import shutil
+from pathlib import Path
 
-home_dir = os.path.expanduser("~")
+_home_dir = Path.home()
 
 
-def _success_message(action, src: str, dest: str):
+def _success_message(action, src: Path, dest: Path):
     # Shorten displayed paths
-    src = src.replace(home_dir, "~", 1) if src.startswith(home_dir) else src
-    dest = dest.replace(home_dir, "~", 1) if dest.startswith(home_dir) else dest
+    formatted_src = (
+        str(src).replace(str(_home_dir), "~", 1)
+        if str(src).startswith(str(_home_dir))
+        else src
+    )
+    formatted_dest = (
+        str(dest).replace(str(_home_dir), "~", 1)
+        if str(dest).startswith(str(_home_dir))
+        else dest
+    )
 
-    print(f"{action} from \033[4;32m{src}\033[0m to \033[4;32m{dest}\033[0m")
-
-
-def exists(path, dead_links_exist=True):
-    """Determine if a file or directory exists."""
-    if dead_links_exist:
-        return os.path.lexists(path)
-    return os.path.exists(path)
-
-
-def file_list(path, ignore=None):
-    """Return a list of file and directory names in the given path"""
-    if not os.path.isdir(path):
-        raise IOError(
-            f'Directory listing failed: path "{path}" is not a directory or does not exist'
-        )
-
-    ignore_set = set([] if ignore is None else ignore)
-    files = os.listdir(path)
-
-    return (filename for filename in files if filename not in ignore_set)
+    print(
+        f"{action} from \033[4;32m{formatted_src}\033[0m to \033[4;32m{formatted_dest}\033[0m"
+    )
 
 
-def mkdir(path, recursive=True):
-    """Create a directory or directories on the filesystem."""
+def exists(path: Path):
+    """Determine if a file or directory exists. Broken links will return True"""
+    return path.exists() or path.is_symlink()
+
+
+def mkdir(path: Path):
     if not exists(path):
-        log.info("Creating directory at %s", path)
-        if recursive:
-            os.makedirs(path)
-        else:
-            os.mkdir(path)
+        path.mkdir(parents=True, exist_ok=True)
+        log.info(f'Created directory "{path}"')
     else:
-        log.info('Directory "%s" already exists, skipping mkdir', path)
+        log.info('Directory "{path}" already exists, skipping...')
 
 
-def remove(path):
+def remove(path: Path):
     """Remove a file or directory from the filesystem."""
-    if os.path.isdir(path) and not os.path.islink(path):
+    if path.is_dir() and not path.is_symlink():
         shutil.rmtree(path)
-        log.info('Removed directory from "%s"', path)
-    elif exists(path):
-        os.remove(path)
-        log.info('Removed file from "%s"', path)
+        log.info(f'Removed directory from "{path}"')
+    elif path.is_file() or path.is_symlink():
+        path.unlink()
+        log.info(f'Removed file from "{path}"')
     else:
-        log.warn('Removal failed: "%s" doesn\'t exist', path)
+        log.warn(f'Removal failed: "{path}" doesn\'t exist')
 
 
-def copy(src, dest, preserve_links=True, quiet=False):
+def copy(src: Path, dest: Path, preserve_links=True, quiet=False):
     """Copy a file, directory, or symlink"""
     if not exists(src):
         raise IOError(f'Copy failed: Source file or directory "{src}" does not exist')
 
-    if os.path.islink(src) and preserve_links:
-        link_target = os.readlink(src)
+    if src.is_symlink() and preserve_links:
+        link_target = src.readlink()
         link(link_target, dest, quiet=quiet)
         if not quiet:
             _success_message("Copied symlink", src, dest)
-    elif os.path.isfile(src):
+    elif src.is_file():
         shutil.copy(src, dest)
         if not quiet:
             _success_message("Copied file", src, dest)
-    elif os.path.isdir(src):
-        shutil.copytree(src, dest, preserve_links, dirs_exist_ok=True)
+    elif src.is_dir():
+        shutil.copytree(src, dest, True, dirs_exist_ok=True)
         if not quiet:
             _success_message("Copied directory", src, dest)
     else:
-        log.warn('Copy failed: source "%s" does not exist', src)
+        log.warn('Copy failed: source "{src}" does not exist')
 
 
-def link(src, dest, quiet=False):
-    """Create a symlink"""
-    try:
-        os.symlink(src, dest)
-    except OSError as e:
-        if e.errno == errno.EEXIST:
-            remove(dest)
-            os.symlink(src, dest)
+def link(src: Path, dest: Path, quiet=False):
+    """Create a symlink. Will remove existing file/folder at `dest`"""
+    if exists(dest):
+        remove(dest)
+
+    dest.symlink_to(src)
 
     if not quiet:
         _success_message("Softlinked", src, dest)
 
 
-def hardlink(src, dest, quiet=False):
-    """Create a symlink"""
-    try:
-        os.link(src, dest)
-    except OSError as e:
-        if e.errno == errno.EEXIST:
-            os.remove(dest)
-            os.link(src, dest)
+def hardlink(src: Path, dest: Path, quiet=False):
+    """Create a hardlink. Will remove any existing file or folder at `dest`"""
+    if exists(dest):
+        remove(dest)
+
+    dest.hardlink_to(src)
 
     if not quiet:
         _success_message("Hardlinked", src, dest)

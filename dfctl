@@ -1,32 +1,28 @@
 #!/usr/bin/env python3
 """Dotfiles management"""
 
+import argparse
+import configparser
+import logging as log
 import os
 import socket
-import argparse
-import logging as log
-import configparser
 from datetime import datetime
+from pathlib import Path
+
 import dflib.filesystem as fs
 
 # Set a restrictive default umask
 os.umask(0o077)
 
-_home_dir = os.path.expanduser("~")
-_dotfiles_dir = os.path.dirname(os.path.realpath(__file__))
-_config_file_path = os.path.join(_dotfiles_dir, "config.ini")
+_home_dir = Path.home()
+_dotfiles_dir = Path(os.path.dirname(os.path.realpath(__file__)))
+_config_file_path = _dotfiles_dir / "config.ini"
 
 _env_var_defaults = {
     "HOME": _home_dir,
-    "XDG_CONFIG_HOME": os.path.join(_home_dir, ".config"),
-    "XDG_DATA_HOME": os.path.join(_home_dir, ".local", "share"),
-    "XDG_STATE_HOME": os.path.join(_home_dir, ".local", "state"),
-}
-
-_actions = {
-    ".link": fs.link,
-    ".hardlink": fs.hardlink,
-    ".copy": fs.copy,
+    "XDG_CONFIG_HOME": _home_dir / ".config",
+    "XDG_DATA_HOME": _home_dir / ".local" / "share",
+    "XDG_STATE_HOME": _home_dir / ".local" / "state",
 }
 
 config = configparser.ConfigParser()
@@ -34,7 +30,8 @@ config.optionxform = str  # type: ignore
 config.read(_config_file_path)
 
 if config.has_section("env.fallbacks"):
-    _env_var_defaults.update(config.items("env.fallbacks"))
+    for key, value in config.items("env.fallbacks"):
+        _env_var_defaults[key] = Path(value)
 
 
 class DotfileManager(object):
@@ -44,100 +41,98 @@ class DotfileManager(object):
     backup existing files.
     """
 
-    def __init__(self, dir, ignore=None):
-        self.ignore_list = [] if ignore is None else ignore
-        self.make_backups = True
+    def __init__(self, dir: Path, ignore_list: list[str] | None = None):
+        self.ignore_list = set([] if ignore_list is None else ignore_list)
+        self.make_backups: bool = True
         # Create a timestamp now so that it's stable for backups
-        self._timestamp = datetime.now().strftime("%Y-%m-%d-%H%M%S")
+        self._timestamp = datetime.now().isoformat()
         # The directory to operate within
-        self._dir = dir
+        self._dir = Path(dir)
         self._home = _home_dir
-        self._files = os.path.join(self._dir, "files-env")
-        self._enabled_actions = []
+        self._files = self._dir / "files-env"
+        self._actions = {
+            "link": fs.link,
+            "hardlink": fs.hardlink,
+            "copy": fs.copy,
+        }
+        self._enabled_actions: list[str] = []
 
-    def _process_env_dirs(self):
-        path = self._files
-        # If the path is equal to self.files, then we're at the base dir
-        # with the env var names as the dirs in this directory, we'll need
-        # to iterate and resolve those before moving on.
-        if path == self._files:
-            for filename in fs.file_list(path, self.ignore_list):
-                env_var_name = os.path.basename(filename)
-                env_var_value = os.environ.get(env_var_name)
-                # If the value is empty, first check if there is a default
-                # value we can use
-                if env_var_value is None:
-                    if env_var_name in _env_var_defaults:
-                        env_var_value = _env_var_defaults[env_var_name]
+    def _resolve_env_dirs(self):
+        for env_dir in self._files.glob("*"):
+            if not env_dir.is_dir():
+                continue
 
-                # If not, print an error and exit
-                if env_var_value is None:
-                    log.fatal(
-                        'Environment variable "%s" is not set, unable to continue.',
-                        env_var_name,
-                    )
-                    exit(1)
+            env_var_name = env_dir.name
+            env_var_value = os.environ.get(env_var_name)
+            # If the value is empty, first check if there is a default
+            # value we can use
+            if env_var_value is None and env_var_name in _env_var_defaults:
+                env_var_value = _env_var_defaults[env_var_name]
 
-                baseDest = env_var_value
-                print(f'\033[4;36mResolved "${env_var_name}" to "{baseDest}"\033[0m')
-                self._process_dir(os.path.join(path, filename), baseDest)
-
-    # Recursive function to actually process the dotfiles
-    def _process_dir(self, path, baseDest):
-        for pathname in fs.file_list(path, self.ignore_list):
-            stripped_filename, extension = os.path.splitext(pathname)
-            if extension in self._enabled_actions and extension in _actions:
-                source = os.path.join(path, pathname)
-                dest = os.path.join(baseDest, stripped_filename)
-
-                if fs.exists(dest) and self.make_backups:
-                    self.backup(dest)
-
-                # Make sure the destination directory exists
-                fs.mkdir(baseDest)
-                _actions[extension](source, dest)
-            elif os.path.isdir(os.path.join(path, pathname)):
-                self._process_dir(
-                    os.path.join(path, pathname), os.path.join(baseDest, pathname)
+            # If not, print an error and exit
+            if env_var_value is None:
+                log.fatal(
+                    f'Environment variable "{env_var_name}" is not set, unable to continue.'
                 )
+                exit(1)
 
-    def backup(self, path):
+            baseDest = Path(env_var_value)
+            print(f'\033[4;36mResolved "${env_var_name}" to "{baseDest}"\033[0m')
+            self._process_dotfiles(self._files / env_dir, baseDest)
+
+    def _process_dotfiles(self, path: Path, baseDest: Path):
+        for extension in self._enabled_actions:
+            for dotfile in path.glob(f"**/*.{extension}"):
+                if dotfile not in self.ignore_list:
+                    action = dotfile.suffix.removeprefix(".")
+                    source = dotfile
+                    dest = baseDest / dotfile.parent.relative_to(path) / dotfile.stem
+
+                    if fs.exists(dest) and self.make_backups:
+                        # If the backup function returns False, skip
+                        # copying/linking this file/folder
+                        if not self.backup(dest):
+                            continue
+
+                    # Make sure the destination directory exists
+                    fs.mkdir(dest.parent)
+                    self._actions[action](source, dest)
+
+    def backup(self, path: Path):
         hostname = socket.getfqdn()
         backup_name = f"{hostname}@{self._timestamp}"
-        path.removeprefix(self._home)
-        src_path_formatted = os.path.dirname(path).removeprefix("/")
-        backup_path = os.path.join(
-            self._dir, "backups", backup_name, src_path_formatted
-        )
-        filename = os.path.basename(path)
+        src_path_formatted = path.parent
+        base_backup_path = self._dir / "backups" / backup_name
+        backup_path = base_backup_path / path.parent.relative_to("/")
+
+        if not backup_path.is_relative_to(base_backup_path):
+            log.warn(
+                f'Backup: backup target "{backup_path}" is not relative to "{base_backup_path}". Skipping...'
+            )
+            return False
 
         # Make sure the backup directory exists
         fs.mkdir(backup_path)
 
-        fs.copy(path, os.path.join(backup_path, filename), quiet=True)
+        fs.copy(path, backup_path / path.name, quiet=True)
+
+        return True
 
     def install(self):
-        self._enabled_actions = [".link", ".hardlink", ".copy"]
-        self._process_env_dirs()
+        self._enabled_actions = ["link", "hardlink", "copy"]
+        self._resolve_env_dirs()
 
     def link(self):
-        self._enabled_actions = [".link"]
-        self._process_env_dirs()
+        self._enabled_actions = ["link"]
+        self._resolve_env_dirs()
 
     def hardlink(self):
-        self._enabled_actions = [".hardlink"]
-        self._process_env_dirs()
+        self._enabled_actions = ["hardlink"]
+        self._resolve_env_dirs()
 
     def copy(self):
-        self._enabled_actions = [".copy"]
-        self._process_env_dirs()
-
-    def _success_message(self, action, src, dest):
-        # Shorten displayed paths
-        src = src.replace(self._home, "~", 1) if src.startswith(self._home) else src
-        dest = dest.replace(self._home, "~", 1) if dest.startswith(self._home) else dest
-
-        print(f"{action} from \033[4;32m{src}\033[0m to \033[4;32m{dest}\033[0m")
+        self._enabled_actions = ["copy"]
+        self._resolve_env_dirs()
 
 
 def main():
@@ -191,13 +186,13 @@ def main():
 
     if (
         args.no_backups
-        or config.getboolean("options", "backups", fallback=True) == False
+        or config.getboolean("options", "backups", fallback=True) is False
     ):
         dotfiles.make_backups = False
 
     if args.ignore:
         for sublist in args.ignore:
-            dotfiles.ignore_list.extend(sublist)
+            dotfiles.ignore_list.intersection_update(sublist)
 
     if "func" in args:
         try:
