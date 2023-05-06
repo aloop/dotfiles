@@ -1,2 +1,4 @@
-backups/
-.dirty_xresources
+/backups/
+__pycache__/
+/config.ini
+/.vscode

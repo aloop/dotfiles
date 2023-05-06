@@ -1,0 +1,210 @@
+#!/usr/bin/env python3
+"""Dotfiles management"""
+
+import os
+import socket
+import argparse
+import logging as log
+import configparser
+from datetime import datetime
+import dflib.filesystem as fs
+
+# Set a restrictive default umask
+os.umask(0o077)
+
+_home_dir = os.path.expanduser("~")
+_dotfiles_dir = os.path.dirname(os.path.realpath(__file__))
+_config_file_path = os.path.join(_dotfiles_dir, "config.ini")
+
+_env_var_defaults = {
+    "HOME": _home_dir,
+    "XDG_CONFIG_HOME": os.path.join(_home_dir, ".config"),
+    "XDG_DATA_HOME": os.path.join(_home_dir, ".local", "share"),
+    "XDG_STATE_HOME": os.path.join(_home_dir, ".local", "state"),
+}
+
+_actions = {
+    ".link": fs.link,
+    ".hardlink": fs.hardlink,
+    ".copy": fs.copy,
+}
+
+config = configparser.ConfigParser()
+config.optionxform = str  # type: ignore
+config.read(_config_file_path)
+
+if config.has_section("env.fallbacks"):
+    _env_var_defaults.update(config.items("env.fallbacks"))
+
+
+class DotfileManager(object):
+    """
+    Manages dotfiles by linking or copying them
+    to a users home directory and can optionally
+    backup existing files.
+    """
+
+    def __init__(self, dir, ignore=None):
+        self.ignore_list = [] if ignore is None else ignore
+        self.make_backups = True
+        # Create a timestamp now so that it's stable for backups
+        self._timestamp = datetime.now().strftime("%Y-%m-%d-%H%M%S")
+        # The directory to operate within
+        self._dir = dir
+        self._home = _home_dir
+        self._files = os.path.join(self._dir, "files-env")
+        self._enabled_actions = []
+
+    def _process_env_dirs(self):
+        path = self._files
+        # If the path is equal to self.files, then we're at the base dir
+        # with the env var names as the dirs in this directory, we'll need
+        # to iterate and resolve those before moving on.
+        if path == self._files:
+            for filename in fs.file_list(path, self.ignore_list):
+                env_var_name = os.path.basename(filename)
+                env_var_value = os.environ.get(env_var_name)
+                # If the value is empty, first check if there is a default
+                # value we can use
+                if env_var_value is None:
+                    if env_var_name in _env_var_defaults:
+                        env_var_value = _env_var_defaults[env_var_name]
+
+                # If not, print an error and exit
+                if env_var_value is None:
+                    log.fatal(
+                        'Environment variable "%s" is not set, unable to continue.',
+                        env_var_name,
+                    )
+                    exit(1)
+
+                baseDest = env_var_value
+                print(f'\033[4;36mResolved "${env_var_name}" to "{baseDest}"\033[0m')
+                self._process_dir(os.path.join(path, filename), baseDest)
+
+    # Recursive function to actually process the dotfiles
+    def _process_dir(self, path, baseDest):
+        for pathname in fs.file_list(path, self.ignore_list):
+            stripped_filename, extension = os.path.splitext(pathname)
+            if extension in self._enabled_actions and extension in _actions:
+                source = os.path.join(path, pathname)
+                dest = os.path.join(baseDest, stripped_filename)
+
+                if fs.exists(dest) and self.make_backups:
+                    self.backup(dest)
+
+                # Make sure the destination directory exists
+                fs.mkdir(baseDest)
+                _actions[extension](source, dest)
+            elif os.path.isdir(os.path.join(path, pathname)):
+                self._process_dir(
+                    os.path.join(path, pathname), os.path.join(baseDest, pathname)
+                )
+
+    def backup(self, path):
+        hostname = socket.getfqdn()
+        backup_name = f"{hostname}@{self._timestamp}"
+        path.removeprefix(self._home)
+        src_path_formatted = os.path.dirname(path).removeprefix("/")
+        backup_path = os.path.join(
+            self._dir, "backups", backup_name, src_path_formatted
+        )
+        filename = os.path.basename(path)
+
+        # Make sure the backup directory exists
+        fs.mkdir(backup_path)
+
+        fs.copy(path, os.path.join(backup_path, filename), quiet=True)
+
+    def install(self):
+        self._enabled_actions = [".link", ".hardlink", ".copy"]
+        self._process_env_dirs()
+
+    def link(self):
+        self._enabled_actions = [".link"]
+        self._process_env_dirs()
+
+    def hardlink(self):
+        self._enabled_actions = [".hardlink"]
+        self._process_env_dirs()
+
+    def copy(self):
+        self._enabled_actions = [".copy"]
+        self._process_env_dirs()
+
+    def _success_message(self, action, src, dest):
+        # Shorten displayed paths
+        src = src.replace(self._home, "~", 1) if src.startswith(self._home) else src
+        dest = dest.replace(self._home, "~", 1) if dest.startswith(self._home) else dest
+
+        print(f"{action} from \033[4;32m{src}\033[0m to \033[4;32m{dest}\033[0m")
+
+
+def main():
+    default_ignore_list = []
+
+    dotfiles = DotfileManager(_dotfiles_dir, default_ignore_list)
+
+    file_description = "A Simple way to manage your dotfiles."
+
+    parentp = argparse.ArgumentParser(add_help=False)
+
+    parentp.add_argument(
+        "-v", "--verbose", action="store_true", help="Show more verbose output"
+    )
+
+    parser = argparse.ArgumentParser(parents=[parentp], description=file_description)
+
+    parser.add_argument(
+        "--no-backups",
+        action="store_true",
+        help=("Do not backup existing files " "from the home directory"),
+    )
+
+    parser.add_argument(
+        "--ignore",
+        metavar="FILENAME",
+        action="append",
+        nargs="+",
+        help=("Specify one or more files " "or folders to ignore"),
+    )
+
+    subp = parser.add_subparsers(title="Commands")
+
+    subparser_definitions = [
+        ["install", "Install all dotfiles", dotfiles.install],
+        ["link", "Install dotfile links", dotfiles.link],
+        ["hardlink", "Install dotfile hardlinks", dotfiles.hardlink],
+        ["copy", "Install dotfile copies", dotfiles.copy],
+    ]
+
+    for name, help_, func in subparser_definitions:
+        new_subp = subp.add_parser(name, help=help_, parents=[parentp])
+        new_subp.set_defaults(func=func)
+
+    args = parser.parse_args()
+
+    log_format = "%(levelname)s: %(message)s"
+    log_level = log.INFO if args.verbose else log.WARNING
+
+    log.basicConfig(format=log_format, level=log_level)
+
+    if args.no_backups or config.get("options", "backups", fallback=None) == False:
+        dotfiles.make_backups = False
+
+    if args.ignore:
+        for sublist in args.ignore:
+            dotfiles.ignore_list.extend(sublist)
+
+    if "func" in args:
+        try:
+            args.func()
+        except IOError:
+            log.exception("Error processing dotfiles:")
+            parser.exit(1)
+    else:
+        parser.print_usage()
+
+
+if __name__ == "__main__":
+    main()
