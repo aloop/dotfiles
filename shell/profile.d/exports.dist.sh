@@ -34,3 +34,6 @@ export QT_QPA_PLATFORM="wayland;xcb"
 if [ -n "$WT_SESSION" ]; then
     export COLORTERM="truecolor"
 fi
+
+# Don't automatically add the current VENV to PS1
+export VIRTUAL_ENV_DISABLE_PROMPT=true
