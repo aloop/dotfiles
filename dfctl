@@ -5,141 +5,31 @@ import argparse
 import configparser
 import logging as log
 import os
-import socket
-from datetime import datetime
 from pathlib import Path
 
-import dflib.filesystem as fs
+from lib.dotfiles import Dotfiles
 
 # Set a restrictive default umask
 os.umask(0o077)
 
-_home_dir = Path.home()
-_dotfiles_dir = Path(os.path.dirname(os.path.realpath(__file__)))
-_config_file_path = _dotfiles_dir / "config.ini"
+dotfiles_dir = Path(os.path.dirname(os.path.realpath(__file__)))
+default_ignore_list: list[str | Path] = []
 
-_env_var_defaults = {
-    "HOME": _home_dir,
-    "XDG_CONFIG_HOME": _home_dir / ".config",
-    "XDG_DATA_HOME": _home_dir / ".local" / "share",
-    "XDG_STATE_HOME": _home_dir / ".local" / "state",
-}
+_env_defaults: dict[str, Path] = {}
 
 config = configparser.ConfigParser()
 config.optionxform = str  # type: ignore
-config.read(_config_file_path)
+config.read(dotfiles_dir / "config.ini")
 
 if config.has_section("env.fallbacks"):
     for key, value in config.items("env.fallbacks"):
-        _env_var_defaults[key] = Path(value)
-
-
-class DotfileManager(object):
-    """
-    Manages dotfiles by linking or copying them
-    to a users home directory and can optionally
-    backup existing files.
-    """
-
-    def __init__(self, dir: Path, ignore_list: list[str] | None = None):
-        self.ignore_list = set([] if ignore_list is None else ignore_list)
-        self.make_backups: bool = True
-        # Create a timestamp now so that it's stable for backups
-        self._timestamp = datetime.now().isoformat()
-        # The directory to operate within
-        self._dir = Path(dir)
-        self._home = _home_dir
-        self._files = self._dir / "files-env"
-        self._actions = {
-            "link": fs.link,
-            "hardlink": fs.hardlink,
-            "copy": fs.copy,
-        }
-        self._enabled_actions: list[str] = []
-
-    def _resolve_env_dirs(self):
-        for env_dir in self._files.glob("*"):
-            if not env_dir.is_dir():
-                continue
-
-            env_var_name = env_dir.name
-            env_var_value = os.environ.get(env_var_name)
-            # If the value is empty, first check if there is a default
-            # value we can use
-            if env_var_value is None and env_var_name in _env_var_defaults:
-                env_var_value = _env_var_defaults[env_var_name]
-
-            # If not, print an error and exit
-            if env_var_value is None:
-                log.fatal(
-                    f'Environment variable "{env_var_name}" is not set, unable to continue.'
-                )
-                exit(1)
-
-            baseDest = Path(env_var_value)
-            print(f'\033[4;36mResolved "${env_var_name}" to "{baseDest}"\033[0m')
-            self._process_dotfiles(self._files / env_dir, baseDest)
-
-    def _process_dotfiles(self, path: Path, baseDest: Path):
-        for extension in self._enabled_actions:
-            for dotfile in path.glob(f"**/*.{extension}"):
-                if dotfile not in self.ignore_list:
-                    action = dotfile.suffix.removeprefix(".")
-                    source = dotfile
-                    dest = baseDest / dotfile.parent.relative_to(path) / dotfile.stem
-
-                    if fs.exists(dest) and self.make_backups:
-                        # If the backup function returns False, skip
-                        # copying/linking this file/folder
-                        if not self.backup(dest):
-                            continue
-
-                    # Make sure the destination directory exists
-                    fs.mkdir(dest.parent)
-                    self._actions[action](source, dest)
-
-    def backup(self, path: Path):
-        hostname = socket.getfqdn()
-        backup_name = f"{hostname}@{self._timestamp}"
-        base_backup_path = self._dir / "backups" / backup_name
-        backup_path = base_backup_path / path.parent.relative_to("/")
-
-        if not backup_path.is_relative_to(base_backup_path):
-            log.warn(
-                f'Backup: backup target "{backup_path}" is not relative to "{base_backup_path}". Skipping...'
-            )
-            return False
-
-        # Make sure the backup directory exists
-        fs.mkdir(backup_path)
-
-        fs.copy(path, backup_path / path.name, quiet=True)
-
-        return True
-
-    def install(self):
-        self._enabled_actions = ["link", "hardlink", "copy"]
-        self._resolve_env_dirs()
-
-    def link(self):
-        self._enabled_actions = ["link"]
-        self._resolve_env_dirs()
-
-    def hardlink(self):
-        self._enabled_actions = ["hardlink"]
-        self._resolve_env_dirs()
-
-    def copy(self):
-        self._enabled_actions = ["copy"]
-        self._resolve_env_dirs()
+        _env_defaults[key] = Path(value)
 
 
 def main():
-    default_ignore_list = []
+    dotfiles = Dotfiles(config, dotfiles_dir, _env_defaults, default_ignore_list)
 
-    dotfiles = DotfileManager(_dotfiles_dir, default_ignore_list)
-
-    file_description = "A Simple way to manage your dotfiles."
+    file_description = "a simple way to manage your dotfiles."
 
     parentp = argparse.ArgumentParser(add_help=False)
 
@@ -152,7 +42,7 @@ def main():
     parser.add_argument(
         "--no-backups",
         action="store_true",
-        help=("Do not backup existing files " "from the home directory"),
+        help=("Do not backup existing files from the home directory"),
     )
 
     parser.add_argument(
@@ -160,7 +50,7 @@ def main():
         metavar="FILENAME",
         action="append",
         nargs="+",
-        help=("Specify one or more files " "or folders to ignore"),
+        help=("Specify one or more files or folders to ignore"),
     )
 
     subp = parser.add_subparsers(title="Commands")
@@ -183,19 +73,9 @@ def main():
 
     log.basicConfig(format=log_format, level=log_level)
 
-    if (
-        args.no_backups
-        or config.getboolean("options", "backups", fallback=True) is False
-    ):
-        dotfiles.make_backups = False
-
-    if args.ignore:
-        for sublist in args.ignore:
-            dotfiles.ignore_list.intersection_update(sublist)
-
     if "func" in args:
         try:
-            args.func()
+            args.func(args)
         except IOError:
             log.exception("Error processing dotfiles:")
             parser.exit(1)
