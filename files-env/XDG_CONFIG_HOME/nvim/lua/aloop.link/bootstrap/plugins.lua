@@ -12,19 +12,33 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-    { 'gpanders/editorconfig.nvim', cond = vim.fn.has('nvim-0.9') == 0 },
     { 'catppuccin/nvim', name = 'catppuccin' },
     { 'ojroques/vim-oscyank', branch = 'main' },
-    'dense-analysis/ale',
     'tpope/vim-fugitive',
     'mhinz/vim-signify',
     'nvim-tree/nvim-web-devicons',
-    {
-        'nvim-lualine/lualine.nvim',
-        cond = vim.fn.has('nvim-0.5') == 1
-    },
+    'nvim-lualine/lualine.nvim',
     'tpope/vim-surround',
     'mattn/emmet-vim',
+    'sbdchd/neoformat',
+    {
+        'folke/trouble.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require('trouble').setup {
+
+            }
+        end,
+    },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        config = function()
+            require('indent_blankline').setup {
+                show_current_context = true,
+                show_current_context_start = true,
+            }
+        end,
+    },
     {
         'nvim-treesitter/nvim-treesitter',
         build = function()
@@ -36,19 +50,21 @@ require('lazy').setup({
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        cond = vim.fn.has('nvim-0.7') == 1
     },
     {
-        "folke/which-key.nvim",
+        'folke/which-key.nvim',
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
-            require("which-key").setup({
+            require('which-key').setup({
                 -- your configuration comes here
                 -- or leave it empty to use the default settings
                 -- refer to the configuration section below
             })
         end,
-        cond = vim.fn.has('nvim-0.5') == 1
+    },
+    {
+        'gpanders/editorconfig.nvim',
+        cond = vim.fn.has('nvim-0.9') == 0
     },
 })
