@@ -26,10 +26,25 @@ if config.has_section("env.fallbacks"):
         _env_defaults[key] = Path(value)
 
 
+def df_cmd_setup(parser):
+    parser.add_argument(
+        "--no-backups",
+        action="store_true",
+        help=("Do not backup existing files from the home directory"),
+    )
+    parser.add_argument(
+        "--ignore",
+        metavar="FILENAME",
+        action="append",
+        nargs="+",
+        help=("Specify one or more files or folders to ignore"),
+    )
+
+
 def main():
     dotfiles = Dotfiles(config, dotfiles_dir, _env_defaults, default_ignore_list)
 
-    file_description = "a simple way to manage your dotfiles."
+    file_description = "a simple way to manage dotfiles."
 
     parentp = argparse.ArgumentParser(add_help=False)
 
@@ -39,32 +54,20 @@ def main():
 
     parser = argparse.ArgumentParser(parents=[parentp], description=file_description)
 
-    parser.add_argument(
-        "--no-backups",
-        action="store_true",
-        help=("Do not backup existing files from the home directory"),
-    )
-
-    parser.add_argument(
-        "--ignore",
-        metavar="FILENAME",
-        action="append",
-        nargs="+",
-        help=("Specify one or more files or folders to ignore"),
-    )
-
-    subp = parser.add_subparsers(title="Commands")
+    subp = parser.add_subparsers(title="commands")
 
     subparser_definitions = [
-        ["install", "Install all dotfiles", dotfiles.install],
-        ["link", "Install dotfile links", dotfiles.link],
-        ["hardlink", "Install dotfile hardlinks", dotfiles.hardlink],
-        ["copy", "Install dotfile copies", dotfiles.copy],
+        ["install", "Install all dotfiles", dotfiles.install, df_cmd_setup],
+        ["link", "Install dotfile links", dotfiles.link, df_cmd_setup],
+        ["hardlink", "Install dotfile hardlinks", dotfiles.hardlink, df_cmd_setup],
+        ["copy", "Install dotfile copies", dotfiles.copy, df_cmd_setup],
     ]
 
-    for name, help_, func in subparser_definitions:
-        new_subp = subp.add_parser(name, help=help_, parents=[parentp])
-        new_subp.set_defaults(func=func)
+    for name, help_, func, setup in subparser_definitions:
+        cmd_parser = subp.add_parser(name, help=help_, parents=[parentp])
+        cmd_parser.set_defaults(func=func)
+        if setup is not None:
+            setup(cmd_parser)
 
     args = parser.parse_args()
 
