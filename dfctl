@@ -101,7 +101,6 @@ class DotfileManager(object):
     def backup(self, path: Path):
         hostname = socket.getfqdn()
         backup_name = f"{hostname}@{self._timestamp}"
-        src_path_formatted = path.parent
         base_backup_path = self._dir / "backups" / backup_name
         backup_path = base_backup_path / path.parent.relative_to("/")
 
