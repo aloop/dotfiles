@@ -1,3 +1,4 @@
+import argparse
 import logging as log
 import os
 import socket
@@ -6,6 +7,21 @@ from datetime import datetime
 from pathlib import Path
 
 import lib.filesystem as fs
+
+
+def argparser_setup(parser: argparse.ArgumentParser):
+    parser.add_argument(
+        "--no-backups",
+        action="store_true",
+        help=("Do not backup existing files from the home directory"),
+    )
+    parser.add_argument(
+        "--ignore",
+        metavar="FILENAME",
+        action="append",
+        nargs="+",
+        help=("Specify one or more files or folders to ignore"),
+    )
 
 
 class Dotfiles(object):

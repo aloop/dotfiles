@@ -30,6 +30,15 @@ def exists(path: Path):
     return path.exists() or path.is_symlink()
 
 
+def list_dirs(path: Path):
+    """List all directories in `path`"""
+    if path.is_dir():
+        for dir in path.iterdir():
+            if dir.is_dir():
+                yield dir
+    return
+
+
 def mkdir(path: Path):
     if not exists(path):
         path.mkdir(parents=True, exist_ok=True)

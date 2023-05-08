@@ -7,7 +7,8 @@ import logging as log
 import os
 from pathlib import Path
 
-from lib.dotfiles import Dotfiles
+import lib.dotfiles as dotfiles
+import lib.scriptrunner as scriptrunner
 
 # Set a restrictive default umask
 os.umask(0o077)
@@ -26,23 +27,8 @@ if config.has_section("env.fallbacks"):
         _env_defaults[key] = Path(value)
 
 
-def df_cmd_setup(parser):
-    parser.add_argument(
-        "--no-backups",
-        action="store_true",
-        help=("Do not backup existing files from the home directory"),
-    )
-    parser.add_argument(
-        "--ignore",
-        metavar="FILENAME",
-        action="append",
-        nargs="+",
-        help=("Specify one or more files or folders to ignore"),
-    )
-
-
 def main():
-    dotfiles = Dotfiles(config, dotfiles_dir, _env_defaults, default_ignore_list)
+    df = dotfiles.Dotfiles(config, dotfiles_dir, _env_defaults, default_ignore_list)
 
     file_description = "a simple way to manage dotfiles."
 
@@ -57,10 +43,21 @@ def main():
     subp = parser.add_subparsers(title="commands")
 
     subparser_definitions = [
-        ["install", "Install all dotfiles", dotfiles.install, df_cmd_setup],
-        ["link", "Install dotfile links", dotfiles.link, df_cmd_setup],
-        ["hardlink", "Install dotfile hardlinks", dotfiles.hardlink, df_cmd_setup],
-        ["copy", "Install dotfile copies", dotfiles.copy, df_cmd_setup],
+        ["install", "Install all dotfiles", df.install, dotfiles.argparser_setup],
+        ["link", "Install dotfile links", df.link, dotfiles.argparser_setup],
+        [
+            "hardlink",
+            "Install dotfile hardlinks",
+            df.hardlink,
+            dotfiles.argparser_setup,
+        ],
+        ["copy", "Install dotfile copies", df.copy, dotfiles.argparser_setup],
+        [
+            "run",
+            "Run a script from `$DOTFILES_DIR/scripts/`",
+            scriptrunner.run,
+            scriptrunner.argparser_setup,
+        ],
     ]
 
     for name, help_, func, setup in subparser_definitions:
