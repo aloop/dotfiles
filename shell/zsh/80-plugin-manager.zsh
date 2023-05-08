@@ -48,4 +48,3 @@ df_update_plugins() (
         fi
     done
 )
-
