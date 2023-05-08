@@ -14,10 +14,16 @@ To setup or update all links and copies, simply run the following command:
 ~/.dotfiles/dfctl install
 ```
 
-On the other hand, you may wish to only update links _or_ copies:
+On the other hand, you may wish to only update softlinks, hardlinks _or_ copies:
 
 ```sh
-~/.dotfiles/dfctl links # Only setup links
+~/.dotfiles/dfctl link # Only setup softlinks
+```
+
+or:
+
+```sh
+~/.dotfiles/dfctl hardlink # Only setup hardlinks
 ```
 
 or:
