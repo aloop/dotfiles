@@ -17,19 +17,27 @@ To setup or update all links and copies, simply run the following command:
 On the other hand, you may wish to only update softlinks, hardlinks _or_ copies:
 
 ```sh
-~/.dotfiles/dfctl link # Only setup softlinks
+~/.dotfiles/dfctl install --links # Only setup softlinks
+
+# or:
+
+~/.dotfiles/dfctl install --hardlinks # Only setup hardlinks
+
+# or:
+
+~/.dotfiles/dfctl install --copies # Only setup copies
 ```
 
-or:
+These options can also be in any combination with each other:
 
 ```sh
-~/.dotfiles/dfctl hardlink # Only setup hardlinks
-```
+~/.dotfiles/dfctl install --links --copies
 
-or:
+# or:
 
-```sh
-~/.dotfiles/dfctl copy # Only setup copies
+~/.dotfiles/dfctl install --hardlinks --links
+
+# etc.
 ```
 
 ## dfctl on the $PATH

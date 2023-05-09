@@ -22,6 +22,21 @@ def argparser_setup(parser: argparse.ArgumentParser):
         nargs="+",
         help=("Specify one or more files or folders to ignore"),
     )
+    parser.add_argument(
+        "--links",
+        action="store_true",
+        help=("Install all softlinks"),
+    )
+    parser.add_argument(
+        "--hardlinks",
+        action="store_true",
+        help=("Install all hardlinks"),
+    )
+    parser.add_argument(
+        "--copies",
+        action="store_true",
+        help=("Install all copies"),
+    )
 
 
 class Dotfiles(object):
@@ -52,7 +67,7 @@ class Dotfiles(object):
             "hardlink": fs.hardlink,
             "copy": fs.copy,
         }
-        self._enabled_actions: list[str] = []
+        self._enabled_actions: set[str] = set()
         self._env_defaults = {
             "HOME": Path.home(),
             "XDG_CONFIG_HOME": Path.home() / ".config",
@@ -136,20 +151,13 @@ class Dotfiles(object):
 
     def install(self, args):
         self._handle_args(args)
-        self._enabled_actions = ["link", "hardlink", "copy"]
-        self._resolve_env_dirs()
-
-    def link(self, args):
-        self._handle_args(args)
-        self._enabled_actions = ["link"]
-        self._resolve_env_dirs()
-
-    def hardlink(self, args):
-        self._handle_args(args)
-        self._enabled_actions = ["hardlink"]
-        self._resolve_env_dirs()
-
-    def copy(self, args):
-        self._handle_args(args)
-        self._enabled_actions = ["copy"]
+        if args.links or args.hardlinks or args.copies:
+            if args.copies:
+                self._enabled_actions.add("copy")
+            if args.links:
+                self._enabled_actions.add("link")
+            if args.hardlinks:
+                self._enabled_actions.add("hardlink")
+        else:
+            self._enabled_actions.update(["link", "hardlink", "copy"])
         self._resolve_env_dirs()

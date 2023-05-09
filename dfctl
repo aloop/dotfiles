@@ -42,29 +42,19 @@ def main():
 
     subp = parser.add_subparsers(title="commands")
 
-    subparser_definitions = [
-        ["install", "Install all dotfiles", df.install, dotfiles.argparser_setup],
-        ["link", "Install dotfile links", df.link, dotfiles.argparser_setup],
-        [
-            "hardlink",
-            "Install dotfile hardlinks",
-            df.hardlink,
-            dotfiles.argparser_setup,
-        ],
-        ["copy", "Install dotfile copies", df.copy, dotfiles.argparser_setup],
-        [
-            "run",
-            "Run a script from `$DOTFILES_DIR/scripts/`",
-            scriptrunner.run,
-            scriptrunner.argparser_setup,
-        ],
-    ]
+    # Setup parser for dotfiles install functionality
+    dotfiles_install_parser = subp.add_parser(
+        "install", help="Install all dotfiles", parents=[parentp]
+    )
+    dotfiles.argparser_setup(dotfiles_install_parser)
+    dotfiles_install_parser.set_defaults(func=df.install)
 
-    for name, help_, func, setup in subparser_definitions:
-        cmd_parser = subp.add_parser(name, help=help_, parents=[parentp])
-        cmd_parser.set_defaults(func=func)
-        if setup is not None:
-            setup(cmd_parser)
+    # Setup parser for script running functionality
+    scriptrunner_parser = subp.add_parser(
+        "run", help="Run a script from `$DOTFILES_DIR/scripts/`", parents=[parentp]
+    )
+    scriptrunner.argparser_setup(scriptrunner_parser)
+    scriptrunner_parser.set_defaults(func=scriptrunner.run)
 
     args = parser.parse_args()
 
