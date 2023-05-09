@@ -10,24 +10,24 @@ from pathlib import Path
 import lib.dotfiles as dotfiles
 import lib.scriptrunner as scriptrunner
 
-# Set a restrictive default umask
-os.umask(0o077)
-
-dotfiles_dir = Path(os.path.dirname(os.path.realpath(__file__)))
-default_ignore_list: list[str | Path] = []
-
-_env_defaults: dict[str, Path] = {}
-
-config = configparser.ConfigParser()
-config.optionxform = str  # type: ignore
-config.read(dotfiles_dir / "config.ini")
-
-if config.has_section("env.fallbacks"):
-    for key, value in config.items("env.fallbacks"):
-        _env_defaults[key] = Path(value)
-
 
 def main():
+    # Set a restrictive default umask
+    os.umask(0o077)
+
+    dotfiles_dir = Path(os.path.dirname(os.path.realpath(__file__)))
+    default_ignore_list: list[str | Path] = []
+
+    _env_defaults: dict[str, Path] = {}
+
+    config = configparser.ConfigParser()
+    config.optionxform = str  # type: ignore
+    config.read(dotfiles_dir / "config.ini")
+
+    if config.has_section("env.fallbacks"):
+        for key, value in config.items("env.fallbacks"):
+            _env_defaults[key] = Path(value)
+
     df = dotfiles.Dotfiles(config, dotfiles_dir, _env_defaults, default_ignore_list)
 
     file_description = "a simple way to manage dotfiles."
@@ -70,7 +70,8 @@ def main():
             log.exception("Error processing dotfiles:")
             parser.exit(1)
     else:
-        parser.print_usage()
+        parser.print_help()
+        parser.exit(1)
 
 
 if __name__ == "__main__":
