@@ -13,7 +13,7 @@ def argparser_setup(parser: argparse.ArgumentParser):
     parser.add_argument(
         "--no-backups",
         action="store_true",
-        help=("Do not backup existing files from the home directory"),
+        help=("Do not backup existing files"),
     )
     parser.add_argument(
         "--ignore",

@@ -35,7 +35,7 @@ def main():
     parentp = argparse.ArgumentParser(add_help=False)
 
     parentp.add_argument(
-        "-v", "--verbose", action="store_true", help="Show more verbose output"
+        "-v", "--verbose", action="store_true", help="Enable more verbose output"
     )
 
     parser = argparse.ArgumentParser(parents=[parentp], description=file_description)
