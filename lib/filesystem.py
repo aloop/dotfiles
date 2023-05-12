@@ -1,6 +1,7 @@
 """Abstractions for file system operations"""
 
 import logging as log
+import os
 import shutil
 from pathlib import Path
 
@@ -97,7 +98,7 @@ def hardlink(src: Path, dest: Path, quiet=False):
     if exists(dest):
         remove(dest)
 
-    dest.hardlink_to(src)
+    os.link(src, dest)
 
     if not quiet:
         _success_message("Hardlinked", src, dest)

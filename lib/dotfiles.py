@@ -5,6 +5,7 @@ import socket
 from configparser import ConfigParser
 from datetime import datetime
 from pathlib import Path
+from typing import Union
 
 import lib.filesystem as fs
 
@@ -50,8 +51,8 @@ class Dotfiles(object):
         self,
         config: ConfigParser,
         dotfiles_dir: Path,
-        env_defaults: dict[str, Path] | None = None,
-        ignore_list: list[str | Path] | None = None,
+        env_defaults: Union[dict[str, Path], None] = None,
+        ignore_list: Union[list[Union[str, Path]], None] = None,
     ):
         self._config = config
         self._home = Path.home()
