@@ -69,10 +69,10 @@ dfctl run install rustup
 ## Backups
 
 Files and Folders to be installed that already exist at the destination
- will be backed up by default to a directory similar to:
+will be backed up by default to a directory similar to:
 
 ```sh
-~/.dotfiles/backups/${HOSTNAME}@2023-01-01T00:00:00.000000
+~/.dotfiles/backups/${HOST}@2023-01-01T00:00:00.000000
 ```
 
 ### Temporarily disable backup
@@ -95,29 +95,29 @@ then edit the file as directed to disable backups.
 
 ### ENV Vars
 
-- `DF_SWAY_AUTOSTART`: whether or not to start a sway session when a login on tty1 is started. Default is true
-- `DF_TMUX_AUTOSTART`: whether or not to start a tmux session when a terminal is started. Default is false
-- `DF_TMUX_AUTOSTART_SESSION_NAME`: The name of the session which will be automatically created or re-attached to. Default is `df_autostart_session`
-- `path_prepend` and `path_append`: add to the PATH, should be set in ~/.before, in PATH format
-- `DF_ZSH_HIGHLIGHTERS`: set which highlighters to use with zsh-syntax-highlighting. Default is `(main brackets)`
+-   `DF_SWAY_AUTOSTART`: whether or not to start a sway session when a login on tty1 is started. Default is true
+-   `DF_TMUX_AUTOSTART`: whether or not to start a tmux session when a terminal is started. Default is false
+-   `DF_TMUX_AUTOSTART_SESSION_NAME`: The name of the session which will be automatically created or re-attached to. Default is `df_autostart_session`
+-   `path_prepend` and `path_append`: add to the PATH, should be set in ~/.before, in PATH format
+-   `DF_ZSH_HIGHLIGHTERS`: set which highlighters to use with zsh-syntax-highlighting. Default is `(main brackets)`
 
 ### Local Override Files
 
-- `~/.gitconfig.local`: override git settings, useful for setting email and name
-- `~/.before`: is sourced near the beginning of `.bash_profile` or `.zshenv`
-- `~/.after`: is sourced near the end of `.bash_profile` or `.zshenv`
-- `~/.zshenv.local`
-- `${ZDOTDIR}/local/.zshrc`
-- `${ZDOTDIR}/local/.zlogin`
-- `~/.bash_profile.local`
-- `~/.bashrc.local`
-- `~/.ssh/config.d/*.conf`: add custom SSH configuration files here
-- `${DOTFILES_DIR}/shell/profile.d/*.sh`: any shell scripts you place in this directory will be sourced by `${DOTFILES_DIR}/shell/profile.sh`
-- `${DOTFILES_DIR}/shell/interactive.d/*.sh`: any shell scripts you place in this directory will be sourced by `${DOTFILES_DIR}/shell/interactive.sh`
-- `${DOTFILES_DIR}/shell/autostart.d/*.sh`: any shell scripts you place in this directory will be sourced by `${DOTFILES_DIR}/shell/autostart.sh`
-- `~/.config/sway/config.d`: add extra config files for sway here
+-   `~/.gitconfig.local`: override git settings, useful for setting email and name
+-   `~/.before`: is sourced near the beginning of `.bash_profile` or `.zshenv`
+-   `~/.after`: is sourced near the end of `.bash_profile` or `.zshenv`
+-   `~/.zshenv.local`
+-   `${ZDOTDIR}/local/.zshrc`
+-   `${ZDOTDIR}/local/.zlogin`
+-   `~/.bash_profile.local`
+-   `~/.bashrc.local`
+-   `~/.ssh/config.d/*.conf`: add custom SSH configuration files here
+-   `${DOTFILES_DIR}/shell/profile.d/*.sh`: any shell scripts you place in this directory will be sourced by `${DOTFILES_DIR}/shell/profile.sh`
+-   `${DOTFILES_DIR}/shell/interactive.d/*.sh`: any shell scripts you place in this directory will be sourced by `${DOTFILES_DIR}/shell/interactive.sh`
+-   `${DOTFILES_DIR}/shell/autostart.d/*.sh`: any shell scripts you place in this directory will be sourced by `${DOTFILES_DIR}/shell/autostart.sh`
+-   `~/.config/sway/config.d`: add extra config files for sway here
 
 ## Todo
 
-- Add some backup management commands
-- Create a manifest on install which can be used for uninstalling dotfiles
+-   Add some backup management commands
+-   Create a manifest on install which can be used for uninstalling dotfiles
