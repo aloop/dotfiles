@@ -3,13 +3,18 @@
 [user]
     name = Anthony Loop
     email = anthony@anthonyloop.com
-    signingKey = B01478CBEF5DE5E9!
+    signingkey = ~/.ssh/id_ed25519.pub
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.config/git/allowed_signers
 [commit]
     gpgSign = true
 [init]
     defaultBranch = main
 [push]
     default = simple
+    autoSetupRemote = true
 [pull]
     rebase = true
 [tag]
