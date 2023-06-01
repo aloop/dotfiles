@@ -248,8 +248,6 @@ user_pref("privacy.clearOnShutdown.downloads", true);
 user_pref("browser.urlbar.suggest.openpage", false);
 user_pref("browser.urlbar.suggest.topsites", false);
 
-user_pref("ui.systemUsesDarkTheme", 1);
-
 // Disable autocopy on Linux
 user_pref("clipboard.autocopy", false);
 
