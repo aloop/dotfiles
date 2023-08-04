@@ -36,7 +36,7 @@ if command -v gsettings >/dev/null 2>&1; then
 
     # Theme
     gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
-    gsettings set org.gnome.desktop.interface icon-theme "breeze-dark"
+    gsettings set org.gnome.desktop.interface icon-theme "Adwaita"
     gsettings set org.gnome.desktop.interface cursor-theme "Adwaita"
     gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 
@@ -84,7 +84,7 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.privacy recent-files-max-age 3
 
     ## Add minimize and maximize buttons to windows
-    gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:close"
+    gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
 
     ## Power Saving/Screen lock settings
     gsettings set org.gnome.desktop.session idle-delay 1200
