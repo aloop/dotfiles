@@ -23,7 +23,18 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-if df_command_exists exa; then
+if df_command_exists lsd; then
+    # shellcheck disable=SC2262
+    alias ls="lsd"
+    # List all files and directories
+    alias l="lsd --long --classify --almost-all"
+    alias la="lsd --long --classify --almost-all"
+    # List all non-hidden files and directories
+    alias ll="lsd --long --classify"
+    # List all symlinks in the current directory
+    alias lsl='ll $(find -maxdepth 1 -type l -print)'
+    alias lt="l --tree"
+elif df_command_exists exa; then
     # shellcheck disable=SC2262
     alias ls="exa"
     # List all files and directories
