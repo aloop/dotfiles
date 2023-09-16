@@ -9,7 +9,7 @@ _df_path_append="${HOME}/.cabal/bin\
 ${GOPATH:+":$GOPATH/bin"}\
 :${HOME}/.composer/vendor/bin\
 :${HOME}/.cargo/bin\
-:${HOME}/.fnm\
+:${XDG_DATA_HOME}/fnm\
 :${HOME}/.bin\
 :${HOME}/.local/bin\
 :${DOTFILES_DIR:-"${HOME}/.dotfiles"}/bin\
