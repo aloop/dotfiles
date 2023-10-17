@@ -1,7 +1,22 @@
 --no-call-home
+
 --embed-subs
+--no-write-auto-subs
 --sub-langs en.*
 --convert-subs srt
---merge-output-format mkv
+
+--embed-chapters
+
 --downloader aria2c
 --downloader "dash,m3u8:native"
+
+-f bestvideo+bestaudio/best
+
+--restrict-filenames
+
+--no-overwrites
+--concurrent-fragments 4
+
+--remux-video mkv
+
+--extractor-args "youtube:player_client=default,ios"
