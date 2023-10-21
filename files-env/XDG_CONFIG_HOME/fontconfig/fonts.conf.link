@@ -18,7 +18,7 @@
             <bool>false</bool>
         </edit>
         <edit mode="assign" name="lcdfilter">
-            <const>lcddefault</const>
+            <const>lcdnone</const>
         </edit>
         <edit mode="assign" name="rgba">
             <const>rgb</const>
