@@ -14,6 +14,8 @@ bind_to_address "127.0.0.1"
 replaygain "auto"
 replaygain_preamp "0"
 replaygain_missing_preamp "0"
+replaygain_limit "yes"
+volume_normalization "no"
 
 resampler {
     plugin "soxr"
@@ -21,7 +23,7 @@ resampler {
     threads "0"
 }
 
-#audio_output_format "96000:f:*"
+audio_output_format "96000:f:*"
 
 audio_output {
     type "pipewire"
