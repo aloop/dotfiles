@@ -2,16 +2,17 @@
 
 set $mod Mod4
 set $alt Mod1
-set $term ${TERMINAL:-foot}
+set $term ${TERMINAL:-footclient}
 
 set $web-browser firefox
 set $alternate-web-browser chromium
 set $web-browser-private-flag --private-window
 set $alternate-web-browser-private-flag --incognito
-set $menu wofi --conf "${XDG_CONFIG_HOME:-${HOME}/.config}/wofi/sway.conf" --term $term
+set $menu rofi -show drun
+set $alttab rofi -show window
 set $bar waybar
 set $notifications mako
-set $redshift gammastep -m wayland
+set $redshift wlsunset -t 2700 -T 6500 -S 6:00 -s 20:00 -d 1800
 
 
 ### Font
@@ -24,12 +25,20 @@ input type:keyboard {
     repeat_delay 250
     repeat_rate 50
     xkb_numlock enabled
-    xkb_options ctrl:nocaps
+    xkb_options ctrl:nocaps,compose:menu
+}
+
+input type:pointer {
+    accel_profile flat
+    pointer_accel 1
+    natural_scroll disabled
 }
 
 input type:touchpad {
-    tap enabled
+    accel_profile flat
+    pointer_accel 1
     natural_scroll enabled
+    tap enabled
 }
 
 # Use Left Mouse+$mod to drag, or Right Mouse+$mod to resize floating windows
@@ -121,11 +130,12 @@ bindsym --no-repeat $mod+$alt+b exec $alternate-web-browser
 bindsym --no-repeat $mod+$alt+Shift+b exec $alternate-web-browser $alternate-web-browser-private-flag
 bindsym --no-repeat $mod+Return exec $term
 bindsym --no-repeat $mod+space exec --no-startup-id $menu
+bindsym --no-repeat $alt+Tab exec --no-startup-id $menu
 
 # Control volume
-bindsym --locked XF86AudioRaiseVolume exec "df-volume increase 2"
-bindsym --locked XF86AudioLowerVolume exec "df-volume decrease 2"
-bindsym --locked --no-repeat XF86AudioMute exec "df-volume toggle-mute"
+bindsym --locked XF86AudioRaiseVolume exec "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+bindsym --locked XF86AudioLowerVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+bindsym --locked --no-repeat XF86AudioMute exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 
 # Control screen brightness
 bindsym --locked XF86MonBrightnessDown exec dsplight down 5
@@ -197,7 +207,37 @@ focus_follows_mouse yes
 
 ### Per-application Settings
 
-for_window [class="Steam"] floating enable
+# Enable floating for some common window types/classes
+for_window [window_role = "pop-up"] floating enable
+for_window [window_role = "bubble"] floating enable
+for_window [window_role = "dialog"] floating enable
+for_window [window_type = "dialog"] floating enable
+for_window [window_role = "task_dialog"] floating enable
+for_window [window_type = "menu"] floating enable
+for_window [app_id = "floating"] floating enable
+for_window [app_id = "floating_update"] floating enable, resize set width 1000px height 600px
+for_window [class = "(?i)pinentry"] floating enable
+for_window [title = "Administrator privileges required"] floating enable
+
+# Enable floating for some Firefox windows
+for_window [title = "About Mozilla Firefox"] floating enable
+for_window [window_role = "About"] floating enable
+for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable
+
+# Steam
+
+for_window [class="^Steam$" title="^Friends List$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
+
+# Misc
 for_window [title="Preferences$"] floating enable
 
 
@@ -219,9 +259,15 @@ exec $notifications
 # Redshift
 exec $redshift
 
+# Start Foot server
+exec foot --server
+
+# Gnome Keyring
+exec = gnome-keyring-daemon --start
+
 # Idle command
 exec swayidle -w \
     timeout 1800 'swaylock -f -c 222222' \
-    timeout 1200 'swaymsg "output * dpms off"' \
-        resume 'sleep 2 && swaymsg "output * dpms on"' \
+    timeout 1200 'swaymsg "output * power off"' \
+          resume 'swaymsg "output * power on"' \
     before-sleep 'swaylock -f -c 222222'

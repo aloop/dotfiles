@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [],
-    "modules-right": ["mpd", "idle_inhibitor", "custom/light-control", "pulseaudio", "battery", "battery#bat2", "network", "clock", "custom/weather", "tray"],
+    "modules-right": ["mpd", "idle_inhibitor", "wireplumber", "battery", "battery#bat2", "network", "clock", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "format": "{name}: {icon}",
@@ -65,7 +65,9 @@
         "tooltip-format": "Artist: {artist}\nTitle: {title}\nAlbum: {album}\n\n({elapsedTime:%M:%S}/{totalTime:%M:%S})",
         "tooltip-format-disconnected": "MPD (disconnected)",
         "on-scroll-up": "mpc volume +2",
-        "on-scroll-down": "mpc volume -2"
+        "on-scroll-down": "mpc volume -2",
+        "on-click": "mpc toggle",
+        "on-click-right": "mpc next"
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -80,8 +82,8 @@
     },
     "clock": {
         "interval": 1,
-        "format": "{:<span weight=\"bold\">%I:%M:%S</span> %p}",
-        "format-alt": "{:%a, %b %d <span weight=\"bold\">%I:%M:%S</span> %p}",
+        "format": "{:%a, %b %d <span weight=\"bold\">%I:%M:%S</span> %p}",
+        "format-alt": "{:<span weight=\"bold\">%I:%M:%S</span> %p}",
         "tooltip-format": "{:%A, %B %d %I:%M:%S %p}"
     },
     "cpu": {
@@ -127,22 +129,11 @@
         "tooltip-format-ethernet": "{ifname}: {ipaddr} ",
         "tooltip-format-disconnected": ""
     },
-    "pulseaudio": {
-        // "scroll-step": 1,
-        "format": "{volume:3}% {icon} {format_source}",
-        "format-bluetooth": "{volume:3}% {icon} {format_source}",
-        "format-muted": "{volume:3}%  {format_source}",
-        "format-source": "{volume:3}% ",
-        "format-source-muted": "{volume:3}% ",
-        "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": "",
+        "max-volume": 100,
+        "on-click": "pavucontrol",
+        "format-icons": ["", "", ""]
     }
 }
