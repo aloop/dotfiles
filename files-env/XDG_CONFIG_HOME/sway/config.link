@@ -226,15 +226,13 @@ for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, s
 
 # Steam
 
-for_window [class="^Steam$" title="^Friends List$"] floating enable
-for_window [class="^Steam$" title="Steam - News"] floating enable
-for_window [class="^Steam$" title=".* - Chat"] floating enable
-for_window [class="^Steam$" title="^Settings$"] floating enable
-for_window [class="^Steam$" title=".* - event started"] floating enable
-for_window [class="^Steam$" title=".* CD key"] floating enable
-for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [class="^steam$" title="^Friends List$"] floating enable
+for_window [class="^steam$" title="Steam - News"] floating enable
+for_window [class="^steam$" title=".* - Chat"] floating enable
+for_window [class="^steam$" title="^Steam Settings$"] floating enable
+for_window [class="^steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^steam$" title="^Steam Guard"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
 
 # Misc
