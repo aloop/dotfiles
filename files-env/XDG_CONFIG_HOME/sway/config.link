@@ -262,9 +262,6 @@ exec $redshift
 # Start Foot server
 exec foot --server
 
-# Gnome Keyring
-exec = gnome-keyring-daemon --start
-
 # Idle command
 exec swayidle -w \
     timeout 1800 'swaylock -f -c 222222' \

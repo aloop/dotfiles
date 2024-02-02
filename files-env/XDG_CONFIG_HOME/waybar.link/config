@@ -40,7 +40,7 @@
         "interval": 1
     },
     "mpd": {
-        "format": "{stateIcon}  {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {artist} - {title} (<span font=\"monospace\">{elapsedTime:%M:%S}/{totalTime:%M:%S}</span>)",
         "format-disconnected": "",
         "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} Stopped",
         "unknown-tag": "N/A",
@@ -82,8 +82,8 @@
     },
     "clock": {
         "interval": 1,
-        "format": "{:%a, %b %d <span weight=\"bold\">%I:%M:%S</span> %p}",
-        "format-alt": "{:<span weight=\"bold\">%I:%M:%S</span> %p}",
+        "format": "{:%a, %b %d    <span font=\"monospace\" weight=\"bold\">%I:%M:%S</span> %p}",
+        "format-alt": "{:<span font=\"monospace\" weight=\"bold\">%I:%M:%S</span> %p}",
         "tooltip-format": "{:%A, %B %d %I:%M:%S %p}"
     },
     "cpu": {

@@ -43,8 +43,8 @@
     font-family: 'Hack NF Mono', 'Hack Nerd Font Mono', 'Font Awesome 6 Free', 'Noto Color Emoji', monospace;
     font-family: 'Hack NF Mono', 'Hack Nerd Font Mono', 'Font Awesome 6 Free', monospace;
     */
-    font-family: monospace;
-    font-size: 9pt;
+    font-family: sans-serif, monospace;
+    font-size: 10pt;
     min-height: 0;
 }
 
