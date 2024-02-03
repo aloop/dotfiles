@@ -1,8 +1,9 @@
 # GPU Acceleration
 
 vo=gpu-next
+ao=pipewire
 profile=gpu-hq
-hwdec=auto
+hwdec=no
 fbo-format=rgba32f
 gpu-context=auto # or wayland
 gpu-api=vulkan
@@ -25,16 +26,13 @@ error-diffusion=jarvis-judice-ninke
 
 video-sync=display-resample
 interpolation
+tscale=oversample
 
-scale=ewa_lanczos
-scale-blur=0.981251
-dscale=ewa_lanczos
-dscale-blur=0.981251
-cscale=ewa_lanczos
-cscale-blur=0.981251
+scale=ewa_lanczossharp
+cscale=ewa_lanczossharp
+dscale=mitchell
 correct-downscaling=yes
 sigmoid-upscaling=yes
-tscale=oversample
 
 # Display Settings
 
@@ -82,5 +80,6 @@ screenshot-high-bit-depth=yes
 
 hls-bitrate=max
 
-# Make sure to use yt-dlp
-#script-opts=ytdl_hook-try_ytdl_first=yes,ytdl_hook-ytdl_path=yt-dlp
+cache=yes
+demuxer-max-bytes=123400KiB
+demuxer-readahead-secs=20
