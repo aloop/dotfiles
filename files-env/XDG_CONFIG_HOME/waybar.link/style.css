@@ -1,94 +1,93 @@
-/* Dracula Colors */
+/*
+*
+* Catppuccin Mocha palette
+* Maintainer: rubyowo
+*
+*/
 
-/* Normal */
-@define-color color-black #282a36;
-@define-color color-red #ff5555;
-@define-color color-green #50fa7b;
-@define-color color-orange #ffb86c;
-@define-color color-yellow #f1fa8c;
-@define-color color-blue #6272a4;
-@define-color color-magenta #ff79c6;
-@define-color color-purple #bd93f9;
-@define-color color-cyan #8be9fd;
-@define-color color-white #f8f8f2;
+@define-color base   #1e1e2e;
+@define-color mantle #181825;
+@define-color crust  #11111b;
 
-/* Bright (~10% higher luminance) */
-@define-color color-bright-black #44475a;
-@define-color color-bright-red #ff8888;
-@define-color color-bright-green #82fba0;
-@define-color color-bright-orange #ffd09e;
-@define-color color-bright-yellow #f7fcbd;
-@define-color color-bright-blue #828fb7;
-@define-color color-bright-magenta #ffacdc;
-@define-color color-bright-purple #dcc5fc;
-@define-color color-bright-cyan #bdf3fe;
-@define-color color-bright-white #ffffff;
+@define-color text     #cdd6f4;
+@define-color subtext0 #a6adc8;
+@define-color subtext1 #bac2de;
 
-/* Dim (~10% lower luminance) */
-@define-color color-dim-black #14151b;
-@define-color color-dim-red #ff2222;
-@define-color color-dim-green #1ef956;
-@define-color color-dim-orange #ff9f38;
-@define-color color-dim-yellow #ebf85b;
-@define-color color-dim-blue #4d5b86;
-@define-color color-dim-magenta #ff46b0;
-@define-color color-dim-purple #a165f6;
-@define-color color-dim-cyan #59dffc;
-@define-color color-dim-white #e6e6d1;
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color surface2 #585b70;
+
+@define-color overlay0 #6c7086;
+@define-color overlay1 #7f849c;
+@define-color overlay2 #9399b2;
+
+@define-color blue      #89b4fa;
+@define-color lavender  #b4befe;
+@define-color sapphire  #74c7ec;
+@define-color sky       #89dceb;
+@define-color teal      #94e2d5;
+@define-color green     #a6e3a1;
+@define-color yellow    #f9e2af;
+@define-color peach     #fab387;
+@define-color maroon    #eba0ac;
+@define-color red       #f38ba8;
+@define-color mauve     #cba6f7;
+@define-color pink      #f5c2e7;
+@define-color flamingo  #f2cdcd;
+@define-color rosewater #f5e0dc;
 
 * {
     border: none;
     border-radius: 0;
-    /*
-    font-family: 'Hack NF Mono', 'Hack Nerd Font Mono', 'Font Awesome 6 Free', 'Noto Color Emoji', monospace;
-    font-family: 'Hack NF Mono', 'Hack Nerd Font Mono', 'Font Awesome 6 Free', monospace;
-    */
     font-family: sans-serif, monospace;
-    font-size: 10pt;
+    font-size: 14px;
     min-height: 0;
 }
 
 window#waybar {
-    background-color: @color-black;
-    color: #e9e9f4;
+    background-color: transparent;
+    color: #ffffff;
     transition-property: background-color;
     transition-duration: 0.5s;
-    border-radius: 5px;
 }
 
 window#waybar.hidden {
     opacity: 0.2;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-    margin: 0 7.5px;
-}
-
 #workspaces {
+    background-color: @surface0;
+    margin-right: 20px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
-    color: @color-white;
-    border-bottom: 2px solid transparent;
+    color: #ffffff;
+    min-width: 30px;
+}
+
+#workspaces button:hover {
+    color: inherit;
+}
+
+#workspaces button.visible {
+    background-color: shade(@mauve, 1.1);
+    color: @crust;
 }
 
 #workspaces button.focused {
-    color: @color-purple;
-    border-bottom-color: @color-purple;
+    background-color: @mauve;
+    color: @crust;
 }
 
 #workspaces button.urgent {
-    color: @color-red;
-    border-bottom-color: @color-red;
+    background-color: @red;
+    color: @crust;
 }
 
 #window {
-    margin-left: 7.5px;
     font-weight: bold;
 }
 
@@ -117,45 +116,42 @@ window#waybar.solo {
 #custom-media,
 #custom-light-control,
 #custom-weather {
-    padding: 0 10px;
-    margin: 0px 2.5px;
-    color: @color-white;
-    background-color: @color-bright-black;
-    border-bottom: 2px solid @color-purple;
+    background-color: @surface0;
+    padding: 0 16px;
+    color: #ffffff;
 }
 
 #mode {
     font-weight: bold;
-    color: @color-bright-black;
-    background-color: @color-orange;
-    border-top: 2px solid @color-orange;
-    border-bottom: 2px solid @color-orange;
+    color: @crust;
+    background-color: @red;
 }
 
 #clock {
-    font-size: 9pt;
+    background-color: @sky;
+    color: @crust;
 }
 
 #battery {
-    background-color: @color-white;
-    color: @color-black;
+    background-color: #ffffff;
+    color: @crust;
 }
 
 #battery.charging {
-    color: @color-bright-black;
-    background-color: @color-bright-green;
+    background-color: @green;
+    color: @crust;
 }
 
 @keyframes blink {
     to {
-        background-color: @color-white;
-        color: @color-dim-black;
+        background-color: #ffffff;
+        color: @crust;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: @color-red;
-    color: @color-white;
+    background-color: @red;
+    color: #ffffff;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -164,13 +160,12 @@ window#waybar.solo {
 }
 
 label:focus {
-    background-color: @color-dim-black;
+    background-color: @crust;
 }
 
 #custom-media {
-    background: @color-dim-green;
-    border-color: @color-dim-green;
-    color: @color-black;
+    background-color: @green;
+    color: @crust;
 }
 
 #custom-weather {
@@ -184,9 +179,9 @@ label:focus {
 }
 
 #custom-light-control.light-on {
-    background-color: @color-dim-yellow;
-    border-bottom-color: @color-dim-yellow;
-    color: @color-black;
+    background-color: @yellow;
+    border-bottom-color: @yellow;
+    color: @crust;
 }
 
 #cpu {
@@ -201,10 +196,12 @@ label:focus {
 #network.disconnected {
 }
 
-#pulseaudio {
+#wireplumber {
 }
 
-#pulseaudio.muted {
+#wireplumber.muted {
+    background-color: @peach;
+    color: @crust;
 }
 
 #temperature {
@@ -220,9 +217,12 @@ label:focus {
 }
 
 #idle_inhibitor.activated {
+    color: @mauve;
 }
 
 #mpd {
+    background-color: @surface1;
+    color: #ffffff;
 }
 
 #mpd.disconnected {

@@ -1,15 +1,28 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    "margin": "8 8 0 8",
+    "height": 40, // Waybar height (to be removed for auto height)
+    "spacing": 10,
+    "margin": "8 16 0 16",
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": [],
-    "modules-right": ["mpd", "idle_inhibitor", "wireplumber", "battery", "battery#bat2", "network", "clock", "tray"],
+    "modules-left": [
+        "clock",
+        "tray",
+        "wireplumber",
+        "battery",
+        "network",
+        "mpd"
+    ],
+    "modules-center": [
+        "sway/window"
+    ],
+    "modules-right": [
+        "sway/mode",
+        "sway/workspaces"
+    ],
     // Modules configuration
     "sway/workspaces": {
-        "format": "{name}: {icon}",
+        "format": "{name}",
         "format-icons": {
             "urgent": "",
             "focused": "",
@@ -40,7 +53,7 @@
         "interval": 1
     },
     "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {artist} - {title} (<span font=\"monospace\">{elapsedTime:%M:%S}/{totalTime:%M:%S}</span>)",
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon} {artist} - {title} (<tt>{elapsedTime:%M:%S}/{totalTime:%M:%S}</tt>)",
         "format-disconnected": "",
         "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon} Stopped",
         "unknown-tag": "N/A",
@@ -72,19 +85,18 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "<span color=\"#bd93f9\"></span>",
+            "activated": "",
             "deactivated": ""
         }
     },
     "tray": {
-        "icon-size": 20,
         "spacing": 10
     },
     "clock": {
         "interval": 1,
-        "format": "{:%a, %b %d    <span font=\"monospace\" weight=\"bold\">%I:%M:%S</span> %p}",
-        "format-alt": "{:<span font=\"monospace\" weight=\"bold\">%I:%M:%S</span> %p}",
-        "tooltip-format": "{:%A, %B %d %I:%M:%S %p}"
+        "format": "{:<span font=\"monospace\" weight=\"bold\">%I:%M</span> %p}",
+        "format-alt": "{:%a, %b %d    <span font=\"monospace\" weight=\"bold\">%I:%M</span> %p}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
         "format": "{usage:3}% ",
@@ -101,6 +113,11 @@
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
     },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
     "battery": {
         "states": {
             // "good": 95,
@@ -115,19 +132,13 @@
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "network": {
         "format-wifi": "{essid} ({signalStrength}%) {frequency} ",
         "format-ethernet": "",
+        "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}",
-        "tooltip-format": "{ifname}: {ipaddr}",
-        "tooltip-format-wifi": "{ipaddr}",
-        "tooltip-format-ethernet": "{ifname}: {ipaddr} ",
-        "tooltip-format-disconnected": ""
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "wireplumber": {
         "format": "{volume}% {icon}",
