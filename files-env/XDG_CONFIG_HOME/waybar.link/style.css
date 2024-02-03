@@ -44,6 +44,18 @@
     min-height: 0;
 }
 
+.modules-left {
+
+}
+
+.modules-center {
+    margin: 0 10px;
+}
+
+.modules-right {
+
+}
+
 window#waybar {
     background-color: transparent;
     color: #ffffff;
@@ -57,7 +69,6 @@ window#waybar.hidden {
 
 #workspaces {
     background-color: @surface0;
-    margin-right: 20px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -89,6 +100,14 @@ window#waybar.hidden {
 
 #window {
     font-weight: bold;
+    text-shadow: 1px 1px 1px alpha(#000, 0.2);
+    padding: 0 16px;
+    border-radius: 20px;
+    background-color: alpha(@surface0, 0.7);
+}
+
+window#waybar.empty #window {
+    background-color: transparent;
 }
 
 /*
@@ -119,6 +138,7 @@ window#waybar.solo {
     background-color: @surface0;
     padding: 0 16px;
     color: #ffffff;
+    text-shadow: 1px 1px 1px alpha(@crust, 0.1);
 }
 
 #mode {

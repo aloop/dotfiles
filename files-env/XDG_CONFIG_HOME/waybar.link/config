@@ -32,6 +32,10 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
+    "sway/window": {
+        "max-length": 50,
+        "icon": true
+    },
     "custom/weather": {
         "exec": "curl -fs 'https://wttr.in/?format=1'",
         "interval": 1800,
@@ -95,7 +99,7 @@
     "clock": {
         "interval": 1,
         "format": "{:<span font=\"monospace\" weight=\"bold\">%I:%M</span> %p}",
-        "format-alt": "{:%a, %b %d    <span font=\"monospace\" weight=\"bold\">%I:%M</span> %p}",
+        "format-alt": "{:%a, %b %d, <span font=\"monospace\" weight=\"bold\">%I:%M</span> %p}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
