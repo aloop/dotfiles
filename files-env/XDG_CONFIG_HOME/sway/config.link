@@ -5,9 +5,7 @@ set $alt Mod1
 set $term ${TERMINAL:-footclient}
 
 set $web-browser firefox
-set $alternate-web-browser chromium
-set $web-browser-private-flag --private-window
-set $alternate-web-browser-private-flag --incognito
+set $file-browser thunar
 set $menu rofi -show drun
 set $alttab rofi -show window
 set $bar waybar
@@ -30,7 +28,7 @@ input type:keyboard {
 
 input type:pointer {
     accel_profile flat
-    pointer_accel 1
+    pointer_accel 0
     natural_scroll disabled
 }
 
@@ -125,9 +123,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # Application launching keybindings
 bindsym --no-repeat $mod+b exec $web-browser
-bindsym --no-repeat $mod+Shift+b exec $web-browser $web-browser-private-flag
-bindsym --no-repeat $mod+$alt+b exec $alternate-web-browser
-bindsym --no-repeat $mod+$alt+Shift+b exec $alternate-web-browser $alternate-web-browser-private-flag
+bindsym --no-repeat $mod+Shift+b exec $file-browser
 bindsym --no-repeat $mod+Return exec $term
 bindsym --no-repeat $mod+space exec --no-startup-id $menu
 bindsym --no-repeat $alt+Tab exec --no-startup-id $menu
@@ -190,11 +186,11 @@ bindsym $mod+$alt+l exec --no-startup-id $Locker
 
 include "${XDG_CONFIG_HOME:-$HOME/.config}/sway/colors.d/current"
 
-titlebar_border_thickness 2
-titlebar_padding 6 3
+titlebar_border_thickness 4
+titlebar_padding 12 8
 
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 4
+default_floating_border pixel 4
 
 gaps outer 8
 gaps inner 8
