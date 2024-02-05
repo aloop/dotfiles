@@ -1,9 +1,0 @@
-[general]
-temp-day=6500
-temp-night=2700
-brightness-day=1.0
-brightness-night=1.0
-fade=1
-adjustment-method=wayland
-dawn-time=6:00-7:45
-dusk-time=20:00-21:45
