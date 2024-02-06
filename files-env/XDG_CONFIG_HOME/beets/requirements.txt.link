@@ -1,4 +1,4 @@
-beets
+git+https://github.com/beetbox/beets.git
 pylast
 requests
 beautifulsoup4
