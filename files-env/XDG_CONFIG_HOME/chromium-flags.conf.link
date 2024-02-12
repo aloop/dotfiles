@@ -1,8 +1,0 @@
---ignore-gpu-blacklist
---enable-gpu-rasterization
---enable-zero-copy
---use-gl=egl
---enable-accelerated-video-decode
---force-dark-mode
---ozone-platform-hint=wayland
---enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,VaapiVideoDecoder,WebUIDarkMode
