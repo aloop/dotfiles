@@ -1,7 +1,0 @@
-vte-terminal {
-    /*
-     * Add some padding around the terminal in gnome-terminal
-     * (and maybe other gtk-based terminals)
-     */
-    padding: 20px;
-}
