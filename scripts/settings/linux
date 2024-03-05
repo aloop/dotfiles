@@ -1,17 +1,5 @@
 #!/usr/bin/env sh
 
-# Create a symlink to our user.js in any available firefox profiles
-
-if [ -d "${HOME}/.mozilla/firefox" ]; then
-    for firefox_profile in "${HOME}"/.mozilla/firefox/*.*; do
-        if [ -d "$firefox_profile" ]; then
-            ln -sf "${DOTFILES_DIR:-${HOME}/.dotfiles}/scripts/settings/files/firefox/user.js" "${firefox_profile}/user.js"
-        fi
-    done
-else
-    echo "Directory \"~/.mozilla/firefox/\" doesn't exist, start firefox to create a profile, then run these settings again."
-fi
-
 # Gnome Settings
 
 if command -v gsettings >/dev/null 2>&1; then
